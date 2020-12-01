@@ -11,7 +11,7 @@
 
 ```
 $ git clone https://github.com/georgeslabreche/opssat-orbitai.git
-$ cd opssat-orbitai && mvn install
+$ cd opssat-orbitai/nmf/space-app/ && mvn install
 ```
 2. Install the NanoSatMO Framework (NMF) following [the NMF quick start guide](https://nanosat-mo-framework.readthedocs.io/en/latest/quickstart.html)
 3. Deploy the application in the NMF SDK following [the NMF deployment guide](https://nanosat-mo-framework.readthedocs.io/en/latest/apps/packaging.html). When you follow the guide, replace "sobel" by "orbit-ai" everywhere and "Sobel" by "OrbitAI" in the main class name.
