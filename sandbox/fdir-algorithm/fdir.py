@@ -25,6 +25,16 @@ PD_ELEVATION_THRESHOLD_OPT_RX = 0.6632
 PD_ELEVATION_THRESHOLD_IADCS_ST = 1.0996
 
 
+class PhotoDiode(Enum):
+    """Photodiode enum."""
+    PD1 = 0
+    PD2 = 1
+    PD3 = 2
+    PD4 = 3
+    PD5 = 4
+    PD6 = 5
+
+
 class DeviceId(Enum):
     """Device id enum."""
     HD_CAMERA = 0
@@ -41,16 +51,20 @@ class DeviceState(Enum):
 class Device():
     """Device class."""
     device_id = None
-    name = None
     state = None
     threshold = None
     turn_off_timer = None
 
-    def __init__(self, device_id, name, state, threshold_angle):
+    def __init__(self, device_id, state, photodiode, threshold_angle):
         self.device_id = device_id
-        self.name = name
         self.state = state
+        self.photodiode = photodiode
         self.threshold_angle = threshold_angle
+
+    @property
+    def name(self):
+        """Returns the name of the device"""
+        return self.device_id.name
 
     def turn_off(self):
         """Turn off the device."""
@@ -90,9 +104,9 @@ class Device():
 
 def create_opssat_devices():
     """Returns a list of 3 devices instances representing OPS-SAT optical devices"""
-    return [Device(DeviceId.HD_CAMERA, "hd_camera", DeviceState.ON, PD_ELEVATION_THRESHOLD_HD_CAM),
-            Device(DeviceId.OPTICAL_RX, "optical_rx", DeviceState.ON, PD_ELEVATION_THRESHOLD_OPT_RX),
-            Device(DeviceId.STAR_TRACKER, "star_tracker", DeviceState.ON, PD_ELEVATION_THRESHOLD_IADCS_ST)]
+    return [Device(DeviceId.STAR_TRACKER, DeviceState.ON, PhotoDiode.PD3, PD_ELEVATION_THRESHOLD_IADCS_ST),
+            Device(DeviceId.HD_CAMERA, DeviceState.ON, PhotoDiode.PD6, PD_ELEVATION_THRESHOLD_HD_CAM),
+            Device(DeviceId.OPTICAL_RX, DeviceState.ON, PhotoDiode.PD6, PD_ELEVATION_THRESHOLD_OPT_RX)]
 
 
 if __name__ == "__main__":
@@ -122,6 +136,9 @@ if __name__ == "__main__":
             INPUT_FILE = os.path.join(_CALLER_DIR_NAME, sys.argv[3])
         except:
             print('Error setting arguments, using default values.')
+    elif len(sys.argv) != 1:
+        print("Wrong number of arguments")
+        exit(1)
 
     # Initialize the devices
     devices = create_opssat_devices()
@@ -145,4 +162,4 @@ if __name__ == "__main__":
     # Show final devices state
     print("\nDevice - State")
     for device in devices:
-        print(device.name + " - " + str(device.state))
+        print(device.name + " - " + str(device.state.name))
