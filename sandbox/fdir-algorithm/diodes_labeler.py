@@ -1,5 +1,6 @@
 """
-Takes a CSV file from webmust containg the 6 photodiodes values and creates labeled file.
+Takes a CSV file from webmust containg the 6 coarse sun sensors values and creates a labeled file
+with the coarse sun sensors values as input data.
 The labels consist of 0 (off) or 1 (on).
 """
 
@@ -32,7 +33,6 @@ def process_webmust_diodes_csv(csv_file_path, devices):
     Parses a webmust CSV file with the 6 photodiodes values and returns a formatted panda
     DataFrame with labels for the given devices
     """
-    # Create first line with column names
     global NEXT_LABEL
 
     # Read file using line 21 as header and timestamps as index
@@ -42,9 +42,10 @@ def process_webmust_diodes_csv(csv_file_path, devices):
     df.iloc[:, :] = df.iloc[:, :].astype(np.float64)
 
     # Round index to the second
+    df.index.rename("TIMESTAMP", inplace=True)
     threshold_ns = 1 * 1e9
     df.index = pd.to_datetime(df.index, format="%Y-%m-%d %H:%M:%S.%f")
-    df.index = pd.to_datetime(np.round(df.index.astype(np.int64) / threshold_ns) * threshold_ns)
+    df.index = pd.to_datetime((np.round(df.index.astype(np.int64) / threshold_ns) * threshold_ns).astype(np.int64))
 
     # Group 2 rows with same index
     df = df.groupby([df.index]).agg([np.nanmin])
@@ -70,7 +71,7 @@ def process_webmust_diodes_csv(csv_file_path, devices):
     # Clean: cast labels to byte, remove duplicates, remove timestamps
     df[label_columns] = df[label_columns].astype(np.int8)
     df.drop_duplicates(inplace=True)
-    df.set_index(df.columns[0], inplace=True)
+    #df.set_index(df.columns[0], inplace=True)
 
     return df
 
@@ -104,4 +105,5 @@ if __name__ == "__main__":
 
     # Label data
     labeled_diodes_df = process_webmust_diodes_csv(INPUT_FILE, DEVICES)
+    print(labeled_diodes_df)
     labeled_diodes_df.to_csv(OUTPUT_FILE)
