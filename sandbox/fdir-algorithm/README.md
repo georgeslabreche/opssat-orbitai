@@ -18,3 +18,12 @@ Optical device FDIR algorithm as implemented on the OPS-SAT spacecraft's OBSW.
 1. Place photodiode input values in webmust CSV file `data/webmust/I_PD_THETA.csv`
 2. Run the program: `python3 diodes_labeler.py`, the formatted and labeled file is generated in `data/webmust_labeled/`
 3. Optionally, run the program with relative path to another webmust input file: `python3 diodes_labeler.py data/webmust_labeled/I_PD_THETA2.csv`
+
+### Quaternion labeler
+1. Place quaternion input values in webmust CSV file `data/webmust/O_Q_FB_FI_EST.csv`
+2. Run the program: `python3 coarse_quat_labeler.py`, the formatted and labeled file is generated in `data/webmust_labeled/`
+3. Optionally, run the program with relative path to another webmust input file: `python3 coarse_quat_labeler.py data/webmust/O_Q_FB_FI_EST.csv data/webmust/I_PD_THETA.csv`
+
+### Visualize spacecraft's attitude changes
+0. Reads the labeled coarse ADCS quaternion file `data/webmust_labeled/labeled_O_Q_FB_FI_EST.csv` This is experimental, axis and reference frame are arbitrary. Only use it to see the jumps in attitude.
+1. Run the program: `python3 viz_sc_attitude.py`
