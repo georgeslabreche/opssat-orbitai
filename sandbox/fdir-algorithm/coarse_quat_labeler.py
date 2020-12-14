@@ -10,6 +10,7 @@ import sys
 
 import numpy as np
 import pandas as pd
+from scipy.spatial.transform import Rotation as ro
 
 from fdir import create_opssat_devices
 from diodes_labeler import process_webmust_diodes_csv
@@ -55,10 +56,19 @@ def process_webmust_coarse_quat_csv(csv_file_path, labeled_diodes, devices):
     label_columns = df.columns[-3:]
     df[label_columns] = df[label_columns].astype(np.int8)
 
-    # TODO convert to euler angles
+    # Convert to euler angles
+    df[['x', 'y', 'z']] = df.apply(lambda row: quat_to_euler(row['w'], row['x'], row['y'], row['z']), axis=1)
+    df.drop('w', inplace=True, axis=1)
+
+    # Drop duplicates
+    df.drop_duplicates(inplace=True, keep=False)
 
     return df
 
+def quat_to_euler(w, x, y, z):
+    """Uses scipy to convert a quaternion to euler angle"""
+    # TODO confirm axis order
+    return pd.Series(ro.from_quat([x,y,z,w]).as_euler("XYZ", degrees=True))
 
 if __name__ == "__main__":
     # Path from where the script is called
