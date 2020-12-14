@@ -67,7 +67,6 @@ def process_webmust_coarse_quat_csv(csv_file_path, labeled_diodes, devices):
 
 def quat_to_euler(w, x, y, z):
     """Uses scipy to convert a quaternion to euler angle"""
-    # TODO confirm axis order
     return pd.Series(ro.from_quat([x,y,z,w]).as_euler("XYZ", degrees=True))
 
 if __name__ == "__main__":
