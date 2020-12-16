@@ -3,9 +3,10 @@ Optical device FDIR algorithm as implemented on the OPS-SAT spacecraft's OBSW.
 
 ## Installation
 
-1. Install the virtual environment: `pip3 install --user virtualenv`
-2. Create the virtual environment: `python3 -m venv venv`
+1. Install virtualenv: `pip3 install --user virtualenv`
+2. Create a virtual environment called `venv`: `python3 -m venv venv`
 3. Start the virtual environment: `source venv/bin/activate`
+4. Install the required packages in the virtual environment: `pip install -r requirements.txt`
 
 ## Starting
 
@@ -26,5 +27,5 @@ Optical device FDIR algorithm as implemented on the OPS-SAT spacecraft's OBSW.
 4. Optionally, run the program with relative path to others webmust input files: `python3 coarse_quat_labeler.py data/webmust/O_Q_FB_FI_EST.csv data/webmust/I_PD_THETA.csv`
 
 ### Visualize spacecraft's attitude changes
-0. Reads the labeled coarse ADCS quaternion file `data/webmust_labeled/labeled_O_Q_FB_FI_EST.csv` This is experimental, axis and reference frame are arbitrary. Only use it to see the jumps in attitude.
+0. The visualizer reads the labeled coarse ADCS quaternion file `data/webmust_labeled/labeled_O_Q_FB_FI_EST.csv`.
 1. Run the program: `python3 viz_sc_attitude.py`
