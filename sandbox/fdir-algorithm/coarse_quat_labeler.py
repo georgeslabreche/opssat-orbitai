@@ -16,17 +16,15 @@ from fdir import create_opssat_devices
 from diodes_labeler import process_webmust_diodes_csv
 
 
-def process_webmust_coarse_quat_csv(csv_file_path, labeled_diodes, devices):
+def process_webmust_coarse_quat_csv(csv_file_path, labeled_diodes):
     """
     Parses a webmust CSV file with coarse ADCS quaternion values and returns a formatted panda
-    DataFrame with labels for the given devices. Labeled photodiodes values are used to label the
+    DataFrame with labels. Labeled photodiodes values are used to label the
     quaternion by matching timestamps.
     """
     # Read file using line 19 as header and timestamps as index
     nb_line_header = 18
     df = pd.read_csv(csv_file_path, header=nb_line_header, skip_blank_lines=False, index_col=0)
-    df.replace(" ", np.nan, inplace=True)
-    df.iloc[:, :] = df.iloc[:, :].astype(np.float64)
 
     # Round index to the second
     df.index.rename("TIMESTAMP", inplace=True)
@@ -37,7 +35,11 @@ def process_webmust_coarse_quat_csv(csv_file_path, labeled_diodes, devices):
     # Nice column names
     df.columns = ["w", "x", "y", "z"]  # TODO confirm order
 
-    # Drop lines with 0 only
+    # Cast every cell to number or NaN
+    df.replace(" ", np.nan, inplace=True)
+    df.iloc[:, :] = df.iloc[:, :].astype(np.float64)
+
+    # Drop lines with 0 only, they can't be converted to euler angles
     df = df[(df.T != 0).any()]
 
     # Merge by nearest timestamp with tolerance
@@ -48,19 +50,20 @@ def process_webmust_coarse_quat_csv(csv_file_path, labeled_diodes, devices):
                        direction='nearest',
                        tolerance=pd.Timedelta(seconds=1))
 
-    # Drop nan and photodiodes columns
+    # Drop unmatched lines and photodiodes columns
     df.dropna(inplace=True)
     df.drop(df.columns[-5:-3], axis=1, inplace=True)
 
-    # Cast labels to int
+    # Add euler angles columns
+    euler_col_names = ['x_euler', 'y_euler', 'z_euler']
+    df[euler_col_names] = df.apply(
+        lambda row: quat_to_euler(row['w'], row['x'], row['y'], row['z']), axis=1)
+    columns_names = list(df.columns)
+    df = df[columns_names[:-6] + euler_col_names + columns_names[-6:-3]]
+
+    # Clean: cast labels to byte, drop duplicates
     label_columns = df.columns[-3:]
     df[label_columns] = df[label_columns].astype(np.int8)
-
-    # Convert to euler angles
-    df[['x', 'y', 'z']] = df.apply(lambda row: quat_to_euler(row['w'], row['x'], row['y'], row['z']), axis=1)
-    df.drop('w', inplace=True, axis=1)
-
-    # Drop duplicates
     df.drop_duplicates(inplace=True, keep=False)
 
     return df
@@ -106,6 +109,6 @@ if __name__ == "__main__":
     LABELED_DIODES = process_webmust_diodes_csv(INPUT_FILE_DIODES, DEVICES)
 
     # Label data
-    labeled_euler_df = process_webmust_coarse_quat_csv(INPUT_FILE, LABELED_DIODES, DEVICES)
+    labeled_euler_df = process_webmust_coarse_quat_csv(INPUT_FILE, LABELED_DIODES)
     print(labeled_euler_df)
     labeled_euler_df.to_csv(OUTPUT_FILE)

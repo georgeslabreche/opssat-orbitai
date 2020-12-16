@@ -1,10 +1,18 @@
+from math import cos, sin, radians
+
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import pandas as pd
+import numpy as np
 
-from mpl_toolkits.mplot3d import Axes3D
-from time import sleep
-from math import cos, sin, radians
+from scipy.spatial.transform import Rotation as ro
+
+
+def draw_axis(ax):
+    # x, y, z
+    ax.quiver(0, 0, 0, 1, 0, 0, length=0.08, arrow_length_ratio=0.1, normalize=True, color="red", label="X")
+    ax.quiver(0, 0, 0, 0, 1, 0, length=0.08, arrow_length_ratio=0.1, normalize=True, color="green", label="Y")
+    ax.quiver(0, 0, 0, 0, 0, 1, length=0.08, arrow_length_ratio=0.1, normalize=True, color="blue", label="Z")
 
 
 if __name__ == '__main__':
@@ -13,10 +21,7 @@ if __name__ == '__main__':
     ax = fig.add_subplot(111, projection='3d')
     ax.set_axis_off()
 
-    # draw axis (z,y,x)
-    ax.quiver(0, 0, 0, 0, 0, 1, length=0.08, arrow_length_ratio=0.1, normalize=True, color="blue", label="z")
-    ax.quiver(0, 0, 0, 0, 1, 0, length=0.08, arrow_length_ratio=0.1, normalize=True, color="green", label="y")
-    ax.quiver(0, 0, 0, 1, 0, 0, length=0.08, arrow_length_ratio=0.1, normalize=True, color="red", label="x")
+    draw_axis(ax)
 
     # read attitude
     df = pd.read_csv("data/webmust_labeled/labeled_O_Q_FB_FI_EST.csv", index_col=0)
@@ -26,23 +31,28 @@ if __name__ == '__main__':
         ax.clear()
         ax.set_axis_off()
 
-        # draw axis (z,y,x)
-        ax.quiver(0, 0, 0, 0, 0, 1, length=0.08, arrow_length_ratio=0.1, normalize=True, color="blue", label="z")
-        ax.quiver(0, 0, 0, 0, 1, 0, length=0.08, arrow_length_ratio=0.1, normalize=True, color="green", label="y")
-        ax.quiver(0, 0, 0, 1, 0, 0, length=0.08, arrow_length_ratio=0.1, normalize=True, color="red", label="x")
+        draw_axis(ax)
 
-        # draw SC attitude
-        yaw = radians(df.iloc[i, 2])
-        pitch = radians(df.iloc[i, 1])
-        roll = radians(df.iloc[i, 0])
-        # TODO confirm order
-        x = -cos(yaw)*sin(pitch)*sin(roll)-sin(yaw)*cos(roll)
-        y = -sin(yaw)*sin(pitch)*sin(roll)+cos(yaw)*cos(roll)
-        z = cos(pitch)*sin(roll)
+        # compute spacecraft attitude
+        sc = np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]])
+        rotation = ro.from_quat([df.iloc[i, 1], df.iloc[i, 2], df.iloc[i, 3], df.iloc[i, 0]])
+        sc = rotation.apply(sc)
 
-        ax.quiver(0, 0, 0, x, y, z, length=0.08, arrow_length_ratio=0.1, normalize=True, color="orange", label="SC")
+        # draw spacecraft attitude
+        # draw x
+        axis=0
+        ax.quiver(0, 0, 0, sc[axis][0], sc[axis][1], sc[axis][2], length=0.08, arrow_length_ratio=0.1,
+                  normalize=True, color="lightcoral", label="SC_x")
+        # draw y
+        axis=1
+        ax.quiver(0, 0, 0, sc[axis][0], sc[axis][1], sc[axis][2], length=0.08, arrow_length_ratio=0.1,
+                  normalize=True, color="yellowgreen", label="SC_y")
+        # draw z
+        axis=2
+        ax.quiver(0, 0, 0, sc[axis][0], sc[axis][1], sc[axis][2], length=0.08, arrow_length_ratio=0.1,
+                  normalize=True, color="skyblue", label="SC_z")
         plt.legend()
 
     # show
-    ani = animation.FuncAnimation(fig, animate, interval=50)
+    ani = animation.FuncAnimation(fig, animate, interval=500)
     plt.show()
