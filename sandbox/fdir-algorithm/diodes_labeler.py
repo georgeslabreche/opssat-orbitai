@@ -6,6 +6,7 @@ The labels consist of 0 (off) or 1 (on).
 
 import os
 import sys
+import math
 
 import numpy as np
 import pandas as pd
@@ -38,14 +39,16 @@ def process_webmust_diodes_csv(csv_file_path, devices):
     # Read file using line 21 as header and timestamps as index
     nb_line_header = 20
     df = pd.read_csv(csv_file_path, header=nb_line_header, skip_blank_lines=False, index_col=0)
-    df.replace(" ", np.nan, inplace=True)
-    df.iloc[:, :] = df.iloc[:, :].astype(np.float64)
 
     # Round index to the second
     df.index.rename("TIMESTAMP", inplace=True)
     threshold_ns = 1 * 1e9
     df.index = pd.to_datetime(df.index, format="%Y-%m-%d %H:%M:%S.%f")
     df.index = pd.to_datetime((np.round(df.index.astype(np.int64) / threshold_ns) * threshold_ns).astype(np.int64))
+
+    # Cast every cell to number or NaN
+    df.replace(" ", np.nan, inplace=True)
+    df.iloc[:, :] = df.iloc[:, :].astype(np.float64)
 
     # Group 2 rows with same index
     df = df.groupby([df.index]).agg([np.nanmin])
@@ -68,10 +71,12 @@ def process_webmust_diodes_csv(csv_file_path, devices):
             d.check(df[d.photodiode.name][i], label_off, label_on)
             df.iat[i, j+2] = NEXT_LABEL
 
-    # Clean: cast labels to byte, remove duplicates, remove timestamps
+    # Clean: cast labels to byte, remove duplicates, NaN and incorrect values
     df[label_columns] = df[label_columns].astype(np.int8)
     df.drop_duplicates(inplace=True)
-    #df.set_index(df.columns[0], inplace=True)
+    df.dropna(inplace=True)
+    mask = (np.abs(df[PhotoDiode.PD3.name]) <= math.pi/2*1.01) & (np.abs(df[PhotoDiode.PD6.name]) <= math.pi/2*1.01)
+    df = df[mask]
 
     return df
 
