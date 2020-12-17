@@ -7,6 +7,7 @@ The labels consist of 0 (off) or 1 (on).
 import os
 import sys
 import math
+import datetime
 
 import numpy as np
 import pandas as pd
@@ -81,6 +82,49 @@ def process_webmust_diodes_csv(csv_file_path, devices):
     return df
 
 
+def generate_perfect_data_set(devices):
+    """
+    Generates a labeled file with the coarse sun sensors values as input data that covers the entire
+    input space possible. AKA a perfect test data set.
+    """
+    global NEXT_LABEL
+
+    # Range of PD3 and PD6 input angles
+    angles_range = range(91)
+    nb_samples = len(angles_range)*len(angles_range)
+
+    # Create empty data frame
+    input_columns = [PhotoDiode.PD3.name, PhotoDiode.PD6.name]
+    label_columns = [d.name + "_STATE" for d in devices]
+    columns = input_columns + label_columns
+
+    todays_date = datetime.datetime.now().date()
+    index = pd.date_range(todays_date-datetime.timedelta(seconds=nb_samples), periods=nb_samples, freq='S')
+
+    df = pd.DataFrame(np.zeros((len(index), len(columns))), index=index, columns=columns)
+    df.index.name = "TIMESTAMP"
+
+    # Fill in data
+    for i in range(len(angles_range)):
+        for j in range(len(angles_range)):
+            row_nb = j+i*len(angles_range)
+
+            # Diodes input
+            df.iat[row_nb, 0] = math.radians(angles_range[i])
+            df.iat[row_nb, 1] = math.radians(angles_range[j])
+
+            # Labels
+            for k in range(len(devices)):
+                d = devices[k]
+                d.check(df[d.photodiode.name][row_nb], label_off, label_on)
+                df.iat[row_nb, k+2] = NEXT_LABEL
+
+    # Clean: cast labels to byte
+    df[label_columns] = df[label_columns].astype(np.int8)
+
+    return df
+
+
 if __name__ == "__main__":
     # Path from where the script is called
     _CALLER_DIR_NAME = os.getcwd()
@@ -107,6 +151,10 @@ if __name__ == "__main__":
 
     # Initialize the devices
     DEVICES = create_opssat_devices()
+
+    # Generate data
+    #generated_df = generate_perfect_data_set(DEVICES)
+    #generated_df.to_csv(os.path.join(_DIR_NAME, 'data/webmust_labeled/', "perfect_training_set.csv"))
 
     # Label data
     labeled_diodes_df = process_webmust_diodes_csv(INPUT_FILE, DEVICES)
