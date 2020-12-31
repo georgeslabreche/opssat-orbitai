@@ -1,3 +1,6 @@
 [submodule "app/MochiMochi"]
 	path = app/MochiMochi
 	url = https://github.com/georgeslabreche/MochiMochi
+[submodule "app/app/eigen"]
+	path = app/app/eigen
+	url = https://gitlab.com/libeigen/eigen.git
