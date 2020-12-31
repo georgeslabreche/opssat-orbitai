@@ -13,5 +13,5 @@ cmake .
 make
 ```
 
-## rRun
+## Run
 `./orbita`
