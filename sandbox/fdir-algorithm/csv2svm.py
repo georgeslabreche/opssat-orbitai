@@ -10,7 +10,7 @@ ROUND_PD_DIGITS = 1
 
 # We always round Euler angles.
 
-ROuND_QUATERNION = True
+ROUND_QUATERNION = True
 ROUND_QUATERNION_DIGITS = 1
 
 
