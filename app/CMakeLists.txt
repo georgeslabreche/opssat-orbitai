@@ -13,5 +13,5 @@ SET(CMAKE_BUILD_TYPE Release)
 SET(CMAKE_C_LINK_EXECUTABLE "-lboost_serialization -lboost_program_options")
 
 INCLUDE_DIRECTORIES("${PROJECT_SOURCE_DIR}")
-ADD_EXECUTABLE(orbitai orbitai.cpp)
-TARGET_LINK_LIBRARIES(orbitai ${CMAKE_C_LINK_EXECUTABLE})
+ADD_EXECUTABLE(orbitai.out orbitai.cpp)
+TARGET_LINK_LIBRARIES(orbitai.out ${CMAKE_C_LINK_EXECUTABLE})

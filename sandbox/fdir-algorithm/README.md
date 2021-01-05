@@ -27,5 +27,13 @@ Optical device FDIR algorithm as implemented on the OPS-SAT spacecraft's OBSW.
 4. Optionally, run the program with relative path to others webmust input files: `python3 coarse_quat_labeler.py data/webmust/O_Q_FB_FI_EST.csv data/webmust/I_PD_THETA.csv`
 
 ### Visualize spacecraft's attitude changes
-0. The visualizer reads the labeled coarse ADCS quaternion file `data/webmust_labeled/labeled_O_Q_FB_FI_EST.csv`.
-1. Run the program: `python3 viz_sc_attitude.py`
+1. The visualizer reads the labeled coarse ADCS quaternion file `data/webmust_labeled/labeled_O_Q_FB_FI_EST.csv`.
+2. Run the program: `python3 viz_sc_attitude.py`
+
+### Plot training data
+1. Run the program: `python3 training_data_plots.py`
+
+### Create SVM data files
+Ceate SVN files from the WebMUST CSV files in `data/webmust/`:
+1. Run the program: `csv2svm.py`
+2. File are created in `data/svm`
