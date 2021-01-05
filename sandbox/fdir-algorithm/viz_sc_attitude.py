@@ -16,6 +16,17 @@ def draw_axis(ax):
 
 
 if __name__ == '__main__':
+    # Set up formatting for the movie files
+    save_to_mp4 = False
+
+    try:
+        Writer = animation.writers['ffmpeg']
+        writer = Writer(fps=15, metadata=dict(artist='Me'), bitrate=1800)
+        save_to_mp4 = True
+    except:
+        print("ffmpeg not installed so attitude.mp4 animation file will not be created.")
+
+
     # prepare
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
@@ -53,6 +64,12 @@ if __name__ == '__main__':
                   normalize=True, color="skyblue", label="SC_z")
         plt.legend()
 
+    # create animation
+    ani = animation.FuncAnimation(fig, animate, interval=50)
+
+    # save animation in mp4 file
+    if save_to_mp4:
+        ani.save('attitude.mp4', writer=writer)
+
     # show
-    ani = animation.FuncAnimation(fig, animate, interval=500)
     plt.show()
