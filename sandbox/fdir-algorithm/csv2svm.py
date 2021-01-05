@@ -4,6 +4,7 @@ import glob
 from enum import Enum
 from pathlib import Path
 import random
+import math
 
 ROUND_PD = True
 ROUND_PD_DIGITS = 1
@@ -103,6 +104,28 @@ def csv2svm_1D(device_id):
 def csv2svm_2D(device_id):
     """2 dimensional input with 2 photodiode values."""
 
+    # Define some transformation functions
+    def transform_none(x, y):
+        return y
+
+    def transform_linear(x, y):
+        return x*y
+
+    def transform_polynomial(x, y):
+        return pow(x * y + 1, 2)
+
+    def transform_rbf(x, y):
+        gamma = 1
+        return pow(math.e, -gamma * pow(abs(x-y), 2))
+
+    # Put all transformation functions in a dictionary so that we can apply all of them in a loop
+    transformation_function_dict = {
+        'none': transform_none,
+        'linear': transform_linear,
+        'polynomial': transform_polynomial,
+        'rbf': transform_rbf
+    }
+
     svm_filename = None
     pd3_col_index = None
     pd6_col_index = None
@@ -131,34 +154,40 @@ def csv2svm_2D(device_id):
         return None
 
 
-    # Delete any previously created SVM data file.
-    if Path(svm_filename).is_file():
-        os.remove(svm_filename) 
+    for key, transformation_function in transformation_function_dict.items():
+        svm_filename_transformed = svm_filename.replace('.svmdata', '_' + key + '.svmdata')
 
-    # SVM file writer.
-    with open(svm_filename, 'a') as svm_file:
-        
-        # CSV file reader.
-        with open('data/webmust_labeled/perfect_training_set.csv') as csv_file:
+        # Delete any previously created SVM data file.
+        if Path(svm_filename_transformed).is_file():
+            os.remove(svm_filename_transformed) 
 
-            # Read the CSV file.
-            csv_reader = csv.reader(csv_file, delimiter=',')
+        # SVM file writer.
+        with open(svm_filename_transformed, 'a') as svm_file:
+            
+            # CSV file reader.
+            with open('data/webmust_labeled/perfect_training_set.csv') as csv_file:
 
-            # Skip the header row.
-            next(csv_reader, None)
+                # Read the CSV file.
+                csv_reader = csv.reader(csv_file, delimiter=',')
 
-            # Convert each CSV row into an SVM line.
-            for row in csv_reader:
+                # Skip the header row.
+                next(csv_reader, None)
 
-                pd3 = round(float(row[pd3_col_index]), ROUND_PD_DIGITS) if ROUND_PD else float(row[pd3_col_index])
-                pd6 = round(float(row[pd6_col_index]), ROUND_PD_DIGITS) if ROUND_PD else float(row[pd6_col_index])
-                device_state = row[device_state_col_index]
+                # Convert each CSV row into an SVM line.
+                for row in csv_reader:
 
-                # Construct the SVM data line for the current CSV data row.
-                svm_line = ('+1' if int(device_state) == 1 else '-1') + ' 1:' + str(pd3) + ' 2:' + str(pd6)
+                    pd3 = round(float(row[pd3_col_index]), ROUND_PD_DIGITS) if ROUND_PD else float(row[pd3_col_index])
+                    pd6 = round(float(row[pd6_col_index]), ROUND_PD_DIGITS) if ROUND_PD else float(row[pd6_col_index])
+                    device_state = row[device_state_col_index]
 
-                # Write the SVM data line into a file
-                svm_file.write(svm_line + '\n')
+                    # Apply transformation
+                    pd6 = transformation_function(pd3, pd6)
+
+                    # Construct the SVM data line for the current CSV data row.
+                    svm_line = ('+1' if int(device_state) == 1 else '-1') + ' 1:' + str(pd3) + ' 2:' + str(pd6)
+
+                    # Write the SVM data line into a file
+                    svm_file.write(svm_line + '\n')
 
 
 def csv2svm_3D(device_id):
@@ -301,7 +330,6 @@ def split_svm_files():
                         svm_train_file.write(svm_line)
 
                 svm_line = fp.readline()
-
 
 # 1 dimension input: 1 PD value.
 csv2svm_1D(DeviceId.HD_CAMERA)

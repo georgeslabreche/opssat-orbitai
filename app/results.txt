@@ -1,0 +1,216 @@
+--------------------------------
+> ADAM > none
+training...
+predicting...
+Accuracy = 72.7888% (1827/2510)
+
+real	0m0.146s
+user	0m0.047s
+sys	0m0.016s
+--------------------------------
+> ADAM > linear
+training...
+predicting...
+Accuracy = 85.9787% (2183/2539)
+
+real	0m0.117s
+user	0m0.047s
+sys	0m0.047s
+--------------------------------
+> ADAM > polynomial
+training...
+predicting...
+Accuracy = 85.3155% (2109/2472)
+
+real	0m0.123s
+user	0m0.063s
+sys	0m0.016s
+--------------------------------
+> ADAM > rbf
+training...
+predicting...
+Accuracy = 66.7998% (1672/2503)
+
+real	0m0.109s
+user	0m0.047s
+sys	0m0.000s
+--------------------------------
+> RDA > none
+training...
+predicting...
+Accuracy = 71.7131% (1800/2510)
+
+real	0m0.103s
+user	0m0.031s
+sys	0m0.031s
+--------------------------------
+> RDA > linear
+training...
+predicting...
+Accuracy = 92.5955% (2351/2539)
+
+real	0m0.082s
+user	0m0.047s
+sys	0m0.031s
+--------------------------------
+> RDA > polynomial
+training...
+predicting...
+Accuracy = 84.5065% (2089/2472)
+
+real	0m0.103s
+user	0m0.063s
+sys	0m0.000s
+--------------------------------
+> RDA > rbf
+training...
+predicting...
+Accuracy = 66.7998% (1672/2503)
+
+real	0m0.111s
+user	0m0.047s
+sys	0m0.031s
+--------------------------------
+> AROW > none
+training...
+predicting...
+Accuracy = 72.5896% (1822/2510)
+
+real	0m0.099s
+user	0m0.047s
+sys	0m0.031s
+--------------------------------
+> AROW > linear
+training...
+predicting...
+Accuracy = 97.7156% (2481/2539)
+
+real	0m0.122s
+user	0m0.031s
+sys	0m0.016s
+--------------------------------
+> AROW > polynomial
+training...
+predicting...
+Accuracy = 80.5016% (1990/2472)
+
+real	0m0.130s
+user	0m0.063s
+sys	0m0.000s
+--------------------------------
+> AROW > rbf
+training...
+predicting...
+Accuracy = 53.296% (1334/2503)
+
+real	0m0.119s
+user	0m0.063s
+sys	0m0.000s
+--------------------------------
+> SCW > none
+training...
+predicting...
+Accuracy = 71.992% (1807/2510)
+
+real	0m0.114s
+user	0m0.031s
+sys	0m0.031s
+--------------------------------
+> SCW > linear
+training...
+predicting...
+Accuracy = 98.779% (2508/2539)
+
+real	0m0.132s
+user	0m0.031s
+sys	0m0.031s
+--------------------------------
+> SCW > polynomial
+training...
+predicting...
+Accuracy = 62.8641% (1554/2472)
+
+real	0m0.119s
+user	0m0.063s
+sys	0m0.031s
+--------------------------------
+> SCW > rbf
+training...
+predicting...
+Accuracy = 51.9776% (1301/2503)
+
+real	0m0.093s
+user	0m0.063s
+sys	0m0.016s
+--------------------------------
+> NHERD > none
+training...
+predicting...
+Accuracy = 70.9163% (1780/2510)
+
+real	0m0.130s
+user	0m0.063s
+sys	0m0.016s
+--------------------------------
+> NHERD > linear
+training...
+predicting...
+Accuracy = 97.7156% (2481/2539)
+
+real	0m0.091s
+user	0m0.047s
+sys	0m0.031s
+--------------------------------
+> NHERD > polynomial
+training...
+predicting...
+Accuracy = 51.8204% (1281/2472)
+
+real	0m0.092s
+user	0m0.047s
+sys	0m0.016s
+--------------------------------
+> NHERD > rbf
+training...
+predicting...
+Accuracy = 52.9764% (1326/2503)
+
+real	0m0.113s
+user	0m0.047s
+sys	0m0.031s
+--------------------------------
+> PA > none
+training...
+predicting...
+Accuracy = 65.3785% (1641/2510)
+
+real	0m0.109s
+user	0m0.016s
+sys	0m0.031s
+--------------------------------
+> PA > linear
+training...
+predicting...
+Accuracy = 91.4139% (2321/2539)
+
+real	0m0.091s
+user	0m0.031s
+sys	0m0.016s
+--------------------------------
+> PA > polynomial
+training...
+predicting...
+Accuracy = 85.5987% (2116/2472)
+
+real	0m0.091s
+user	0m0.031s
+sys	0m0.000s
+--------------------------------
+> PA > rbf
+training...
+predicting...
+Accuracy = 42.2293% (1057/2503)
+
+real	0m0.111s
+user	0m0.063s
+sys	0m0.016s
