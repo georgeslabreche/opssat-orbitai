@@ -5,9 +5,13 @@ from enum import Enum
 from pathlib import Path
 import random
 
+ROUND_PD = True
+ROUND_PD_DIGITS = 1
 
-ROUND_PD = 1
-ROUND_QUATERNION = 1
+# We always round Euler angles.
+
+ROuND_QUATERNION = True
+ROUND_QUATERNION_DIGITS = 1
 
 
 class CsvHeaderElevationAngles(Enum):
@@ -86,11 +90,11 @@ def csv2svm_1D(device_id):
 
             # Convert each CSV row into an SVM line.
             for row in csv_reader:
-                elevation_angle = round(float(row[pd_col_index]), ROUND_PD)
+                pd = round(float(row[pd_col_index]), ROUND_PD_DIGITS) if ROUND_PD else float(row[pd_col_index])
                 device_state = row[device_state_col_index]
 
                 # Construct the SVM data line for the current CSV data row.
-                svm_line = ('+1' if int(device_state) == 1 else '-1') + ' 1:' + str(elevation_angle)
+                svm_line = ('+1' if int(device_state) == 1 else '-1') + ' 1:' + str(pd)
 
                 # Write the SVM data line into a file
                 svm_file.write(svm_line + '\n')
@@ -145,8 +149,9 @@ def csv2svm_2D(device_id):
 
             # Convert each CSV row into an SVM line.
             for row in csv_reader:
-                pd3 = round(float(row[pd3_col_index]), ROUND_PD)
-                pd6 = round(float(row[pd6_col_index]), ROUND_PD)
+
+                pd3 = round(float(row[pd3_col_index]), ROUND_PD_DIGITS) if ROUND_PD else float(row[pd3_col_index])
+                pd6 = round(float(row[pd6_col_index]), ROUND_PD_DIGITS) if ROUND_PD else float(row[pd6_col_index])
                 device_state = row[device_state_col_index]
 
                 # Construct the SVM data line for the current CSV data row.
@@ -249,10 +254,10 @@ def csv2svm_4D(device_id):
 
             # Convert each CSV row into an SVM line.
             for row in csv_reader:
-                w = round(float(row[CsvHeaderQuatEuler.w.value]), ROUND_QUATERNION)
-                x = round(float(row[CsvHeaderQuatEuler.x.value]), ROUND_QUATERNION)
-                y = round(float(row[CsvHeaderQuatEuler.y.value]), ROUND_QUATERNION)
-                z = round(float(row[CsvHeaderQuatEuler.z.value]), ROUND_QUATERNION)
+                w = round(float(row[CsvHeaderQuatEuler.w.value]), ROUND_QUATERNION) if ROUND_QUATERNION else float(row[CsvHeaderQuatEuler.w.value])
+                x = round(float(row[CsvHeaderQuatEuler.x.value]), ROUND_QUATERNION) if ROUND_QUATERNION else float(row[CsvHeaderQuatEuler.x.value])
+                y = round(float(row[CsvHeaderQuatEuler.y.value]), ROUND_QUATERNION) if ROUND_QUATERNION else float(row[CsvHeaderQuatEuler.y.value])
+                z = round(float(row[CsvHeaderQuatEuler.z.value]), ROUND_QUATERNION) if ROUND_QUATERNION else float(row[CsvHeaderQuatEuler.z.value])
 
                 device_state = row[device_state_col_index]
 
