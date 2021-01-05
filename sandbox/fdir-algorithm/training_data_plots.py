@@ -53,32 +53,32 @@ plt.title("HD Camera State - 3D")
 plt.show()
 
 
-#########################################################
-# 2 dimension using polynomial transformation function. #
-#########################################################
+#################################
+# 2 dimension from 2 dimension. #
+#################################
 
-def kernel_linear(x, y):
+def transform_linear(x, y):
     return x*y
 
-def kernel_polynomial(x, y):
+def transform_polynomial(x, y):
     return pow(x * y + 1, 2)
 
-def kernel_rbf(x, y):
+def transform_rbf(x, y):
     gamma = 1
     return pow(math.e, -gamma * pow(abs(x-y), 2)) 
 
 
-kernel_tricks = [kernel_linear, kernel_polynomial, kernel_rbf]
+transform_functions = [transform_linear, transform_polynomial, transform_rbf]
 
 
-for kernel_function in kernel_tricks:
+for func in transform_functions:
 
     # Round values.
     x = round(pd_df['PD3'], 1)
     y = round(pd_df['PD6'], 1)
 
     # Apply kernel trick.
-    y = kernel_function(x, y)
+    y = func(x, y)
 
     # The camera state: ON/OFF.
     hd_camera_state = pd_df['HD_CAMERA_STATE']
@@ -90,5 +90,83 @@ for kernel_function in kernel_tricks:
     plt.scatter(x, y, c=col)
 
     # Show.
-    plt.title("Kernel Trick")
+    plt.title("Transformation Functions")
     plt.show()
+
+
+print("Now applying functions to input space to obtain higher dimension feature space.")
+
+# Sources:
+# https://towardsdatascience.com/the-kernel-trick-c98cdbcaeb3f
+# https://course.ccs.neu.edu/cs6140sp15/6_SVM_kernels/lecture_notes/kernels/kernels.pdf
+
+#################################
+# 2D from 1D photodiode values. #
+#################################
+
+def from_1d_to_2d_A(x):
+    return [x, x*x]
+
+def from_1d_to_2d_B(x):
+    return [x, x % 2]
+
+
+from_1d_to_2d_functions = [from_1d_to_2d_A, from_1d_to_2d_B]
+
+
+for func in from_1d_to_2d_functions:
+
+    # Input space
+    x = round(pd_df['PD3'], 1)
+
+    # Feature space
+    xy = func(x)
+    x = xy[0]
+    y = xy[1]
+
+    # The camera state: ON/OFF.
+    hd_camera_state = pd_df['HD_CAMERA_STATE']
+    
+
+    # Color ON states blue and OFF states red.
+    col = np.where(hd_camera_state == 1, 'b', 'r')
+    print(col)
+
+    # Plot.
+    plt.scatter(x, y, c=col)
+
+    # Show.
+    plt.title("From 1D to 2D")
+    plt.show()
+
+
+#################################
+# 3D from 2D photodiode values. #
+#################################
+
+def kernel_polynomial(x, y):
+    return [x*x,  y*y, math.sqrt(2) * x * y]
+
+pd3 = round(pd_df['PD3'], 1)
+pd6 = round(pd_df['PD6'], 1)
+
+# Apply the kernel trick
+xyz = kernel_polynomial(pd3, pd6)
+x = xyz[0]
+y = xyz[1]
+z = xyz[2]
+
+# The camera state: ON/OFF.
+hd_camera_state = pd_df['HD_CAMERA_STATE']
+
+# Color ON states blue and OFF states red.
+col3d = np.where(hd_camera_state == 1, 'b', 'r')
+
+# Plot.
+fig = plt.figure()
+ax = Axes3D(fig)
+ax.scatter(x, y, z, c=col3d)
+
+# Show.
+plt.title("HD Camera State - 3D")
+plt.show()
