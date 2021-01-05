@@ -37,31 +37,31 @@ make
 ### Adagarad RDA
 ```
 ./rda.out --dim 9947 --train ../../training_data/example1/train.dat --test ../../training_data/example1/test.dat --eta 0.1 --lambda 0.000001
-./rda.out --dim 9947 --train ../../../../../sandbox/fdir-algorithm/data/svm/train/camera_2d.svmdata --test ../../../../../sandbox/fdir-algorithm/data/svm/test/camera_2d.svmdata --eta 0.1 --lambda 0.000001
+./rda.out --dim 2 --train ../../../../../sandbox/fdir-algorithm/data/svm/train/camera_2d.svmdata --test ../../../../../sandbox/fdir-algorithm/data/svm/test/camera_2d.svmdata --eta 0.1 --lambda 0.000001
 ```
 
 ### AROW
 ```
 ./arow.out --dim 9947 --train ../../training_data/example1/train.dat --test ../../training_data/example1/test.dat --r 0.8
-./arow.out --dim 9947 --train ../../../../../sandbox/fdir-algorithm/data/svm/train/camera_2d.svmdata --test ../../../../../sandbox/fdir-algorithm/data/svm/test/camera_2d.svmdata --r 0.8
+./arow.out --dim 2 --train ../../../../../sandbox/fdir-algorithm/data/svm/train/camera_2d.svmdata --test ../../../../../sandbox/fdir-algorithm/data/svm/test/camera_2d.svmdata --r 0.8
 ```
 
 ### SCW
 ```
 ./scw.out --dim 9947 --train ../../training_data/example1/train.dat --test ../../training_data/example1/test.dat --c 0.1 --eta 0.95
-./scw.out --dim 9947 --train ../../../../../sandbox/fdir-algorithm/data/svm/train/camera_2d.svmdata --test ../../../../../sandbox/fdir-algorithm/data/svm/test/camera_2d.svmdata --c 0.1 --eta 0.95
+./scw.out --dim 2 --train ../../../../../sandbox/fdir-algorithm/data/svm/train/camera_2d.svmdata --test ../../../../../sandbox/fdir-algorithm/data/svm/test/camera_2d.svmdata --c 0.1 --eta 0.95
 ```
 
 ### NHERD
 ```
 ./nherd.out --dim 9947 --train ../../training_data/example1/train.dat --test ../../training_data/example1/test.dat --c 0.1 --diagonal 0
-./nherd.out --dim 9947 --train ../../../../../sandbox/fdir-algorithm/data/svm/train/camera_2d.svmdata --test ../../../../../sandbox/fdir-algorithm/data/svm/test/camera_2d.svmdata --c 0.1 --diagonal 0
+./nherd.out --dim 2 --train ../../../../../sandbox/fdir-algorithm/data/svm/train/camera_2d.svmdata --test ../../../../../sandbox/fdir-algorithm/data/svm/test/camera_2d.svmdata --c 0.1 --diagonal 0
 ```
 
 ### PA
 ```
 ./pa.out --dim 9947 --train ../../training_data/example1/train.dat --test ../../training_data/example1/test.dat --c 0.1 --select 1
-./pa.out --dim 9947 --train ../../../../../sandbox/fdir-algorithm/data/svm/train/camera_2d.svmdata --test ../../../../../sandbox/fdir-algorithm/data/svm/test/camera_2d.svmdata --c 0.1 --select 1
+./pa.out --dim 2 --train ../../../../../sandbox/fdir-algorithm/data/svm/train/camera_2d.svmdata --test ../../../../../sandbox/fdir-algorithm/data/svm/test/camera_2d.svmdata --c 0.1 --select 1
 ```
 
 ## Orbitai
