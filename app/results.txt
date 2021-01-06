@@ -1,270 +1,432 @@
 --------------------------------
+> ADAM > 1D
+training...
+predicting...
+Accuracy = 34.188% (880/2574)
+
+real	0m0.094s
+user	0m0.031s
+sys	0m0.031s
+--------------------------------
+> ADAM > 1D to 2D > power
+training...
+predicting...
+Accuracy = 56.0515% (1394/2487)
+
+real	0m0.092s
+user	0m0.047s
+sys	0m0.016s
+--------------------------------
+> ADAM > 1D to 2D > modulo
+training...
+predicting...
+Accuracy = 31.1436% (787/2527)
+
+real	0m0.078s
+user	0m0.047s
+sys	0m0.016s
+--------------------------------
 > ADAM > 2D > none
 training...
 predicting...
-Accuracy = 71.3949% (1817/2545)
+Accuracy = 72.301% (1835/2538)
 
-real	0m0.056s
+real	0m0.093s
 user	0m0.031s
-sys	0m0.016s
+sys	0m0.063s
 --------------------------------
 > ADAM > 2D > linear
 training...
 predicting...
-Accuracy = 89.8159% (2293/2553)
+Accuracy = 32.8521% (842/2563)
 
-real	0m0.054s
-user	0m0.031s
-sys	0m0.016s
+real	0m0.080s
+user	0m0.047s
+sys	0m0.047s
 --------------------------------
 > ADAM > 2D > polynomial
 training...
 predicting...
-Accuracy = 83.9812% (2139/2547)
+Accuracy = 64.7723% (1664/2569)
 
-real	0m0.066s
+real	0m0.115s
 user	0m0.031s
-sys	0m0.047s
+sys	0m0.031s
 --------------------------------
 > ADAM > 2D > rbf
 training...
 predicting...
-Accuracy = 66.8651% (1685/2520)
+Accuracy = 80.0948% (2028/2532)
 
-real	0m0.065s
-user	0m0.047s
-sys	0m0.016s
+real	0m0.101s
+user	0m0.031s
+sys	0m0.031s
 --------------------------------
-> ADAM > 6D
+> ADAM > 2D to 6D
 training...
 predicting...
-Accuracy = 82.8963% (2118/2555)
+Accuracy = 82.3156% (2076/2522)
 
-real	0m0.082s
-user	0m0.063s
+real	0m0.204s
+user	0m0.094s
 sys	0m0.016s
+--------------------------------
+> RDA > 1D
+training...
+predicting...
+Accuracy = 34.188% (880/2574)
+
+real	0m0.097s
+user	0m0.031s
+sys	0m0.016s
+--------------------------------
+> RDA > 1D to 2D > power
+training...
+predicting...
+Accuracy = 68.3957% (1701/2487)
+
+real	0m0.104s
+user	0m0.031s
+sys	0m0.016s
+--------------------------------
+> RDA > 1D to 2D > modulo
+training...
+predicting...
+Accuracy = 31.1436% (787/2527)
+
+real	0m0.102s
+user	0m0.031s
+sys	0m0.031s
 --------------------------------
 > RDA > 2D > none
 training...
 predicting...
-Accuracy = 71.8271% (1828/2545)
+Accuracy = 71.513% (1815/2538)
 
-real	0m0.037s
-user	0m0.016s
-sys	0m0.016s
+real	0m0.134s
+user	0m0.031s
+sys	0m0.031s
 --------------------------------
 > RDA > 2D > linear
 training...
 predicting...
-Accuracy = 92.7145% (2367/2553)
+Accuracy = 32.8521% (842/2563)
 
-real	0m0.038s
-user	0m0.016s
+real	0m0.088s
+user	0m0.047s
 sys	0m0.016s
 --------------------------------
 > RDA > 2D > polynomial
 training...
 predicting...
-Accuracy = 84.0989% (2142/2547)
+Accuracy = 37.0183% (951/2569)
 
-real	0m0.035s
-user	0m0.016s
-sys	0m0.016s
+real	0m0.091s
+user	0m0.047s
+sys	0m0.000s
 --------------------------------
 > RDA > 2D > rbf
 training...
 predicting...
-Accuracy = 66.8651% (1685/2520)
+Accuracy = 86.6904% (2195/2532)
 
-real	0m0.036s
-user	0m0.016s
+real	0m0.096s
+user	0m0.031s
 sys	0m0.016s
 --------------------------------
-> RDA > 6D
+> RDA > 2D --> 2D to 6D
 training...
 predicting...
-Accuracy = 87.8278% (2244/2555)
+Accuracy = 88.3426% (2228/2522)
 
-real	0m0.063s
-user	0m0.047s
+real	0m0.174s
+user	0m0.031s
+sys	0m0.047s
+--------------------------------
+> AROW > 1D
+training...
+predicting...
+Accuracy = 34.188% (880/2574)
+
+real	0m0.096s
+user	0m0.031s
+sys	0m0.016s
+--------------------------------
+> AROW > 1D to 2D > power
+training...
+predicting...
+Accuracy = 94.1295% (2341/2487)
+
+real	0m0.124s
+user	0m0.031s
 sys	0m0.000s
+--------------------------------
+> AROW > 1D to 2D > modulo
+training...
+predicting...
+Accuracy = 31.1436% (787/2527)
+
+real	0m0.135s
+user	0m0.047s
+sys	0m0.016s
 --------------------------------
 > AROW > 2D > none
 training...
 predicting...
-Accuracy = 71.7878% (1827/2545)
+Accuracy = 71.4342% (1813/2538)
 
-real	0m0.034s
-user	0m0.016s
+real	0m0.100s
+user	0m0.047s
 sys	0m0.016s
 --------------------------------
 > AROW > 2D > linear
 training...
 predicting...
-Accuracy = 93.4978% (2387/2553)
+Accuracy = 32.9692% (845/2563)
 
-real	0m0.036s
-user	0m0.016s
+real	0m0.092s
+user	0m0.047s
 sys	0m0.016s
 --------------------------------
 > AROW > 2D > polynomial
 training...
 predicting...
-Accuracy = 84.6093% (2155/2547)
+Accuracy = 52.0436% (1337/2569)
 
-real	0m0.043s
-user	0m0.031s
-sys	0m0.000s
+real	0m0.115s
+user	0m0.063s
+sys	0m0.016s
 --------------------------------
 > AROW > 2D > rbf
 training...
 predicting...
-Accuracy = 53.4524% (1347/2520)
+Accuracy = 88.1122% (2231/2532)
 
-real	0m0.108s
-user	0m0.031s
-sys	0m0.016s
+real	0m0.123s
+user	0m0.047s
+sys	0m0.031s
 --------------------------------
-> AROW > 6D
+> AROW > 2D to 6D
 training...
 predicting...
-Accuracy = 95.1076% (2430/2555)
+Accuracy = 95.3608% (2405/2522)
 
-real	0m0.134s
-user	0m0.078s
-sys	0m0.016s
+real	0m0.188s
+user	0m0.094s
+sys	0m0.031s
+--------------------------------
+> SCW > 1D
+training...
+predicting...
+Accuracy = 36.8298% (948/2574)
+
+real	0m0.140s
+user	0m0.031s
+sys	0m0.031s
+--------------------------------
+> SCW > 1D to 2D > power
+training...
+predicting...
+Accuracy = 97.4668% (2424/2487)
+
+real	0m0.120s
+user	0m0.031s
+sys	0m0.031s
+--------------------------------
+> SCW > 1D to 2D > modulo
+training...
+predicting...
+Accuracy = 34.4677% (871/2527)
+
+real	0m0.123s
+user	0m0.047s
+sys	0m0.063s
 --------------------------------
 > SCW > 2D > none
 training...
 predicting...
-Accuracy = 71.7878% (1827/2545)
+Accuracy = 71.0402% (1803/2538)
 
-real	0m0.071s
+real	0m0.118s
 user	0m0.047s
-sys	0m0.000s
+sys	0m0.016s
 --------------------------------
 > SCW > 2D > linear
 training...
 predicting...
-Accuracy = 94.5554% (2414/2553)
+Accuracy = 35.8954% (920/2563)
 
-real	0m0.084s
-user	0m0.031s
-sys	0m0.016s
+real	0m0.118s
+user	0m0.063s
+sys	0m0.000s
 --------------------------------
 > SCW > 2D > polynomial
 training...
 predicting...
-Accuracy = 84.6879% (2157/2547)
+Accuracy = 67.3414% (1730/2569)
 
-real	0m0.085s
-user	0m0.031s
-sys	0m0.016s
+real	0m0.112s
+user	0m0.047s
+sys	0m0.031s
 --------------------------------
 > SCW > 2D > rbf
 training...
 predicting...
-Accuracy = 52.8571% (1332/2520)
+Accuracy = 86.5719% (2192/2532)
 
-real	0m0.078s
+real	0m0.108s
 user	0m0.063s
 sys	0m0.000s
 --------------------------------
-> SCW > 6D
+> SCW > 2D to 6D
 training...
 predicting...
-Accuracy = 97.1429% (2482/2555)
+Accuracy = 97.3037% (2454/2522)
 
-real	0m0.142s
+real	0m0.165s
 user	0m0.109s
+sys	0m0.031s
+--------------------------------
+> NHERD > 1D
+training...
+predicting...
+Accuracy = 34.188% (880/2574)
+
+real	0m0.134s
+user	0m0.031s
+sys	0m0.031s
+--------------------------------
+> NHERD > 1D to 2D > power
+training...
+predicting...
+Accuracy = 81.9461% (2038/2487)
+
+real	0m0.175s
+user	0m0.047s
+sys	0m0.031s
+--------------------------------
+> NHERD > 1D to 2D > modulo
+training...
+predicting...
+Accuracy = 31.1436% (787/2527)
+
+real	0m0.113s
+user	0m0.047s
 sys	0m0.031s
 --------------------------------
 > NHERD > 2D > none
 training...
 predicting...
-Accuracy = 69.5874% (1771/2545)
+Accuracy = 71.513% (1815/2538)
 
-real	0m0.109s
+real	0m0.118s
 user	0m0.047s
-sys	0m0.031s
+sys	0m0.000s
 --------------------------------
 > NHERD > 2D > linear
 training...
 predicting...
-Accuracy = 93.4978% (2387/2553)
+Accuracy = 40.4994% (1038/2563)
 
-real	0m0.104s
-user	0m0.047s
-sys	0m0.031s
+real	0m0.072s
+user	0m0.031s
+sys	0m0.016s
 --------------------------------
 > NHERD > 2D > polynomial
 training...
 predicting...
-Accuracy = 68.1979% (1737/2547)
+Accuracy = 58.5831% (1505/2569)
 
-real	0m0.097s
+real	0m0.105s
 user	0m0.047s
-sys	0m0.031s
+sys	0m0.016s
 --------------------------------
 > NHERD > 2D > rbf
 training...
 predicting...
-Accuracy = 53.4524% (1347/2520)
+Accuracy = 85.1501% (2156/2532)
 
-real	0m0.085s
-user	0m0.031s
+real	0m0.092s
+user	0m0.047s
 sys	0m0.016s
 --------------------------------
-> NHERD > 6D
+> NHERD > 2D to 6D
 training...
 predicting...
-Accuracy = 95.1859% (2432/2555)
+Accuracy = 95.7177% (2414/2522)
 
-real	0m0.144s
-user	0m0.078s
+real	0m0.165s
+user	0m0.094s
+sys	0m0.047s
+--------------------------------
+> PA > 1D
+training...
+predicting...
+Accuracy = 34.188% (880/2574)
+
+real	0m0.088s
+user	0m0.016s
+sys	0m0.000s
+--------------------------------
+> PA > 1D to 2D > power
+training...
+predicting...
+Accuracy = 94.1295% (2341/2487)
+
+real	0m0.111s
+user	0m0.031s
+sys	0m0.031s
+--------------------------------
+> PA > 1D to 2D > modulo
+training...
+predicting...
+Accuracy = 31.1436% (787/2527)
+
+real	0m0.141s
+user	0m0.063s
 sys	0m0.016s
 --------------------------------
 > PA > 2D > none
 training...
 predicting...
-Accuracy = 64.4794% (1641/2545)
+Accuracy = 63.8692% (1621/2538)
 
-real	0m0.075s
-user	0m0.031s
-sys	0m0.016s
+real	0m0.132s
+user	0m0.063s
+sys	0m0.000s
 --------------------------------
 > PA > 2D > linear
 training...
 predicting...
-Accuracy = 88.915% (2270/2553)
+Accuracy = 32.8521% (842/2563)
 
-real	0m0.078s
+real	0m0.118s
 user	0m0.047s
 sys	0m0.016s
 --------------------------------
 > PA > 2D > polynomial
 training...
 predicting...
-Accuracy = 83.9812% (2139/2547)
+Accuracy = 44.4531% (1142/2569)
 
-real	0m0.117s
-user	0m0.047s
-sys	0m0.047s
+real	0m0.111s
+user	0m0.031s
+sys	0m0.016s
 --------------------------------
 > PA > 2D > rbf
 training...
 predicting...
-Accuracy = 43.9286% (1107/2520)
+Accuracy = 86.5719% (2192/2532)
 
-real	0m0.137s
+real	0m0.119s
 user	0m0.031s
 sys	0m0.031s
 --------------------------------
-> PA > 6D
+> PA > 2D to 6D
 training...
 predicting...
-Accuracy = 89.8239% (2295/2555)
+Accuracy = 83.3466% (2102/2522)
 
-real	0m0.179s
-user	0m0.078s
-sys	0m0.000s
+real	0m0.195s
+user	0m0.094s
+sys	0m0.047s
