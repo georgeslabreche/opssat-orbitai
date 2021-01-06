@@ -10,7 +10,7 @@ import math
 pd_df = pd.read_csv("data/webmust_labeled/perfect_training_set.csv")
 quat_euler_df = pd.read_csv("data/webmust_labeled/labeled_O_Q_FB_FI_EST.csv")
 
-fig_counter = 1
+fig_counter = 0
 
 #################################
 # 1 dimension using PD3 values. #
@@ -26,6 +26,7 @@ hd_camera_state = pd_df['HD_CAMERA_STATE']
 col = np.where(hd_camera_state == 1, 'b', 'r')
 
 # Plot.
+fig_counter += 1
 plt.figure(fig_counter)
 plt.scatter(x, np.zeros(len(x)), c=col)
 plt.title("HD Camera State: 1D")
@@ -86,6 +87,8 @@ hd_camera_state = pd_df['HD_CAMERA_STATE']
 col = np.where(hd_camera_state == 1, 'b', 'r')
 
 # Plot.
+fig_counter += 1
+plt.figure(fig_counter)
 plt.scatter(x, y, c=col)
 plt.title("HD Camera State: 2D")
 
