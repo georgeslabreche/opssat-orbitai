@@ -4,8 +4,71 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import math
 
+# PD3  Elevation angle for Star Tracker surface.
+# PD6  Elevation angle for HD Camera and Optical RX surface.
+
 pd_df = pd.read_csv("data/webmust_labeled/perfect_training_set.csv")
 quat_euler_df = pd.read_csv("data/webmust_labeled/labeled_O_Q_FB_FI_EST.csv")
+
+fig_counter = 1
+
+#################################
+# 1 dimension using PD3 values. #
+#################################
+
+# Round values.
+x = round(pd_df['PD6'], 1)
+
+# The camera state: ON/OFF.
+hd_camera_state = pd_df['HD_CAMERA_STATE']
+
+# Color ON states blue and OFF states red.
+col = np.where(hd_camera_state == 1, 'b', 'r')
+
+# Plot.
+plt.figure(fig_counter)
+plt.scatter(x, np.zeros(len(x)), c=col)
+plt.title("HD Camera State: 1D")
+
+
+#################################
+# 2D from 1D photodiode values. #
+#################################
+
+def from_1d_to_2d_A(x):
+    return [x, x*x]
+
+def from_1d_to_2d_B(x):
+    return [x, x % 2]
+
+
+from_1d_to_2d_functions = [from_1d_to_2d_A, from_1d_to_2d_B]
+
+
+for func in from_1d_to_2d_functions:
+
+    # Input space
+    x = round(pd_df['PD6'], 1)
+
+    # Feature space
+    xy = func(x)
+    x = xy[0]
+    y = xy[1]
+
+    # The camera state: ON/OFF.
+    hd_camera_state = pd_df['HD_CAMERA_STATE']
+    
+
+    # Color ON states blue and OFF states red.
+    col = np.where(hd_camera_state == 1, 'b', 'r')
+
+    # Plot.
+    fig_counter += 1
+    plt.figure(fig_counter)
+    plt.scatter(x, y, c=col)
+    plt.title("HD Camera State: 1D → 2D")
+
+
 
 
 #########################################
@@ -24,10 +87,7 @@ col = np.where(hd_camera_state == 1, 'b', 'r')
 
 # Plot.
 plt.scatter(x, y, c=col)
-
-# Show.
-plt.title("HD Camera State - 2D")
-plt.show()
+plt.title("HD Camera State: 2D")
 
 ##################################
 # 3 dimension with Euler angles. #
@@ -44,13 +104,14 @@ hd_camera_state = quat_euler_df['HD_CAMERA_STATE']
 col3d = np.where(hd_camera_state == 1, 'b', 'r')
 
 # Plot.
-fig = plt.figure()
+fig_counter += 1
+plt.title('HD Camera State: 3D with Euler angles')
+fig = plt.figure(fig_counter)
 ax = Axes3D(fig)
+ax.set_xlabel('Euler X')
+ax.set_ylabel('Euler Y')
+ax.set_zlabel('Euler Z')
 ax.scatter(x_euler, y_euler, z_euler, c=col3d)
-
-# Show.
-plt.title("HD Camera State - 3D")
-plt.show()
 
 
 #################################
@@ -87,57 +148,16 @@ for func in transform_functions:
     col = np.where(hd_camera_state == 1, 'b', 'r')
 
     # Plot.
+    fig_counter += 1
+    plt.figure(fig_counter)
     plt.scatter(x, y, c=col)
+    plt.title("HD Camera State: 2D → 2D")
 
-    # Show.
-    plt.title("Transformation Functions")
-    plt.show()
-
-
-print("Now applying functions to input space to obtain higher dimension feature space.")
 
 # Sources:
 # https://towardsdatascience.com/the-kernel-trick-c98cdbcaeb3f
 # https://course.ccs.neu.edu/cs6140sp15/6_SVM_kernels/lecture_notes/kernels/kernels.pdf
 
-#################################
-# 2D from 1D photodiode values. #
-#################################
-
-def from_1d_to_2d_A(x):
-    return [x, x*x]
-
-def from_1d_to_2d_B(x):
-    return [x, x % 2]
-
-
-from_1d_to_2d_functions = [from_1d_to_2d_A, from_1d_to_2d_B]
-
-
-for func in from_1d_to_2d_functions:
-
-    # Input space
-    x = round(pd_df['PD3'], 1)
-
-    # Feature space
-    xy = func(x)
-    x = xy[0]
-    y = xy[1]
-
-    # The camera state: ON/OFF.
-    hd_camera_state = pd_df['HD_CAMERA_STATE']
-    
-
-    # Color ON states blue and OFF states red.
-    col = np.where(hd_camera_state == 1, 'b', 'r')
-    print(col)
-
-    # Plot.
-    plt.scatter(x, y, c=col)
-
-    # Show.
-    plt.title("From 1D to 2D")
-    plt.show()
 
 
 #################################
@@ -163,10 +183,16 @@ hd_camera_state = pd_df['HD_CAMERA_STATE']
 col3d = np.where(hd_camera_state == 1, 'b', 'r')
 
 # Plot.
-fig = plt.figure()
+fig_counter += 1
+plt.title("HD Camera State: 2D → 3D")
+fig = plt.figure(fig_counter)
 ax = Axes3D(fig)
 ax.scatter(x, y, z, c=col3d)
 
-# Show.
-plt.title("HD Camera State - 3D")
+
+
+
+###################
+# Show all plots. #
+###################
 plt.show()
