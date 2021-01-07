@@ -4,13 +4,34 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import math
 
+# Transformation sources:
+# https://towardsdatascience.com/the-kernel-trick-c98cdbcaeb3f
+# https://course.ccs.neu.edu/cs6140sp15/6_SVM_kernels/lecture_notes/kernels/kernels.pdf
+
 # PD3  Elevation angle for Star Tracker surface.
 # PD6  Elevation angle for HD Camera and Optical RX surface.
+
+save_figures_to_file = True
+display_figures = False
 
 pd_df = pd.read_csv("data/webmust_labeled/perfect_training_set.csv")
 quat_euler_df = pd.read_csv("data/webmust_labeled/labeled_O_Q_FB_FI_EST.csv")
 
 fig_counter = 0
+
+# XY combinations.
+XYs = [{
+        'xy': [pd_df['PD6'], pd_df['PD3']],
+        'x_label': 'PD6',
+        'y_label': 'PD3',
+    },
+    {
+        'xy': [pd_df['PD3'], pd_df['PD6']],
+        'x_label': 'PD3',
+        'y_label': 'PD6',
+    }
+]
+
 
 #################################
 # 1 dimension using PD3 values. #
@@ -30,6 +51,7 @@ fig_counter += 1
 plt.figure(fig_counter)
 plt.scatter(x, np.zeros(len(x)), c=col)
 plt.title("HD Camera State: 1D")
+plt.savefig("plots/Figure_" + str(fig_counter) + ".png")
 
 
 #################################
@@ -58,7 +80,6 @@ for func in from_1d_to_2d_functions:
 
     # The camera state: ON/OFF.
     hd_camera_state = pd_df['HD_CAMERA_STATE']
-    
 
     # Color ON states blue and OFF states red.
     col = np.where(hd_camera_state == 1, 'b', 'r')
@@ -68,7 +89,10 @@ for func in from_1d_to_2d_functions:
     plt.figure(fig_counter)
     plt.scatter(x, y, c=col)
     plt.title("HD Camera State: 1D → 2D")
-
+    
+    # Save figure to file.
+    if save_figures_to_file:
+        plt.savefig("plots/Figure_" + str(fig_counter) + ".png")
 
 
 
@@ -76,21 +100,30 @@ for func in from_1d_to_2d_functions:
 # 2 dimension using PD3 and PD6 values. #
 #########################################
 
-# Round values.
-x = round(pd_df['PD3'], 1)
-y = round(pd_df['PD6'], 1)
+for val in XYs:
 
-# The camera state: ON/OFF.
-hd_camera_state = pd_df['HD_CAMERA_STATE']
+    # Round values.
+    x = round(val['xy'][0], 1)
+    y = round(val['xy'][1], 1)
 
-# Color ON states blue and OFF states red.
-col = np.where(hd_camera_state == 1, 'b', 'r')
+    # The camera state: ON/OFF.
+    hd_camera_state = pd_df['HD_CAMERA_STATE']
 
-# Plot.
-fig_counter += 1
-plt.figure(fig_counter)
-plt.scatter(x, y, c=col)
-plt.title("HD Camera State: 2D")
+    # Color ON states blue and OFF states red.
+    col = np.where(hd_camera_state == 1, 'b', 'r')
+
+    # Plot.
+    fig_counter += 1
+    plt.figure(fig_counter)
+    plt.scatter(x, y, c=col)
+    plt.title("HD Camera State: 2D")
+    plt.xlabel(val['x_label'])
+    plt.ylabel(val['y_label'])
+
+    # Save figure to file.
+    if save_figures_to_file:
+        plt.savefig("plots/Figure_" + str(fig_counter) + ".png")
+
 
 ##################################
 # 3 dimension with Euler angles. #
@@ -116,6 +149,10 @@ ax.set_ylabel('Euler Y')
 ax.set_zlabel('Euler Z')
 ax.scatter(x_euler, y_euler, z_euler, c=col3d)
 
+# Save figure to file.
+if save_figures_to_file:
+    plt.savefig("plots/Figure_" + str(fig_counter) + ".png")
+
 
 #################################
 # 2 dimension from 2 dimension. #
@@ -132,35 +169,47 @@ def transform_rbf(x, y):
     return pow(math.e, -gamma * pow(abs(x-y), 2)) 
 
 
-transform_functions = [transform_linear, transform_polynomial, transform_rbf]
+transform_functions = [
+    {   'name': 'linear',
+        'func': transform_linear
+    }, 
+    {
+        'name': 'polynomial',
+        'func': transform_polynomial
+    },
+    {   'name': 'rbf',
+        'func': transform_rbf
+    }
+]
 
+for val in XYs:
 
-for func in transform_functions:
+    for func in transform_functions:
 
-    # Round values.
-    x = round(pd_df['PD3'], 1)
-    y = round(pd_df['PD6'], 1)
+        # Round values.
+        x = round(val['xy'][0], 1)
+        y = round(val['xy'][1], 1)
 
-    # Apply kernel trick.
-    y = func(x, y)
+        # Apply kernel trick.
+        y = func['func'](x, y)
 
-    # The camera state: ON/OFF.
-    hd_camera_state = pd_df['HD_CAMERA_STATE']
+        # The camera state: ON/OFF.
+        hd_camera_state = pd_df['HD_CAMERA_STATE']
 
-    # Color ON states blue and OFF states red.
-    col = np.where(hd_camera_state == 1, 'b', 'r')
+        # Color ON states blue and OFF states red.
+        col = np.where(hd_camera_state == 1, 'b', 'r')
 
-    # Plot.
-    fig_counter += 1
-    plt.figure(fig_counter)
-    plt.scatter(x, y, c=col)
-    plt.title("HD Camera State: 2D → 2D")
+        # Plot.
+        fig_counter += 1
+        plt.figure(fig_counter)
+        plt.scatter(x, y, c=col)
+        plt.title("HD Camera State: 2D → 2D")
+        plt.xlabel(val['x_label'])
+        plt.ylabel('f_' + func['name'] + '(' + val['x_label'] + ', ' + val['y_label'] + ')')
 
-
-# Sources:
-# https://towardsdatascience.com/the-kernel-trick-c98cdbcaeb3f
-# https://course.ccs.neu.edu/cs6140sp15/6_SVM_kernels/lecture_notes/kernels/kernels.pdf
-
+        # Save figure to file.
+        if save_figures_to_file:
+            plt.savefig("plots/Figure_" + str(fig_counter) + ".png")
 
 
 #################################
@@ -192,10 +241,13 @@ fig = plt.figure(fig_counter)
 ax = Axes3D(fig)
 ax.scatter(x, y, z, c=col3d)
 
-
+# Save figure to file.
+if save_figures_to_file:
+    plt.savefig("plots/Figure_" + str(fig_counter) + ".png")
 
 
 ###################
 # Show all plots. #
 ###################
-plt.show()
+if display_figures:
+    plt.show()

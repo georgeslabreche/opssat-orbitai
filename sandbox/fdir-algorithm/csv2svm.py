@@ -127,26 +127,21 @@ def csv2svm_2D(device_id):
     }
 
     svm_filename = None
-    x_col_index = None
-    y_col_index = None
     device_state_col_index = None
+
+    pd3_col_index = CsvHeaderElevationAngles.PD3.value 
+    pd6_col_index = CsvHeaderElevationAngles.PD6.value
 
     if device_id == DeviceId.HD_CAMERA:
         svm_filename = 'data/svm/all/camera_2d.svmdata'
-        y_col_index = CsvHeaderElevationAngles.PD3.value 
-        x_col_index = CsvHeaderElevationAngles.PD6.value # X value is PD6 for HD Camera.
         device_state_col_index = CsvHeaderElevationAngles.HD_CAMERA_STATE.value
 
     elif device_id == DeviceId.OPTICAL_RX:
         svm_filename = 'data/svm/all/optical_rx_2d.svmdata'
-        y_col_index = CsvHeaderElevationAngles.PD3.value
-        x_col_index = CsvHeaderElevationAngles.PD6.value # X value is PD6 for Optical RX.
         device_state_col_index = CsvHeaderElevationAngles.OPTICAL_RX_STATE.value
 
     elif device_id == DeviceId.STAR_TRACKER:
         svm_filename = 'data/svm/all/star_tracker_2d.svmdata'
-        x_col_index = CsvHeaderElevationAngles.PD3.value # X value is PD3 for Star Tracker.
-        y_col_index = CsvHeaderElevationAngles.PD6.value
         device_state_col_index = CsvHeaderElevationAngles.STAR_TRACKER_STATE.value
 
     else:
@@ -154,41 +149,56 @@ def csv2svm_2D(device_id):
         return None
 
 
-    for key, transformation_function in transformation_function_dict.items():
-        svm_filename_transformed = svm_filename.replace('.svmdata', '_' + key + '.svmdata')
+    XY_indices = [
+        {
+            'x': pd3_col_index,
+            'y': pd6_col_index,
+            'id': 'Xpd3-Ypd6'
+        },
+        {
+            'x': pd6_col_index,
+            'y': pd3_col_index,
+            'id': 'Xpd6-Ypd3'
+        }
+    ]
 
-        # Delete any previously created SVM data file.
-        if Path(svm_filename_transformed).is_file():
-            os.remove(svm_filename_transformed) 
+    for xy_index in XY_indices:
 
-        # SVM file writer.
-        with open(svm_filename_transformed, 'a') as svm_file:
-            
-            # CSV file reader.
-            with open('data/webmust_labeled/perfect_training_set.csv') as csv_file:
+        for func_name, transformation_function in transformation_function_dict.items():
+            svm_filename_transformed = svm_filename.replace('.svmdata', '_' + xy_index['id'] + '_' + func_name + '.svmdata')
 
-                # Read the CSV file.
-                csv_reader = csv.reader(csv_file, delimiter=',')
+            # Delete any previously created SVM data file.
+            if Path(svm_filename_transformed).is_file():
+                os.remove(svm_filename_transformed) 
 
-                # Skip the header row.
-                next(csv_reader, None)
+            # SVM file writer.
+            with open(svm_filename_transformed, 'a') as svm_file:
+                
+                # CSV file reader.
+                with open('data/webmust_labeled/perfect_training_set.csv') as csv_file:
 
-                # Convert each CSV row into an SVM line.
-                for row in csv_reader:
+                    # Read the CSV file.
+                    csv_reader = csv.reader(csv_file, delimiter=',')
 
-                    x = float(row[x_col_index])
-                    y = float(row[y_col_index])
-                    device_state = row[device_state_col_index]
+                    # Skip the header row.
+                    next(csv_reader, None)
 
-                    # Apply transformation
-                    x_rounded = round(x, 1)
-                    y_transformed_rounded = round(transformation_function(x, y), 1) 
+                    # Convert each CSV row into an SVM line.
+                    for row in csv_reader:
 
-                    # Construct the SVM data line for the current CSV data row.
-                    svm_line = ('+1' if int(device_state) == 1 else '-1') + ' 1:' + str(x_rounded) + ' 2:' + str(y_transformed_rounded)
+                        x = float(row[xy_index['x']])
+                        y = float(row[xy_index['y']])
+                        device_state = row[device_state_col_index]
 
-                    # Write the SVM data line into a file
-                    svm_file.write(svm_line + '\n')
+                        # Apply transformation
+                        x_rounded = round(x, 1)
+                        y_transformed_rounded = round(transformation_function(x, y), 1) 
+
+                        # Construct the SVM data line for the current CSV data row.
+                        svm_line = ('+1' if int(device_state) == 1 else '-1') + ' 1:' + str(x_rounded) + ' 2:' + str(y_transformed_rounded)
+
+                        # Write the SVM data line into a file
+                        svm_file.write(svm_line + '\n')
 
 
 def csv2svm_3D(device_id):
@@ -315,22 +325,21 @@ def csv2svm_2D_from_1D_A(device_id):
     }
 
     svm_filename = None
-    x_col_index = None
     device_state_col_index = None
+
+    pd3_col_index = CsvHeaderElevationAngles.PD3.value
+    pd6_col_index = CsvHeaderElevationAngles.PD6.value
 
     if device_id == DeviceId.HD_CAMERA:
         svm_filename = 'data/svm/all/camera_2d_from_1d_A.svmdata'
-        x_col_index = CsvHeaderElevationAngles.PD6.value # X value is PD6 for HD Camera.
         device_state_col_index = CsvHeaderElevationAngles.HD_CAMERA_STATE.value
 
     elif device_id == DeviceId.OPTICAL_RX:
         svm_filename = 'data/svm/all/optical_rx_2d_from_1d_A.svmdata'
-        x_col_index = CsvHeaderElevationAngles.PD6.value # X value is PD6 for Optical RX.
         device_state_col_index = CsvHeaderElevationAngles.OPTICAL_RX_STATE.value
 
     elif device_id == DeviceId.STAR_TRACKER:
         svm_filename = 'data/svm/all/star_tracker_2d_from_1d_A.svmdata'
-        x_col_index = CsvHeaderElevationAngles.PD3.value # X value is PD3 for Star Tracker.
         device_state_col_index = CsvHeaderElevationAngles.STAR_TRACKER_STATE.value
 
     else:
@@ -338,8 +347,102 @@ def csv2svm_2D_from_1D_A(device_id):
         return None
 
 
-    for key, transformation_function in transformation_function_dict.items():
-        svm_filename_transformed = svm_filename.replace('.svmdata', '_' + key + '.svmdata')
+    X_indices = [
+        {
+            'x': pd3_col_index,
+            'id': 'Xpd3'
+        },
+        {
+            'x': pd6_col_index,
+            'id': 'Xpd6'
+        }
+    ]
+
+    for x_index in X_indices:
+
+        for func_name, transformation_function in transformation_function_dict.items():
+            svm_filename_transformed = svm_filename.replace('.svmdata', '_' + x_index['id'] + '_' + func_name + '.svmdata')
+
+            # Delete any previously created SVM data file.
+            if Path(svm_filename_transformed).is_file():
+                os.remove(svm_filename_transformed) 
+
+            # SVM file writer.
+            with open(svm_filename_transformed, 'a') as svm_file:
+                
+                # CSV file reader.
+                with open('data/webmust_labeled/perfect_training_set.csv') as csv_file:
+
+                    # Read the CSV file.
+                    csv_reader = csv.reader(csv_file, delimiter=',')
+
+                    # Skip the header row.
+                    next(csv_reader, None)
+
+                    # Convert each CSV row into an SVM line.
+                    for row in csv_reader:
+
+                        # The device state.
+                        device_state = row[device_state_col_index]
+
+                        x = float(row[x_index['x']])
+
+                        # Apply transformation
+                        xy = transformation_function(x)
+                        x_transformed_rounded = round(xy[0], 1) # This x is the same as the original x. Not actually transformed.
+                        y_transformed_rounded = round(xy[1], 1) 
+
+                        # Construct the SVM data line for the current CSV data row.
+                        svm_line = ('+1' if int(device_state) == 1 else '-1') + ' 1:' + str(x_transformed_rounded) + ' 2:' + str(y_transformed_rounded)
+
+                        # Write the SVM data line into a file
+                        svm_file.write(svm_line + '\n')
+
+
+def csv2svm_3D_from_2D_A(device_id):
+    """3 dimension feature space from 2 dimension PD values input space."""
+
+    def to_higher_dimension(x, y):
+        return [x*x,  y*y, math.sqrt(2) * x * y]
+
+    svm_filename = None
+    device_state_col_index = None
+
+    pd3_col_index = CsvHeaderElevationAngles.PD3.value
+    pd6_col_index = CsvHeaderElevationAngles.PD6.value
+
+    if device_id == DeviceId.HD_CAMERA:
+        svm_filename = 'data/svm/all/camera_3d_from_2d_A.svmdata'
+        device_state_col_index = CsvHeaderElevationAngles.HD_CAMERA_STATE.value
+
+    elif device_id == DeviceId.OPTICAL_RX:
+        svm_filename = 'data/svm/all/optical_rx_3d_from_2d_A.svmdata'
+        device_state_col_index = CsvHeaderElevationAngles.OPTICAL_RX_STATE.value
+
+    elif device_id == DeviceId.STAR_TRACKER:
+        svm_filename = 'data/svm/all/star_tracker_3d_from_2d_A.svmdata'
+        device_state_col_index = CsvHeaderElevationAngles.STAR_TRACKER_STATE.value
+
+    else:
+        # Invalid device id.
+        return None
+
+    XY_indices = [
+        {
+            'x': pd3_col_index,
+            'y': pd6_col_index,
+            'id': 'Xpd3-Ypd6'
+        },
+        {
+            'x': pd6_col_index,
+            'y': pd3_col_index,
+            'id': 'Xpd6-Ypd3'
+        }
+    ]
+
+    for xy_index in XY_indices:
+
+        svm_filename_transformed = svm_filename.replace('.svmdata', '_' + xy_index['id'] + '.svmdata')
 
         # Delete any previously created SVM data file.
         if Path(svm_filename_transformed).is_file():
@@ -360,92 +463,24 @@ def csv2svm_2D_from_1D_A(device_id):
                 # Convert each CSV row into an SVM line.
                 for row in csv_reader:
 
-                    x = float(row[x_col_index])
+                    # Device state
                     device_state = row[device_state_col_index]
 
-                    # Apply transformation
-                    xy = transformation_function(x)
-                    x_transformed_rounded = round(xy[0], 1)
-                    y_transformed_rounded = round(xy[1], 1) 
+                    # Input space.
+                    x = float(row[xy_index['x']])
+                    y = float(row[xy_index['y']])
+
+                    # Feature space.
+                    xyz = to_higher_dimension(x, y)
+                    x_transformed_rounded = round(xyz[0], 1)
+                    y_transformed_rounded = round(xyz[1], 1)
+                    z_transformed_rounded = round(xyz[2], 1)
 
                     # Construct the SVM data line for the current CSV data row.
-                    svm_line = ('+1' if int(device_state) == 1 else '-1') + ' 1:' + str(x_transformed_rounded) + ' 2:' + str(y_transformed_rounded)
+                    svm_line = ('+1' if int(device_state) == 1 else '-1') + ' 1:' + str(x_transformed_rounded) + ' 2:' + str(y_transformed_rounded) + ' 3:' + str(z_transformed_rounded)
 
                     # Write the SVM data line into a file
                     svm_file.write(svm_line + '\n')
-
-
-def csv2svm_3D_from_2D_A(device_id):
-    """3 dimension feature space from 2 dimension PD values input space."""
-
-    def to_higher_dimension(x, y):
-        return [x*x,  y*y, math.sqrt(2) * x * y]
-
-    svm_filename = None
-    x_col_index = None
-    y_col_index = None
-    device_state_col_index = None
-
-    if device_id == DeviceId.HD_CAMERA:
-        svm_filename = 'data/svm/all/camera_3d_from_2d_A.svmdata'
-        y_col_index = CsvHeaderElevationAngles.PD3.value
-        x_col_index = CsvHeaderElevationAngles.PD6.value # X value is PD6 for HD Camera.
-        device_state_col_index = CsvHeaderElevationAngles.HD_CAMERA_STATE.value
-
-    elif device_id == DeviceId.OPTICAL_RX:
-        svm_filename = 'data/svm/all/optical_rx_3d_from_2d_A.svmdata'
-        y_col_index = CsvHeaderElevationAngles.PD3.value
-        x_col_index = CsvHeaderElevationAngles.PD6.value # X value is PD6 for Optical RX.
-        device_state_col_index = CsvHeaderElevationAngles.OPTICAL_RX_STATE.value
-
-    elif device_id == DeviceId.STAR_TRACKER:
-        svm_filename = 'data/svm/all/star_tracker_3d_from_2d_A.svmdata'
-        x_col_index = CsvHeaderElevationAngles.PD3.value # X value is PD3 for Star Tracker.
-        y_col_index = CsvHeaderElevationAngles.PD6.value
-        device_state_col_index = CsvHeaderElevationAngles.STAR_TRACKER_STATE.value
-
-    else:
-        # Invalid device id.
-        return None
-
-
-     # Delete any previously created SVM data file.
-    if Path(svm_filename).is_file():
-        os.remove(svm_filename) 
-
-    # SVM file writer.
-    with open(svm_filename, 'a') as svm_file:
-        
-        # CSV file reader.
-        with open('data/webmust_labeled/perfect_training_set.csv') as csv_file:
-
-            # Read the CSV file.
-            csv_reader = csv.reader(csv_file, delimiter=',')
-
-            # Skip the header row.
-            next(csv_reader, None)
-
-            # Convert each CSV row into an SVM line.
-            for row in csv_reader:
-
-                # Device state
-                device_state = row[device_state_col_index]
-
-                # Input space.
-                x = float(row[x_col_index])
-                y = float(row[y_col_index])
-
-                # Feature space.
-                xyz = to_higher_dimension(x, y)
-                x_transformed_rounded = round(xyz[0], 1)
-                y_transformed_rounded = round(xyz[1], 1)
-                z_transformed_rounded = round(xyz[2], 1)
-
-                # Construct the SVM data line for the current CSV data row.
-                svm_line = ('+1' if int(device_state) == 1 else '-1') + ' 1:' + str(x_transformed_rounded) + ' 2:' + str(y_transformed_rounded) + ' 3:' + str(z_transformed_rounded)
-
-                # Write the SVM data line into a file
-                svm_file.write(svm_line + '\n')
 
 
 def csv2svm_6D_from_2D_A(device_id):
@@ -456,74 +491,85 @@ def csv2svm_6D_from_2D_A(device_id):
 
 
     svm_filename = None
-    x_col_index = None
-    y_col_index = None
     device_state_col_index = None
+
+    pd3_col_index = CsvHeaderElevationAngles.PD3.value
+    pd6_col_index = CsvHeaderElevationAngles.PD6.value 
 
     if device_id == DeviceId.HD_CAMERA:
         svm_filename = 'data/svm/all/camera_6d_from_2d_A.svmdata'
-        y_col_index = CsvHeaderElevationAngles.PD3.value
-        x_col_index = CsvHeaderElevationAngles.PD6.value # X value is PD6 for HD Camera.
         device_state_col_index = CsvHeaderElevationAngles.HD_CAMERA_STATE.value
 
     elif device_id == DeviceId.OPTICAL_RX:
         svm_filename = 'data/svm/all/optical_rx_6d_from_2d_A.svmdata'
-        y_col_index = CsvHeaderElevationAngles.PD3.value
-        x_col_index = CsvHeaderElevationAngles.PD6.value # X value is PD6 for Optical RX.
         device_state_col_index = CsvHeaderElevationAngles.OPTICAL_RX_STATE.value
 
     elif device_id == DeviceId.STAR_TRACKER:
         svm_filename = 'data/svm/all/star_tracker_6d_from_2d_A.svmdata'
-        x_col_index = CsvHeaderElevationAngles.PD3.value # X value is PD3 for Star Tracker.
-        y_col_index = CsvHeaderElevationAngles.PD6.value
         device_state_col_index = CsvHeaderElevationAngles.STAR_TRACKER_STATE.value
 
     else:
         # Invalid device id.
         return None
 
+    XY_indices = [
+        {
+            'x': pd3_col_index,
+            'y': pd6_col_index,
+            'id': 'Xpd3-Ypd6'
+        },
+        {
+            'x': pd6_col_index,
+            'y': pd3_col_index,
+            'id': 'Xpd6-Ypd3'
+        }
+    ]
 
-     # Delete any previously created SVM data file.
-    if Path(svm_filename).is_file():
-        os.remove(svm_filename) 
+    for xy_index in XY_indices:
 
-    # SVM file writer.
-    with open(svm_filename, 'a') as svm_file:
-        
-        # CSV file reader.
-        with open('data/webmust_labeled/perfect_training_set.csv') as csv_file:
+        svm_filename_transformed = svm_filename.replace('.svmdata', '_' + xy_index['id'] + '.svmdata')
 
-            # Read the CSV file.
-            csv_reader = csv.reader(csv_file, delimiter=',')
+        # Delete any previously created SVM data file.
+        if Path(svm_filename).is_file():
+            os.remove(svm_filename) 
 
-            # Skip the header row.
-            next(csv_reader, None)
+        # SVM file writer.
+        with open(svm_filename, 'a') as svm_file:
+            
+            # CSV file reader.
+            with open('data/webmust_labeled/perfect_training_set.csv') as csv_file:
 
-            # Convert each CSV row into an SVM line.
-            for row in csv_reader:
+                # Read the CSV file.
+                csv_reader = csv.reader(csv_file, delimiter=',')
 
-                # Device state
-                device_state = row[device_state_col_index]
+                # Skip the header row.
+                next(csv_reader, None)
 
-                # Input space.
-                x = float(row[x_col_index])
-                y = float(row[y_col_index])
+                # Convert each CSV row into an SVM line.
+                for row in csv_reader:
 
-                # Feature space.
-                dim6 = to_higher_dimension(x, y)
+                    # Device state.
+                    device_state = row[device_state_col_index]
 
-                d1 = round(dim6[0], 1)
-                d2 = round(dim6[1], 1)
-                d3 = round(dim6[2], 1)
-                d4 = round(dim6[3], 1)
-                d5 = round(dim6[4], 1)
-                d6 = round(dim6[5], 1)
+                    # Input space.
+                    x = float(row[xy_index['x']])
+                    y = float(row[xy_index['y']])
 
-                # Construct the SVM data line for the current CSV data row.
-                svm_line = ('+1' if int(device_state) == 1 else '-1') + ' 1:' + str(d1) + ' 2:' + str(d2) + ' 3:' + str(d3) + ' 4:' + str(d4) + ' 5:' + str(d5) + ' 6:' + str(d6)
+                    # Feature space.
+                    dim6 = to_higher_dimension(x, y)
 
-                # Write the SVM data line into a file
-                svm_file.write(svm_line + '\n')
+                    d1 = round(dim6[0], 1)
+                    d2 = round(dim6[1], 1)
+                    d3 = round(dim6[2], 1)
+                    d4 = round(dim6[3], 1)
+                    d5 = round(dim6[4], 1)
+                    d6 = round(dim6[5], 1)
+
+                    # Construct the SVM data line for the current CSV data row.
+                    svm_line = ('+1' if int(device_state) == 1 else '-1') + ' 1:' + str(d1) + ' 2:' + str(d2) + ' 3:' + str(d3) + ' 4:' + str(d4) + ' 5:' + str(d5) + ' 6:' + str(d6)
+
+                    # Write the SVM data line into a file
+                    svm_file.write(svm_line + '\n')
   
 
 def split_svm_files():
