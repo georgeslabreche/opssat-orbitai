@@ -399,6 +399,88 @@ def csv2svm_2D_from_1D_A(device_id):
                         svm_file.write(svm_line + '\n')
 
 
+def csv2svm_3D_from_1D_A(device_id):
+    """3 dimension feature space fro 1 dimension PD values input space."""
+
+    def to_higher_dimension_A(x):
+        return [x, x*x, x*x*x]
+
+    
+    svm_filename = None
+    device_state_col_index = None
+
+    pd3_col_index = CsvHeaderElevationAngles.PD3.value
+    pd6_col_index = CsvHeaderElevationAngles.PD6.value
+
+    if device_id == DeviceId.HD_CAMERA:
+        svm_filename = 'data/svm/all/camera_3d_from_1d_A.svmdata'
+        device_state_col_index = CsvHeaderElevationAngles.HD_CAMERA_STATE.value
+
+    elif device_id == DeviceId.OPTICAL_RX:
+        svm_filename = 'data/svm/all/optical_rx_3d_from_1d_A.svmdata'
+        device_state_col_index = CsvHeaderElevationAngles.OPTICAL_RX_STATE.value
+
+    elif device_id == DeviceId.STAR_TRACKER:
+        svm_filename = 'data/svm/all/star_tracker_3d_from_1d_A.svmdata'
+        device_state_col_index = CsvHeaderElevationAngles.STAR_TRACKER_STATE.value
+
+    else:
+        # Invalid device id.
+        return None
+
+
+    X_indices = [
+        {
+            'x': pd3_col_index,
+            'id': 'Xpd3'
+        },
+        {
+            'x': pd6_col_index,
+            'id': 'Xpd6'
+        }
+    ]
+
+    for x_index in X_indices:
+        svm_filename_transformed = svm_filename.replace('.svmdata', '_' + x_index['id'] + '.svmdata')
+
+
+        # Delete any previously created SVM data file.
+        if Path(svm_filename).is_file():
+            os.remove(svm_filename_transformed) 
+
+        # SVM file writer.
+        with open(svm_filename_transformed, 'a') as svm_file:
+            
+            # CSV file reader.
+            with open('data/webmust_labeled/perfect_training_set.csv') as csv_file:
+
+                # Read the CSV file.
+                csv_reader = csv.reader(csv_file, delimiter=',')
+
+                # Skip the header row.
+                next(csv_reader, None)
+
+                # Convert each CSV row into an SVM line.
+                for row in csv_reader:
+
+                    # The device state.
+                    device_state = row[device_state_col_index]
+
+                    x = float(row[x_index['x']])
+
+                    # Apply transformation
+                    xyz = to_higher_dimension_A(x)
+                    x_transformed_rounded = round(xyz[0], 1) # This x is the same as the original x. Not actually transformed.
+                    y_transformed_rounded = round(xyz[1], 1) 
+                    z_transformed_rounded = round(xyz[2], 1) 
+
+                    # Construct the SVM data line for the current CSV data row.
+                    svm_line = ('+1' if int(device_state) == 1 else '-1') + ' 1:' + str(x_transformed_rounded) + ' 2:' + str(y_transformed_rounded) + ' 3:' + str(z_transformed_rounded)
+
+                    # Write the SVM data line into a file
+                    svm_file.write(svm_line + '\n')
+
+
 def csv2svm_3D_from_2D_A(device_id):
     """3 dimension feature space from 2 dimension PD values input space."""
 
@@ -631,6 +713,11 @@ csv2svm_4D(DeviceId.STAR_TRACKER)
 csv2svm_2D_from_1D_A(DeviceId.HD_CAMERA)
 csv2svm_2D_from_1D_A(DeviceId.OPTICAL_RX)
 csv2svm_2D_from_1D_A(DeviceId.STAR_TRACKER)
+
+# 3 dimension feature space from 1 dimension PD values.
+csv2svm_3D_from_1D_A(DeviceId.HD_CAMERA)
+csv2svm_3D_from_1D_A(DeviceId.HD_CAMERA)
+csv2svm_3D_from_1D_A(DeviceId.HD_CAMERA)
 
 # 3 dimension feature space from 2 dimension PD values.
 csv2svm_3D_from_2D_A(DeviceId.HD_CAMERA)

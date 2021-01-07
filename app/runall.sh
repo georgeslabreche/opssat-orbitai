@@ -53,6 +53,16 @@ echo "--------------------------------"
 echo "> ADAM > 3D"
 time ./adam.out --dim 3 --train ../../../../../sandbox/fdir-algorithm/data/svm/train/camera_3d.svmdata --test ../../../../../sandbox/fdir-algorithm/data/svm/test/camera_3d.svmdata
 
+
+# 3 dimension feature space obtained from transforming 1D input space to higher dimension
+for x in "${arr_1D_axes_combos[@]}"
+do
+   echo "--------------------------------"
+   echo "> ADAM > 1D to 3D > ${x}"
+   time ./adam.out --dim 3 --train ../../../../../sandbox/fdir-algorithm/data/svm/train/camera_3d_from_1d_A_${x}.svmdata --test ../../../../../sandbox/fdir-algorithm/data/svm/test/camera_3d_from_1d_A_${x}.svmdata
+done
+
+
 # 3 dimension feature space obtained from transforming 2D input space to higher dimension
 for xy in "${arr_2D_axes_combos[@]}"
 do
@@ -108,6 +118,14 @@ done
 echo "--------------------------------"
 echo "> RDA > 3D"
 time ./rda.out --dim 3 --train ../../../../../sandbox/fdir-algorithm/data/svm/train/camera_3d.svmdata --test ../../../../../sandbox/fdir-algorithm/data/svm/test/camera_3d.svmdata --eta 0.1 --lambda 0.000001
+
+# 3 dimension feature space obtained from transforming 1D input space to higher dimension
+for x in "${arr_1D_axes_combos[@]}"
+do
+   echo "--------------------------------"
+   echo "> RDA > 1D to 3D > ${x}"
+   time ./rda.out --dim 3 --train ../../../../../sandbox/fdir-algorithm/data/svm/train/camera_3d_from_1d_A_${x}.svmdata --test ../../../../../sandbox/fdir-algorithm/data/svm/test/camera_3d_from_1d_A_${x}.svmdata --eta 0.1 --lambda 0.000001
+done
 
 # 3 dimension feature space obtained from transforming 2D input space to higher dimension
 for xy in "${arr_2D_axes_combos[@]}"
@@ -165,6 +183,14 @@ echo "--------------------------------"
 echo "> AROW > 3D"
 time ./arow.out --dim 3 --train ../../../../../sandbox/fdir-algorithm/data/svm/train/camera_3d.svmdata --test ../../../../../sandbox/fdir-algorithm/data/svm/test/camera_3d.svmdata --r 0.8
 
+# 3 dimension feature space obtained from transforming 1D input space to higher dimension
+for x in "${arr_1D_axes_combos[@]}"
+do
+   echo "--------------------------------"
+   echo "> AROW > 1D to 3D > ${x}"
+   time ./arow.out --dim 3 --train ../../../../../sandbox/fdir-algorithm/data/svm/train/camera_3d_from_1d_A_${x}.svmdata --test ../../../../../sandbox/fdir-algorithm/data/svm/test/camera_3d_from_1d_A_${x}.svmdata --r 0.8
+done
+
 # 3 dimension feature space obtained from transforming 2D input space to higher dimension
 for xy in "${arr_2D_axes_combos[@]}"
 do
@@ -220,6 +246,14 @@ done
 echo "--------------------------------"
 echo "> SCW > 3D"
 time ./scw.out --dim 3 --train ../../../../../sandbox/fdir-algorithm/data/svm/train/camera_3d.svmdata --test ../../../../../sandbox/fdir-algorithm/data/svm/test/camera_3d.svmdata --c 0.1 --eta 0.95
+
+# 3 dimension feature space obtained from transforming 1D input space to higher dimension
+for x in "${arr_1D_axes_combos[@]}"
+do
+   echo "--------------------------------"
+   echo "> SCW > 1D to 3D > ${x}"
+   time ./scw.out --dim 3 --train ../../../../../sandbox/fdir-algorithm/data/svm/train/camera_3d_from_1d_A_${x}.svmdata --test ../../../../../sandbox/fdir-algorithm/data/svm/test/camera_3d_from_1d_A_${x}.svmdata --c 0.1 --eta 0.95
+done
 
 # 3 dimension feature space obtained from transforming 2D input space to higher dimension
 for xy in "${arr_2D_axes_combos[@]}"
@@ -277,6 +311,14 @@ echo "--------------------------------"
 echo "> NHERD > 3D"
 time ./nherd.out --dim 3 --train ../../../../../sandbox/fdir-algorithm/data/svm/train/camera_3d.svmdata --test ../../../../../sandbox/fdir-algorithm/data/svm/test/camera_3d.svmdata --c 0.1 --diagonal 0
 
+# 3 dimension feature space obtained from transforming 1D input space to higher dimension
+for x in "${arr_1D_axes_combos[@]}"
+do
+   echo "--------------------------------"
+   echo "> NHERD > 1D to 3D > ${x}"
+   time ./nherd.out --dim 3 --train ../../../../../sandbox/fdir-algorithm/data/svm/train/camera_3d_from_1d_A_${x}.svmdata --test ../../../../../sandbox/fdir-algorithm/data/svm/test/camera_3d_from_1d_A_${x}.svmdata --c 0.1 --diagonal 0
+done
+
 # 3 dimension feature space obtained from transforming 2D input space to higher dimension
 for xy in "${arr_2D_axes_combos[@]}"
 do
@@ -332,6 +374,14 @@ done
 echo "--------------------------------"
 echo "> PA > 3D"
 time ./pa.out --dim 3 --train ../../../../../sandbox/fdir-algorithm/data/svm/train/camera_3d.svmdata --test ../../../../../sandbox/fdir-algorithm/data/svm/test/camera_3d.svmdata --c 0.1 --select 1
+
+# 3 dimension feature space obtained from transforming 1D input space to higher dimension
+for x in "${arr_1D_axes_combos[@]}"
+do
+   echo "--------------------------------"
+   echo "> PA > 1D to 3D > ${x}"
+   time ./pa.out --dim 3 --train ../../../../../sandbox/fdir-algorithm/data/svm/train/camera_3d_from_1d_A_${x}.svmdata --test ../../../../../sandbox/fdir-algorithm/data/svm/test/camera_3d_from_1d_A_${x}.svmdata --c 0.1 --select 1
+done
 
 # 3 dimension feature space obtained from transforming 2D input space to higher dimension
 for xy in "${arr_2D_axes_combos[@]}"

@@ -213,6 +213,40 @@ for val in XYs:
 
 
 #################################
+# 3D from 1D photodiode values. #
+#################################
+def from_1d_to_3d_A(x):
+    return [x, x*x, x*x*x]
+
+# This PD value as x gives better results.
+# Even though the camera is on the surface tied with PD3.
+pd6 = round(pd_df['PD6'], 1)
+
+# Apply the kernel trick
+xyz = from_1d_to_3d_A(pd6)
+x = xyz[0]
+y = xyz[1]
+z = xyz[2]
+
+# The camera state: ON/OFF.
+hd_camera_state = pd_df['HD_CAMERA_STATE']
+
+# Color ON states blue and OFF states red.
+col3d = np.where(hd_camera_state == 1, 'b', 'r')
+
+# Plot.
+fig_counter += 1
+plt.title("HD Camera State: 1D → 3D")
+fig = plt.figure(fig_counter)
+ax = Axes3D(fig)
+ax.scatter(x, y, z, c=col3d)
+
+# Save figure to file.
+if save_figures_to_file:
+    plt.savefig("plots/Figure_" + str(fig_counter) + ".png")
+
+
+#################################
 # 3D from 2D photodiode values. #
 #################################
 
