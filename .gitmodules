@@ -1,6 +1,12 @@
-[submodule "app/MochiMochi"]
-	path = app/MochiMochi
+[submodule "AppMochi/MochiMochi"]
+	path = AppMochi/MochiMochi
 	url = https://github.com/georgeslabreche/MochiMochi
-[submodule "app/eigen"]
-	path = app/eigen
+[submodule "AppMochi/eigen"]
+	path = AppMochi/eigen
 	url = https://gitlab.com/libeigen/eigen.git
+[submodule "AppBoost/eigen"]
+	path = AppBoost/eigen
+	url = https://gitlab.com/libeigen/eigen.git
+[submodule "AppBoost/lpboost"]
+	path = AppBoost/lpboost
+	url = https://github.com/georgeslabreche/online-multiclass-lpboost.git
