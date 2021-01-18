@@ -4,6 +4,3 @@
 [submodule "app/eigen"]
 	path = app/eigen
 	url = https://gitlab.com/libeigen/eigen.git
-[submodule "app/lpboost"]
-	path = app/lpboost
-	url = https://github.com/georgeslabreche/online-multiclass-lpboost.git
