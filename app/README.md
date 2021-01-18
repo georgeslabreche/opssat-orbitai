@@ -4,7 +4,13 @@ Using Online ML to train FDIR models for the OPS-SAT spacecraft.
 ## Development Environment
 1. Install ARM cross-compilers: `sudo apt-get install gcc-arm-linux-gnueabihf`
 2. Include boost libraries: serizaliazation, math, and archive.
-3. Fetch source code for the submodules: `git submodule update --init`
+3. Fetch source code for the Eigen and MochiMochi submodules: `git submodule update --init`
+
+## Compiling for ARM with libboost Dependency
+- Cherry-pick download the ARM compiled libboost dependencies, [here](https://packages.debian.org/source/stretch/armhf/boost1.62).
+- Make sure that .a, .so, and .so.X.XX.X files are where the compiler expects them, e.g. in `/lib/arm-linux-gnueabihf/`.
+- Note that the .so files are simply symlink to the .so.X.XX.X file.
+- These files will have to be created on the SEPP via IPK installation.
 
 
 Comment out the following compiler setting in `CMakeLists.txt` to compile for your development environment instead of for ARM:
