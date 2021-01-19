@@ -1,12 +1,16 @@
-[submodule "AppMochi/MochiMochi"]
-	path = AppMochi/MochiMochi
+[submodule "Mochi/MochiMochi"]
+	path = Mochi/MochiMochi
 	url = https://github.com/georgeslabreche/MochiMochi
-[submodule "AppMochi/eigen"]
-	path = AppMochi/eigen
+	branch = orbitai
+[submodule "Mochi/eigen"]
+	path = Mochi/eigen
 	url = https://gitlab.com/libeigen/eigen.git
-[submodule "AppBoost/eigen"]
-	path = AppBoost/eigen
+	branch = 3.3
+[submodule "Boost/eigen"]
+	path = Boost/eigen
 	url = https://gitlab.com/libeigen/eigen.git
-[submodule "AppBoost/lpboost"]
-	path = AppBoost/lpboost
+	branch = 2.0
+[submodule "Boost/online-multiclass-lpboost"]
+	path = Boost/online-multiclass-lpboost
 	url = https://github.com/georgeslabreche/online-multiclass-lpboost.git
+	branch = orbitai
