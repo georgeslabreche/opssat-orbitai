@@ -19,6 +19,20 @@ The Boost C++ library needs to be packaged for and deployed to the spacecraft:
 ## Getting Started
 Use `Make` to compile for either the local development environment or the spacecraft. 
 
+### Compile and start for development
+```
+make clean
+make
+./OrbitAI_Mochi
+```
+
+### Compile and start for the spacecraft
+```
+make clean
+make TARGET=arm
+./OrbitAI_Mochi
+```
+
 ### Training
 Running the program will start a server that accepts commands to train models using the following methodologies:
 - ARROW
@@ -38,20 +52,6 @@ The given training data is specific to the OrbitAI experiment. A generic solutio
 - The `train` command takes 3 parameters: the label and two photodiode elevation angle values, e.g.: `train 1 1.43 0.45` or `train 0 0.43 0.1`.
 - Label values can either be 1 or 0 for binary classification. Label values of -1 are interpreted as 0.
 - Expected photodiode elevation angles values are PD3 and PD6.
-
-### Compile and start for development
-```
-make clean
-make
-./OrbitAI_Mochi
-```
-
-### Compile and start for the spacecraft
-```
-make clean
-make TARGET=arm
-./OrbitAI_Mochi
-```
 
 ## MochiMochi
 Some example training datasets are taken from:
