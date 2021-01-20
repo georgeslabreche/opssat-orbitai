@@ -53,6 +53,11 @@ The given training data is specific to the OrbitAI experiment. A generic solutio
 - Label values can either be 1 or 0 for binary classification. Label values of -1 are interpreted as 0.
 - Expected photodiode elevation angles values are PD3 and PD6.
 
+### Test Server
+1. Start the Online ML server: `./OrbitAI_Mochi `
+2. Send telnet commands to the server: `./test_server.sh | telnet localhost 9999`
+3. Monitor a model file being updated: `watch -n 0.1 cat models/arow_2D`
+
 ## MochiMochi
 Some example training datasets are taken from:
 - [SVMLight](http://svmlight.joachims.org/)'s "Inductive SVM" for `example1`.
@@ -112,5 +117,5 @@ For each ML methodology, two training examples are given in each of the followin
 ### Run all examples
 To run all examples with all OPS-SAT training and test data:
 - Make sure that all examples are compiled.
-- `./runall.sh`.
+- `./runall_examples.sh`.
 - Sample results are available in `results.txt`.
