@@ -110,5 +110,7 @@ For each ML methodology, two training examples are given in each of the followin
 ```
 
 ### Run all examples
-- To run all examples with all OPS-SAT training and test data: `./runall.sh`
-- Results are saved in the results.txt file.
+To run all examples with all OPS-SAT training and test data:
+- Make sure that all examples are compiled.
+- `./runall.sh`.
+- Sample results are available in `results.txt`.
