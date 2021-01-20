@@ -10,7 +10,7 @@ This project was successfully compiled in in Ubuntu 18.04 LTS. The target platfo
 1. Install the ARM cross-compilers: `sudo apt-get install gcc-arm-linux-gnueabihf`.
 2. Download and install libconfig++: `sudo apt-get install -y libconfig++-dev`.
 
-Alternatively, for step 3, download [libconfig v1.7.2](http://hyperrealm.github.io/libconfig/dist/libconfig-1.7.2.tar.gz) and install with `./configure` followed by `sudo make install`.
+Alternatively, for step 2, download [libconfig v1.7.2](http://hyperrealm.github.io/libconfig/dist/libconfig-1.7.2.tar.gz) and install with `./configure` followed by `sudo make install`.
 
 ### Spacecraft
 The libconfig++ library need to be packaged for and deployed to the spacecraft:
