@@ -55,7 +55,7 @@ The given training data is specific to the OrbitAI experiment. A generic solutio
 
 ### Test Server
 1. Start the Online ML server: `./OrbitAI_Mochi `
-2. Send telnet commands to the server: `./test_server.sh | telnet localhost 9999`
+2. Send telnet commands to the server: `eval 'input="camera_2d_Xpd3-Ypd6_none.svmdata"; while IFS= read -r line; do sleep 0.1; echo "train ${line/+/''}"; sleep 0.1; echo "save"; done < "$input"; echo "exit";' | telnet localhost 9999`
 3. Monitor a model file being updated: `watch -n 0.1 cat models/arow_2D`
 
 ## MochiMochi
