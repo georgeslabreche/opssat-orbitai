@@ -44,7 +44,7 @@
     <developer>
       <id>TanguySoto</id>
       <name>Tanguy Soto</name>
-      <url>https://github.com/TanguySoto</url>
+      <url>https://tanguyso.to</url>
     </developer>
     <developer>
       <id>GeorgesLabreche</id>
@@ -58,7 +58,7 @@
     </developer>
   </developers>
   <properties>
-    <assembly.mainClass>esa.mo.nmf.apps.BlankApp</assembly.mainClass>
+    <assembly.mainClass>esa.mo.nmf.apps.OrbitAIApp</assembly.mainClass>
     <maven.deploy.skip>true</maven.deploy.skip>
     <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
   </properties>
@@ -66,6 +66,10 @@
     <dependency>
       <groupId>int.esa.nmf.core</groupId>
       <artifactId>nanosat-mo-connector</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>int.esa.nmf.core</groupId>
+      <artifactId>space-mo-adapter</artifactId>
     </dependency>
   </dependencies>
   <build>
