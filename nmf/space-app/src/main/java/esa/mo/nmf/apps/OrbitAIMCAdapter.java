@@ -19,16 +19,9 @@ public class OrbitAIMCAdapter extends MonitorAndControlNMFAdapter {
 
   private static final Logger LOGGER = Logger.getLogger(OrbitAIMCAdapter.class.getName());
 
-  private static final float PARAMS_DEFAULT_VALUE = 42;
-
-  // Reference to the parent NMF app
-  private OrbitAIApp app;
-
-
-  // Supervisor consumers
-  private SpaceMOApdapterImpl supervisorSMA;
-
   // ----------------------------------- Parameters -----------------------------------------------
+
+  private static final float PARAMS_DEFAULT_VALUE = 42;
 
   // -------- RE-EXPOSING parameters consumed from supervisor --------
 
@@ -38,6 +31,8 @@ public class OrbitAIMCAdapter extends MonitorAndControlNMFAdapter {
       reportIntervalSeconds = 5, readOnly = true)
   private float CADC0880 = PARAMS_DEFAULT_VALUE;
 
+  /*
+
   @Parameter(description = "I_OM_FB_FI_FB_0 fetched from supervisor", generationEnabled = true,
       reportIntervalSeconds = 5, readOnly = true)
   private float CADC0881 = PARAMS_DEFAULT_VALUE;
@@ -45,7 +40,6 @@ public class OrbitAIMCAdapter extends MonitorAndControlNMFAdapter {
   @Parameter(description = "I_OM_FB_FI_FB_0 fetched from supervisor", generationEnabled = true,
       reportIntervalSeconds = 5, readOnly = true)
   private float CADC0882 = PARAMS_DEFAULT_VALUE;
-
 
   // CADC PHOTODIOES parameters
 
@@ -90,24 +84,13 @@ public class OrbitAIMCAdapter extends MonitorAndControlNMFAdapter {
   @Parameter(description = "O_Q_FB_FI_EST_3 fetched from supervisor", generationEnabled = true,
       reportIntervalSeconds = 5, readOnly = true)
   private float CADC1005 = PARAMS_DEFAULT_VALUE;
-
-
-  public OrbitAIMCAdapter(OrbitAIApp app) {
-    this.app = app;
-    this.supervisorSMA = SpaceMOApdapterImpl
-        .forNMFSupervisor(this.app.getConnector().readCentralDirectoryServiceURI());
-
-    startQueryingSupervisorParameters();
-
-    LOGGER.log(Level.INFO, "OrbitAIMCAdapter initialized.");
-  }
+  */
 
   /**
    * Queries OBSW parameters values from the supervisor and set our internal parameters with those
    * values.
-   *
    */
-  private void startQueryingSupervisorParameters() {
+  public void startQueryingSupervisorParameters(SpaceMOApdapterImpl supervisorSMA) {
     // Toggle parameters generation in supervisor
     List<String> parameterNames = new ArrayList<String>();
     for (Field f : this.getClass().getDeclaredFields()) {
@@ -121,6 +104,12 @@ public class OrbitAIMCAdapter extends MonitorAndControlNMFAdapter {
     supervisorSMA.addDataReceivedListener(new SimpleDataReceivedListener() {
       @Override
       public void onDataReceived(String parameterName, Serializable data) {
+        if(data == null) {
+          LOGGER.log(Level.WARNING,
+              String.format("Received null value for parameter %s", parameterName));
+          return;
+        }
+
         String dataS = data.toString();
         try {
           Field internalParameter =

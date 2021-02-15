@@ -2,8 +2,8 @@ package esa.mo.nmf.apps;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import esa.mo.helpertools.misc.Const;
 import esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl;
+import esa.mo.nmf.spacemoadapter.SpaceMOApdapterImpl;
 
 /**
  * Main class to start the OrbitAI space application.
@@ -14,17 +14,23 @@ public class OrbitAIApp {
 
   private static final Logger LOGGER = Logger.getLogger(OrbitAIApp.class.getName());
 
-  // Providers
+  // Provider
   private NanoSatMOConnectorImpl connector;
   private OrbitAIMCAdapter adapter;
 
-  public OrbitAIApp() {
-    //System.setProperty(Const.CENTRAL_DIRECTORY_URI_PROPERTY,
-    //    "maltcp://10.0.2.15:1024/nanosat-mo-supervisor-Directory");
+  // Consumer
+  private SpaceMOApdapterImpl supervisorSMA;
 
+  public OrbitAIApp() {
+    // Init provider
     connector = new NanoSatMOConnectorImpl();
-    adapter = new OrbitAIMCAdapter(this);
+    adapter = new OrbitAIMCAdapter();
     connector.init(adapter);
+
+    // Init consumer
+    supervisorSMA =
+        SpaceMOApdapterImpl.forNMFSupervisor(connector.readCentralDirectoryServiceURI());
+    adapter.startQueryingSupervisorParameters(supervisorSMA);
 
     LOGGER.log(Level.INFO, "OrbitAI initialized.");
   }
