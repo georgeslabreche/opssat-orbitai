@@ -30,7 +30,7 @@ public class OrbitAIApp {
     // Init consumer
     supervisorSMA =
         SpaceMOApdapterImpl.forNMFSupervisor(connector.readCentralDirectoryServiceURI());
-    adapter.startQueryingSupervisorParameters(supervisorSMA);
+    adapter.toggleSupervisorParametersSubscription(supervisorSMA, true);
 
     LOGGER.log(Level.INFO, "OrbitAI initialized.");
   }
@@ -61,6 +61,6 @@ public class OrbitAIApp {
    * @throws java.lang.Exception If there is an error
    */
   public static void main(final String args[]) throws Exception {
-    OrbitAIApp app = new OrbitAIApp();
+    new OrbitAIApp();
   }
 }
