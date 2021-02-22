@@ -1,11 +1,12 @@
 package esa.mo.nmf.apps;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.ccsds.moims.mo.mal.provider.MALInteraction;
 import org.ccsds.moims.mo.mal.structures.UInteger;
+import esa.mo.nmf.CloseAppListener;
 import esa.mo.nmf.MonitorAndControlNMFAdapter;
 import esa.mo.nmf.annotations.Action;
-import esa.mo.nmf.annotations.ActionParameter;
 import esa.mo.nmf.annotations.Parameter;
 import esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl;
 import esa.mo.nmf.spacemoadapter.SpaceMOApdapterImpl;
@@ -30,7 +31,6 @@ public class OrbitAIMCAdapter extends MonitorAndControlNMFAdapter {
    * Internal parameters default value.
    */
   private static final float PARAMS_DEFAULT_VALUE = 42;
-
 
   // --- RE-EXPOSING parameters consumed from supervisor ---
 
@@ -91,6 +91,18 @@ public class OrbitAIMCAdapter extends MonitorAndControlNMFAdapter {
     return dataHandler.toggleSupervisorParametersSubscription(false);
   }
 
+  @Action(description = "Starts training models, even if we are currently not fetching data",
+      stepCount = 1, name = "startTraining")
+  public UInteger startTraining(Long actionInstanceObjId, boolean reportProgress,
+      MALInteraction interaction) {
+    return trainingHandler.startTraining();
+  }
+
+  @Action(description = "Stops training models", stepCount = 1, name = "stopTraining")
+  public UInteger stopTraining(Long actionInstanceObjId, boolean reportProgress,
+      MALInteraction interaction) {
+    return trainingHandler.stopTraining();
+  }
 
   // ----------------------------------- NMF components --------------------------------------------
 
@@ -120,6 +132,27 @@ public class OrbitAIMCAdapter extends MonitorAndControlNMFAdapter {
    */
   public void setConnector(NanoSatMOConnectorImpl connector) {
     this.connector = connector;
+
+    // Define application behavior when closed
+    this.connector.setCloseAppListener(new CloseAppListener() {
+      @Override
+      public Boolean onClose() {
+        boolean success = true;
+        // Stop fetching data in supervisor
+        if (dataHandler.toggleSupervisorParametersSubscription(false) != null) {
+          success = false;
+        }
+        // Stop training models
+        if (trainingHandler.stopTraining() != null) {
+          success = false;
+        }
+        // Close supervisor consumer connections
+        supervisorSMA.closeConnections();
+
+        LOGGER.log(Level.INFO, "Closed application successfully: " + success);
+        return success;
+      }
+    });
   }
 
   /**

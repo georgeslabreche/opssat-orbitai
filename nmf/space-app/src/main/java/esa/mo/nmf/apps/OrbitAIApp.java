@@ -19,11 +19,11 @@ public class OrbitAIApp {
     // Initialize M&C interface
     OrbitAIMCAdapter adapter = new OrbitAIMCAdapter();
 
-    // Initialize application's MO provider
+    // Initialize application's NMF provider
     NanoSatMOConnectorImpl connector = new NanoSatMOConnectorImpl();
     connector.init(adapter);
 
-    // Initialize application's MO consumer (consuming the supervisor)
+    // Initialize application's NMF consumer (consuming the supervisor)
     SpaceMOApdapterImpl supervisorSMA =
         SpaceMOApdapterImpl.forNMFSupervisor(connector.readCentralDirectoryServiceURI());
 

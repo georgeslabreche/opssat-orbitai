@@ -6,6 +6,7 @@ package esa.mo.nmf.apps;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.ccsds.moims.mo.mal.structures.UInteger;
 
 /**
  * Handles tasks related to models training: start/stop the training, save the models.
@@ -22,29 +23,73 @@ public class OrbitAITrainingHandler {
   private final OrbitAIMCAdapter adapter;
 
   /**
-   * True if the application is currently training models.
+   * True if the training handler is stopped (not starting, stopping or training), false otherwise.
    */
-  private boolean isTraining;
+  private boolean isStopped;
+
+  /**
+   * True if the training handler is currently in the training loop.
+   */
+  private boolean isLooping;
 
 
   public OrbitAITrainingHandler(OrbitAIMCAdapter adapter) {
     this.adapter = adapter;
-    isTraining = false;
+    isStopped = true;
+    isLooping = false;
   }
 
   /**
-   * TODO train
+   * 
+   * TODO startTraining
+   *
+   * @return null if it was successful. If not null, then the returned value holds the error number
+   */
+  public UInteger startTraining() {
+    isStopped = false;
+
+    startTrainingLoop();
+    return null;
+  }
+
+  /**
+   * 
+   * TODO stopTraining
+   *
+   * @return null if it was successful. If not null, then the returned value holds the error number
+   */
+  public UInteger stopTraining() {
+    stopTrainingLoop();
+
+    isStopped = true;
+    return null;
+  }
+
+
+  /**
+   * 
+   * TODO startTrainingLoop
    *
    */
-  public void train() {
-    while (isTraining) {
+  private void startTrainingLoop() {
+    isLooping = true;
+    while (isLooping) {
       try {
         LOGGER.log(Level.INFO, "Training");
-        
+
 
         Thread.sleep(1000);
       } catch (InterruptedException e) {
       }
     }
+  }
+
+  /**
+   * 
+   * TODO stopTrainingLoop
+   *
+   */
+  private void stopTrainingLoop() {
+    isLooping = false;
   }
 }

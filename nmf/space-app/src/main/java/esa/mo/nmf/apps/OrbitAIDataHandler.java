@@ -56,7 +56,6 @@ public class OrbitAIDataHandler {
    * @return null if it was successful. If not null, then the returned value holds the error number
    */
   public UInteger toggleSupervisorParametersSubscription(boolean subscribe) {
-    // Always toggle the parameters generation in supervisor
     List<String> parametersNames = getParametersToSubscribeTo();
     if (parametersNames == null) {
       return new UInteger(1);
@@ -65,6 +64,7 @@ public class OrbitAIDataHandler {
       return new UInteger(2);
     }
 
+    // Always toggle the parameters generation in supervisor
     try {
       adapter.getSupervisorSMA().toggleParametersGeneration(parametersNames, subscribe);
     } catch (NMFException e0) {
@@ -110,6 +110,15 @@ public class OrbitAIDataHandler {
     }
 
     return null;
+  }
+  
+  /**
+   * 
+   * TODO getTrainingDataSet
+   *
+   */
+  public void getTrainingDataSet() {
+    
   }
 
   /**
