@@ -14,45 +14,25 @@ public class OrbitAIApp {
 
   private static final Logger LOGGER = Logger.getLogger(OrbitAIApp.class.getName());
 
-  // Provider
-  private NanoSatMOConnectorImpl connector;
-  private OrbitAIMCAdapter adapter;
-
-  // Consumer
-  private SpaceMOApdapterImpl supervisorSMA;
 
   public OrbitAIApp() {
-    // Init provider
-    connector = new NanoSatMOConnectorImpl();
-    adapter = new OrbitAIMCAdapter();
+    // Initialize M&C interface
+    OrbitAIMCAdapter adapter = new OrbitAIMCAdapter();
+
+    // Initialize application's MO provider
+    NanoSatMOConnectorImpl connector = new NanoSatMOConnectorImpl();
     connector.init(adapter);
 
-    // Init consumer
-    supervisorSMA =
+    // Initialize application's MO consumer (consuming the supervisor)
+    SpaceMOApdapterImpl supervisorSMA =
         SpaceMOApdapterImpl.forNMFSupervisor(connector.readCentralDirectoryServiceURI());
-    adapter.toggleSupervisorParametersSubscription(supervisorSMA, true);
+
+    // Once all initialized, pass them to the M&C interface that handles the application's logic
+    adapter.setConnector(connector);
+    adapter.setSupervisorSMA(supervisorSMA);
 
     LOGGER.log(Level.INFO, "OrbitAI initialized.");
   }
-
-  /**
-   * Returns the connector.
-   * 
-   * @return a NanoSatMOConnectorImpl containing the connector of this OrbitAIApp
-   */
-  public NanoSatMOConnectorImpl getConnector() {
-    return connector;
-  }
-
-  /**
-   * Returns the adapter.
-   * 
-   * @return a OrbitAIMCAdapter containing the adapter of this OrbitAIApp
-   */
-  public OrbitAIMCAdapter getAdapter() {
-    return adapter;
-  }
-
 
   /**
    * Main command line entry point.

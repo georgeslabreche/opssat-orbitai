@@ -1,43 +1,38 @@
 package esa.mo.nmf.apps;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.Serializable;
-import java.lang.reflect.Field;
-import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.ccsds.moims.mo.mal.provider.MALInteraction;
+import org.ccsds.moims.mo.mal.structures.UInteger;
 import esa.mo.nmf.MonitorAndControlNMFAdapter;
+import esa.mo.nmf.annotations.Action;
+import esa.mo.nmf.annotations.ActionParameter;
 import esa.mo.nmf.annotations.Parameter;
-import esa.mo.nmf.commonmoadapter.SimpleDataReceivedListener;
+import esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl;
 import esa.mo.nmf.spacemoadapter.SpaceMOApdapterImpl;
 
 /**
- * Monitoring and control interface of the OrbitAI space application. Handles parameters and
- * actions.
+ * Monitoring and control interface of the OrbitAI space application. Forwards actions and collects
+ * parameters values needed for the training.
  */
 public class OrbitAIMCAdapter extends MonitorAndControlNMFAdapter {
 
   private static final Logger LOGGER = Logger.getLogger(OrbitAIMCAdapter.class.getName());
 
-  /**
-   * Relative path to the file containing the list of OBSW parameters we want to subscribe to from
-   * supervisor.
-   */
-  private static final String PARAM_SUBS_FILE_PATH = "subscriptions.txt";
+  public OrbitAIMCAdapter() {
+    this.dataHandler = new OrbitAIDataHandler(this);
+    this.trainingHandler = new OrbitAITrainingHandler(this);
+  }
+
 
   // ----------------------------------- Parameters -----------------------------------------------
 
+  /**
+   * Internal parameters default value.
+   */
   private static final float PARAMS_DEFAULT_VALUE = 42;
 
-  /**
-   * The listener for parameters values coming from supervisor.
-   */
-  private SimpleDataReceivedListener parameterListener;
 
-  // -------- RE-EXPOSING some parameters consumed from supervisor --------
+  // --- RE-EXPOSING parameters consumed from supervisor ---
 
   // CADC
 
@@ -70,82 +65,78 @@ public class OrbitAIMCAdapter extends MonitorAndControlNMFAdapter {
   private float CADC1005 = PARAMS_DEFAULT_VALUE;
 
 
+  // ----------------------------------- Actions --------------------------------------------------
+
   /**
-   * Queries OBSW parameters values from the supervisor and set our internal parameters with those
-   * values.
+   * Class handling actions related to training the models.
    */
-  public void toggleSupervisorParametersSubscription(SpaceMOApdapterImpl supervisorSMA,
-      boolean subscribe) {
-    supervisorSMA.toggleParametersGeneration(getParametersToSubscribeTo(), subscribe);
+  private OrbitAITrainingHandler trainingHandler;
 
-    if (subscribe) {
-      // Only if it's the first time we try to subscribe, create the listener and add it
-      if (this.parameterListener == null) {
-        this.parameterListener = new SimpleDataReceivedListener() {
-          @Override
-          public void onDataReceived(String parameterName, Serializable data) {
-            if (data == null) {
-              LOGGER.log(Level.WARNING,
-                  String.format("Received null value for parameter %s", parameterName));
-              return;
-            }
+  /**
+   * Class handling actions related to data.
+   */
+  private OrbitAIDataHandler dataHandler;
 
-            String dataS = data.toString();
-            LOGGER.log(Level.INFO, String.format(
-                "Received value %s from supervisor for parameter %s", dataS, parameterName));
+  @Action(description = "Starts fetching training data from the supervisor", stepCount = 1,
+      name = "startFetchingData")
+  public UInteger startFetchingData(Long actionInstanceObjId, boolean reportProgress,
+      MALInteraction interaction) {
+    return dataHandler.toggleSupervisorParametersSubscription(true);
+  }
 
-            try {
-              Field internalParameter =
-                  OrbitAIMCAdapter.this.getClass().getDeclaredField(parameterName);
-              internalParameter.setAccessible(true);
-              internalParameter.set(OrbitAIMCAdapter.this, Float.parseFloat(dataS));
-              internalParameter.setAccessible(false);
+  @Action(description = "Stops fetching training data from the supervisor", stepCount = 1,
+      name = "stopFetchingData")
+  public UInteger stopFetchingData(Long actionInstanceObjId, boolean reportProgress,
+      MALInteraction interaction) {
+    return dataHandler.toggleSupervisorParametersSubscription(false);
+  }
 
-            } catch (NoSuchFieldException e) { // received parameter that we don't need
-              LOGGER.log(Level.WARNING,
-                  String.format("Value %s received from supervisor for parameter %s was not used",
-                      dataS, parameterName));
-            } catch (SecurityException | IllegalArgumentException | IllegalAccessException e1) {
-              LOGGER.log(Level.SEVERE,
-                  "Error setting internal parameter from supervisor acquired value", e1);
-            }
-          }
-        };
 
-        supervisorSMA.addDataReceivedListener(this.parameterListener);
-      }
-    }
+  // ----------------------------------- NMF components --------------------------------------------
+
+  /**
+   * The application's NMF provider.
+   */
+  private NanoSatMOConnectorImpl connector;
+
+  /**
+   * The application's NMF consumer (consuming supervisor).
+   */
+  private SpaceMOApdapterImpl supervisorSMA;
+
+  /**
+   * Returns the NMF connector, the application's NMF provider.
+   * 
+   * @return the connector
+   */
+  public NanoSatMOConnectorImpl getConnector() {
+    return connector;
   }
 
   /**
-   * Parses the parameter subscriptions file and returns the list of OBSW parameter we want to
-   * subscribe to from supervisor.
-   *
-   * @return The list of parameter identifiers.
+   * Sets the NMF connector, the application's NMF provider.
+   * 
+   * @param the connector to set
    */
-  private List<String> getParametersToSubscribeTo() {
-    List<String> paramNames = new ArrayList<String>();
-    File file = new File(PARAM_SUBS_FILE_PATH);
+  public void setConnector(NanoSatMOConnectorImpl connector) {
+    this.connector = connector;
+  }
 
-    if (file.exists()) {
-      try {
-        // expect one line with parameters names
-        String content = new String(Files.readAllBytes(file.toPath()));
-        content = content.replace("\n", "");
+  /**
+   * Returns the application's NMF consumer (consuming supervisor).
+   * 
+   * @return the consumer
+   */
+  public SpaceMOApdapterImpl getSupervisorSMA() {
+    return supervisorSMA;
+  }
 
-        for (String paramName : content.split(",")) {
-          paramNames.add(paramName);
-          LOGGER.log(Level.INFO,
-              String.format("Will subscribe to parameter %s from supervisor", paramName));
-        }
-      } catch (IOException e) {
-        LOGGER.log(Level.SEVERE, "Error while loading parameters to subscribe to", e);
-      }
-    } else {
-      LOGGER.log(Level.SEVERE,
-          String.format("Trying to load file %s that doesn't exist", file.getPath()));
-    }
-
-    return paramNames;
+  /**
+   * Sets the the application's NMF consumer (consuming supervisor).
+   * 
+   * @param the consumer to set
+   */
+  public void setSupervisorSMA(SpaceMOApdapterImpl supervisorSMA) {
+    this.supervisorSMA = supervisorSMA;
   }
 }
