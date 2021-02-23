@@ -22,74 +22,102 @@ public class OrbitAITrainingHandler {
    */
   private final OrbitAIMCAdapter adapter;
 
-  /**
-   * True if the training handler is stopped (not starting, stopping or training), false otherwise.
-   */
-  private boolean isStopped;
 
   /**
-   * True if the training handler is currently in the training loop.
+   * The training thread.
    */
-  private boolean isLooping;
+  private Thread trainingThread;
+
+  /**
+   * The training runnable, running in trainingThread.
+   */
+  private TrainingRunnable trainingRunnable;
 
 
   public OrbitAITrainingHandler(OrbitAIMCAdapter adapter) {
     this.adapter = adapter;
-    isStopped = true;
-    isLooping = false;
+    trainingThread = null;
   }
 
   /**
-   * 
-   * TODO startTraining
+   * Starts the training loop.
    *
    * @return null if it was successful. If not null, then the returned value holds the error number
    */
   public UInteger startTraining() {
-    isStopped = false;
+    // Check that we are not already training
+    if (trainingThread != null && trainingThread.isAlive()) {
+      LOGGER.log(Level.SEVERE, "Couldn't start training thread, thread is already running");
+      return new UInteger(1);
+    }
 
-    startTrainingLoop();
+    // Start the training loop in separate thread
+    trainingRunnable = new TrainingRunnable();
+    trainingThread = new Thread(trainingRunnable);
+    trainingThread.setDaemon(true);
+    trainingThread.start();
+
     return null;
   }
 
   /**
-   * 
-   * TODO stopTraining
+   * Stops the training loop.
    *
    * @return null if it was successful. If not null, then the returned value holds the error number
    */
   public UInteger stopTraining() {
-    stopTrainingLoop();
+    // Check that we are indeed training
+    if (trainingThread == null || !trainingThread.isAlive()) {
+      LOGGER.log(Level.WARNING, "Didn't stop training thread, thread was already stopped");
+    } else {
+      // Stop the training loop and wait for separate thread to finish
+      trainingRunnable.stop();
+      trainingThread.interrupt();
+      try {
+        trainingThread.join();
+      } catch (InterruptedException e) {
+        LOGGER.log(Level.WARNING, "Current thread interrupted while joining on training thread");
+      }
 
-    isStopped = true;
+      trainingRunnable = null;
+      trainingThread = null;
+    }
+
     return null;
   }
 
 
   /**
-   * 
-   * TODO startTrainingLoop
+   * The training runnable, running in a separate thread.
    *
+   * @author Tanguy Soto
    */
-  private void startTrainingLoop() {
-    isLooping = true;
-    while (isLooping) {
-      try {
-        LOGGER.log(Level.INFO, "Training");
+  public class TrainingRunnable implements Runnable {
 
+    private boolean doStop = false;
 
-        Thread.sleep(1000);
-      } catch (InterruptedException e) {
-      }
+    public synchronized void stop() {
+      this.doStop = true;
     }
-  }
 
-  /**
-   * 
-   * TODO stopTrainingLoop
-   *
-   */
-  private void stopTrainingLoop() {
-    isLooping = false;
+    private synchronized boolean keepRunning() {
+      return this.doStop == false;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void run() {
+      LOGGER.log(Level.INFO, "Training thread started");
+      while (keepRunning()) {
+        try {
+          LOGGER.log(Level.INFO, "Training");
+          Thread.sleep(1000);
+
+        } catch (InterruptedException e) {
+          LOGGER.log(Level.INFO, "Training thread interrupted while sleeping");
+        }
+      }
+      LOGGER.log(Level.INFO, "Training thread stopped");
+    }
   }
 }

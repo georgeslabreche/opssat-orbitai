@@ -57,7 +57,7 @@ public class OrbitAIDataHandler {
   public static final float PARAMS_DEFAULT_VALUE = 42;
 
   /**
-   * Internal parameters default report interval.
+   * Internal parameters default report interval in seconds.
    */
   public static final float PARAMS_DEFAULT_REPORT_INTERVAL = 5;
 
@@ -117,6 +117,8 @@ public class OrbitAIDataHandler {
 
 
     if (subscribe) {
+      LOGGER.log(Level.INFO, "Starting to fetch parameters from supervisor");
+
       if (!openTrainingDataFileStream()) {
         return new UInteger(4);
       }
@@ -137,12 +139,15 @@ public class OrbitAIDataHandler {
                 "Received value %s from supervisor for parameter %s", dataS, parameterName));
 
             setInternalParameter(parameterName, dataS);
+            logData();
           }
         };
 
         adapter.getSupervisorSMA().addDataReceivedListener(this.parameterListener);
       }
     } else {
+      LOGGER.log(Level.INFO, "Stopping to fetch parameters from supervisor");
+
       if (!closeTraininDataFileStream()) {
         return new UInteger(5);
       }
