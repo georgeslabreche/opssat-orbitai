@@ -14,6 +14,11 @@ public class OrbitAIApp {
 
   private static final Logger LOGGER = Logger.getLogger(OrbitAIApp.class.getName());
 
+  /**
+   * Path to the toGround directory of the application.
+   */
+  public static final String TO_GROUND_DIRECTORY_PATH = "toGround/";
+
 
   public OrbitAIApp() {
     // Initialize M&C interface

@@ -5,12 +5,20 @@
 package esa.mo.nmf.apps;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.ccsds.moims.mo.mal.structures.UInteger;
@@ -18,8 +26,7 @@ import esa.mo.nmf.NMFException;
 import esa.mo.nmf.commonmoadapter.SimpleDataReceivedListener;
 
 /**
- * Handles tasks related to data: fetch data from supervisor, save the data, prepare them for the
- * training.
+ * Handles tasks related to data: fetch data from supervisor, save the data.
  *
  * @author Tanguy Soto
  */
@@ -34,14 +41,50 @@ public class OrbitAIDataHandler {
   private static final String PARAM_SUBS_FILE_PATH = "subscriptions.txt";
 
   /**
+   * Relative path to the directory containing our data inside the toGround/ folder.
+   */
+  private static final String DATA_DIRECTORY_PATH = "data";
+
+  /**
+   * Time stamps format for data logs
+   */
+  private static final SimpleDateFormat timestampFormat =
+      new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+
+  /**
+   * Internal parameters default value.
+   */
+  public static final float PARAMS_DEFAULT_VALUE = 42;
+
+  /**
+   * Internal parameters default report interval.
+   */
+  public static final float PARAMS_DEFAULT_REPORT_INTERVAL = 5;
+
+  /**
    * M&C interface of the application.
    */
   private final OrbitAIMCAdapter adapter;
 
   /**
+   * Lock for accessing our internal parameters
+   */
+  private final ReentrantLock parametersLock = new ReentrantLock();
+
+  /**
    * The listener for parameters values coming from supervisor.
    */
   private SimpleDataReceivedListener parameterListener;
+
+  /**
+   * File stream used to log our acquired data.
+   */
+  private FileOutputStream trainingDataOutputStream;
+
+  /**
+   * Last time we logged our acquired data.
+   */
+  private Long lastLogTime;
 
 
   public OrbitAIDataHandler(OrbitAIMCAdapter adapter) {
@@ -72,53 +115,88 @@ public class OrbitAIDataHandler {
       return new UInteger(3);
     }
 
-    // Only if first time, create and register the parameters listener
-    if (subscribe && this.parameterListener == null) {
-      this.parameterListener = new SimpleDataReceivedListener() {
-        @Override
-        public void onDataReceived(String parameterName, Serializable data) {
-          if (data == null) {
-            LOGGER.log(Level.WARNING,
-                String.format("Received null value for parameter %s", parameterName));
-            return;
+
+    if (subscribe) {
+      if (!openTrainingDataFileStream()) {
+        return new UInteger(4);
+      }
+
+      // Only if first time, create and register the parameters listener
+      if (this.parameterListener == null) {
+        this.parameterListener = new SimpleDataReceivedListener() {
+          @Override
+          public void onDataReceived(String parameterName, Serializable data) {
+            if (data == null) {
+              LOGGER.log(Level.WARNING,
+                  String.format("Received null value for parameter %s", parameterName));
+              return;
+            }
+
+            String dataS = data.toString();
+            LOGGER.log(Level.INFO, String.format(
+                "Received value %s from supervisor for parameter %s", dataS, parameterName));
+
+            setInternalParameter(parameterName, dataS);
           }
+        };
 
-          String dataS = data.toString();
-          LOGGER.log(Level.INFO, String.format("Received value %s from supervisor for parameter %s",
-              dataS, parameterName));
-
-          try {
-            // update internal parameter with the value received
-            Field internalParameter = adapter.getClass().getDeclaredField(parameterName);
-            internalParameter.setAccessible(true);
-            internalParameter.set(adapter, Float.parseFloat(dataS));
-            internalParameter.setAccessible(false);
-
-          } catch (NoSuchFieldException e1) {
-            // received parameter value that we don't need
-            LOGGER.log(Level.WARNING,
-                String.format("Value %s received from supervisor for parameter %s was not used",
-                    dataS, parameterName));
-          } catch (SecurityException | IllegalArgumentException | IllegalAccessException e2) {
-            LOGGER.log(Level.SEVERE,
-                "Error setting internal parameter from supervisor acquired value", e2);
-          }
-        }
-      };
-
-      adapter.getSupervisorSMA().addDataReceivedListener(this.parameterListener);
+        adapter.getSupervisorSMA().addDataReceivedListener(this.parameterListener);
+      }
+    } else {
+      if (!closeTraininDataFileStream()) {
+        return new UInteger(5);
+      }
     }
 
     return null;
   }
-  
+
   /**
-   * 
-   * TODO getTrainingDataSet
+   * Sets an internal parameter with the given value.
    *
+   * @param parameterName The internal parameter name
+   * @param value The new value for the parameter
    */
-  public void getTrainingDataSet() {
-    
+  private void setInternalParameter(String parameterName, String value) {
+    parametersLock.lock();;
+    try {
+      Field internalParameter = adapter.getClass().getDeclaredField(parameterName);
+      internalParameter.setAccessible(true);
+      internalParameter.set(adapter, Float.parseFloat(value));
+      internalParameter.setAccessible(false);
+    } catch (NoSuchFieldException e1) {
+      LOGGER.log(Level.WARNING, String.format(
+          "Trying to set value %s for unknown internal parameter %s", value, parameterName));
+    } catch (SecurityException | IllegalArgumentException | IllegalAccessException e2) {
+      LOGGER.log(Level.SEVERE, "Error setting internal parameter", e2);
+    } finally {
+      parametersLock.unlock();
+    }
+  }
+
+  /**
+   * Gets an internal parameter value.
+   *
+   * @param parameterName The internal parameter name
+   * @return the float value or PARAMS_DEFAULT_VALUE if an error happened
+   */
+  private float getInternalParameter(String parameterName) {
+    parametersLock.lock();
+    try {
+      Field internalParameter = adapter.getClass().getDeclaredField(parameterName);
+      internalParameter.setAccessible(true);
+      float value = internalParameter.getFloat(adapter);
+      internalParameter.setAccessible(true);
+      return value;
+    } catch (NoSuchFieldException e) {
+      LOGGER.log(Level.WARNING,
+          String.format("Trying to get value of unknown internal parameter %s", parameterName));
+    } catch (SecurityException | IllegalArgumentException | IllegalAccessException e2) {
+      LOGGER.log(Level.SEVERE, "Error getting internal parameter", e2);
+    } finally {
+      parametersLock.unlock();
+    }
+    return PARAMS_DEFAULT_VALUE;
   }
 
   /**
@@ -151,5 +229,108 @@ public class OrbitAIDataHandler {
           String.format("Parameters names list read from %s is empty", file.toPath()));
     }
     return paramNames;
+  }
+
+  /**
+   * Returns our internal parameters values at the time of call.
+   *
+   * @return The map of parameters names and their values
+   */
+  public Map<String, Float> getDataSet() {
+    Map<String, Float> parametersValues = new HashMap<String, Float>();
+    for (String parameterName : OrbitAIMCAdapter.parametersNames) {
+      parametersValues.put(parameterName, getInternalParameter(parameterName));
+    }
+
+    return parametersValues;
+  }
+
+  /**
+   * Returns a formatted time stamp for the time of the call.
+   *
+   * @return the time stamp
+   */
+  public static String getTimestamp() {
+    return timestampFormat.format(new Date(System.currentTimeMillis()));
+  }
+
+  /**
+   * Opens the training data file stream. Also creates the toGround/ directory if not present
+   * already.
+   * 
+   * @return True if everything went fine, false if an IOException occurred
+   */
+  private boolean openTrainingDataFileStream() {
+    // Create containing directory if needed
+    File dataDirectory =
+        Paths.get(OrbitAIApp.TO_GROUND_DIRECTORY_PATH, DATA_DIRECTORY_PATH).toFile();
+    if (!(dataDirectory.exists() && dataDirectory.isDirectory())) {
+      dataDirectory.mkdirs();
+    }
+
+    // Open file stream
+    String fileNameExtension = getTimestamp() + ".csv";
+    String fileName = "";
+    for (String parameterName : OrbitAIMCAdapter.parametersNames) {
+      fileName += (parameterName + "_");
+    }
+    fileName += fileNameExtension;
+
+    try {
+      trainingDataOutputStream =
+          new FileOutputStream(Paths.get(dataDirectory.getPath(), fileName).toFile(), true);
+    } catch (FileNotFoundException e) {
+      LOGGER.log(Level.SEVERE, "Couldn't create data file stream", e);
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Closes the training data file stream.
+   * 
+   * @return True if everything went fine, false if an IOException occurred
+   */
+  private boolean closeTraininDataFileStream() {
+    if (trainingDataOutputStream != null) {
+      try {
+        trainingDataOutputStream.close();
+        trainingDataOutputStream = null;
+      } catch (IOException e) {
+        LOGGER.log(Level.WARNING, "Error while closing training data file output stream", e);
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /**
+   * Saves acquired data in the data file stream.
+   */
+  private void logData() {
+    Long now = System.currentTimeMillis();
+    // Only save at specific intervals
+    if (lastLogTime == null || (now - lastLogTime >= PARAMS_DEFAULT_REPORT_INTERVAL * 1000 * 0.9)) {
+      if (trainingDataOutputStream == null) {
+        LOGGER.log(Level.WARNING, "Data file stream is null, can't log data");
+        return;
+      }
+
+      // format line
+      Map<String, Float> dataSet = getDataSet();
+      String line = "";
+      for (String parameterName : OrbitAIMCAdapter.parametersNames) {
+        line += (dataSet.get(parameterName) + ",");
+      }
+      line = getTimestamp() + "," + line.substring(0, line.length() - 2) + "\n";
+
+      // write line
+      try {
+        trainingDataOutputStream.write(line.getBytes());
+        lastLogTime = now;
+      } catch (IOException e) {
+        LOGGER.log(Level.WARNING, "Could not write to data file output stream", e);
+      }
+    }
   }
 }
