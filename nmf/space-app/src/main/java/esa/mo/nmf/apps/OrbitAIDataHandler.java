@@ -35,10 +35,10 @@ public class OrbitAIDataHandler {
   private static final Logger LOGGER = Logger.getLogger(OrbitAITrainingHandler.class.getName());
 
   /**
-   * Relative path to the file containing the list of OBSW parameters we want to subscribe to from
-   * supervisor.
+   * Relative path to the file containing the list of OBSW parameters we want to enable the
+   * generation in the supervisor.
    */
-  private static final String PARAM_SUBS_FILE_PATH = "subscriptions.txt";
+  private static final String PARAMS_TO_ENABLE_FILE_PATH = "params_to_enable.txt";
 
   /**
    * Relative path to the directory containing our data inside the toGround/ folder.
@@ -46,7 +46,7 @@ public class OrbitAIDataHandler {
   private static final String DATA_DIRECTORY_PATH = "data";
 
   /**
-   * Time stamps format for data logs
+   * Time stamps format for data logs.
    */
   private static final SimpleDateFormat timestampFormat =
       new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
@@ -99,7 +99,7 @@ public class OrbitAIDataHandler {
    * @return null if it was successful. If not null, then the returned value holds the error number
    */
   public UInteger toggleSupervisorParametersSubscription(boolean subscribe) {
-    List<String> parametersNames = getParametersToSubscribeTo();
+    List<String> parametersNames = getParametersToEnable();
     if (parametersNames == null) {
       return new UInteger(1);
     }
@@ -191,7 +191,7 @@ public class OrbitAIDataHandler {
       Field internalParameter = adapter.getClass().getDeclaredField(parameterName);
       internalParameter.setAccessible(true);
       float value = internalParameter.getFloat(adapter);
-      internalParameter.setAccessible(true);
+      internalParameter.setAccessible(false);
       return value;
     } catch (NoSuchFieldException e) {
       LOGGER.log(Level.WARNING,
@@ -205,20 +205,20 @@ public class OrbitAIDataHandler {
   }
 
   /**
-   * Parses the parameter subscriptions file and returns the list of OBSW parameter we want to
-   * subscribe to from supervisor.
+   * Parses the parameters to enable file and returns the list of OBSW parameter we want to enable
+   * the generation in the supervisor.
    *
    * @return The list of parameter identifiers or null if an IOException occurred.
    */
-  private List<String> getParametersToSubscribeTo() {
-    File file = new File(PARAM_SUBS_FILE_PATH);
+  private List<String> getParametersToEnable() {
+    File file = new File(PARAMS_TO_ENABLE_FILE_PATH);
     String content = "";
 
     try {
       // expect one line with parameters names
       content = new String(Files.readAllBytes(file.toPath()));
     } catch (IOException e) {
-      LOGGER.log(Level.SEVERE, "Error while loading parameters to subscribe to", e);
+      LOGGER.log(Level.SEVERE, "Error while loading parameters to enable in supervisor", e);
       return null;
     }
 

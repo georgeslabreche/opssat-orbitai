@@ -81,6 +81,15 @@ public class OrbitAIMCAdapter extends MonitorAndControlNMFAdapter {
    */
   private OrbitAIDataHandler dataHandler;
 
+  /**
+   * Returns the data handler of the application.
+   *
+   * @return the data handler
+   */
+  public OrbitAIDataHandler getDataHandler() {
+    return dataHandler;
+  }
+
   @Action(description = "Starts fetching training data from the supervisor", stepCount = 1,
       name = "startFetchingData")
   public UInteger startFetchingData(Long actionInstanceObjId, boolean reportProgress,
@@ -101,6 +110,8 @@ public class OrbitAIMCAdapter extends MonitorAndControlNMFAdapter {
       MALInteraction interaction) {
     return trainingHandler.startTraining();
   }
+
+  // TODO restart training action (on previous models)
 
   @Action(description = "Stops training models", stepCount = 1, name = "stopTraining")
   public UInteger stopTraining(Long actionInstanceObjId, boolean reportProgress,
