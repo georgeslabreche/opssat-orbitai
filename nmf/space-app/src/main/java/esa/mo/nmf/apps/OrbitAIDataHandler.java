@@ -38,18 +38,24 @@ public class OrbitAIDataHandler {
    * Relative path to the file containing the list of OBSW parameters we want to enable the
    * generation in the supervisor.
    */
-  private static final String PARAMS_TO_ENABLE_FILE_PATH = "params_to_enable.txt";
+  private static final String PARAMS_TO_ENABLE_FILE = "params_to_enable.txt";
 
   /**
    * Relative path to the directory containing our data inside the toGround/ folder.
    */
-  private static final String DATA_DIRECTORY_PATH = "data";
+  private static final String DATA_DIR = "data";
 
   /**
    * Time stamps format for data logs.
    */
   private static final SimpleDateFormat timestampFormat =
       new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+
+  /**
+   * Photodiode elevation threshold for the HD Camera: FOV 18.63 deg (in lens specs) and 21 deg (in
+   * ICD). Elevation threshold is 90 deg - (FOV + margin) = 60 deg (1.0472 rad).
+   */
+  private static final float PD6_ELEVATION_THRESHOLD_HD_CAM = 1.0472f;
 
   /**
    * Internal parameters default value.
@@ -117,8 +123,6 @@ public class OrbitAIDataHandler {
 
 
     if (subscribe) {
-      LOGGER.log(Level.INFO, "Starting to fetch parameters from supervisor");
-
       if (!openTrainingDataFileStream()) {
         return new UInteger(4);
       }
@@ -144,13 +148,14 @@ public class OrbitAIDataHandler {
         };
 
         adapter.getSupervisorSMA().addDataReceivedListener(this.parameterListener);
+        LOGGER.log(Level.INFO, "Started fetching parameters from supervisor");
       }
     } else {
-      LOGGER.log(Level.INFO, "Stopping to fetch parameters from supervisor");
-
       if (!closeTraininDataFileStream()) {
         return new UInteger(5);
       }
+
+      LOGGER.log(Level.INFO, "Stopped fetching parameters from supervisor");
     }
 
     return null;
@@ -211,7 +216,7 @@ public class OrbitAIDataHandler {
    * @return The list of parameter identifiers or null if an IOException occurred.
    */
   private List<String> getParametersToEnable() {
-    File file = new File(PARAMS_TO_ENABLE_FILE_PATH);
+    File file = new File(PARAMS_TO_ENABLE_FILE);
     String content = "";
 
     try {
@@ -251,6 +256,21 @@ public class OrbitAIDataHandler {
   }
 
   /**
+   * Returns the label (ON/OFF) associated to a PD6 elevation for the HD camera.
+   *
+   * @param PD6 the photo-diode 6 (located on -z face of the S/C body) elevation
+   * @return the label, 1 = ON, 0 = OFF
+   */
+  public static int getHDCameraLabel(float PD6) {
+    // if elevation, superior than threshold, camera should be OFF
+    if (PD6 > PD6_ELEVATION_THRESHOLD_HD_CAM) {
+      return 0;
+    }
+
+    return 1;
+  }
+
+  /**
    * Returns a formatted time stamp for the time of the call.
    *
    * @return the time stamp
@@ -267,10 +287,13 @@ public class OrbitAIDataHandler {
    */
   private boolean openTrainingDataFileStream() {
     // Create containing directory if needed
-    File dataDirectory =
-        Paths.get(OrbitAIApp.TO_GROUND_DIRECTORY_PATH, DATA_DIRECTORY_PATH).toFile();
+    File dataDirectory = Paths.get(OrbitAIApp.TO_GROUND_DIR, DATA_DIR).toFile();
     if (!(dataDirectory.exists() && dataDirectory.isDirectory())) {
-      dataDirectory.mkdirs();
+      if (!dataDirectory.mkdirs()) {
+        LOGGER.log(Level.SEVERE,
+            String.format("Couldn't create directory %s", dataDirectory.getPath()));
+        return false;
+      }
     }
 
     // Open file stream

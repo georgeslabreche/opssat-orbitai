@@ -15,14 +15,19 @@ public class OrbitAIApp {
   private static final Logger LOGGER = Logger.getLogger(OrbitAIApp.class.getName());
 
   /**
-   * Path to the toGround directory of the application.
+   * Path to the toGround/ directory of the application.
    */
-  public static final String TO_GROUND_DIRECTORY_PATH = "toGround/";
+  public static final String TO_GROUND_DIR = "toGround/";
+
+  /**
+   * Monitoring & Control interface of the application.
+   */
+  private OrbitAIMCAdapter adapter;
 
 
   public OrbitAIApp() {
     // Initialize M&C interface
-    OrbitAIMCAdapter adapter = new OrbitAIMCAdapter();
+    adapter = new OrbitAIMCAdapter();
 
     // Initialize application's NMF provider
     NanoSatMOConnectorImpl connector = new NanoSatMOConnectorImpl();
@@ -40,12 +45,27 @@ public class OrbitAIApp {
   }
 
   /**
+   * Starts the application. This starts fetching data from the supervisor and starts the training
+   * of models based on these data.
+   *
+   */
+  public void start() {
+    LOGGER.log(Level.INFO, "Starting OrbitAI");
+
+    adapter.startFetchingData(0l, false, null);
+    adapter.startTraining(0l, false, null);
+  }
+
+  /**
    * Main command line entry point.
    *
    * @param args the command line arguments
    * @throws java.lang.Exception If there is an error
    */
   public static void main(final String args[]) throws Exception {
-    new OrbitAIApp();
+
+    // Create
+    OrbitAIApp app = new OrbitAIApp();
+    app.start();
   }
 }

@@ -7,9 +7,11 @@ package esa.mo.nmf.apps;
 import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
+import java.nio.file.Paths;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.io.FileUtils;
 import org.ccsds.moims.mo.mal.structures.UInteger;
 
 /**
@@ -20,6 +22,11 @@ import org.ccsds.moims.mo.mal.structures.UInteger;
 public class OrbitAITrainingHandler {
 
   private static final Logger LOGGER = Logger.getLogger(OrbitAITrainingHandler.class.getName());
+
+  /**
+   * Relative path to the directory that will contain trained models inside the toGround/ folder.
+   */
+  private static final String EXPORT_MODELS_DIR = "trained_models";
 
   /**
    * M&C interface of the application.
@@ -39,7 +46,8 @@ public class OrbitAITrainingHandler {
 
   // ----- MOCHI MOCHI ----- //
 
-  private static final String MOCHI_DIRECTORY = "/home/root/georges/orbitai/OrbitAI_Mochi";
+  private static final String MOCHI_DIR = "/home/tanguy/Documents/code/opssat/opssat-orbitai/Mochi";
+  private static final String MOCHI_MODELS_DIR = "models";
   private static final String MOCHI_CMD = "./OrbitAI_Mochi";
 
   private static final String MOCHI_ADDRESS = "127.0.0.1";
@@ -92,14 +100,20 @@ public class OrbitAITrainingHandler {
    * @return null if it was successful. If not null, then the returned value holds the error number
    */
   public UInteger stopTraining() {
-    // MochiMochi
+    // stop training loop
+    stopTrainingLoop();
+
+    // stop MochiMochi process
     UInteger errorCode = stopAndDisconnectFromMochi();
     if (errorCode != null) {
       return errorCode;
     }
 
-    // training loop
-    stopTrainingLoop();
+    // export models
+    errorCode = exportTrainedModels();
+    if (errorCode != null) {
+      return errorCode;
+    }
 
     return null;
   }
@@ -146,8 +160,30 @@ public class OrbitAITrainingHandler {
 
     trainingRunnable = null;
     trainingThread = null;
+  }
 
-    // TODO export models and their data in toGround/ directory
+  /**
+   * Copies the trained models and their training data to the application's toGround/ directory to
+   * be later downlinked.
+   *
+   * @return null if it was successful. If not null, then the returned value holds the error number
+   */
+  private UInteger exportTrainedModels() {
+    String timestamp = OrbitAIDataHandler.getTimestamp();
+
+    // Copy Mochi models
+    File trainedMochiModelsDir = Paths.get(MOCHI_DIR, MOCHI_MODELS_DIR).toFile();
+    File exportTrainedMochiModelsDir =
+        Paths.get(OrbitAIApp.TO_GROUND_DIR, EXPORT_MODELS_DIR, "mochi", timestamp).toFile();
+    try {
+      FileUtils.copyDirectory(trainedMochiModelsDir, exportTrainedMochiModelsDir);
+    } catch (IOException e) {
+      LOGGER.log(Level.SEVERE, "Error exporting MochiMochi trained models", e);
+      return new UInteger(2);
+    }
+
+    LOGGER.log(Level.INFO, "Exported trained models to the toGround/ directory");
+    return null;
   }
 
   /**
@@ -165,7 +201,7 @@ public class OrbitAITrainingHandler {
     // Start Mochi process
     ProcessBuilder builder = new ProcessBuilder();
     builder.command(MOCHI_CMD);
-    builder.directory(new File(MOCHI_DIRECTORY));
+    builder.directory(new File(MOCHI_DIR));
     try {
       mochiProcess = builder.start();
       LOGGER.log(Level.INFO, "MochiMochi process started");
@@ -191,7 +227,7 @@ public class OrbitAITrainingHandler {
       return new UInteger(13);
     } catch (InterruptedException e) {
       LOGGER.log(Level.SEVERE,
-          "Training thread interrupted while waiting for Mochi process initialization", e);
+          "Training thread interrupted while waiting for MochiMochi process initialization", e);
     }
 
     return null;
@@ -206,15 +242,15 @@ public class OrbitAITrainingHandler {
     // Check if we are not already disconnected
     if (mochiClient == null || mochiClient.isClosed()) {
       LOGGER.log(Level.WARNING,
-          "Didn't disconnect from Mochi process, connection was already closed");
+          "Didn't disconnect from MochiMochi process, connection was already closed");
       mochiClient = null;
     } else {
       // Disconnect from it
       try {
         mochiClient.close();
-        LOGGER.log(Level.INFO, "Disconnected from Mochi process");
+        LOGGER.log(Level.INFO, "Disconnected from MochiMochi process");
       } catch (IOException e) {
-        LOGGER.log(Level.SEVERE, "Error while disconnecting from Mochi process", e);
+        LOGGER.log(Level.SEVERE, "Error while disconnecting from MochiMochi process", e);
         return new UInteger(1);
       } finally {
         mochiClient = null;
@@ -223,7 +259,7 @@ public class OrbitAITrainingHandler {
 
     // Check that process is running
     if (mochiProcess == null || !mochiProcess.isAlive()) {
-      LOGGER.log(Level.WARNING, "Didn't stop Mochi process, process is already dead");
+      LOGGER.log(Level.WARNING, "Didn't stop MochiMochi process, process is already dead");
     } else {
       // Stop it
       mochiProcess.destroy();
@@ -231,6 +267,8 @@ public class OrbitAITrainingHandler {
     }
 
     mochiProcess = null;
+
+    // Save models and data
 
     return null;
   }
@@ -261,8 +299,6 @@ public class OrbitAITrainingHandler {
 
       while (keepRunning()) {
         try {
-          LOGGER.log(Level.INFO, "Training");
-
           sendMochiTrainCommand();
           sendMochiSaveCommand();
 
@@ -298,8 +334,6 @@ public class OrbitAITrainingHandler {
     /**
      * Sends a train command to the MochiMochi process. The input data come from our data handler
      * and from our data labeler.
-     * 
-     * TODO real parameter and label
      */
     private void sendMochiTrainCommand() {
       long now = System.currentTimeMillis();
@@ -311,8 +345,8 @@ public class OrbitAITrainingHandler {
       Map<String, Float> dataSet = adapter.getDataHandler().getDataSet();
       float PD3 = dataSet.get("CADC0888");
       float PD6 = dataSet.get("CADC0894");
-      int label = 1;
-      String command = String.format("train %d 1:%f 2: %f", label, PD3, PD6);
+      int label = OrbitAIDataHandler.getHDCameraLabel(PD6);
+      String command = String.format("train %d 1:%f 2:%f", label, PD3, PD6); // TODO clarify format
 
       if (mochiClient != null && !mochiClient.isClosed()) {
         try {
