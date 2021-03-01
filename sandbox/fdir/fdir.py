@@ -9,17 +9,17 @@ import time
 import sys
 import os
 
-# Photodiode elevation threshold for the Camera:
+# Photodiode 6 elevation threshold for the Camera:
 #   - FOV 18.63 deg (in lens specs) and 21 deg (in ICD)
 #   - Elevation threshold is 90 deg - (FOV + margin) = 60 deg (1.0472 rad)
 PD_ELEVATION_THRESHOLD_HD_CAM = 1.0472
 
-# Photodiode elevation threshold for the Optical RX:
+# Photodiode 6 elevation threshold for the Optical RX:
 #  - FOV 12.2 deg (for 542 nm) and 82.65 deg (for optics, as per CAD model)
 #  - PD elevation threshold is 90 deg - (82.65 deg / 2 FOV + 10 deg margin) = 38 deg (0.663225 rad)
 PD_ELEVATION_THRESHOLD_OPT_RX = 0.6632
 
-# Photodiode elevation threshold for the Startracker:
+# Photodiode 3 elevation threshold for the Startracker:
 #   - FOV 33.1 deg, as per the CAD model
 #   - Elevation threshold is 63 deg (1.09956 rad)
 PD_ELEVATION_THRESHOLD_IADCS_ST = 1.0996

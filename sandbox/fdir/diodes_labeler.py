@@ -124,6 +124,62 @@ def generate_perfect_data_set(devices):
 
     return df
 
+def generate_full_perfect_data_set(devices):
+    """
+    Generates a labeled file with all the coarse sun sensors values as input data that covers the entire
+    input space possible. AKA a perfect test data set.
+    """
+    global NEXT_LABEL
+
+    # Range of PD3 and PD6 input angles
+    angles_range = range(0, 91, 15)
+    nb_angles = len(angles_range)
+
+    # Create empty data frame
+    input_columns = [PhotoDiode.PD1.name,PhotoDiode.PD2.name,PhotoDiode.PD3.name,
+                     PhotoDiode.PD4.name,PhotoDiode.PD5.name, PhotoDiode.PD6.name]
+    nb_diodes = len(input_columns)
+
+
+    nb_samples = nb_angles**nb_diodes
+
+    label_columns = [d.name + "_STATE" for d in devices]
+    columns = input_columns + label_columns
+
+    todays_date = datetime.datetime.now().date()
+    index = pd.date_range(todays_date-datetime.timedelta(seconds=nb_samples), periods=nb_samples, freq='S')
+
+    df = pd.DataFrame(np.zeros((len(index), len(columns))), index=index, columns=columns)
+    df.index.name = "TIMESTAMP"
+
+    # Fill in data
+    for e in range(nb_angles):
+        for f in range(nb_angles):
+            for g in range(nb_angles):
+                for h in range(nb_angles):
+                    for i in range(nb_angles):
+                        for j in range(nb_angles):
+                            row_nb = j+nb_angles * (i + nb_angles * (h + nb_angles * (g + nb_angles *(f + nb_angles * e))))
+
+                            # Diodes input
+                            df.iat[row_nb, 0] = round(math.radians(angles_range[e]), 2)
+                            df.iat[row_nb, 1] = round(math.radians(angles_range[f]), 2)
+                            df.iat[row_nb, 2] = round(math.radians(angles_range[g]), 2)
+                            df.iat[row_nb, 3] = round(math.radians(angles_range[h]), 2)
+                            df.iat[row_nb, 4] = round(math.radians(angles_range[i]), 2)
+                            df.iat[row_nb, 5] = round(math.radians(angles_range[j]), 2)
+
+                            # Labels
+                            for k in range(len(devices)):
+                                d = devices[k]
+                                d.check(df[d.photodiode.name][row_nb], label_off, label_on)
+                                df.iat[row_nb, k+nb_diodes] = NEXT_LABEL
+
+    # Clean: cast labels to byte
+    df[label_columns] = df[label_columns].astype(np.int8)
+
+    return df
+
 
 if __name__ == "__main__":
     # Path from where the script is called
@@ -154,7 +210,8 @@ if __name__ == "__main__":
 
     # Generate data
     #generated_df = generate_perfect_data_set(DEVICES)
-    #generated_df.to_csv(os.path.join(_DIR_NAME, 'data/webmust_labeled/', "perfect_training_set.csv"))
+    #generated_df = generate_full_perfect_data_set(DEVICES)
+    #generated_df.to_csv(os.path.join(_DIR_NAME, 'data/webmust_labeled/', "perfect_full_training_set.csv"))
 
     # Label data
     labeled_diodes_df = process_webmust_diodes_csv(INPUT_FILE, DEVICES)
