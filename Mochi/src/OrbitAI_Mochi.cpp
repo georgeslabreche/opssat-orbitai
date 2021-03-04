@@ -4,6 +4,9 @@
 #include <iostream> // For cout
 #include <unistd.h> // For read
 
+#include <sys/types.h> // For mkdkir
+#include <sys/stat.h> // For mkdkir
+
 #include <string>
 #include <sstream>
 #include <algorithm>
@@ -13,12 +16,31 @@
 #include <mochimochi/binary_classifier.hpp>
 #include <mochimochi/utility.hpp>
 
+
+#define COMMAND_BUFFER_LENGTH              100
+
+/**
+ * Questions:
+ *  1. Do we just automatically do load by checking if files exist in the models folder?
+ *  2. Do we just automatically save the file after each train?
+ *  3. Do we need the timestamp for the logs?
+ */ 
 int main() 
 {
+
+    // Create models and logs directory if they do not exist.
+    mkdir("models", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+    mkdir("logs", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+
+    // Train command.
+    const char* resetCmd = "reset";
+    const int resetCmdLen = 5;
+
     // Train command.
     const char* trainCmd = "train";
     const int trainCmdLen = 5;
 
+    // Infer command.
     const char* inferCmd = "infer";
     const int inferCmdLen = 5;
 
@@ -33,6 +55,46 @@ int main()
     // Exit command.
     const char* exitCmd = "exit";
     const int exitCmdLen = 4;
+
+    // The hyperparameters
+    const double hp_arow_r = 0.8;
+
+    const double hp_scw_c = 1.0;
+    const double hp_scw_eta = 0.95;
+
+    const double hp_nherd_c = 0.1;
+    const int hp_nherd_diagonal = 0;
+
+    const double hp_pa_c = 0.1;
+    const int hp_pa_select = 1;
+
+    // ADAM
+    //ADAM adam_1D(1);
+    //ADAM adam_2D(2);
+    //ADAM adam_3D(3);
+
+    // ARROW
+    AROW arow_1D(1, hp_arow_r);
+    AROW arow_2D(2, hp_arow_r);
+    AROW arow_3D(3, hp_arow_r);
+
+    // SCW
+    SCW scw_1D(1, hp_scw_c, hp_scw_eta);
+    SCW scw_2D(2, hp_scw_c, hp_scw_eta);
+    SCW scw_3D(3, hp_scw_c, hp_scw_eta);
+
+    // NHERD
+    NHERD nherd_1D(1, hp_nherd_c, hp_nherd_diagonal);
+    NHERD nherd_2D(2, hp_nherd_c, hp_nherd_diagonal);
+    NHERD nherd_3D(3, hp_nherd_c, hp_nherd_diagonal);
+
+    // PA
+    PA pa_1D(1, hp_pa_c, hp_pa_select);
+    PA pa_2D(2, hp_pa_c, hp_pa_select);
+    PA pa_3D(3, hp_pa_c, hp_pa_select);
+
+    // The command buffer.
+    char buffer[COMMAND_BUFFER_LENGTH];
 
     // Create a socket (IPv4, TCP)
     int sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -70,52 +132,54 @@ int main()
         exit(EXIT_FAILURE);
     }
 
-    // Load the hyperparameters
-    const double hp_arow_r = 0.8;
-
-    const double hp_scw_c = 1.0;
-    const double hp_scw_eta = 0.95;
-
-    const double hp_nherd_c = 0.1;
-    const int hp_nherd_diagonal = 0;
-
-    const double hp_pa_c = 0.1;
-    const int hp_pa_select = 1;
-
-    // ADAM
-    //ADAM adam_1D(1);
-    //ADAM adam_2D(2);
-    //ADAM adam_3D(3);
-
-    // ARROW
-    AROW arow_1D(1, hp_arow_r);
-    AROW arow_2D(2, hp_arow_r);
-    AROW arow_3D(3, hp_arow_r);
-
-    // SCW
-    SCW scw_1D(1, hp_scw_c, hp_scw_eta);
-    SCW scw_2D(2, hp_scw_c, hp_scw_eta);
-    SCW scw_3D(3, hp_scw_c, hp_scw_eta);
-
-    // NHERD
-    NHERD nherd_1D(1, hp_nherd_c, hp_nherd_diagonal);
-    NHERD nherd_2D(2, hp_nherd_c, hp_nherd_diagonal);
-    NHERD nherd_3D(3, hp_nherd_c, hp_nherd_diagonal);
-
-    // PA
-    PA pa_1D(1, hp_pa_c, hp_pa_select);
-    PA pa_2D(2, hp_pa_c, hp_pa_select);
-    PA pa_3D(3, hp_pa_c, hp_pa_select);
-
     // Read from the connection
     while(1)
     {
-        char buffer[100];
-        const int bufferLen = 100;
-        auto bytesRead = read(connection, buffer, bufferLen);
-        std::cout << "Received command: " << buffer;
+        // Read received command.
+        auto bytesRead = read(connection, buffer, COMMAND_BUFFER_LENGTH);
 
-        if (std::equal(loadCmd, loadCmd+loadCmdLen, buffer))  // Load saved models.
+        // Get string representation of the command.
+        std::string receivedCmd(buffer, bytesRead);
+
+        // Print out received command.
+        std::cout << "\nReceived: " << receivedCmd;
+
+        if(receivedCmd.compare(0, resetCmdLen, resetCmd) == 0)
+        {
+            // ADAM
+            //remove("models/adam_1D");
+            //remove("models/adam_2D");
+            //remove("models/adam_3D");
+
+            // AROW
+            remove("models/arow_1D");
+            remove("models/arow_2D");
+            remove("models/arow_3D");
+
+            // SCW
+            remove("models/scw_1D");
+            remove("models/scw_2D");
+            remove("models/scw_3D");
+
+            // NHERD
+            remove("models/nherd_1D");
+            remove("models/nherd_2D");
+            remove("models/nherd_3D");
+
+            // PA
+            remove("models/pa_1D");
+            remove("models/pa_2D");
+            remove("models/pa_3D");
+
+            // Logs
+            remove("logs/training.csv");
+            remove("logs/inference.csv");
+
+            std::string response = "OK\n";
+            send(connection, response.c_str(), response.size(), 0);
+
+        }
+        else if(receivedCmd.compare(0, loadCmdLen, loadCmd) == 0)  // Load saved models.
         {
             // Deserialize.
             
@@ -147,7 +211,7 @@ int main()
             std::string response = "OK\n";
             send(connection, response.c_str(), response.size(), 0);
         }
-        else if (std::equal(saveCmd, saveCmd+saveCmdLen, buffer)) // Save models.
+        else if(receivedCmd.compare(0, saveCmdLen, saveCmd) == 0)// Save models.
         {
             // Serialize.
 
@@ -179,13 +243,15 @@ int main()
             std::string response = "OK\n";
             send(connection, response.c_str(), response.size(), 0);
         }
-        else if (std::equal(exitCmd, exitCmd+exitCmdLen, buffer)) // Exit server loop.
+        else if(receivedCmd.compare(0, exitCmdLen, exitCmd) == 0) // Exit server loop.
         {
+            std::cout << "\nReceived: " << exitCmd;
+
             std::string response = "BYE\n";
             send(connection, response.c_str(), response.size(), 0);
             break;
         }
-        else if (std::equal(trainCmd, trainCmd+trainCmdLen, buffer))
+        else if(receivedCmd.compare(0, trainCmdLen, trainCmd) == 0)
         {
             /**
              * Expected command string format:
@@ -195,9 +261,9 @@ int main()
              *  train 1 1.23
              *  train 0 0.32
              **/
-            try 
+            try
             {
-                std::string cmdString(buffer, bufferLen);
+                std::string cmdString(buffer, COMMAND_BUFFER_LENGTH);
                 std::istringstream cmdStringStream(cmdString);
 
                 std::vector<std::string> cmdTokens
@@ -218,7 +284,6 @@ int main()
                 }
                 else // Valid training input.
                 {
-
                     // Features.
                     std::ostringstream ss1;
                     ss1 << pd;
@@ -239,19 +304,16 @@ int main()
 
                     if(label == 1)
                     {
-
                         line_1D = "+1 1:" + s1;
                         line_2D = "+1 1:" + s1 + " 2:" + s2;
                         line_3D = "+1 1:" + s1 + " 2:" + s2 + " 3:" + s3;
                     }
                     else if(label == 0 || label == -1)
                     {
-
                         line_1D = "-1 1:" + s1;
                         line_2D = "-1 1:" + s1 + " 2:" + s2;
                         line_3D = "-1 1:" + s1 + " 2:" + s2 + " 3:" + s3;
                     }
-                    
 
                     // Read data.
                     auto data_1D = utility::read_ones<int>(line_1D, 1);
@@ -285,6 +347,19 @@ int main()
                     pa_2D.update(data_2D.second, data_2D.first);
                     pa_3D.update(data_3D.second, data_3D.first);
 
+                    // Opening the training log file.
+                    std::ofstream trainingLogFile;
+                    trainingLogFile.open("logs/training.csv", std::ios_base::out | std::ios_base::app);
+
+                    // Creating the training row string to append to the log file.
+                    std::string trainingLogFileRow = std::to_string(pd) + "," + std::to_string(label) + "\n";
+
+                    // Append the training row data into the log file.
+                    trainingLogFile << trainingLogFileRow;
+
+                    // Close the log files.
+                    trainingLogFile.close();
+
                     std::string response = "OK\n";
                     send(connection, response.c_str(), response.size(), 0);
                 }
@@ -296,20 +371,20 @@ int main()
                 send(connection, response.c_str(), response.size(), 0);
             }
         }
-        else if (std::equal(inferCmd, inferCmd+inferCmdLen, buffer))
+        else if(receivedCmd.compare(0, inferCmdLen, inferCmd) == 0)
         {
             /**
              * Expected command string format:
-             *      infer <pd:float>
+             *      infer <expected_label:int> <pd:float>
              * 
              * e.g.: 
-             *  infer 1.23
-             *  infer 0.32
+             *  infer +1 1.23
+             *  infer -1 0.32
              **/
 
             try
             {
-                std::string cmdString(buffer, bufferLen);
+                std::string cmdString(buffer, COMMAND_BUFFER_LENGTH);
                 std::istringstream cmdStringStream(cmdString);
 
                 std::vector<std::string> cmdTokens{
@@ -317,72 +392,104 @@ int main()
                     std::istream_iterator<std::string>{}
                 };
 
-                // Parse input string to float.
-                float pd = std::stof(cmdTokens[1]);
+                // Parse input string for expected label int and PD float.
+                int label = std::stof(cmdTokens[1]);
+                float pd = std::stof(cmdTokens[2]);
 
-                // Features.
-                std::ostringstream ss1;
-                ss1 << pd;
-                std::string s1(ss1.str());
+                // inference input error.
+                if(!(label == 0 || label == -1 || label == 1))
+                {
+                    std::string response = "ERROR\n";
+                    send(connection, response.c_str(), response.size(), 0);
+                }
+                else // Valid inference input.
+                {
+                    // Features.
+                    std::ostringstream ss1;
+                    ss1 << pd;
+                    std::string s1(ss1.str());
 
-                std::ostringstream ss2;
-                ss2 << pd * pd;
-                std::string s2(ss2.str());
+                    std::ostringstream ss2;
+                    ss2 << pd * pd;
+                    std::string s2(ss2.str());
 
-                std::ostringstream ss3;
-                ss3 << pd * pd * pd;
-                std::string s3(ss3.str());
+                    std::ostringstream ss3;
+                    ss3 << pd * pd * pd;
+                    std::string s3(ss3.str());
 
-                // 1D, 2D, and 3D feature spaces input data for inference.
-                // The labels, i.e. +1, will be ignore. It's just there because it is expected when calling utility::read_ones().
-                std::string line_1D = "+1 1:" + s1;
-                std::string line_2D = "+1 1:" + s1 + " 2:" + s2;
-                std::string line_3D = "+1 1:" + s1 + " 2:" + s2 + " 3:" + s3;
+                    // Inference data for 1D, 2D, and 3D feature spaces.
+                    std::string line_1D;
+                    std::string line_2D;
+                    std::string line_3D;
 
-                // Read data.
-                auto data_1D = utility::read_ones<int>(line_1D, 1);
-                auto data_2D = utility::read_ones<int>(line_2D, 2);
-                auto data_3D = utility::read_ones<int>(line_3D, 3);
+                    if(label == 1)
+                    {
+                        line_1D = "+1 1:" + s1;
+                        line_2D = "+1 1:" + s1 + " 2:" + s2;
+                        line_3D = "+1 1:" + s1 + " 2:" + s2 + " 3:" + s3;
+                    }
+                    else if(label == 0 || label == -1)
+                    {
 
-                int arow_label_1D = arow_1D.predict(data_1D.second);
-                int arow_label_2D = arow_2D.predict(data_2D.second);
-                int arow_label_3D = arow_3D.predict(data_3D.second);
+                        line_1D = "-1 1:" + s1;
+                        line_2D = "-1 1:" + s1 + " 2:" + s2;
+                        line_3D = "-1 1:" + s1 + " 2:" + s2 + " 3:" + s3;
+                    }
 
-                int scw_label_1D = scw_1D.predict(data_1D.second);
-                int scw_label_2D = scw_2D.predict(data_2D.second);
-                int scw_label_3D = scw_3D.predict(data_3D.second);
+                    // Read data.
+                    auto data_1D = utility::read_ones<int>(line_1D, 1);
+                    auto data_2D = utility::read_ones<int>(line_2D, 2);
+                    auto data_3D = utility::read_ones<int>(line_3D, 3);
 
-                int nherd_label_1D = nherd_1D.predict(data_1D.second);
-                int nherd_label_2D = nherd_2D.predict(data_2D.second);
-                int nherd_label_3D = nherd_3D.predict(data_3D.second);
+                    int arow_pred_1D = arow_1D.predict(data_1D.second);
+                    int arow_pred_2D = arow_2D.predict(data_2D.second);
+                    int arow_pred_3D = arow_3D.predict(data_3D.second);
 
-                int pa_label_1D = pa_1D.predict(data_1D.second);
-                int pa_label_2D = pa_2D.predict(data_2D.second);
-                int pa_label_3D = pa_3D.predict(data_3D.second);
+                    int scw_pred_1D = scw_1D.predict(data_1D.second);
+                    int scw_pred_2D = scw_2D.predict(data_2D.second);
+                    int scw_pred_3D = scw_3D.predict(data_3D.second);
 
-                // Inference results formatting 
-                std::string arow_inference = "[\n\  {\"AROW\": [" + std::to_string(arow_label_1D) + ", " + std::to_string(arow_label_2D) + ", " + std::to_string(arow_label_3D) + "]},\n"
-                    + "  {\"SCW\": [" + std::to_string(scw_label_1D) + ", " + std::to_string(scw_label_2D) + ", " + std::to_string(scw_label_3D) + "]},\n"
-                    + "  {\"NHERD\": [" + std::to_string(nherd_label_1D) + ", " + std::to_string(nherd_label_2D) + ", " + std::to_string(nherd_label_3D) + "]},\n"
-                    + "  {\"PA\": [" + std::to_string(pa_label_1D) + ", " + std::to_string(pa_label_2D) + ", " + std::to_string(pa_label_3D) + "]}\n"
-                    + "]\n";
+                    int nherd_pred_1D = nherd_1D.predict(data_1D.second);
+                    int nherd_pred_2D = nherd_2D.predict(data_2D.second);
+                    int nherd_pred_3D = nherd_3D.predict(data_3D.second);
 
-                send(connection, arow_inference.c_str(), arow_inference.size(), 0);
+                    int pa_pred_1D = pa_1D.predict(data_1D.second);
+                    int pa_pred_2D = pa_2D.predict(data_2D.second);
+                    int pa_pred_3D = pa_3D.predict(data_3D.second);
+
+                    // The inference log file.
+                    std::ofstream inferenceLogFile;
+                    inferenceLogFile.open("logs/inference.csv", std::ios_base::out | std::ios_base::app);
+
+                    // Creating the inference results row string to append to the log file.
+                    std::string inferenceLogFileRow = std::to_string(pd) + "," + std::to_string(label) + ","
+                        + std::to_string(arow_pred_1D) + "," + std::to_string(arow_pred_2D) + "," + std::to_string(arow_pred_3D) + ","
+                        + std::to_string(scw_pred_1D) + "," + std::to_string(scw_pred_2D) + "," + std::to_string(scw_pred_3D) + ","
+                        + std::to_string(nherd_pred_1D) + "," + std::to_string(nherd_pred_2D) + "," + std::to_string(nherd_pred_3D) + ","
+                        + std::to_string(pa_pred_1D) + "," + std::to_string(pa_pred_2D) + "," + std::to_string(pa_pred_3D) + "\n";
+
+                    // Append infer result row to CSV log file.
+                    inferenceLogFile << inferenceLogFileRow;
+
+                    // Close file.
+                    inferenceLogFile.close();
+
+                    // Send row to client.
+                    send(connection, inferenceLogFileRow.c_str(), inferenceLogFileRow.size(), 0);
+                }
             }
             catch(const std::exception& e)
-            {
-                std::cerr << e.what() << '\n';
-            } 
-
-            catch (const std::exception& e)
             {
                 // TODO: Log error in log file.
                 std::string response = "ERROR\n";
                 send(connection, response.c_str(), response.size(), 0);
+
+                std::cerr << e.what() << '\n';
             }
         }
         else
         {
+            std::cout << "\nReceived invalid command: " << receivedCmd;
             std::string response = "INVALID\n";
             send(connection, response.c_str(), response.size(), 0);
         }

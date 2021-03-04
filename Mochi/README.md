@@ -54,18 +54,47 @@ The given training data is specific to the OrbitAI experiment. A generic solutio
 - Expected photodiode elevation angles values are PD6 for Camera and Optical RX FDIR model training and PD3 for Star Tracker model training.
 
 ### Test the ML Server
-### Individual Inputs
-1. Start the Online ML server: `./OrbitAI_Mochi `
+
+#### Training
+##### Single Sample
+1. Start the Online ML server: `./OrbitAI_Mochi`
 2. Connect to the ML server: `telnet localhost 9999`
 3. Train the models: `train 1 1.43`
 4. Save the models: `save`
-5. Load the models: `load`
-6. Close the conneciton and stop the server: `stop`
 
-#### Batch Inputs:
-1. Start the Online ML server: `./OrbitAI_Mochi `
-2. Send telnet commands to the server: `eval 'input="../sandbox/fdir/data/svm/train/camera_1d_small.svmdata"; while IFS= read -r line; do sleep 0.05; echo "train ${line/+/''}"; sleep 0.1; echo "save"; done < "$input"; echo "exit";' | telnet localhost 9999`
+##### Batch Samples
+1. Start the Online ML server: `./OrbitAI_Mochi`
+2. Send telnet commands to the server: `eval 'input="test_data/camera_tiny.txt"; while IFS= read -r line; do sleep 0.02; echo "train ${line/+/''}"; sleep 0.02; echo "save"; done < "$input";' | telnet localhost 9999`
 3. Monitor a model file being updated: `watch -n 0.1 cat models/arow_2D`
+
+### Inferring
+
+##### Single Sample
+1. Start the Online ML server: `./OrbitAI_Mochi`
+2. Connect to the ML server: `telnet localhost 9999`
+3. Load the saved models: `load`
+4. Predict the label: `infer 1 1.43`
+
+##### Batch Samples
+1. Start the Online ML server: `./OrbitAI_Mochi`
+2. Send telnet commands to the server: `eval 'echo "load"; sleep 1; input="test_data/camera_tiny.txt"; while IFS= read -r line; do sleep 0.02; echo "infer ${line/+/''}"; done < "$input";' | telnet localhost 9999`
+
+### Validation
+This validation procedure is to check that the models save and load as expected. First, trains and infers data without saving and loading the model:
+1. Start the Online ML server: `./OrbitAI_Mochi`
+2. Delete any previously saved models and log files followed by training and infering test data: `eval 'echo "reset"; sleep 1; input="test_data/camera_train_and_infer_small.txt"; while IFS= read -r line; do sleep 0.02; echo "${line/+/''}"; done < "$input";' | telnet localhost 9999`
+3. Rename the `logs/training.csv` file to `logs/training1.csv` so the logged trianing data is not lost the next time that the `reset` command is invoked.
+3. Rename the `logs/inference.csv` file to `logs/inference1.csv` so the logged inference results are not lost the next time that the `reset` command is invoked.
+
+Retrain the models from scratch but this time skip the inference and save the models:
+4. Start the Online ML server: `./OrbitAI_Mochi`
+5. Train and save the models: `eval 'echo "reset"; sleep 1; input="test_data/camera_small.txt"; while IFS= read -r line; do sleep 0.02; echo "train ${line/+/''}"; sleep 0.02; echo "save"; done < "$input";' | telnet localhost 9999`
+6. Diff `logs/training1.csv` and `logs/training.csv`. Both files should be exactly the same: `diff logs/training1.csv logs/training.csv`
+
+Load the saved models and infer given validation inputs. The inference results will be compared against those obtained in step 3:
+7. Start the Online ML server: `./OrbitAI_Mochi`
+8. Load saved models and infer: `eval 'echo "load"; sleep 1; input="test_data/camera_validation_small.txt"; while IFS= read -r line; do sleep 0.02; echo "infer ${line/+/''}"; done < "$input";' | telnet localhost 9999`
+9. Diff `logs/inference1.csv` and `logs/inference.csv`. Both files should be exactly the same: `diff logs/inference1.csv logs/inference.csv`
 
 
 ## MochiMochi
