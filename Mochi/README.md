@@ -48,15 +48,25 @@ The server accepts the following commands:
 - exit: stop the server and exit the program (does not save the trained models).
 
 ### Training
-The given training data is specific to the OrbitAI experiment. A generic solution is possible but in the scope of this experiment for the sake of rapid prototyping.
-- The `train` command takes 3 parameters: the label and two photodiode elevation angle values, e.g.: `train 1 1.43 0.45` or `train 0 0.43 0.1`.
+The given training data is specific to the OrbitAI experiment. A generic solution is possible but not in the scope of this experiment for the sake of rapid prototyping.
+- The `train` command takes 2 parameters: the label and a photodiode elevation angle value, e.g.: `train 1 1.43` or `train 0 0.43`.
 - Label values can either be 1 or 0 for binary classification. Label values of -1 are interpreted as 0.
-- Expected photodiode elevation angles values are PD3 and PD6.
+- Expected photodiode elevation angles values are PD6 for Camera and Optical RX FDIR model training and PD3 for Star Tracker model training.
 
-### Test Server
+### Test the ML Server
+### Individual Inputs
 1. Start the Online ML server: `./OrbitAI_Mochi `
-2. Send telnet commands to the server: `eval 'input="../sandbox/fdir/data/svm/train/camera_2d_Xpd3-Ypd6_none.svmdata"; while IFS= read -r line; do sleep 0.1; echo "train ${line/+/''}"; sleep 0.1; echo "save"; done < "$input"; echo "exit";' | telnet localhost 9999`
+2. Connect to the ML server: `telnet localhost 9999`
+3. Train the models: `train 1 1.43`
+4. Save the models: `save`
+5. Load the models: `load`
+6. Close the conneciton and stop the server: `stop`
+
+#### Batch Inputs:
+1. Start the Online ML server: `./OrbitAI_Mochi `
+2. Send telnet commands to the server: `eval 'input="../sandbox/fdir/data/svm/train/camera_1d_small.svmdata"; while IFS= read -r line; do sleep 0.05; echo "train ${line/+/''}"; sleep 0.1; echo "save"; done < "$input"; echo "exit";' | telnet localhost 9999`
 3. Monitor a model file being updated: `watch -n 0.1 cat models/arow_2D`
+
 
 ## MochiMochi
 Some example training datasets are taken from:
