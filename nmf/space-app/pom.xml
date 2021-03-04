@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-    Licensed under the European Space Agency Public License, Version 2.0
-    You may not use this file except in compliance with the License.
-
-    Except as expressly set forth in this License, the Software is provided to
-    You on an "as is" basis and without warranties of any kind, including without
-    limitation merchantability, fitness for a particular purpose, absence of
-    defects or errors, accuracy or non-infringement of intellectual property rights.
-
-    See the License for the specific language governing permissions and limitations under the License.
--->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>int.esa.nmf</groupId>
@@ -23,28 +14,12 @@
 
   <name>ESA NMF SDK App Example - OrbitAI</name>
   <description>On-board machine learning for OPS-SAT optical devices FDIR</description>
-  <url>http://www.esa.int</url>
-  <organization>
-    <name>ESA</name>
-    <url>http://www.esa.int</url>
-  </organization>
-  <licenses>
-    <license>
-      <name>The European Space Agency Public License, Version 2.0</name>
-      <url>https://raw.github.com/esa/nanosat-mo-framework/master/LICENCE.md</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
-  <scm>
-    <connection>scm:git:git@github.com:esa/nanosat-mo-framework.git</connection>
-    <developerConnection>scm:git:git@github.com:esa/nanosat-mo-framework.git</developerConnection>
-    <url>https://github.com/esa/nanosat-mo-framework</url>
-  </scm>
+
   <developers>
     <developer>
       <id>TanguySoto</id>
       <name>Tanguy Soto</name>
-      <url>https://github.com/TanguySoto</url>
+      <url>https://tanguyso.to</url>
     </developer>
     <developer>
       <id>GeorgesLabreche</id>
@@ -58,7 +33,7 @@
     </developer>
   </developers>
   <properties>
-    <assembly.mainClass>esa.mo.nmf.apps.BlankApp</assembly.mainClass>
+    <assembly.mainClass>esa.mo.nmf.apps.OrbitAIApp</assembly.mainClass>
     <maven.deploy.skip>true</maven.deploy.skip>
     <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
   </properties>
@@ -66,6 +41,15 @@
     <dependency>
       <groupId>int.esa.nmf.core</groupId>
       <artifactId>nanosat-mo-connector</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>int.esa.nmf.core</groupId>
+      <artifactId>space-mo-adapter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.8.0</version>
     </dependency>
   </dependencies>
   <build>
