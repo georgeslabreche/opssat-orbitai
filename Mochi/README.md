@@ -42,16 +42,19 @@ Running the program will start a server that accepts commands to train models us
 
 ### Commands
 The server accepts the following commands:
+- reset: delete all model and log files.
 - train: train the models with the given inputs.
+- infer: predict label with given input.
 - save: save the models.
 - load: load the previously saved models in order to update them with new training data.
 - exit: stop the server and exit the program (does not save the trained models).
 
 ### Training
 The given training data is specific to the OrbitAI experiment. A generic solution is possible but not in the scope of this experiment for the sake of rapid prototyping.
-- The `train` command takes 2 parameters: the label and a photodiode elevation angle value, e.g.: `train 1 1.43` or `train 0 0.43`.
+- The `train` command takes 3 parameters: the expected label, a photodiode elevation angle value, the photodiode acquisition timestamp (milliseconds) e.g.: `train 1 1.43 1615255005626` or `train 0 0.43 1615255005626`.
 - Label values can either be 1 or 0 for binary classification. Label values of -1 are interpreted as 0.
 - Expected photodiode elevation angles values are PD6 for Camera and Optical RX FDIR model training and PD3 for Star Tracker model training.
+= The photodiode acquisition timestamp is only passed for logging purposes, it is not used for training.
 
 ### Test the ML Server
 
@@ -59,7 +62,7 @@ The given training data is specific to the OrbitAI experiment. A generic solutio
 ##### Single Sample
 1. Start the Online ML server: `./OrbitAI_Mochi`
 2. Connect to the ML server: `telnet localhost 9999`
-3. Train the models: `train 1 1.43`
+3. Train the models: `train 1 1.43 1615255005626`
 4. Save the models: `save`
 
 ##### Batch Samples
@@ -73,7 +76,7 @@ The given training data is specific to the OrbitAI experiment. A generic solutio
 1. Start the Online ML server: `./OrbitAI_Mochi`
 2. Connect to the ML server: `telnet localhost 9999`
 3. Load the saved models: `load`
-4. Predict the label: `infer 1 1.43`
+4. Predict the label: `infer 1 1.43 1615255005626`
 
 ##### Batch Samples
 1. Start the Online ML server: `./OrbitAI_Mochi`
