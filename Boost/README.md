@@ -16,16 +16,18 @@ Alternatively, for step 3, download [libconfig v1.7.2](http://hyperrealm.github.
 ### Spacecraft
 #### libconfig++
 The libconfig++ library needs to be packaged for and deployed to the spacecraft:
-1. Download the ARM compiled libconfig dependency, [here](https://packages.debian.org/sid/armhf/libconfig++9v5/download).
-2. Make sure that .so, and .so.X.XX.X files are where the compiler expects them, e.g. in `/usr/lib/arm-linux-gnueabihf/`.
-3. Note that the .so files are simply symlink to the .so.X.XX.X file.
-4. These files will have to be created on the SEPP via IPK installation.
+1. Check if the libray isn't already installed in `/usr/lib`. If it is already there than skip this package deployment.
+2. Download the ARM compiled libconfig dependency, [here](https://packages.debian.org/sid/armhf/libconfig++9v5/download).
+3. Make sure that .so, and .so.X.XX.X files are where the compiler expects them, e.g. in `/usr/lib/arm-linux-gnueabihf/`.
+4. Note that the .so files are simply symlink to the .so.X.XX.X file.
+5. These files will have to be created on the SEPP via IPK installation.
 
 #### Boost C++ Library
 The Boost C++ library needs to be packaged for and deployed to the spacecraft:
-1. Cherry-pick download the ARM compiled libboost dependencies, [here](https://packages.debian.org/source/stretch/armhf/boost1.62).
-2. Make sure that the .so and .so.X.XX.X files are where the compiler expects them, e.g. in `/usr/lib/arm-linux-gnueabihf/`.
-3. Note that the .so files are simply symlink to the .so.X.XX.X file.
+1. Check if the libray isn't already installed in `/usr/lib`. If it is already there than skip this package deployment.
+2. Cherry-pick download the ARM compiled libboost dependencies, [here](https://packages.debian.org/source/stretch/armhf/boost1.62).
+3. Make sure that the .so and .so.X.XX.X files are where the compiler expects them, e.g. in `/usr/lib/arm-linux-gnueabihf/`.
+4. Note that the .so files are simply symlink to the .so.X.XX.X file.
 
 ## Getting Started
 - Use `make` to compile for either the local development environment or the spacecraft. 
