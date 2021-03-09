@@ -23,13 +23,7 @@
 #define SAVE_AFTER_UPDATE                    1
 #define LOG_TIMES                            1
 
-/**
- * Questions:
- *  1. Do we just automatically do load by checking if files exist in the models folder? N/A
- *  2. Do we just automatically save the file after each train? OUI
- *  3. Do we need the timestamp for the logs? OUI
- *  4. Measure training and inference execution time? OUI
- */ 
+
 int main() 
 {
 
