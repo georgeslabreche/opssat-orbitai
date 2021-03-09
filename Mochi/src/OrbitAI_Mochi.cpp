@@ -248,8 +248,6 @@ int main()
         }
         else if(receivedCmd.compare(0, exitCmdLen, exitCmd) == 0) // Exit server loop.
         {
-            std::cout << "\nReceived: " << exitCmd;
-
             std::string response = "BYE\n";
             send(connection, response.c_str(), response.size(), 0);
             break;
