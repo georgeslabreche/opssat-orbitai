@@ -7,6 +7,8 @@
 #include <sys/types.h> // For mkdkir
 #include <sys/stat.h> // For mkdkir
 
+#include <chrono> // For execution time calculations
+
 #include <string>
 #include <sstream>
 #include <algorithm>
@@ -18,12 +20,15 @@
 
 
 #define COMMAND_BUFFER_LENGTH              100
+#define SAVE_AFTER_UPDATE                    1
+#define LOG_TIMES                            1
 
 /**
  * Questions:
- *  1. Do we just automatically do load by checking if files exist in the models folder?
- *  2. Do we just automatically save the file after each train?
- *  3. Do we need the timestamp for the logs?
+ *  1. Do we just automatically do load by checking if files exist in the models folder? N/A
+ *  2. Do we just automatically save the file after each train? OUI
+ *  3. Do we need the timestamp for the logs? OUI
+ *  4. Measure training and inference execution time? OUI
  */ 
 int main() 
 {
@@ -131,6 +136,10 @@ int main()
         std::cout << "Failed to grab connection. errno: " << errno << std::endl;
         exit(EXIT_FAILURE);
     }
+
+    // Start and end time points to measure operation execution times.
+    std::chrono::high_resolution_clock::time_point start;
+    std::chrono::high_resolution_clock::time_point end;
 
     // Read from the connection
     while(1)
@@ -255,11 +264,11 @@ int main()
         {
             /**
              * Expected command string format:
-             *      train <label:int> <pd:float>
+             *      train <label:int> <pd:float> <timestamp:long>
              * 
              * e.g.: 
-             *  train 1 1.23
-             *  train 0 0.32
+             *  train 1 1.23 1615253200322
+             *  train 0 0.32 1615253200322
              **/
             try
             {
@@ -273,8 +282,9 @@ int main()
                 };
 
                 // Parse input string label int and PD float.
-                int label = std::stof(cmdTokens[1]);
+                int label = std::stoi(cmdTokens[1]);
                 float pd = std::stof(cmdTokens[2]);
+                long timestamp = std::stol(cmdTokens[3]);
 
                 // Training input error.
                 if(!(label == 0 || label == -1 || label == 1))
@@ -327,32 +337,136 @@ int main()
                     //adam_2D.update(data_2D.second, data_2D.first);
                     //adam_3D.update(data_3D.second, data_3D.first);
 
-                    // AROW
+                    /** 
+                     * AROW
+                     */
+                    // 1D feature space. Record execution time in milliseconds.
+                    start = std::chrono::high_resolution_clock::now();
                     arow_1D.update(data_1D.second, data_1D.first);
+                    end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> updateTime_arow_1D = end - start;
+
+                    // 2D feature space. Record execution time in milliseconds.
+                    start = std::chrono::high_resolution_clock::now();
                     arow_2D.update(data_2D.second, data_2D.first);
+                    end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> updateTime_arow_2D = end - start;
+
+                    // 3D feature space. Record execution time in milliseconds.
+                    start = std::chrono::high_resolution_clock::now();
                     arow_3D.update(data_3D.second, data_3D.first);
+                    end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> updateTime_arow_3D = end - start;
+
+                    /**
+                     * SCW
+                     */
+
+                    // 1D feature space. Record execution time in milliseconds.
+                    start = std::chrono::high_resolution_clock::now();
+                    scw_1D.update(data_1D.second, data_1D.first);
+                    end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> updateTime_scw_1D = end - start;
+
+                    // 2D feature space. Record execution time in milliseconds.
+                    start = std::chrono::high_resolution_clock::now();
+                    scw_2D.update(data_2D.second, data_2D.first);
+                    end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> updateTime_scw_2D = end - start;
+
+                    // 3D feature space. Record execution time in milliseconds.
+                    start = std::chrono::high_resolution_clock::now();
+                    scw_3D.update(data_3D.second, data_3D.first);
+                    end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> updateTime_scw_3D = end - start;
+
+                    /**
+                     * NHERD
+                     */
+
+                    // 1D feature space. Record execution time in milliseconds.
+                    start = std::chrono::high_resolution_clock::now();
+                    nherd_1D.update(data_1D.second, data_1D.first);
+                    end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> updateTime_nherd_1D = end - start;
+
+                    // 2D feature space. Record execution time in milliseconds.
+                    start = std::chrono::high_resolution_clock::now();
+                    nherd_2D.update(data_2D.second, data_2D.first);
+                    end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> updateTime_nherd_2D = end - start;
+
+                    // 3D feature space. Record execution time in milliseconds.
+                    start = std::chrono::high_resolution_clock::now();
+                    nherd_3D.update(data_3D.second, data_3D.first);
+                    end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> updateTime_nherd_3D = end - start;
+
+                    /**
+                     * PA
+                     */
+
+                    // 1D feature space. Record execution time in milliseconds.
+                    start = std::chrono::high_resolution_clock::now();
+                    pa_1D.update(data_1D.second, data_1D.first);
+                    end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> updateTime_pa_1D = end - start;
+
+                    // 2D feature space. Record execution time in milliseconds.
+                    start = std::chrono::high_resolution_clock::now();
+                    pa_2D.update(data_2D.second, data_2D.first);
+                    end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> updateTime_pa_2D = end - start;
+
+                    // 3D feature space. Record execution time in milliseconds.
+                    start = std::chrono::high_resolution_clock::now();
+                    pa_3D.update(data_3D.second, data_3D.first);
+                    end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> updateTime_pa_3D = end - start;
+
+
+#if SAVE_AFTER_UPDATE
+                    // Save the models if set to do so.
+
+                    // AROW
+                    arow_1D.save("models/arow_1D");
+                    arow_2D.save("models/arow_2D");
+                    arow_3D.save("models/arow_3D");
 
                     // SCW
-                    scw_1D.update(data_1D.second, data_1D.first);
-                    scw_2D.update(data_2D.second, data_2D.first);
-                    scw_3D.update(data_3D.second, data_3D.first);
+                    scw_1D.save("models/scw_1D");
+                    scw_2D.save("models/scw_2D");
+                    scw_3D.save("models/scw_3D");
 
                     // NHERD
-                    nherd_1D.update(data_1D.second, data_1D.first);
-                    nherd_2D.update(data_2D.second, data_2D.first);
-                    nherd_3D.update(data_3D.second, data_3D.first);
+                    nherd_1D.save("models/nherd_1D");
+                    nherd_2D.save("models/nherd_2D");
+                    nherd_3D.save("models/nherd_3D");
 
                     // PA
-                    pa_1D.update(data_1D.second, data_1D.first);
-                    pa_2D.update(data_2D.second, data_2D.first);
-                    pa_3D.update(data_3D.second, data_3D.first);
+                    pa_1D.save("models/pa_1D");
+                    pa_2D.save("models/pa_2D");
+                    pa_3D.save("models/pa_3D");
+#endif
 
                     // Opening the training log file.
                     std::ofstream trainingLogFile;
                     trainingLogFile.open("logs/training.csv", std::ios_base::out | std::ios_base::app);
 
                     // Creating the training row string to append to the log file.
-                    std::string trainingLogFileRow = std::to_string(pd) + "," + std::to_string(label) + "\n";
+                    std::string trainingLogFileRow = 
+#if LOG_TIMES
+                        std::to_string(timestamp) + "," + 
+#endif 
+                        std::to_string(pd) + "," + std::to_string(label) 
+#if LOG_TIMES
+                        + ","
+                        + std::to_string(updateTime_arow_1D.count()) + "," + std::to_string(updateTime_arow_2D.count()) + "," + std::to_string(updateTime_arow_3D.count()) + ","
+                        + std::to_string(updateTime_scw_1D.count()) + "," + std::to_string(updateTime_scw_2D.count()) + "," + std::to_string(updateTime_scw_3D.count()) + ","
+                        + std::to_string(updateTime_nherd_1D.count()) + "," + std::to_string(updateTime_nherd_2D.count()) + "," + std::to_string(updateTime_nherd_3D.count()) + ","
+                        + std::to_string(updateTime_pa_1D.count()) + "," + std::to_string(updateTime_pa_2D.count()) + "," + std::to_string(updateTime_pa_3D.count())
+#endif                         
+                        + "\n";
 
                     // Append the training row data into the log file.
                     trainingLogFile << trainingLogFileRow;
@@ -375,11 +489,11 @@ int main()
         {
             /**
              * Expected command string format:
-             *      infer <expected_label:int> <pd:float>
+             *      infer <expected_label:int> <pd:float> <timestamp:long>
              * 
              * e.g.: 
-             *  infer +1 1.23
-             *  infer -1 0.32
+             *  infer +1 1.23 1615253200322
+             *  infer -1 0.32 1615253200322
              **/
 
             try
@@ -393,8 +507,9 @@ int main()
                 };
 
                 // Parse input string for expected label int and PD float.
-                int label = std::stof(cmdTokens[1]);
+                int label = std::stoi(cmdTokens[1]);
                 float pd = std::stof(cmdTokens[2]);
+                long timestamp = std::stol(cmdTokens[3]);
 
                 // inference input error.
                 if(!(label == 0 || label == -1 || label == 1))
@@ -441,32 +556,100 @@ int main()
                     auto data_2D = utility::read_ones<int>(line_2D, 2);
                     auto data_3D = utility::read_ones<int>(line_3D, 3);
 
+                    /**
+                     * AROW.
+                     */
+                    start = std::chrono::high_resolution_clock::now();
                     int arow_pred_1D = arow_1D.predict(data_1D.second);
+                    end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> predictTime_arow_1D = end - start;
+
+                    start = std::chrono::high_resolution_clock::now();
                     int arow_pred_2D = arow_2D.predict(data_2D.second);
+                    end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> predictTime_arow_2D = end - start;
+
+                    start = std::chrono::high_resolution_clock::now();
                     int arow_pred_3D = arow_3D.predict(data_3D.second);
+                    end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> predictTime_arow_3D = end - start;
 
+                    /**
+                     * SCW.
+                     */
+                    start = std::chrono::high_resolution_clock::now();
                     int scw_pred_1D = scw_1D.predict(data_1D.second);
+                    end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> predictTime_scw_1D = end - start;
+
+                    start = std::chrono::high_resolution_clock::now();
                     int scw_pred_2D = scw_2D.predict(data_2D.second);
+                    end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> predictTime_scw_2D = end - start;
+
+                    start = std::chrono::high_resolution_clock::now();
                     int scw_pred_3D = scw_3D.predict(data_3D.second);
+                    end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> predictTime_scw_3D = end - start;
 
+                    /**
+                     * NHERD.
+                     */
+                    start = std::chrono::high_resolution_clock::now();
                     int nherd_pred_1D = nherd_1D.predict(data_1D.second);
-                    int nherd_pred_2D = nherd_2D.predict(data_2D.second);
-                    int nherd_pred_3D = nherd_3D.predict(data_3D.second);
+                    end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> predictTime_nherd_1D = end - start;
 
+                    start = std::chrono::high_resolution_clock::now();
+                    int nherd_pred_2D = nherd_2D.predict(data_2D.second);
+                    end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> predictTime_nherd_2D = end - start;
+
+                    start = std::chrono::high_resolution_clock::now();
+                    int nherd_pred_3D = nherd_3D.predict(data_3D.second);
+                    end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> predictTime_nherd_3D = end - start;
+
+                    /**
+                     * PA.
+                     */
+                    start = std::chrono::high_resolution_clock::now();
                     int pa_pred_1D = pa_1D.predict(data_1D.second);
+                    end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> predictTime_pa_1D = end - start;
+
+                    start = std::chrono::high_resolution_clock::now();
                     int pa_pred_2D = pa_2D.predict(data_2D.second);
+                    end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> predictTime_pa_2D = end - start;
+
+                    start = std::chrono::high_resolution_clock::now();
                     int pa_pred_3D = pa_3D.predict(data_3D.second);
+                    end = std::chrono::high_resolution_clock::now(); 
+                    std::chrono::duration<double, std::milli> predictTime_pa_3D = end - start;
 
                     // The inference log file.
                     std::ofstream inferenceLogFile;
                     inferenceLogFile.open("logs/inference.csv", std::ios_base::out | std::ios_base::app);
 
                     // Creating the inference results row string to append to the log file.
-                    std::string inferenceLogFileRow = std::to_string(pd) + "," + std::to_string(label) + ","
+                    std::string inferenceLogFileRow =
+#if LOG_TIMES
+                        std::to_string(timestamp) + "," + 
+#endif                     
+                        std::to_string(pd) + "," + std::to_string(label) + ","
                         + std::to_string(arow_pred_1D) + "," + std::to_string(arow_pred_2D) + "," + std::to_string(arow_pred_3D) + ","
                         + std::to_string(scw_pred_1D) + "," + std::to_string(scw_pred_2D) + "," + std::to_string(scw_pred_3D) + ","
                         + std::to_string(nherd_pred_1D) + "," + std::to_string(nherd_pred_2D) + "," + std::to_string(nherd_pred_3D) + ","
-                        + std::to_string(pa_pred_1D) + "," + std::to_string(pa_pred_2D) + "," + std::to_string(pa_pred_3D) + "\n";
+                        + std::to_string(pa_pred_1D) + "," + std::to_string(pa_pred_2D) + "," + std::to_string(pa_pred_3D)
+#if LOG_TIMES
+                        + ","
+                        + std::to_string(predictTime_arow_1D.count()) + "," + std::to_string(predictTime_arow_2D.count()) + "," + std::to_string(predictTime_arow_3D.count()) + ","
+                        + std::to_string(predictTime_scw_1D.count()) + "," + std::to_string(predictTime_scw_2D.count()) + "," + std::to_string(predictTime_scw_3D.count()) + ","
+                        + std::to_string(predictTime_nherd_1D.count()) + "," + std::to_string(predictTime_nherd_2D.count()) + "," + std::to_string(predictTime_nherd_3D.count()) + ","
+                        + std::to_string(predictTime_pa_1D.count()) + "," + std::to_string(predictTime_pa_2D.count()) + "," + std::to_string(predictTime_pa_3D.count())
+#endif
+                        + "\n";
 
                     // Append infer result row to CSV log file.
                     inferenceLogFile << inferenceLogFileRow;
