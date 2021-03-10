@@ -1,6 +1,6 @@
 #include <sys/socket.h> // For socket functions
 #include <netinet/in.h> // For sockaddr_in
-#include <cstdlib> // For exit() and EXIT_FAILURE
+#include <cstdlib> // For exit()
 #include <iostream> // For cout
 #include <unistd.h> // For read
 
@@ -711,16 +711,19 @@ int main(int argc, char *argv[])
                         std::ofstream inferenceLogFile;
                         inferenceLogFile.open(LOG_FILEPATH_INFERENCE, std::ios_base::out | std::ios_base::app);
 
+                        // Concatenate the prediction results.
+                        std::string predictions = std::to_string(arow_pred_1D) + "," + std::to_string(arow_pred_2D) + "," + std::to_string(arow_pred_3D) + ","
+                            + std::to_string(scw_pred_1D) + "," + std::to_string(scw_pred_2D) + "," + std::to_string(scw_pred_3D) + ","
+                            + std::to_string(nherd_pred_1D) + "," + std::to_string(nherd_pred_2D) + "," + std::to_string(nherd_pred_3D) + ","
+                            + std::to_string(pa_pred_1D) + "," + std::to_string(pa_pred_2D) + "," + std::to_string(pa_pred_3D);
+
                         // Creating the inference results row string to append to the log file.
                         std::string inferenceLogFileRow =
     #if LOG_TIMES
                             std::to_string(timestamp) + "," + 
     #endif                     
                             std::to_string(pd) + "," + std::to_string(label) + ","
-                            + std::to_string(arow_pred_1D) + "," + std::to_string(arow_pred_2D) + "," + std::to_string(arow_pred_3D) + ","
-                            + std::to_string(scw_pred_1D) + "," + std::to_string(scw_pred_2D) + "," + std::to_string(scw_pred_3D) + ","
-                            + std::to_string(nherd_pred_1D) + "," + std::to_string(nherd_pred_2D) + "," + std::to_string(nherd_pred_3D) + ","
-                            + std::to_string(pa_pred_1D) + "," + std::to_string(pa_pred_2D) + "," + std::to_string(pa_pred_3D)
+                            + predictions
     #if LOG_TIMES
                             + ","
                             + std::to_string(predictTime_arow_1D.count()) + "," + std::to_string(predictTime_arow_2D.count()) + "," + std::to_string(predictTime_arow_3D.count()) + ","
@@ -737,7 +740,7 @@ int main(int argc, char *argv[])
                         inferenceLogFile.close();
 
                         // Send row to client.
-                        send(connection, inferenceLogFileRow.c_str(), inferenceLogFileRow.size(), 0);
+                        send(connection, (predictions + "\n").c_str(), (predictions + "\n").size(), 0);
                     }
                 }
                 catch(const std::exception& e)
