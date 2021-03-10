@@ -13,6 +13,7 @@
 #include <sstream>
 #include <algorithm>
 #include <iterator>
+#include <ctime>
 
 // For machine learning.
 #include <mochimochi/binary_classifier.hpp>
@@ -28,8 +29,32 @@
 #define LOG_FILEPATH_ERROR              "logs/error.log"
 
 // In case no port number is given.
-#define DEFAULT_PORT_NUMBER                         9999 
+#define DEFAULT_PORT_NUMBER                         9999
 
+// Error codes.
+#define ERROR_SUCCESS                                  0
+#define ERROR_UNKNOWN                                  1
+#define ERROR_PARSE_ARGS                               2
+#define ERROR_INVALID_PORT_NUM                         3
+#define ERROR_CREATE_SOCKET                            4
+#define ERROR_BIND_PORT                                5
+#define ERROR_LISTEN_SOCKET                            6
+#define ERROR_GRAB_CONNECTION                          7
+
+/**
+ * Get a precise timestamp as a string.
+ */
+std::string getTimestamp();
+
+/**
+ * Logging errors into the error log file.
+ */
+void logError(std::string message);
+
+
+/**
+ * The main application loop.
+ */
 int main(int argc, char *argv[]) 
 {
     // Main try/catch loop.
@@ -38,11 +63,34 @@ int main(int argc, char *argv[])
         // Assign port number to default number.
         int portNumber = DEFAULT_PORT_NUMBER;
 
-        // Change port number to value given as command argument.
-        if(argc == 2)
+        // Parse arguments.
+        try
         {
-            portNumber = std::stoi(argv[1]);
+            // Change port number to value given as command argument.
+            if(argc == 2)
+            {
+                portNumber = std::stoi(argv[1]);
+
+                if(portNumber <= 0)
+                {
+                    // Log error.
+                    logError("Invalid port number: " + std::to_string(portNumber));
+
+                    // Exit program with error code.
+                    exit(ERROR_INVALID_PORT_NUM);
+                }
+            }
         }
+        catch(const std::exception& e)
+        {
+            // Log error.
+            std::ostringstream oss;
+            oss << "Error parsing arguments: " << e.what();
+            logError(oss.str());
+            
+            // Exit program with error code.
+            exit(ERROR_PARSE_ARGS);
+        } 
 
         // Create models and logs directory if they do not exist.
         mkdir("models", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
@@ -116,8 +164,11 @@ int main(int argc, char *argv[])
         int sockfd = socket(AF_INET, SOCK_STREAM, 0);
         if (sockfd == -1)
         {
-            std::cout << "Failed to create socket. errno: " << errno << std::endl;
-            exit(EXIT_FAILURE);
+            // Log error.
+            logError("Failed to create socket. errno: " + std::to_string(errno));
+
+            // Exit with error code.
+            exit(ERROR_CREATE_SOCKET);
         }
 
         // Listen to port on any address
@@ -131,15 +182,21 @@ int main(int argc, char *argv[])
         // Bind to the given port.
         if (bind(sockfd, (struct sockaddr*)&sockaddr, sizeof(sockaddr)) < 0)
         {
-            std::cout << "Failed to bind to port " << portNumber << ". errno: " << errno << std::endl;
-            exit(EXIT_FAILURE);
+            // Log error.
+            logError("Failed to bind to port " + std::to_string(portNumber) + ". errno: " + std::to_string(errno));
+
+            // Exit with error code.
+            exit(ERROR_BIND_PORT);
         }
 
         // Start listening. Hold at most 1 connection in the queue
         if (listen(sockfd, 1) < 0)
         {
-            std::cout << "Failed to listen on socket. errno: " << errno << std::endl;
-            exit(EXIT_FAILURE);
+            // Log error.
+            logError("Failed to listen on socket. errno: " + std::to_string(errno));
+
+            // Exit with error code.
+            exit(ERROR_LISTEN_SOCKET);
         }
 
         // Grab a connection from the queue
@@ -147,8 +204,11 @@ int main(int argc, char *argv[])
         int connection = accept(sockfd, (struct sockaddr*)&sockaddr, (socklen_t*)&addrlen);
         if (connection < 0)
         {
-            std::cout << "Failed to grab connection. errno: " << errno << std::endl;
-            exit(EXIT_FAILURE);
+            // Log error.
+            logError("Failed to grab connection. errno: " + std::to_string(errno));
+
+            // Exit with error code.
+            exit(ERROR_GRAB_CONNECTION);
         }
 
         // Start and end time points to measure operation execution times.
@@ -194,9 +254,10 @@ int main(int argc, char *argv[])
                 remove("models/pa_2D");
                 remove("models/pa_3D");
 
-                // Logs
+                // Delete log files.
                 remove(LOG_FILEPATH_TRAINING);
                 remove(LOG_FILEPATH_INFERENCE);
+                remove(LOG_FILEPATH_ERROR);
 
                 std::string response = "OK\n";
                 send(connection, response.c_str(), response.size(), 0);
@@ -266,10 +327,12 @@ int main(int argc, char *argv[])
                 std::string response = "OK\n";
                 send(connection, response.c_str(), response.size(), 0);
             }
-            else if(receivedCmd.compare(0, exitCmdLen, exitCmd) == 0) // Exit server loop.
+            else if(receivedCmd.compare(0, exitCmdLen, exitCmd) == 0)
             {
                 std::string response = "BYE\n";
                 send(connection, response.c_str(), response.size(), 0);
+
+                // Exit server loop.
                 break;
             }
             else if(receivedCmd.compare(0, trainCmdLen, trainCmd) == 0)
@@ -436,7 +499,6 @@ int main(int argc, char *argv[])
                         end = std::chrono::high_resolution_clock::now();
                         std::chrono::duration<double, std::milli> updateTime_pa_3D = end - start;
 
-
     #if SAVE_AFTER_UPDATE
                         // Save the models if set to do so.
 
@@ -460,7 +522,6 @@ int main(int argc, char *argv[])
                         pa_2D.save("models/pa_2D");
                         pa_3D.save("models/pa_3D");
     #endif
-
                         // Opening the training log file.
                         std::ofstream trainingLogFile;
                         trainingLogFile.open(LOG_FILEPATH_TRAINING, std::ios_base::out | std::ios_base::app);
@@ -492,7 +553,12 @@ int main(int argc, char *argv[])
                 }
                 catch (const std::exception& e)
                 {
-                    // TODO: Log error in log file.
+                    // Log error.
+                    std::ostringstream oss;
+                    oss << "Unhandled training error: " << e.what();
+                    logError(oss.str());
+
+                    // Error response
                     std::string response = "ERROR\n";
                     send(connection, response.c_str(), response.size(), 0);
                 }
@@ -513,7 +579,8 @@ int main(int argc, char *argv[])
                     std::string cmdString(buffer, COMMAND_BUFFER_LENGTH);
                     std::istringstream cmdStringStream(cmdString);
 
-                    std::vector<std::string> cmdTokens{
+                    std::vector<std::string> cmdTokens
+                    {
                         std::istream_iterator<std::string>{cmdStringStream}, 
                         std::istream_iterator<std::string>{}
                     };
@@ -675,16 +742,21 @@ int main(int argc, char *argv[])
                 }
                 catch(const std::exception& e)
                 {
-                    // TODO: Log error in log file.
+                    // Log error.
+                    std::ostringstream oss;
+                    oss << "Unhandled inference error: " << e.what();
+                    logError(oss.str());
+
+                    // Send response.
                     std::string response = "ERROR\n";
                     send(connection, response.c_str(), response.size(), 0);
-
-                    std::cerr << e.what() << '\n';
                 }
             }
             else
             {
-                std::cout << "\nReceived invalid command: " << receivedCmd;
+                // Log error.
+                logError("Received invalid command: " + receivedCmd);
+
                 std::string response = "INVALID\n";
                 send(connection, response.c_str(), response.size(), 0);
             }
@@ -701,9 +773,58 @@ int main(int argc, char *argv[])
         {
             close(sockfd);
         }
+
+        exit(ERROR_SUCCESS);
     }
     catch(const std::exception& e)
     {
-        std::cout << e.what() << '\n';
+        // Log error.
+        std::ostringstream oss;
+        oss << "Error parsing arguments: " << e.what();
+        logError(oss.str());
+        
+        // Exit program with error code.
+        exit(ERROR_UNKNOWN);
     }
+}
+
+
+/**
+ * Get a precise timestamp as a string.
+ * Taken from: https://gist.github.com/bschlinker/844a88c09dcf7a61f6a8df1e52af7730
+ */
+std::string getTimestamp() 
+{
+  // 
+  const auto now = std::chrono::system_clock::now();
+  const auto nowAsTimeT = std::chrono::system_clock::to_time_t(now);
+  const auto nowMs = std::chrono::duration_cast<std::chrono::milliseconds>(
+      now.time_since_epoch()) % 1000;
+
+  std::stringstream nowSs;
+  nowSs
+      << std::put_time(std::localtime(&nowAsTimeT), "%Y-%m-%d %T")
+      << '.' << std::setfill('0') << std::setw(3) << nowMs.count();
+
+  return nowSs.str();
+}
+
+
+/**
+ * Logging errors into the error log file.
+ */
+void logError(std::string message)
+{
+    // Print out error message.
+    std::cout << message << std::endl;
+    
+    // Open the error log file.
+    std::ofstream errorLogFile;
+    errorLogFile.open(LOG_FILEPATH_ERROR, std::ios_base::out | std::ios_base::app);
+
+    // Append the log message into the error log file.
+    errorLogFile << "[" << getTimestamp() << "] " << message << "\n";
+
+    // Close the log file.
+    errorLogFile.close();
 }
