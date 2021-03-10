@@ -19,10 +19,13 @@
 #include <mochimochi/utility.hpp>
 
 
-#define COMMAND_BUFFER_LENGTH              100
-#define SAVE_AFTER_UPDATE                    1
-#define LOG_TIMES                            1
+#define COMMAND_BUFFER_LENGTH                        100
+#define SAVE_AFTER_UPDATE                              1
+#define LOG_TIMES                                      1
 
+#define LOG_FILEPATH_TRAINING        "logs/training.csv"
+#define LOG_FILEPATH_INFERENCE      "logs/inference.csv"
+#define LOG_FILEPATH_ERROR              "logs/error.log"
 
 int main() 
 {
@@ -175,8 +178,8 @@ int main()
             remove("models/pa_3D");
 
             // Logs
-            remove("logs/training.csv");
-            remove("logs/inference.csv");
+            remove(LOG_FILEPATH_TRAINING);
+            remove(LOG_FILEPATH_INFERENCE);
 
             std::string response = "OK\n";
             send(connection, response.c_str(), response.size(), 0);
@@ -443,7 +446,7 @@ int main()
 
                     // Opening the training log file.
                     std::ofstream trainingLogFile;
-                    trainingLogFile.open("logs/training.csv", std::ios_base::out | std::ios_base::app);
+                    trainingLogFile.open(LOG_FILEPATH_TRAINING, std::ios_base::out | std::ios_base::app);
 
                     // Creating the training row string to append to the log file.
                     std::string trainingLogFileRow = 
@@ -622,7 +625,7 @@ int main()
 
                     // The inference log file.
                     std::ofstream inferenceLogFile;
-                    inferenceLogFile.open("logs/inference.csv", std::ios_base::out | std::ios_base::app);
+                    inferenceLogFile.open(LOG_FILEPATH_INFERENCE, std::ios_base::out | std::ios_base::app);
 
                     // Creating the inference results row string to append to the log file.
                     std::string inferenceLogFileRow =
