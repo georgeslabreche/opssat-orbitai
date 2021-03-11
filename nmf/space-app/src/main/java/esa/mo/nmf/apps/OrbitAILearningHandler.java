@@ -15,18 +15,19 @@ import org.apache.commons.io.FileUtils;
 import org.ccsds.moims.mo.mal.structures.UInteger;
 
 /**
- * Handles tasks related to models training: start/stop the training, save the models.
+ * Handles tasks related to the machine learning: start/stop the learning, save the models, execute
+ * the inference.
  *
  * @author Tanguy Soto
  */
-public class OrbitAITrainingHandler {
+public class OrbitAILearningHandler {
 
-  private static final Logger LOGGER = Logger.getLogger(OrbitAITrainingHandler.class.getName());
+  private static final Logger LOGGER = Logger.getLogger(OrbitAILearningHandler.class.getName());
 
   /**
    * Relative path to the directory that will contain trained models inside the toGround/ folder.
    */
-  private static final String EXPORT_MODELS_DIR = "trained_models";
+  private static final String EXPORT_LEARNING_DIR = "learning";
 
   /**
    * M&C interface of the application.
@@ -34,33 +35,44 @@ public class OrbitAITrainingHandler {
   private final OrbitAIMCAdapter adapter;
 
   /**
-   * The training thread.
+   * The learning thread.
    */
-  private Thread trainingThread;
+  private Thread learningThread;
 
   /**
-   * The training runnable, running in trainingThread.
+   * The learning runnable, running in learningThread.
    */
-  private TrainingRunnable trainingRunnable;
+  private LearningRunnable learningRunnable;
+
+  /**
+   * TODO Experiment mode.
+   */
+  private String mode = "train";
+
+  /**
+   * Time interval between 2 learning iterations in seconds
+   */
+  private int learningInterval = 5;
+
+  /**
+   * TODO Number of iterations the experiment should last
+   */
+  private int learningIterations = 1000;
 
 
   // ----- MOCHI MOCHI ----- //
 
   private static final String MOCHI_DIR = "/home/tanguy/Documents/code/opssat/opssat-orbitai/Mochi";
   private static final String MOCHI_MODELS_DIR = "models";
+  private static final String MOCHI_LOGS_DIR = "logs";
+
   private static final String MOCHI_CMD = "./OrbitAI_Mochi";
 
   private static final String MOCHI_ADDRESS = "127.0.0.1";
-  private static final int MOCHI_PORT = 9999;
-
-  private static final int MOCHI_TRAIN_INTERVAL = 5; // s
-  private static final int MOCHI_SAVE_INTERVAL = 10; // s
+  private int mochiPort = 9999;
 
   private Process mochiProcess;
   private Socket mochiClient;
-
-  private long lastMochiTrainTime;
-  private long lastMochiSaveTime;
 
 
   // ----- OMC Boost ----- //
@@ -68,25 +80,69 @@ public class OrbitAITrainingHandler {
   // TODO OMC Boost integration
 
 
-  public OrbitAITrainingHandler(OrbitAIMCAdapter adapter) {
+  public OrbitAILearningHandler(OrbitAIMCAdapter adapter) {
     this.adapter = adapter;
-    trainingThread = null;
+    learningThread = null;
+
+    getProperties();
   }
 
   /**
-   * Starts the training.
+   * Get required configuration properties from the application configuration.
+   */
+  private void getProperties() {
+    // Mochi server port
+    String mochiPortS = OrbitAIConf.getinstance().getProperty(OrbitAIConf.MOCHI_PORT);
+    if (mochiPortS == null) {
+      LOGGER.log(Level.WARNING, String
+          .format("Couldn't get Mochi server port from configuration, %d will be used", mochiPort));
+    } else {
+      mochiPort = Integer.parseInt(mochiPortS);
+    }
+
+    // learning interval
+    String learningIntervalS = OrbitAIConf.getinstance().getProperty(OrbitAIConf.INTERVAL);
+    if (learningIntervalS == null) {
+      LOGGER.log(Level.WARNING, String.format(
+          "Couldn't get learning interval from configuration, %d will be used", learningInterval));
+    } else {
+      learningInterval = Integer.parseInt(learningIntervalS);
+    }
+
+    // learning iterations
+    String learningIterationsS = OrbitAIConf.getinstance().getProperty(OrbitAIConf.ITERATIONS);
+    if (learningIterationsS == null) {
+      LOGGER.log(Level.WARNING,
+          String.format("Couldn't get learning iterations from configuration, %d will be used",
+              learningIterations));
+    } else {
+      learningIterations = Integer.parseInt(learningIterationsS);
+    }
+
+    // experiment mode
+    String modeS = OrbitAIConf.getinstance().getProperty(OrbitAIConf.MODE);
+    if (modeS == null) {
+      LOGGER.log(Level.WARNING,
+          String.format("Couldn't get experiment mode from configuration, %s will be used", mode));
+    } else {
+      mode = modeS;
+    }
+  }
+
+  /**
+   * Starts the learning.
    *
    * @return null if it was successful. If not null, then the returned value holds the error number
    */
-  public UInteger startTraining() {
+  public UInteger startLearning() {
     // MochiMochi
     UInteger errorCode = startAndConnectToMochi();
     if (errorCode != null) {
       return errorCode;
     }
 
-    // training loop
-    errorCode = startTrainingLoop();
+    // learning loop
+    errorCode = startLearningLoop();
     if (errorCode != null) {
       return errorCode;
     }
@@ -95,13 +151,13 @@ public class OrbitAITrainingHandler {
   }
 
   /**
-   * Stops the training.
+   * Stops the learning.
    *
    * @return null if it was successful. If not null, then the returned value holds the error number
    */
-  public UInteger stopTraining() {
-    // stop training loop
-    stopTrainingLoop();
+  public UInteger stopLearning() {
+    // stop learning loop
+    stopLearningLoop();
 
     // stop MochiMochi process
     UInteger errorCode = stopAndDisconnectFromMochi();
@@ -109,8 +165,8 @@ public class OrbitAITrainingHandler {
       return errorCode;
     }
 
-    // export models
-    errorCode = exportTrainedModels();
+    // export learning data
+    errorCode = exportLearningData();
     if (errorCode != null) {
       return errorCode;
     }
@@ -119,66 +175,72 @@ public class OrbitAITrainingHandler {
   }
 
   /**
-   * Starts the training loop.
+   * Starts the learning loop.
    *
    * @return null if it was successful. If not null, then the returned value holds the error number
    */
-  private UInteger startTrainingLoop() {
-    // Check that we are not already training
-    if (trainingThread != null && trainingThread.isAlive()) {
-      LOGGER.log(Level.SEVERE, "Couldn't start training thread, thread is already running");
+  private UInteger startLearningLoop() {
+    // Check that we are not already learning
+    if (learningThread != null && learningThread.isAlive()) {
+      LOGGER.log(Level.SEVERE, "Couldn't start learning thread, thread is already running");
       return new UInteger(1);
     }
 
-    // Start the training loop in separate thread
-    trainingRunnable = new TrainingRunnable();
-    trainingThread = new Thread(trainingRunnable);
-    trainingThread.setDaemon(true);
-    trainingThread.start();
+    // Start the learning loop in separate thread
+    learningRunnable = new LearningRunnable();
+    learningThread = new Thread(learningRunnable);
+    learningThread.setDaemon(true);
+    learningThread.start();
 
     return null;
   }
 
   /**
-   * Stops the training loop.
+   * Stops the learning loop.
    *
    */
-  private void stopTrainingLoop() {
-    // Check that we are training
-    if (trainingThread == null || trainingRunnable == null || !trainingThread.isAlive()) {
-      LOGGER.log(Level.WARNING, "Didn't stop training thread, thread was already stopped");
+  private void stopLearningLoop() {
+    // Check that we are learning
+    if (learningThread == null || learningRunnable == null || !learningThread.isAlive()) {
+      LOGGER.log(Level.WARNING, "Didn't stop learning thread, thread was already stopped");
     } else {
-      // Stop the training loop and wait for separate thread to finish
-      trainingRunnable.stop();
-      trainingThread.interrupt();
+      // Stop the learning loop and wait for separate thread to finish
+      learningRunnable.stop();
+      learningThread.interrupt();
       try {
-        trainingThread.join();
+        learningThread.join();
       } catch (InterruptedException e) {
-        LOGGER.log(Level.WARNING, "Current thread interrupted while joining on training thread");
+        LOGGER.log(Level.WARNING, "Current thread interrupted while joining on learning thread");
       }
     }
 
-    trainingRunnable = null;
-    trainingThread = null;
+    learningRunnable = null;
+    learningThread = null;
   }
 
   /**
-   * Copies the trained models and their training data to the application's toGround/ directory to
+   * Copies the learning data (models, logs, inferences) to the application's toGround/ directory to
    * be later downlinked.
    *
    * @return null if it was successful. If not null, then the returned value holds the error number
    */
-  private UInteger exportTrainedModels() {
+  private UInteger exportLearningData() {
     String timestamp = OrbitAIDataHandler.getTimestamp();
 
-    // Copy Mochi models
+    // Copy Mochi models and logs
     File trainedMochiModelsDir = Paths.get(MOCHI_DIR, MOCHI_MODELS_DIR).toFile();
-    File exportTrainedMochiModelsDir =
-        Paths.get(OrbitAIApp.TO_GROUND_DIR, EXPORT_MODELS_DIR, "mochi", timestamp).toFile();
+    File mochiLogsDir = Paths.get(MOCHI_DIR, MOCHI_LOGS_DIR).toFile();
+    File exportTrainedMochiModelsDir = Paths
+        .get(OrbitAIApp.TO_GROUND_DIR, EXPORT_LEARNING_DIR, "mochi-" + timestamp, MOCHI_MODELS_DIR)
+        .toFile();
+    File exportMochiLogsDir = Paths
+        .get(OrbitAIApp.TO_GROUND_DIR, EXPORT_LEARNING_DIR, "mochi-" + timestamp, MOCHI_LOGS_DIR)
+        .toFile();
     try {
       FileUtils.copyDirectory(trainedMochiModelsDir, exportTrainedMochiModelsDir);
+      FileUtils.copyDirectory(mochiLogsDir, exportMochiLogsDir);
     } catch (IOException e) {
-      LOGGER.log(Level.SEVERE, "Error exporting MochiMochi trained models", e);
+      LOGGER.log(Level.SEVERE, "Error exporting MochiMochi trained models and logs", e);
       return new UInteger(2);
     }
 
@@ -200,7 +262,8 @@ public class OrbitAITrainingHandler {
 
     // Start Mochi process
     ProcessBuilder builder = new ProcessBuilder();
-    builder.command(MOCHI_CMD);
+    String[] command = new String[] {MOCHI_CMD, "" + mochiPort};
+    builder.command(command);
     builder.directory(new File(MOCHI_DIR));
     try {
       mochiProcess = builder.start();
@@ -220,14 +283,14 @@ public class OrbitAITrainingHandler {
     // Connect to Mochi process
     try {
       Thread.sleep(3000); // give time for Mochi process to initialize
-      mochiClient = new Socket(MOCHI_ADDRESS, MOCHI_PORT);
+      mochiClient = new Socket(MOCHI_ADDRESS, mochiPort);
       LOGGER.log(Level.INFO, "Connected to MochiMochi");
     } catch (IOException e) {
       LOGGER.log(Level.SEVERE, "Error while connecting to MochiMochi process", e);
       return new UInteger(13);
     } catch (InterruptedException e) {
       LOGGER.log(Level.SEVERE,
-          "Training thread interrupted while waiting for MochiMochi process initialization", e);
+          "learning thread interrupted while waiting for MochiMochi process initialization", e);
     }
 
     return null;
@@ -268,17 +331,15 @@ public class OrbitAITrainingHandler {
 
     mochiProcess = null;
 
-    // Save models and data
-
     return null;
   }
 
   /**
-   * The training runnable, running in a separate thread.
+   * The learning runnable, running in a separate thread.
    *
    * @author Tanguy Soto
    */
-  public class TrainingRunnable implements Runnable {
+  public class LearningRunnable implements Runnable {
 
     // ----- Thread management ----- //
 
@@ -295,31 +356,26 @@ public class OrbitAITrainingHandler {
     /** {@inheritDoc} */
     @Override
     public void run() {
-      LOGGER.log(Level.INFO, "Training thread started");
+      LOGGER.log(Level.INFO, "Learning thread started");
 
       while (keepRunning()) {
         try {
           sendMochiTrainCommand();
-          sendMochiSaveCommand();
 
-          Thread.sleep(200);
+          Thread.sleep(learningInterval * 1000);
         } catch (InterruptedException e) {
-          LOGGER.log(Level.INFO, "Training thread interrupted while sleeping");
+          LOGGER.log(Level.INFO, "Learning thread interrupted while sleeping");
         }
       }
-      LOGGER.log(Level.INFO, "Training thread stopped");
+      sendMochiSaveCommand();
+
+      LOGGER.log(Level.INFO, "Learning thread stopped");
     }
 
     /**
      * Sends a save command to the MochiMochi process.
      */
     private void sendMochiSaveCommand() {
-      long now = System.currentTimeMillis();
-      if (now - lastMochiSaveTime < MOCHI_SAVE_INTERVAL * 1000) {
-        return;
-      }
-      lastMochiSaveTime = now;
-
       String command = "save";
 
       if (mochiClient != null && !mochiClient.isClosed()) {
@@ -336,12 +392,6 @@ public class OrbitAITrainingHandler {
      * and from our data labeler.
      */
     private void sendMochiTrainCommand() {
-      long now = System.currentTimeMillis();
-      if (now - lastMochiTrainTime < MOCHI_TRAIN_INTERVAL * 1000) {
-        return;
-      }
-      lastMochiTrainTime = now;
-
       Map<String, Float> dataSet = adapter.getDataHandler().getDataSet();
       float PD3 = dataSet.get("CADC0888");
       float PD6 = dataSet.get("CADC0894");
