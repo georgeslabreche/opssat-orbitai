@@ -35,10 +35,11 @@ make TARGET=arm
 
 ### Training
 Running the program will start a server that accepts commands to train models using the following methodologies:
-- ARROW
-- SCW
-- NHERD
-- PA
+- ADAM: A Method for Stochastic Optimization
+- AROW: Adaptive Regularization of Weight Vectors
+- SCW: Exact Soft Confidence-Weighted Learning
+- NHERD: Nomal Herd (Learning via Gaussian Herding)
+- PA: Passive Aggressive
 
 ### Commands
 The server accepts the following commands:
@@ -86,8 +87,8 @@ The given training data is specific to the OrbitAI experiment. A generic solutio
 As a pre-requisite, make sure that `src/OrbitAI_Mochi.cpp` is compiled with the `LOG_TIMES` define set to 0. This validation procedure is to check that the models save and load as expected. First, train and infer data without loading the the saved model files:
 1. Start the Online ML server: `./OrbitAI_Mochi`
 2. Delete any previously saved models and log files followed by training and infering test data: `eval 'echo "reset"; sleep 1; input="test_data/camera_train_and_infer_small.txt"; while IFS= read -r line; do sleep 0.02; echo "${line/+/''} $(date +%s%3N)"; done < "$input";' | telnet localhost 9999`
-3. Rename the `logs/training.csv` file to `logs/training1.csv` so the logged trianing data is not lost the next time that the `reset` command is invoked.
-4. Rename the `logs/inference.csv` file to `logs/inference1.csv` so the logged inference results are not lost the next time that the `reset` command is invoked.
+3. Rename the `logs/training.csv` file to `logs/training1.csv` so the logged trianing data is not lost the next time that the `reset` command is invoked: `mv logs/training.csv logs/training1.csv`
+4. Rename the `logs/inference.csv` file to `logs/inference1.csv` so the logged inference results are not lost the next time that the `reset` command is invoked: `mv logs/inference.csv logs/inference1.csv`
 
 Retrain the models from scratch but this time skip the inference:
 5. Start the Online ML server: `./OrbitAI_Mochi`

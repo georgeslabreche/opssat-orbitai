@@ -21,8 +21,8 @@
 
 
 #define COMMAND_BUFFER_LENGTH                        100
-#define SAVE_AFTER_UPDATE                              1
-#define LOG_TIMES                                      1
+#define SAVE_AFTER_UPDATE                              1    // Save/Serialize the models after each update.
+#define LOG_TIMES                                      0    // Include timestamps and execution times in the CSV log files.
 
 #define LOG_FILEPATH_TRAINING        "logs/training.csv"
 #define LOG_FILEPATH_INFERENCE      "logs/inference.csv"
@@ -133,10 +133,10 @@ int main(int argc, char *argv[])
         const int hp_pa_select = 1;
 
         // ADAM
-        //ADAM adam_1D(1);
-        //ADAM adam_2D(2);
-        //ADAM adam_3D(3);
-        //ADAM adam_5D(5);
+        ADAM adam_1D(1);
+        ADAM adam_2D(2);
+        ADAM adam_3D(3);
+        ADAM adam_5D(5);
 
         // ARROW
         AROW arow_1D(1, hp_arow_r);
@@ -235,10 +235,10 @@ int main(int argc, char *argv[])
             if(receivedCmd.compare(0, resetCmdLen, resetCmd) == 0)
             {
                 // ADAM
-                //remove("models/adam_1D");
-                //remove("models/adam_2D");
-                //remove("models/adam_3D");
-                //remove("models/adam_5D");
+                remove("models/adam_1D");
+                remove("models/adam_2D");
+                remove("models/adam_3D");
+                remove("models/adam_5D");
 
                 // AROW
                 remove("models/arow_1D");
@@ -278,10 +278,10 @@ int main(int argc, char *argv[])
                 // Deserialize.
                 
                 // ADAM
-                //adam_1D.load("models/adam_1D");
-                //adam_2D.load("models/adam_2D");
-                //adam_3D.load("models/adam_3D");
-                //adam_5D.load("models/adam_5D");
+                adam_1D.load("models/adam_1D");
+                adam_2D.load("models/adam_2D");
+                adam_3D.load("models/adam_3D");
+                adam_5D.load("models/adam_5D");
 
                 // AROW
                 arow_1D.load("models/arow_1D");
@@ -315,10 +315,10 @@ int main(int argc, char *argv[])
                 // Serialize.
 
                 // ADAM
-                //adam_1D.save("models/adam_1D");
-                //adam_2D.save("models/adam_2D");
-                //adam_3D.save("models/adam_3D");
-                //adam_5D.save("models/adam_5D");
+                adam_1D.save("models/adam_1D");
+                adam_2D.save("models/adam_2D");
+                adam_3D.save("models/adam_3D");
+                adam_5D.save("models/adam_5D");
 
                 // AROW
                 arow_1D.save("models/arow_1D");
@@ -448,15 +448,38 @@ int main(int argc, char *argv[])
 
                         // Train the models.
 
-                        // ADAM
-                        //adam_2D.update(data_1D.second, data_1D.first);
-                        //adam_2D.update(data_2D.second, data_2D.first);
-                        //adam_3D.update(data_3D.second, data_3D.first);
-                        //adam_5D.update(data_3D.second, data_5D.first);
+                        /** 
+                         * ADAM
+                         */
+                        
+                        // 1D feature space. Record execution time in milliseconds.
+                        start = std::chrono::high_resolution_clock::now();
+                        adam_1D.update(data_1D.second, data_1D.first);
+                        end = std::chrono::high_resolution_clock::now();
+                        std::chrono::duration<double, std::milli> updateTime_adam_1D = end - start;
+
+                        // 2D feature space. Record execution time in milliseconds.
+                        start = std::chrono::high_resolution_clock::now();
+                        adam_2D.update(data_2D.second, data_2D.first);
+                        end = std::chrono::high_resolution_clock::now();
+                        std::chrono::duration<double, std::milli> updateTime_adam_2D = end - start;
+
+                        // 3D feature space. Record execution time in milliseconds.
+                        start = std::chrono::high_resolution_clock::now();
+                        adam_3D.update(data_3D.second, data_3D.first);
+                        end = std::chrono::high_resolution_clock::now();
+                        std::chrono::duration<double, std::milli> updateTime_adam_3D = end - start;
+
+                        // 5D feature space. Record execution time in milliseconds.
+                        start = std::chrono::high_resolution_clock::now();
+                        adam_5D.update(data_5D.second, data_5D.first);
+                        end = std::chrono::high_resolution_clock::now();
+                        std::chrono::duration<double, std::milli> updateTime_adam_5D = end - start;
 
                         /** 
                          * AROW
                          */
+
                         // 1D feature space. Record execution time in milliseconds.
                         start = std::chrono::high_resolution_clock::now();
                         arow_1D.update(data_1D.second, data_1D.first);
@@ -568,13 +591,11 @@ int main(int argc, char *argv[])
 #if SAVE_AFTER_UPDATE
                         // Save the models if set to do so.
 
-                        /*
                         // ADAM
                         adam_1D.save("models/adam_1D");
                         adam_2D.save("models/adam_2D");
                         adam_3D.save("models/adam_3D");
                         adam_5D.save("models/adam_5D");
-                        */
 
                         // AROW
                         arow_1D.save("models/arow_1D");
@@ -612,6 +633,7 @@ int main(int argc, char *argv[])
                             std::to_string(pd1) + "," + std::to_string(pd2) + "," + std::to_string(pd3) + "," + std::to_string(pd4) + "," + std::to_string(pd5) + "," + std::to_string(pd6) + "," + std::to_string(label) 
 #if LOG_TIMES
                             + ","
+                            + std::to_string(updateTime_adam_1D.count()) + "," + std::to_string(updateTime_adam_2D.count()) + "," + std::to_string(updateTime_adam_3D.count()) + "," + std::to_string(updateTime_adam_5D.count()) + ","
                             + std::to_string(updateTime_arow_1D.count()) + "," + std::to_string(updateTime_arow_2D.count()) + "," + std::to_string(updateTime_arow_3D.count()) + "," + std::to_string(updateTime_arow_5D.count()) + ","
                             + std::to_string(updateTime_scw_1D.count()) + "," + std::to_string(updateTime_scw_2D.count()) + "," + std::to_string(updateTime_scw_3D.count()) + "," + std::to_string(updateTime_scw_5D.count()) + ","
                             + std::to_string(updateTime_nherd_1D.count()) + "," + std::to_string(updateTime_nherd_2D.count()) + "," + std::to_string(updateTime_nherd_3D.count()) + "," + std::to_string(updateTime_nherd_5D.count()) + ","
@@ -730,6 +752,29 @@ int main(int argc, char *argv[])
                         auto data_5D = utility::read_ones<int>(line_5D, 5);
 
                         /**
+                         * ADAM.
+                         */
+                        start = std::chrono::high_resolution_clock::now();
+                        int adam_pred_1D = adam_1D.predict(data_1D.second);
+                        end = std::chrono::high_resolution_clock::now();
+                        std::chrono::duration<double, std::milli> predictTime_adam_1D = end - start;
+
+                        start = std::chrono::high_resolution_clock::now();
+                        int adam_pred_2D = adam_2D.predict(data_2D.second);
+                        end = std::chrono::high_resolution_clock::now();
+                        std::chrono::duration<double, std::milli> predictTime_adam_2D = end - start;
+
+                        start = std::chrono::high_resolution_clock::now();
+                        int adam_pred_3D = adam_3D.predict(data_3D.second);
+                        end = std::chrono::high_resolution_clock::now();
+                        std::chrono::duration<double, std::milli> predictTime_adam_3D = end - start;
+
+                        start = std::chrono::high_resolution_clock::now();
+                        int adam_pred_5D = adam_5D.predict(data_5D.second);
+                        end = std::chrono::high_resolution_clock::now();
+                        std::chrono::duration<double, std::milli> predictTime_adam_5D = end - start;
+
+                        /**
                          * AROW.
                          */
                         start = std::chrono::high_resolution_clock::now();
@@ -826,7 +871,8 @@ int main(int argc, char *argv[])
                         inferenceLogFile.open(LOG_FILEPATH_INFERENCE, std::ios_base::out | std::ios_base::app);
 
                         // Concatenate the prediction results.
-                        std::string predictions = std::to_string(arow_pred_1D) + "," + std::to_string(arow_pred_2D) + "," + std::to_string(arow_pred_3D) + "," + std::to_string(arow_pred_5D) + ","
+                        std::string predictions = std::to_string(adam_pred_1D) + "," + std::to_string(adam_pred_2D) + "," + std::to_string(adam_pred_3D) + "," + std::to_string(adam_pred_5D) + ","
+                            + std::to_string(arow_pred_1D) + "," + std::to_string(arow_pred_2D) + "," + std::to_string(arow_pred_3D) + "," + std::to_string(arow_pred_5D) + ","
                             + std::to_string(scw_pred_1D) + "," + std::to_string(scw_pred_2D) + "," + std::to_string(scw_pred_3D) + "," + std::to_string(scw_pred_5D) + ","
                             + std::to_string(nherd_pred_1D) + "," + std::to_string(nherd_pred_2D) + "," + std::to_string(nherd_pred_3D) + "," + std::to_string(nherd_pred_5D) + ","
                             + std::to_string(pa_pred_1D) + "," + std::to_string(pa_pred_2D) + "," + std::to_string(pa_pred_3D) + "," + std::to_string(pa_pred_5D);
@@ -840,6 +886,7 @@ int main(int argc, char *argv[])
                             + predictions
     #if LOG_TIMES
                             + ","
+                            + std::to_string(predictTime_adam_1D.count()) + "," + std::to_string(predictTime_adam_2D.count()) + "," + std::to_string(predictTime_adam_3D.count()) + "," + std::to_string(predictTime_adam_5D.count()) + ","
                             + std::to_string(predictTime_arow_1D.count()) + "," + std::to_string(predictTime_arow_2D.count()) + "," + std::to_string(predictTime_arow_3D.count()) + "," + std::to_string(predictTime_arow_5D.count()) + ","
                             + std::to_string(predictTime_scw_1D.count()) + "," + std::to_string(predictTime_scw_2D.count()) + "," + std::to_string(predictTime_scw_3D.count()) + "," + std::to_string(predictTime_scw_5D.count()) + ","
                             + std::to_string(predictTime_nherd_1D.count()) + "," + std::to_string(predictTime_nherd_2D.count()) + "," + std::to_string(predictTime_nherd_3D.count()) + "," + std::to_string(predictTime_nherd_5D.count()) + ","
