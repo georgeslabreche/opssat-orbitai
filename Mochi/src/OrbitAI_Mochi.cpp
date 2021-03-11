@@ -22,7 +22,7 @@
 
 #define COMMAND_BUFFER_LENGTH                        100
 #define SAVE_AFTER_UPDATE                              1    // Save/Serialize the models after each update.
-#define LOG_TIMES                                      0    // Include timestamps and execution times in the CSV log files.
+#define LOG_TIMES                                      1    // Include timestamps and execution times in the CSV log files.
 
 #define LOG_FILEPATH_TRAINING        "logs/training.csv"
 #define LOG_FILEPATH_INFERENCE      "logs/inference.csv"
