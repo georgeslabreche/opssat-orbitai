@@ -10,7 +10,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.lang.reflect.Field;
-import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,13 +31,7 @@ import esa.mo.nmf.commonmoadapter.SimpleDataReceivedListener;
  */
 public class OrbitAIDataHandler {
 
-  private static final Logger LOGGER = Logger.getLogger(OrbitAITrainingHandler.class.getName());
-
-  /**
-   * Relative path to the file containing the list of OBSW parameters we want to enable the
-   * generation in the supervisor.
-   */
-  private static final String PARAMS_TO_ENABLE_FILE = "params_to_enable.txt";
+  private static final Logger LOGGER = Logger.getLogger(OrbitAIDataHandler.class.getName());
 
   /**
    * Relative path to the directory containing our data inside the toGround/ folder.
@@ -210,33 +203,27 @@ public class OrbitAIDataHandler {
   }
 
   /**
-   * Parses the parameters to enable file and returns the list of OBSW parameter we want to enable
-   * the generation in the supervisor.
+   * Parses the parameters to enable properties and returns the list of OBSW parameter we want to
+   * enable the generation in the supervisor.
    *
-   * @return The list of parameter identifiers or null if an IOException occurred.
+   * @return The list of parameter identifiers or null if an error occurred.
    */
   private List<String> getParametersToEnable() {
-    File file = new File(PARAMS_TO_ENABLE_FILE);
-    String content = "";
-
-    try {
-      // expect one line with parameters names
-      content = new String(Files.readAllBytes(file.toPath()));
-    } catch (IOException e) {
-      LOGGER.log(Level.SEVERE, "Error while loading parameters to enable in supervisor", e);
+    String content = OrbitAIConf.getinstance().getProperty(OrbitAIConf.PARAMS_TO_ENABLE);
+    if (content == null) {
+      LOGGER.log(Level.SEVERE, "Error while loading parameters to enable in supervisor");
       return null;
     }
 
     // parse the line
     List<String> paramNames = new ArrayList<String>();
-    content = content.replace("\n", "");
     for (String paramName : content.split(",")) {
       paramNames.add(paramName);
     }
 
     if (paramNames.size() <= 0) {
       LOGGER.log(Level.WARNING,
-          String.format("Parameters names list read from %s is empty", file.toPath()));
+          String.format("Found no parameters to enable in property content %s", content));
     }
     return paramNames;
   }

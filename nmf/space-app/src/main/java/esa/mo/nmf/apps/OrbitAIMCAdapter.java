@@ -24,7 +24,7 @@ public class OrbitAIMCAdapter extends MonitorAndControlNMFAdapter {
 
   public OrbitAIMCAdapter() {
     this.dataHandler = new OrbitAIDataHandler(this);
-    this.trainingHandler = new OrbitAITrainingHandler(this);
+    this.learningHandler = new OrbitAILearningHandler(this);
   }
 
 
@@ -72,9 +72,9 @@ public class OrbitAIMCAdapter extends MonitorAndControlNMFAdapter {
   // ----------------------------------- Actions --------------------------------------------------
 
   /**
-   * Class handling actions related to training the models.
+   * Class handling actions related to machine learning.
    */
-  private OrbitAITrainingHandler trainingHandler;
+  private OrbitAILearningHandler learningHandler;
 
   /**
    * Class handling actions related to data.
@@ -90,33 +90,33 @@ public class OrbitAIMCAdapter extends MonitorAndControlNMFAdapter {
     return dataHandler;
   }
 
-  @Action(description = "Starts fetching training data from the supervisor", stepCount = 1,
+  @Action(description = "Starts fetching data from the supervisor", stepCount = 1,
       name = "startFetchingData")
   public UInteger startFetchingData(Long actionInstanceObjId, boolean reportProgress,
       MALInteraction interaction) {
     return dataHandler.toggleSupervisorParametersSubscription(true);
   }
 
-  @Action(description = "Stops fetching training data from the supervisor", stepCount = 1,
+  @Action(description = "Stops fetching data from the supervisor", stepCount = 1,
       name = "stopFetchingData")
   public UInteger stopFetchingData(Long actionInstanceObjId, boolean reportProgress,
       MALInteraction interaction) {
     return dataHandler.toggleSupervisorParametersSubscription(false);
   }
 
-  @Action(description = "Starts training models, even if we are currently not fetching data",
-      stepCount = 1, name = "startTraining")
-  public UInteger startTraining(Long actionInstanceObjId, boolean reportProgress,
+  @Action(description = "Starts learning depending on the experiment's mode (train, inference ...)",
+      stepCount = 1, name = "startLearning")
+  public UInteger startLearning(Long actionInstanceObjId, boolean reportProgress,
       MALInteraction interaction) {
-    return trainingHandler.startTraining();
+    return learningHandler.startLearning();
   }
 
   // TODO restart training action (on previous models)
 
-  @Action(description = "Stops training models", stepCount = 1, name = "stopTraining")
-  public UInteger stopTraining(Long actionInstanceObjId, boolean reportProgress,
+  @Action(description = "Stops learning", stepCount = 1, name = "stopLearning")
+  public UInteger stopLearning(Long actionInstanceObjId, boolean reportProgress,
       MALInteraction interaction) {
-    return trainingHandler.stopTraining();
+    return learningHandler.stopLearning();
   }
 
   // ----------------------------------- NMF components --------------------------------------------
@@ -158,7 +158,7 @@ public class OrbitAIMCAdapter extends MonitorAndControlNMFAdapter {
           success = false;
         }
         // Stop training models
-        if (trainingHandler.stopTraining() != null) {
+        if (learningHandler.stopLearning() != null) {
           success = false;
         }
         // Close supervisor consumer connections

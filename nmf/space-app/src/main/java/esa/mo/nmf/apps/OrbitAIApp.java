@@ -24,8 +24,9 @@ public class OrbitAIApp {
    */
   private OrbitAIMCAdapter adapter;
 
-
   public OrbitAIApp() {
+    OrbitAIConf.getinstance().loadProperties();
+
     // Initialize M&C interface
     adapter = new OrbitAIMCAdapter();
 
@@ -53,7 +54,7 @@ public class OrbitAIApp {
     LOGGER.log(Level.INFO, "Starting OrbitAI");
 
     adapter.startFetchingData(0l, false, null);
-    adapter.startTraining(0l, false, null);
+    adapter.startLearning(0l, false, null);
   }
 
   /**
@@ -64,7 +65,7 @@ public class OrbitAIApp {
    */
   public static void main(final String args[]) throws Exception {
 
-    // Create
+    // Create and start the app
     OrbitAIApp app = new OrbitAIApp();
     app.start();
   }
