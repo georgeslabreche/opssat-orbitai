@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.ccsds.moims.mo.mal.structures.UInteger;
 import esa.mo.nmf.NMFException;
 import esa.mo.nmf.commonmoadapter.SimpleDataReceivedListener;
@@ -53,7 +54,7 @@ public class OrbitAIDataHandler {
   /**
    * Internal parameters default value.
    */
-  public static final float PARAMS_DEFAULT_VALUE = 42;
+  public static final float PARAMS_DEFAULT_VALUE = 0;
 
   /**
    * Internal parameters default report interval in seconds.
@@ -80,11 +81,6 @@ public class OrbitAIDataHandler {
    */
   private FileOutputStream trainingDataOutputStream;
 
-  /**
-   * Last time we logged our acquired data.
-   */
-  private Long lastLogTime;
-
 
   public OrbitAIDataHandler(OrbitAIMCAdapter adapter) {
     this.adapter = adapter;
@@ -97,7 +93,7 @@ public class OrbitAIDataHandler {
    * @param subscribe True if we want supervisor to push new parameters data, false
    * @return null if it was successful. If not null, then the returned value holds the error number
    */
-  public UInteger toggleSupervisorParametersSubscription(boolean subscribe) {
+  public synchronized UInteger toggleSupervisorParametersSubscription(boolean subscribe) {
     List<String> parametersNames = getParametersToEnable();
     if (parametersNames == null) {
       return new UInteger(1);
@@ -132,11 +128,10 @@ public class OrbitAIDataHandler {
             }
 
             String dataS = data.toString();
-            LOGGER.log(Level.INFO, String.format(
+            LOGGER.log(Level.FINE, String.format(
                 "Received value %s from supervisor for parameter %s", dataS, parameterName));
 
             setInternalParameter(parameterName, dataS);
-            logData();
           }
         };
 
@@ -155,13 +150,39 @@ public class OrbitAIDataHandler {
   }
 
   /**
+   * Parses the parameters to enable properties and returns the list of OBSW parameter we want to
+   * enable the generation in the supervisor.
+   *
+   * @return The list of parameter identifiers or null if an error occurred.
+   */
+  private List<String> getParametersToEnable() {
+    String content = OrbitAIConf.getinstance().getProperty(OrbitAIConf.PARAMS_TO_ENABLE);
+    if (content == null) {
+      LOGGER.log(Level.SEVERE, "Error while loading parameters to enable in supervisor");
+      return null;
+    }
+
+    // parse the line
+    List<String> paramNames = new ArrayList<String>();
+    for (String paramName : content.split(",")) {
+      paramNames.add(paramName);
+    }
+
+    if (paramNames.size() <= 0) {
+      LOGGER.log(Level.WARNING,
+          String.format("Found no parameters to enable in property content %s", content));
+    }
+    return paramNames;
+  }
+
+  /**
    * Sets an internal parameter with the given value.
    *
    * @param parameterName The internal parameter name
    * @param value The new value for the parameter
    */
   private void setInternalParameter(String parameterName, String value) {
-    parametersLock.lock();;
+    parametersLock.lock();
     try {
       Field internalParameter = adapter.getClass().getDeclaredField(parameterName);
       internalParameter.setAccessible(true);
@@ -203,37 +224,11 @@ public class OrbitAIDataHandler {
   }
 
   /**
-   * Parses the parameters to enable properties and returns the list of OBSW parameter we want to
-   * enable the generation in the supervisor.
+   * Returns parameters values fetched from supervisor at the time of call.
    *
-   * @return The list of parameter identifiers or null if an error occurred.
+   * @return The map of parameters names and their values.
    */
-  private List<String> getParametersToEnable() {
-    String content = OrbitAIConf.getinstance().getProperty(OrbitAIConf.PARAMS_TO_ENABLE);
-    if (content == null) {
-      LOGGER.log(Level.SEVERE, "Error while loading parameters to enable in supervisor");
-      return null;
-    }
-
-    // parse the line
-    List<String> paramNames = new ArrayList<String>();
-    for (String paramName : content.split(",")) {
-      paramNames.add(paramName);
-    }
-
-    if (paramNames.size() <= 0) {
-      LOGGER.log(Level.WARNING,
-          String.format("Found no parameters to enable in property content %s", content));
-    }
-    return paramNames;
-  }
-
-  /**
-   * Returns our internal parameters values at the time of call.
-   *
-   * @return The map of parameters names and their values
-   */
-  public Map<String, Float> getDataSet() {
+  private Map<String, Float> getStampedParametersValues() {
     Map<String, Float> parametersValues = new HashMap<String, Float>();
     for (String parameterName : OrbitAIMCAdapter.parametersNames) {
       parametersValues.put(parameterName, getInternalParameter(parameterName));
@@ -243,27 +238,21 @@ public class OrbitAIDataHandler {
   }
 
   /**
-   * Returns the label (ON/OFF) associated to a PD6 elevation for the HD camera.
+   * Returns a formatted time stamp for the time of the call.
    *
-   * @param PD6 the photo-diode 6 (located on -z face of the S/C body) elevation
-   * @return the label, 1 = ON, 0 = OFF
+   * @return the time stamp formatted as a String
    */
-  public static int getHDCameraLabel(float PD6) {
-    // if elevation, superior than threshold, camera should be OFF
-    if (PD6 > PD6_ELEVATION_THRESHOLD_HD_CAM) {
-      return 0;
-    }
-
-    return 1;
+  public static String formatTimestamp(long timestamp) {
+    return timestampFormat.format(new Date(timestamp));
   }
 
   /**
-   * Returns a formatted time stamp for the time of the call.
+   * Returns a time stamp for the time of the call.
    *
-   * @return the time stamp
+   * @return the time stamp in milliseconds
    */
-  public static String getTimestamp() {
-    return timestampFormat.format(new Date(System.currentTimeMillis()));
+  public static long getTimestamp() {
+    return System.currentTimeMillis();
   }
 
   /**
@@ -284,21 +273,26 @@ public class OrbitAIDataHandler {
     }
 
     // Open file stream
-    String fileNameExtension = getTimestamp() + ".csv";
+    String fileNameExtension = formatTimestamp(getTimestamp()) + ".csv";
     String fileName = "";
     for (String parameterName : OrbitAIMCAdapter.parametersNames) {
       fileName += (parameterName + "_");
     }
     fileName += fileNameExtension;
 
-    try {
-      trainingDataOutputStream =
-          new FileOutputStream(Paths.get(dataDirectory.getPath(), fileName).toFile(), true);
-    } catch (FileNotFoundException e) {
-      LOGGER.log(Level.SEVERE, "Couldn't create data file stream", e);
+    if (trainingDataOutputStream == null) {
+      try {
+        trainingDataOutputStream =
+            new FileOutputStream(Paths.get(dataDirectory.getPath(), fileName).toFile(), true);
+      } catch (FileNotFoundException e) {
+        LOGGER.log(Level.SEVERE, "Couldn't create data file stream", e);
+        return false;
+      }
+      return true;
+    } else {
+      LOGGER.log(Level.SEVERE, "Didn't create data file stream, stream is already created");
       return false;
     }
-    return true;
   }
 
   /**
@@ -310,42 +304,55 @@ public class OrbitAIDataHandler {
     if (trainingDataOutputStream != null) {
       try {
         trainingDataOutputStream.close();
-        trainingDataOutputStream = null;
       } catch (IOException e) {
         LOGGER.log(Level.WARNING, "Error while closing training data file output stream", e);
         return false;
+      } finally {
+        trainingDataOutputStream = null;
       }
     }
     return true;
   }
 
   /**
-   * Saves acquired data in the data file stream.
+   * Returns parameters values fetched from supervisor at the time of call. Also logs their values
+   * in the data handler logs.
+   *
+   * @return A time stamped map of parameters names and their values.
    */
-  private void logData() {
-    Long now = System.currentTimeMillis();
-    // Only save at specific intervals
-    if (lastLogTime == null || (now - lastLogTime >= PARAMS_DEFAULT_REPORT_INTERVAL * 1000 * 0.9)) {
-      if (trainingDataOutputStream == null) {
-        LOGGER.log(Level.WARNING, "Data file stream is null, can't log data");
-        return;
-      }
+  public ImmutablePair<Long, Map<String, Float>> getDataSet() {
+    Map<String, Float> dataSet = getStampedParametersValues();
+    long timestamp = getTimestamp();
 
-      // format line
-      Map<String, Float> dataSet = getDataSet();
-      String line = "";
-      for (String parameterName : OrbitAIMCAdapter.parametersNames) {
-        line += (dataSet.get(parameterName) + ",");
-      }
-      line = getTimestamp() + "," + line.substring(0, line.length() - 2) + "\n";
-
-      // write line
-      try {
-        trainingDataOutputStream.write(line.getBytes());
-        lastLogTime = now;
-      } catch (IOException e) {
-        LOGGER.log(Level.WARNING, "Could not write to data file output stream", e);
-      }
+    // format line
+    String line = "";
+    for (String parameterName : OrbitAIMCAdapter.parametersNames) {
+      line += (dataSet.get(parameterName) + ",");
     }
+    line = timestamp + "," + line.substring(0, line.length() - 2) + "\n";
+
+    // write line
+    try {
+      trainingDataOutputStream.write(line.getBytes());
+    } catch (IOException e) {
+      LOGGER.log(Level.WARNING, "Could not write to data file output stream", e);
+    }
+
+    return new ImmutablePair<Long, Map<String, Float>>(timestamp, dataSet);
+  }
+
+  /**
+   * Returns the label (ON/OFF) associated to a PD6 elevation for the HD camera.
+   *
+   * @param PD6 the photo-diode 6 (located on -z face of the S/C body) elevation
+   * @return the label, 1 = ON, 0 = OFF
+   */
+  public static int getHDCameraLabel(float PD6) {
+    // if elevation, superior than threshold, camera should be OFF
+    if (PD6 > PD6_ELEVATION_THRESHOLD_HD_CAM) {
+      return 0;
+    }
+
+    return 1;
   }
 }
