@@ -26,7 +26,7 @@
 
 #define LOG_FILEPATH_TRAINING        "logs/training.csv"
 #define LOG_FILEPATH_INFERENCE      "logs/inference.csv"
-#define LOG_FILEPATH_ERROR              "logs/error.log"
+#define LOG_FILEPATH_ORBITAI              "logs/orbitai.log"
 
 // In case no port number is given.
 #define DEFAULT_PORT_NUMBER                         9999
@@ -47,9 +47,20 @@
 std::string getTimestamp();
 
 /**
- * Logging errors into the error log file.
+ * Logging into log file.
+ */
+static inline void log(std::string message, std::string level);
+
+/**
+ * Logging errors into the log file.
  */
 void logError(std::string message);
+
+/**
+ * Logging info into the log file.
+ */
+void logInfo(std::string message);
+
 
 
 /**
@@ -282,7 +293,7 @@ int main(int argc, char *argv[])
                 // Delete log files.
                 remove(LOG_FILEPATH_TRAINING);
                 remove(LOG_FILEPATH_INFERENCE);
-                remove(LOG_FILEPATH_ERROR);
+                remove(LOG_FILEPATH_ORBITAI);
 
                 std::string response = "OK\n";
                 send(connection, response.c_str(), response.size(), 0);
@@ -295,7 +306,9 @@ int main(int argc, char *argv[])
 
                 // If the test model file does not exist then skip attemping loading all model files.
                 // In this case the training commands will simply start training new models from scratch.
-                // Tout ou rien: we don't account for the unlikley case in which some model files exist and others do not.
+                // Tout ou rien: 
+                //  - We don't account for the unlikley case in which some model files exist and others do not.
+                //  - If this happens then the application log file will have to be analyzed to figure out which models did load.
                 if(access(testModelFile.c_str(), F_OK ) == -1)
                 {
                     // Log error.
@@ -312,39 +325,81 @@ int main(int argc, char *argv[])
                     {
                         // ADAM
                         adam_1D.load("models/adam_1D");
+                        logInfo("Loaded models/adam_1D");
+
                         adam_2D.load("models/adam_2D");
+                        logInfo("Loaded models/adam_2D");
+
                         adam_3D.load("models/adam_3D");
+                        logInfo("Loaded models/adam_3D");
+
                         adam_5D.load("models/adam_5D");
+                        logInfo("Loaded models/adam_5D");
 
                         // ADAGRAD RDA
                         rda_1D.load("models/rda_1D");
+                        logInfo("Loaded models/rda_1D");
+
                         rda_2D.load("models/rda_2D");
+                        logInfo("Loaded models/rda_2D");
+
                         rda_3D.load("models/rda_3D");
+                        logInfo("Loaded models/rda_3D");
+
                         rda_5D.load("models/rda_5D");
+                        logInfo("Loaded models/rda_5D");
 
                         // AROW
                         arow_1D.load("models/arow_1D");
+                        logInfo("Loaded models/arow_1D");
+
                         arow_2D.load("models/arow_2D");
+                        logInfo("Loaded models/arow_2D");
+
                         arow_3D.load("models/arow_3D");
+                        logInfo("Loaded models/arow_3D");
+
                         arow_5D.load("models/arow_5D");
+                        logInfo("Loaded models/arow_5D");
 
                         // SCW
                         scw_1D.load("models/scw_1D");
+                        logInfo("Loaded models/scw_1D");
+
                         scw_2D.load("models/scw_2D");
+                        logInfo("Loaded models/scw_2D");
+
                         scw_3D.load("models/scw_3D");
+                        logInfo("Loaded models/scw_3D");
+
                         scw_5D.load("models/scw_5D");
+                        logInfo("Loaded models/scw_5D");
 
                         // NHERD
                         nherd_1D.load("models/nherd_1D");
+                        logInfo("Loaded models/nherd_1D");
+
                         nherd_2D.load("models/nherd_2D");
+                        logInfo("Loaded models/nherd_2D");
+
                         nherd_3D.load("models/nherd_3D");
+                        logInfo("Loaded models/nherd_3D");
+
                         nherd_5D.load("models/nherd_5D");
+                        logInfo("Loaded models/nherd_5D");
 
                         // PA
                         pa_1D.load("models/pa_1D");
+                        logInfo("Loaded models/pa_1D");
+
                         pa_2D.load("models/pa_2D");
+                        logInfo("Loaded models/pa_2D");
+
                         pa_3D.load("models/pa_3D");
+                        logInfo("Loaded models/pa_3D");
+
                         pa_5D.load("models/pa_5D");
+                        logInfo("Loaded models/pa_5D");
 
                         std::string response = "OK\n";
                         send(connection, response.c_str(), response.size(), 0);
@@ -1094,21 +1149,36 @@ std::string getTimestamp()
 }
 
 
-/**
- * Logging errors into the error log file.
- */
-void logError(std::string message)
+static inline void log(std::string message, std::string level)
 {
     // Print out error message.
     std::cout << message << std::endl;
     
     // Open the error log file.
-    std::ofstream errorLogFile;
-    errorLogFile.open(LOG_FILEPATH_ERROR, std::ios_base::out | std::ios_base::app);
+    std::ofstream logFile;
+    logFile.open(LOG_FILEPATH_ORBITAI, std::ios_base::out | std::ios_base::app);
 
     // Append the log message into the error log file.
-    errorLogFile << "[" << getTimestamp() << "] " << message << "\n";
+    logFile << "[" << getTimestamp() << "][" << level << "] " << message << "\n";
 
     // Close the log file.
-    errorLogFile.close();
+    logFile.close();
+}
+
+
+/**
+ * Logging errors into the application log file.
+ */
+void logError(std::string message)
+{
+    log(message, "ERROR");
+}
+
+
+/**
+ * Logging info into the application log file.
+ */
+void logInfo(std::string message)
+{
+    log(message, "INFO");
 }
