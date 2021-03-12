@@ -30,27 +30,85 @@ public class OrbitAIMCAdapter extends MonitorAndControlNMFAdapter {
 
   // ----------------------------------- Parameters -----------------------------------------------
 
+  // --- TODO Application's own parameters ---
+
+  @Parameter(description = "Experiment mode read from configuration", generationEnabled = true,
+      reportIntervalSeconds = OrbitAIDataHandler.PARAMS_DEFAULT_REPORT_INTERVAL, readOnly = true)
+  private String oai_mode = "unknown";
+
+  @Parameter(description = "Whether we are fetching data from supervisor", generationEnabled = true,
+      reportIntervalSeconds = OrbitAIDataHandler.PARAMS_DEFAULT_REPORT_INTERVAL, readOnly = true)
+  private boolean oai_isFetchingData = false;
+
+  @Parameter(description = "Whether we are currently learning", generationEnabled = true,
+      reportIntervalSeconds = OrbitAIDataHandler.PARAMS_DEFAULT_REPORT_INTERVAL, readOnly = true)
+  private boolean oai_isLearning = false;
+
+  @Parameter(description = "Interval between 2 iterations read from configuration",
+      generationEnabled = true, rawUnit = "seconds",
+      reportIntervalSeconds = OrbitAIDataHandler.PARAMS_DEFAULT_REPORT_INTERVAL, readOnly = true)
+  private int oai_iterationInterval = -1;
+
+  @Parameter(description = "Number of learning iterations left", generationEnabled = true,
+      reportIntervalSeconds = OrbitAIDataHandler.PARAMS_DEFAULT_REPORT_INTERVAL, readOnly = true)
+  private int oai_iterationsLeft = -1;
+
+  // --- RE-EXPOSING parameters consumed from supervisor ---
+
   /**
    * Storing supervisor parameters names for convenience.
    */
   public static final List<String> parametersNames = new ArrayList<>(
-      Arrays.asList("CADC0888", "CADC0894", "CADC1002", "CADC1003", "CADC1004", "CADC1005"));
+      Arrays.asList("CADC0884", "CADC0886", "CADC0888", "CADC0890", "CADC0892", "CADC0894",
+          "CADC0900", "CADC0901", "CADC0902", "CADC1002", "CADC1003", "CADC1004", "CADC1005"));
 
-  // --- RE-EXPOSING parameters consumed from supervisor ---
+  // CADC PHOTODIOES
 
-  // CADC
+  @Parameter(description = "I_PD1_THETA fetched from supervisor", generationEnabled = true,
+      rawUnit = "radians",
+      reportIntervalSeconds = OrbitAIDataHandler.PARAMS_DEFAULT_REPORT_INTERVAL, readOnly = true)
+  private float CADC0884 = OrbitAIDataHandler.PARAMS_DEFAULT_VALUE;
 
-  // CADC PHOTODIOES parameters
+  @Parameter(description = "I_PD2_THETA fetched from supervisor", generationEnabled = true,
+      rawUnit = "radians",
+      reportIntervalSeconds = OrbitAIDataHandler.PARAMS_DEFAULT_REPORT_INTERVAL, readOnly = true)
+  private float CADC0886 = OrbitAIDataHandler.PARAMS_DEFAULT_VALUE;
 
   @Parameter(description = "I_PD3_THETA fetched from supervisor", generationEnabled = true,
+      rawUnit = "radians",
       reportIntervalSeconds = OrbitAIDataHandler.PARAMS_DEFAULT_REPORT_INTERVAL, readOnly = true)
   private float CADC0888 = OrbitAIDataHandler.PARAMS_DEFAULT_VALUE;
 
+  @Parameter(description = "I_PD4_THETA fetched from supervisor", generationEnabled = true,
+      rawUnit = "radians",
+      reportIntervalSeconds = OrbitAIDataHandler.PARAMS_DEFAULT_REPORT_INTERVAL, readOnly = true)
+  private float CADC0890 = OrbitAIDataHandler.PARAMS_DEFAULT_VALUE;
+
+  @Parameter(description = "I_PD5_THETA fetched from supervisor", generationEnabled = true,
+      rawUnit = "radians",
+      reportIntervalSeconds = OrbitAIDataHandler.PARAMS_DEFAULT_REPORT_INTERVAL, readOnly = true)
+  private float CADC0892 = OrbitAIDataHandler.PARAMS_DEFAULT_VALUE;
+
   @Parameter(description = "I_PD6_THETA fetched from supervisor", generationEnabled = true,
+      rawUnit = "radians",
       reportIntervalSeconds = OrbitAIDataHandler.PARAMS_DEFAULT_REPORT_INTERVAL, readOnly = true)
   private float CADC0894 = OrbitAIDataHandler.PARAMS_DEFAULT_VALUE;
 
-  // CADC QUATERNION parameters
+  // CADC SUN VECTOR (from raw physical sensor)
+
+  @Parameter(description = "I_SS_VEC_0 fetched from supervisor", generationEnabled = true,
+      reportIntervalSeconds = OrbitAIDataHandler.PARAMS_DEFAULT_REPORT_INTERVAL, readOnly = true)
+  private float CADC0900 = OrbitAIDataHandler.PARAMS_DEFAULT_VALUE;
+
+  @Parameter(description = "I_SS_VEC_1 fetched from supervisor", generationEnabled = true,
+      reportIntervalSeconds = OrbitAIDataHandler.PARAMS_DEFAULT_REPORT_INTERVAL, readOnly = true)
+  private float CADC0901 = OrbitAIDataHandler.PARAMS_DEFAULT_VALUE;
+
+  @Parameter(description = "I_SS_VEC_2 fetched from supervisor", generationEnabled = true,
+      reportIntervalSeconds = OrbitAIDataHandler.PARAMS_DEFAULT_REPORT_INTERVAL, readOnly = true)
+  private float CADC0902 = OrbitAIDataHandler.PARAMS_DEFAULT_VALUE;
+
+  // CADC QUATERNION
 
   @Parameter(description = "O_Q_FB_FI_EST_0 fetched from supervisor", generationEnabled = true,
       reportIntervalSeconds = OrbitAIDataHandler.PARAMS_DEFAULT_REPORT_INTERVAL, readOnly = true)
@@ -67,6 +125,7 @@ public class OrbitAIMCAdapter extends MonitorAndControlNMFAdapter {
   @Parameter(description = "O_Q_FB_FI_EST_3 fetched from supervisor", generationEnabled = true,
       reportIntervalSeconds = OrbitAIDataHandler.PARAMS_DEFAULT_REPORT_INTERVAL, readOnly = true)
   private float CADC1005 = OrbitAIDataHandler.PARAMS_DEFAULT_VALUE;
+
 
 
   // ----------------------------------- Actions --------------------------------------------------

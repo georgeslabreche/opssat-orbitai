@@ -33,27 +33,47 @@ public class OrbitAIConf {
   // ========== AVAILABLE PROPERTIES
 
   /**
-   * Experiment mode.
+   * Property value: unknown.
+   */
+  public static final String UNKNOWN = "unknown";
+
+  /**
+   * Property key: Experiment mode
    */
   public static final String MODE = "esa.mo.nmf.apps.OrbitAI.mode";
 
   /**
-   * Number of iterations the experiment should last
+   * Property value: Experiment train mode.
+   */
+  public static final String TRAIN_MODE = "train";
+
+  /**
+   * Property value: Experiment continue train mode.
+   */
+  public static final String CONTINUE_TRAIN_MODE = "continue_train";
+
+  /**
+   * Property value: Experiment inference mode.
+   */
+  public static final String INFERENCE_MODE = "inference";
+
+  /**
+   * Property key: Number of iterations the experiment should last
    */
   public static final String ITERATIONS = "esa.mo.nmf.apps.OrbitAI.iterations";
 
   /**
-   * Time interval between 2 iterations in seconds
+   * Property key: Time interval between 2 iterations in seconds
    */
   public static final String INTERVAL = "esa.mo.nmf.apps.OrbitAI.interval";
 
   /**
-   * OBSW parameters for which the publishing will be enabled in NMF supervisor.
+   * Property key: OBSW parameters for which the publishing will be enabled in NMF supervisor.
    */
   public static final String PARAMS_TO_ENABLE = "esa.mo.nmf.apps.OrbitAI.params_to_enable";
 
   /**
-   * Port at which the Mochi server will be listening.
+   * Property key: Port at which the Mochi server will be listening.
    */
   public static final String MOCHI_PORT = "esa.mo.nmf.apps.OrbitAI.mochi.port";
 

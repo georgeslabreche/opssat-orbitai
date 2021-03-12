@@ -47,7 +47,7 @@ public class OrbitAILearningHandler {
   /**
    * TODO Experiment mode.
    */
-  private String mode = "train";
+  private String mode = OrbitAIConf.TRAIN_MODE;
 
   /**
    * Time interval between 2 learning iterations in seconds
@@ -61,6 +61,13 @@ public class OrbitAILearningHandler {
 
 
   // ----- MOCHI MOCHI ----- //
+
+  private static final String SAVE_CMD = "save";
+  private static final String RESET_CMD = "reset";
+  private static final String TRAIN_CMD = "train";
+  private static final String INFER_CMD = "infer";
+  private static final String LOAD_CMD = "load";
+  private static final String EXIT_CMD = "exit";
 
   private static final String MOCHI_DIR = "/home/tanguy/Documents/code/opssat/opssat-orbitai/Mochi";
   private static final String MOCHI_MODELS_DIR = "models";
@@ -367,22 +374,28 @@ public class OrbitAILearningHandler {
           LOGGER.log(Level.INFO, "Learning thread interrupted while sleeping");
         }
       }
-      sendMochiSaveCommand();
+      sendMochiCommand(SAVE_CMD);
 
       LOGGER.log(Level.INFO, "Learning thread stopped");
     }
 
     /**
-     * Sends a save command to the MochiMochi process.
+     * Sends a command to the MochiMochi process.
+     * 
+     * @param command The command
      */
-    private void sendMochiSaveCommand() {
-      String command = "save";
+    private void sendMochiCommand(String command) {
+      if (command == null) {
+        LOGGER.log(Level.WARNING, "Trying to send null command to MochiMochi process.");
+        return;
+      }
 
       if (mochiClient != null && !mochiClient.isClosed()) {
         try {
           mochiClient.getOutputStream().write(command.getBytes());
         } catch (IOException e) {
-          LOGGER.log(Level.SEVERE, "Error sending save command to MochiMochi", e);
+          LOGGER.log(Level.SEVERE, String.format("Error sending %s command to MochiMochi", command),
+              e);
         }
       }
     }
@@ -398,13 +411,7 @@ public class OrbitAILearningHandler {
       int label = OrbitAIDataHandler.getHDCameraLabel(PD6);
       String command = String.format("train %d 1:%f 2:%f", label, PD3, PD6); // TODO clarify format
 
-      if (mochiClient != null && !mochiClient.isClosed()) {
-        try {
-          mochiClient.getOutputStream().write(command.getBytes());
-        } catch (IOException e) {
-          LOGGER.log(Level.SEVERE, "Error sending train command to MochiMochi", e);
-        }
-      }
+      sendMochiCommand(command);
     }
   }
 }
