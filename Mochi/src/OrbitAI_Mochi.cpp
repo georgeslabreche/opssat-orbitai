@@ -290,46 +290,79 @@ int main(int argc, char *argv[])
             }
             else if(receivedCmd.compare(0, loadCmdLen, loadCmd) == 0)  // Load saved models.
             {
-                // Deserialize.
-                
-                // ADAM
-                adam_1D.load("models/adam_1D");
-                adam_2D.load("models/adam_2D");
-                adam_3D.load("models/adam_3D");
-                adam_5D.load("models/adam_5D");
+                // Assume that if this file does not exist then none of the other model files exist.
+                std::string testModelFile = "models/adam_1D";
 
-                // ADAGRAD RDA
-                rda_1D.load("models/rda_1D");
-                rda_2D.load("models/rda_2D");
-                rda_3D.load("models/rda_3D");
-                rda_5D.load("models/rda_5D");
+                // If the test model file does not exist then skip attemping loading all model files.
+                // In this case the training commands will simply start training new models from scratch.
+                // Tout ou rien: we don't account for the unlikley case in which some model files exist and others do not.
+                if(access(testModelFile.c_str(), F_OK ) == -1)
+                {
+                    // Log error.
+                    logError("Skipped loading models because of a missing model file.");
 
-                // AROW
-                arow_1D.load("models/arow_1D");
-                arow_2D.load("models/arow_2D");
-                arow_3D.load("models/arow_3D");
-                arow_5D.load("models/arow_5D");
+                    // Still send OK message.
+                    std::string response = "OK\n";
+                    send(connection, response.c_str(), response.size(), 0);
+                }
+                else
+                {
+                    // Deserialize.
+                    try
+                    {
+                        // ADAM
+                        adam_1D.load("models/adam_1D");
+                        adam_2D.load("models/adam_2D");
+                        adam_3D.load("models/adam_3D");
+                        adam_5D.load("models/adam_5D");
 
-                // SCW
-                scw_1D.load("models/scw_1D");
-                scw_2D.load("models/scw_2D");
-                scw_3D.load("models/scw_3D");
-                scw_5D.load("models/scw_5D");
+                        // ADAGRAD RDA
+                        rda_1D.load("models/rda_1D");
+                        rda_2D.load("models/rda_2D");
+                        rda_3D.load("models/rda_3D");
+                        rda_5D.load("models/rda_5D");
 
-                // NHERD
-                nherd_1D.load("models/nherd_1D");
-                nherd_2D.load("models/nherd_2D");
-                nherd_3D.load("models/nherd_3D");
-                nherd_5D.load("models/nherd_5D");
+                        // AROW
+                        arow_1D.load("models/arow_1D");
+                        arow_2D.load("models/arow_2D");
+                        arow_3D.load("models/arow_3D");
+                        arow_5D.load("models/arow_5D");
 
-                // PA
-                pa_1D.load("models/pa_1D");
-                pa_2D.load("models/pa_2D");
-                pa_3D.load("models/pa_3D");
-                pa_5D.load("models/pa_5D");
+                        // SCW
+                        scw_1D.load("models/scw_1D");
+                        scw_2D.load("models/scw_2D");
+                        scw_3D.load("models/scw_3D");
+                        scw_5D.load("models/scw_5D");
 
-                std::string response = "OK\n";
-                send(connection, response.c_str(), response.size(), 0);
+                        // NHERD
+                        nherd_1D.load("models/nherd_1D");
+                        nherd_2D.load("models/nherd_2D");
+                        nherd_3D.load("models/nherd_3D");
+                        nherd_5D.load("models/nherd_5D");
+
+                        // PA
+                        pa_1D.load("models/pa_1D");
+                        pa_2D.load("models/pa_2D");
+                        pa_3D.load("models/pa_3D");
+                        pa_5D.load("models/pa_5D");
+
+                        std::string response = "OK\n";
+                        send(connection, response.c_str(), response.size(), 0);
+
+                    }
+                    catch (const std::exception& e)
+                    {
+                        // Log error.
+                        std::ostringstream oss;
+                        oss << "Unhandled error while loading mode files. Partial loading may have occured: " << e.what();
+                        logError(oss.str());
+
+                        // Error response
+                        std::string response = "ERROR\n";
+                        send(connection, response.c_str(), response.size(), 0);
+                    }
+
+                }
             }
             else if(receivedCmd.compare(0, saveCmdLen, saveCmd) == 0)// Save models.
             {
