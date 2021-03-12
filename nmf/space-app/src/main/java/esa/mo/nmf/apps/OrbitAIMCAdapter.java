@@ -170,12 +170,10 @@ public class OrbitAIMCAdapter extends MonitorAndControlNMFAdapter {
     return learningHandler.startLearning();
   }
 
-  // TODO restart training action (on previous models)
-
   @Action(description = "Stops learning", stepCount = 1, name = "stopLearning")
   public UInteger stopLearning(Long actionInstanceObjId, boolean reportProgress,
       MALInteraction interaction) {
-    return learningHandler.stopLearning();
+    return learningHandler.stopLearning(true);
   }
 
   // ----------------------------------- NMF components --------------------------------------------
@@ -211,22 +209,40 @@ public class OrbitAIMCAdapter extends MonitorAndControlNMFAdapter {
     this.connector.setCloseAppListener(new CloseAppListener() {
       @Override
       public Boolean onClose() {
-        boolean success = true;
-        // Stop fetching data in supervisor
-        if (dataHandler.toggleSupervisorParametersSubscription(false) != null) {
-          success = false;
-        }
-        // Stop training models
-        if (learningHandler.stopLearning() != null) {
-          success = false;
-        }
-        // Close supervisor consumer connections
-        supervisorSMA.closeConnections();
-
-        LOGGER.log(Level.INFO, "Closed application successfully: " + success);
-        return success;
+        return OrbitAIMCAdapter.this.onClose(true);
       }
     });
+  }
+
+  /**
+   * Gracefully closes the application.
+   *
+   * @param requestFromUser Whether request comes from user
+   * @return true in case of success, false otherwise
+   */
+  public boolean onClose(boolean requestFromUser) {
+    boolean success = true;
+    // Stop fetching data in supervisor
+    if (dataHandler.toggleSupervisorParametersSubscription(false) != null) {
+      success = false;
+    }
+
+    // Stop learning loop
+    if (learningHandler.stopLearning(requestFromUser) != null) {
+      success = false;
+    }
+
+    // Close supervisor consumer connections
+    supervisorSMA.closeConnections();
+
+    LOGGER.log(Level.INFO, "Closed application successfully: " + success);
+
+    // if experiment is over
+    if (!requestFromUser) {
+      System.exit(success ? 0 : 1);
+    }
+
+    return success;
   }
 
   /**
