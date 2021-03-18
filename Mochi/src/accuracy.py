@@ -13,8 +13,8 @@ class Algorithm(Enum):
     SCW = 4     # Exact Soft Confidence-Weighted Learning
     NHERD = 5   # Normal Herd (Learning via Gaussian Herding)
     PA = 6      # Passive Aggressive
-    PA1 = 7     # Passive Aggressive II
-    PA2 = 8     # Passive Aggressive I
+    PA1 = 7     # Passive Aggressive I
+    PA2 = 8     # Passive Aggressive II
 
 ALGORITHMS = [
     Algorithm.ADAM, Algorithm.RDA, Algorithm.AROW, 
