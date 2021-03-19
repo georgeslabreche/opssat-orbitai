@@ -35,12 +35,12 @@ make TARGET=arm
 
 ### Training
 Running the program will start a server that accepts commands to train models using the following methodologies:
-- ADAM: A Method for Stochastic Optimization
-- ADAGRAD RDA: Adaptive Subgradient Methods for Online Learning and Stochastic Optimization (Adagarad = Adaptive Gradian, RDA = Regularized Dual Averaging)
-- AROW: Adaptive Regularization of Weight Vectors
-- SCW: Exact Soft Confidence-Weighted Learning
-- NHERD: Nomal Herd (Learning via Gaussian Herding)
-- PA: Passive Aggressive
+- ADAM: A Method for Stochastic Optimization.
+- ADAGRAD RDA: Adaptive Subgradient Methods for Online Learning and Stochastic Optimization (Adagarad = Adaptive Gradian, RDA = Regularized Dual Averaging).
+- AROW: Adaptive Regularization of Weight Vectors.
+- SCW: Exact Soft Confidence-Weighted Learning.
+- NHERD: Normal Herd (Learning via Gaussian Herding) with full diagonal covariance.
+- PA: Passive Aggressive. All three variants: PA, PA-I, PA-II.
 
 ### Commands
 The server accepts the following commands:

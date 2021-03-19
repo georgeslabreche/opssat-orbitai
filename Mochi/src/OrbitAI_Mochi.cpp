@@ -26,7 +26,7 @@
 
 #define LOG_FILEPATH_TRAINING        "logs/training.csv"
 #define LOG_FILEPATH_INFERENCE      "logs/inference.csv"
-#define LOG_FILEPATH_ORBITAI              "logs/orbitai.log"
+#define LOG_FILEPATH_ORBITAI          "logs/orbitai.log"
 
 // In case no port number is given.
 #define DEFAULT_PORT_NUMBER                         9999
@@ -131,20 +131,66 @@ int main(int argc, char *argv[])
         const char* exitCmd = "exit";
         const int exitCmdLen = 4;
 
-        // The hyperparameters
+        // RDA Hyperparameters.
+
+        // eta - learning Rate.
         const double hp_rda_eta = 0.1;
+
+        // lambda - a small value usd to avoid the denominator from becoming zero.
+        //
+        // See:
+        // - https://towardsdatascience.com/adaptive-learning-rate-adagrad-and-rmsprop-46a7d547d244
         const double hp_rda_lambda = 0.000001;
 
+        // AROW Hyperparameters.
+
+        // r > 0 - a hyperparameter to adjust the generalization of learning.
+        //
+        // See: 
+        // - NARROW ADAPTIVE REGULARIZATION OF WEIGHTSFOR GRAPHEME-TO-PHONEME CONVERSION
+        //   http://www.phontron.com/paper/kubo14icassp.pdf
+        //
+        // - Structured Adaptive Regularization of Weight Vectors for a RobustGrapheme-to-Phoneme Conversion Model
+        //   http://www.phontron.com/paper/kubo14ieice.pdf
         const double hp_arow_r = 0.8;
 
-        const double hp_scw_c = 1.0;
-        const double hp_scw_eta = 0.95;
+        // SCW Hyperparameters.
 
+        // eta - learning Rate.
+        const double hp_scw_eta = 0.95;
+        
+        // C - control the aggressiveness versus passiveness of the learning algorithm.
+        //
+        // See:
+        // - An integrated classification model for incremental learning
+        //   https://link.springer.com/article/10.1007/s11042-020-10070-w
+        const double hp_scw_c = 1.0;
+        
+        // NHERD Hyperparameters.
+
+        // C - control the aggressiveness versus passiveness of the learning algorithm.
         const double hp_nherd_c = 0.1;
+        
+        // diagonal - switching the diagonal covariance,
+        //  0 - Full covariance
+        //  1 - Exact covariance
+        //  2 - Project covariance
+        //  3 - Drop covariance
         const int hp_nherd_diagonal = 0;
 
+        // PA Hyperparameters.
+        
+        // C is a positive parameter to balance the tradeoff between "passiveness" (first regularization term) and "aggressiveness" (second slack-variable term).
+        //
+        // See:
+        // - Online Learning: A Comprehensive Survey
+        //   https://arxiv.org/pdf/1802.02871.pdf
+        //
+        // - Online Passive-Aggressive Algorithms
+        //   https://webee.technion.ac.il/people/koby/publications/crammer06a.pdf
         const double hp_pa_c = 0.1;
-        const int hp_pa_select = 1;
+
+        // Initalize online learning algorithm classes.
 
         // ADAM
         ADAM adam_1D(1);
@@ -177,10 +223,22 @@ int main(int argc, char *argv[])
         NHERD nherd_5D(5, hp_nherd_c, hp_nherd_diagonal);
 
         // PA
-        PA pa_1D(1, hp_pa_c, hp_pa_select);
-        PA pa_2D(2, hp_pa_c, hp_pa_select);
-        PA pa_3D(3, hp_pa_c, hp_pa_select);
-        PA pa_5D(5, hp_pa_c, hp_pa_select);
+        PA pa_1D(1, hp_pa_c, 0);
+        PA pa_2D(2, hp_pa_c, 0);
+        PA pa_3D(3, hp_pa_c, 0);
+        PA pa_5D(5, hp_pa_c, 0);
+
+        // PA-I
+        PA pa1_1D(1, hp_pa_c, 1);
+        PA pa1_2D(2, hp_pa_c, 1);
+        PA pa1_3D(3, hp_pa_c, 1);
+        PA pa1_5D(5, hp_pa_c, 1);
+
+        // PA-II
+        PA pa2_1D(1, hp_pa_c, 2);
+        PA pa2_2D(2, hp_pa_c, 2);
+        PA pa2_3D(3, hp_pa_c, 2);
+        PA pa2_5D(5, hp_pa_c, 2);
 
         // The command buffer.
         char buffer[COMMAND_BUFFER_LENGTH];
@@ -289,6 +347,18 @@ int main(int argc, char *argv[])
                 remove("models/pa_2D");
                 remove("models/pa_3D");
                 remove("models/pa_5D");
+
+                // PA-I
+                remove("models/pa1_1D");
+                remove("models/pa1_2D");
+                remove("models/pa1_3D");
+                remove("models/pa1_5D");
+
+                // PA-II
+                remove("models/pa2_1D");
+                remove("models/pa2_2D");
+                remove("models/pa2_3D");
+                remove("models/pa2_5D");
 
                 // Delete log files.
                 remove(LOG_FILEPATH_TRAINING);
@@ -401,6 +471,32 @@ int main(int argc, char *argv[])
                         pa_5D.load("models/pa_5D");
                         logInfo("Loaded models/pa_5D");
 
+                        // PA-I
+                        pa1_1D.load("models/pa1_1D");
+                        logInfo("Loaded models/pa1_1D");
+
+                        pa1_2D.load("models/pa1_2D");
+                        logInfo("Loaded models/pa1_2D");
+
+                        pa1_3D.load("models/pa1_3D");
+                        logInfo("Loaded models/pa1_3D");
+
+                        pa1_5D.load("models/pa1_5D");
+                        logInfo("Loaded models/pa1_5D");
+
+                        // PA-II
+                        pa2_1D.load("models/pa2_1D");
+                        logInfo("Loaded models/pa2_1D");
+
+                        pa2_2D.load("models/pa2_2D");
+                        logInfo("Loaded models/pa2_2D");
+
+                        pa2_3D.load("models/pa2_3D");
+                        logInfo("Loaded models/pa2_3D");
+
+                        pa2_5D.load("models/pa2_5D");
+                        logInfo("Loaded models/pa2_5D");
+
                         std::string response = "OK\n";
                         send(connection, response.c_str(), response.size(), 0);
 
@@ -458,6 +554,18 @@ int main(int argc, char *argv[])
                 pa_2D.save("models/pa_2D");
                 pa_3D.save("models/pa_3D");
                 pa_5D.save("models/pa_5D");
+
+                // PA-I
+                pa1_1D.save("models/pa1_1D");
+                pa1_2D.save("models/pa1_2D");
+                pa1_3D.save("models/pa1_3D");
+                pa1_5D.save("models/pa1_5D");
+
+                // PA-II
+                pa2_1D.save("models/pa2_1D");
+                pa2_2D.save("models/pa2_2D");
+                pa2_3D.save("models/pa2_3D");
+                pa2_5D.save("models/pa2_5D");
 
                 std::string response = "OK\n";
                 send(connection, response.c_str(), response.size(), 0);
@@ -731,6 +839,62 @@ int main(int argc, char *argv[])
                         end = std::chrono::high_resolution_clock::now();
                         std::chrono::duration<double, std::milli> updateTime_pa_5D = end - start;
 
+                        /**
+                         * PA-I
+                         */
+
+                        // 1D feature space. Record execution time in milliseconds.
+                        start = std::chrono::high_resolution_clock::now();
+                        pa1_1D.update(data_1D.second, data_1D.first);
+                        end = std::chrono::high_resolution_clock::now();
+                        std::chrono::duration<double, std::milli> updateTime_pa1_1D = end - start;
+
+                        // 2D feature space. Record execution time in milliseconds.
+                        start = std::chrono::high_resolution_clock::now();
+                        pa1_2D.update(data_2D.second, data_2D.first);
+                        end = std::chrono::high_resolution_clock::now();
+                        std::chrono::duration<double, std::milli> updateTime_pa1_2D = end - start;
+
+                        // 3D feature space. Record execution time in milliseconds.
+                        start = std::chrono::high_resolution_clock::now();
+                        pa1_3D.update(data_3D.second, data_3D.first);
+                        end = std::chrono::high_resolution_clock::now();
+                        std::chrono::duration<double, std::milli> updateTime_pa1_3D = end - start;
+
+                        // 5D feature space. Record execution time in milliseconds.
+                        start = std::chrono::high_resolution_clock::now();
+                        pa1_5D.update(data_5D.second, data_5D.first);
+                        end = std::chrono::high_resolution_clock::now();
+                        std::chrono::duration<double, std::milli> updateTime_pa1_5D = end - start;
+
+                        /**
+                         * PA
+                         */
+
+                        // 1D feature space. Record execution time in milliseconds.
+                        start = std::chrono::high_resolution_clock::now();
+                        pa2_1D.update(data_1D.second, data_1D.first);
+                        end = std::chrono::high_resolution_clock::now();
+                        std::chrono::duration<double, std::milli> updateTime_pa2_1D = end - start;
+
+                        // 2D feature space. Record execution time in milliseconds.
+                        start = std::chrono::high_resolution_clock::now();
+                        pa2_2D.update(data_2D.second, data_2D.first);
+                        end = std::chrono::high_resolution_clock::now();
+                        std::chrono::duration<double, std::milli> updateTime_pa2_2D = end - start;
+
+                        // 3D feature space. Record execution time in milliseconds.
+                        start = std::chrono::high_resolution_clock::now();
+                        pa2_3D.update(data_3D.second, data_3D.first);
+                        end = std::chrono::high_resolution_clock::now();
+                        std::chrono::duration<double, std::milli> updateTime_pa2_3D = end - start;
+
+                        // 5D feature space. Record execution time in milliseconds.
+                        start = std::chrono::high_resolution_clock::now();
+                        pa2_5D.update(data_5D.second, data_5D.first);
+                        end = std::chrono::high_resolution_clock::now();
+                        std::chrono::duration<double, std::milli> updateTime_pa2_5D = end - start;
+
 #if SAVE_AFTER_UPDATE
                         // Save the models if set to do so.
 
@@ -769,6 +933,18 @@ int main(int argc, char *argv[])
                         pa_2D.save("models/pa_2D");
                         pa_3D.save("models/pa_3D");
                         pa_5D.save("models/pa_5D");
+
+                        // PA-I
+                        pa1_1D.save("models/pa1_1D");
+                        pa1_2D.save("models/pa1_2D");
+                        pa1_3D.save("models/pa1_3D");
+                        pa1_5D.save("models/pa1_5D");
+
+                        // PA-II
+                        pa2_1D.save("models/pa2_1D");
+                        pa2_2D.save("models/pa2_2D");
+                        pa2_3D.save("models/pa2_3D");
+                        pa2_5D.save("models/pa2_5D");
 #endif
                         // Opening the training log file.
                         std::ofstream trainingLogFile;
@@ -787,7 +963,9 @@ int main(int argc, char *argv[])
                             + std::to_string(updateTime_arow_1D.count()) + "," + std::to_string(updateTime_arow_2D.count()) + "," + std::to_string(updateTime_arow_3D.count()) + "," + std::to_string(updateTime_arow_5D.count()) + ","
                             + std::to_string(updateTime_scw_1D.count()) + "," + std::to_string(updateTime_scw_2D.count()) + "," + std::to_string(updateTime_scw_3D.count()) + "," + std::to_string(updateTime_scw_5D.count()) + ","
                             + std::to_string(updateTime_nherd_1D.count()) + "," + std::to_string(updateTime_nherd_2D.count()) + "," + std::to_string(updateTime_nherd_3D.count()) + "," + std::to_string(updateTime_nherd_5D.count()) + ","
-                            + std::to_string(updateTime_pa_1D.count()) + "," + std::to_string(updateTime_pa_2D.count()) + "," + std::to_string(updateTime_pa_3D.count())+ "," + std::to_string(updateTime_pa_5D.count())
+                            + std::to_string(updateTime_pa_1D.count()) + "," + std::to_string(updateTime_pa_2D.count()) + "," + std::to_string(updateTime_pa_3D.count())+ "," + std::to_string(updateTime_pa_5D.count()) + ","
+                            + std::to_string(updateTime_pa1_1D.count()) + "," + std::to_string(updateTime_pa1_2D.count()) + "," + std::to_string(updateTime_pa1_3D.count())+ "," + std::to_string(updateTime_pa1_5D.count()) + ","
+                            + std::to_string(updateTime_pa2_1D.count()) + "," + std::to_string(updateTime_pa2_2D.count()) + "," + std::to_string(updateTime_pa2_3D.count())+ "," + std::to_string(updateTime_pa2_5D.count())
 #endif                         
                             + "\n";
 
@@ -1039,6 +1217,52 @@ int main(int argc, char *argv[])
                         end = std::chrono::high_resolution_clock::now(); 
                         std::chrono::duration<double, std::milli> predictTime_pa_5D = end - start;
 
+                        /**
+                         * PA-I.
+                         */
+                        start = std::chrono::high_resolution_clock::now();
+                        int pa1_pred_1D = pa1_1D.predict(data_1D.second);
+                        end = std::chrono::high_resolution_clock::now();
+                        std::chrono::duration<double, std::milli> predictTime_pa1_1D = end - start;
+
+                        start = std::chrono::high_resolution_clock::now();
+                        int pa1_pred_2D = pa1_2D.predict(data_2D.second);
+                        end = std::chrono::high_resolution_clock::now();
+                        std::chrono::duration<double, std::milli> predictTime_pa1_2D = end - start;
+
+                        start = std::chrono::high_resolution_clock::now();
+                        int pa1_pred_3D = pa1_3D.predict(data_3D.second);
+                        end = std::chrono::high_resolution_clock::now(); 
+                        std::chrono::duration<double, std::milli> predictTime_pa1_3D = end - start;
+
+                        start = std::chrono::high_resolution_clock::now();
+                        int pa1_pred_5D = pa1_5D.predict(data_5D.second);
+                        end = std::chrono::high_resolution_clock::now(); 
+                        std::chrono::duration<double, std::milli> predictTime_pa1_5D = end - start;
+
+                        /**
+                         * PA-II.
+                         */
+                        start = std::chrono::high_resolution_clock::now();
+                        int pa2_pred_1D = pa2_1D.predict(data_1D.second);
+                        end = std::chrono::high_resolution_clock::now();
+                        std::chrono::duration<double, std::milli> predictTime_pa2_1D = end - start;
+
+                        start = std::chrono::high_resolution_clock::now();
+                        int pa2_pred_2D = pa2_2D.predict(data_2D.second);
+                        end = std::chrono::high_resolution_clock::now();
+                        std::chrono::duration<double, std::milli> predictTime_pa2_2D = end - start;
+
+                        start = std::chrono::high_resolution_clock::now();
+                        int pa2_pred_3D = pa2_3D.predict(data_3D.second);
+                        end = std::chrono::high_resolution_clock::now(); 
+                        std::chrono::duration<double, std::milli> predictTime_pa2_3D = end - start;
+
+                        start = std::chrono::high_resolution_clock::now();
+                        int pa2_pred_5D = pa2_5D.predict(data_5D.second);
+                        end = std::chrono::high_resolution_clock::now(); 
+                        std::chrono::duration<double, std::milli> predictTime_pa2_5D = end - start;
+
                         // The inference log file.
                         std::ofstream inferenceLogFile;
                         inferenceLogFile.open(LOG_FILEPATH_INFERENCE, std::ios_base::out | std::ios_base::app);
@@ -1049,7 +1273,9 @@ int main(int argc, char *argv[])
                             + std::to_string(arow_pred_1D) + "," + std::to_string(arow_pred_2D) + "," + std::to_string(arow_pred_3D) + "," + std::to_string(arow_pred_5D) + ","
                             + std::to_string(scw_pred_1D) + "," + std::to_string(scw_pred_2D) + "," + std::to_string(scw_pred_3D) + "," + std::to_string(scw_pred_5D) + ","
                             + std::to_string(nherd_pred_1D) + "," + std::to_string(nherd_pred_2D) + "," + std::to_string(nherd_pred_3D) + "," + std::to_string(nherd_pred_5D) + ","
-                            + std::to_string(pa_pred_1D) + "," + std::to_string(pa_pred_2D) + "," + std::to_string(pa_pred_3D) + "," + std::to_string(pa_pred_5D);
+                            + std::to_string(pa_pred_1D) + "," + std::to_string(pa_pred_2D) + "," + std::to_string(pa_pred_3D) + "," + std::to_string(pa_pred_5D) + ","
+                            + std::to_string(pa1_pred_1D) + "," + std::to_string(pa1_pred_2D) + "," + std::to_string(pa1_pred_3D) + "," + std::to_string(pa1_pred_5D) + ","
+                            + std::to_string(pa2_pred_1D) + "," + std::to_string(pa2_pred_2D) + "," + std::to_string(pa2_pred_3D) + "," + std::to_string(pa2_pred_5D);
 
                         // Creating the inference results row string to append to the log file.
                         std::string inferenceLogFileRow =
@@ -1065,7 +1291,9 @@ int main(int argc, char *argv[])
                             + std::to_string(predictTime_arow_1D.count()) + "," + std::to_string(predictTime_arow_2D.count()) + "," + std::to_string(predictTime_arow_3D.count()) + "," + std::to_string(predictTime_arow_5D.count()) + ","
                             + std::to_string(predictTime_scw_1D.count()) + "," + std::to_string(predictTime_scw_2D.count()) + "," + std::to_string(predictTime_scw_3D.count()) + "," + std::to_string(predictTime_scw_5D.count()) + ","
                             + std::to_string(predictTime_nherd_1D.count()) + "," + std::to_string(predictTime_nherd_2D.count()) + "," + std::to_string(predictTime_nherd_3D.count()) + "," + std::to_string(predictTime_nherd_5D.count()) + ","
-                            + std::to_string(predictTime_pa_1D.count()) + "," + std::to_string(predictTime_pa_2D.count()) + "," + std::to_string(predictTime_pa_3D.count()) + "," + std::to_string(predictTime_pa_5D.count())
+                            + std::to_string(predictTime_pa_1D.count()) + "," + std::to_string(predictTime_pa_2D.count()) + "," + std::to_string(predictTime_pa_3D.count()) + "," + std::to_string(predictTime_pa_5D.count()) + ","
+                            + std::to_string(predictTime_pa1_1D.count()) + "," + std::to_string(predictTime_pa1_2D.count()) + "," + std::to_string(predictTime_pa1_3D.count()) + "," + std::to_string(predictTime_pa1_5D.count()) + ","
+                            + std::to_string(predictTime_pa2_1D.count()) + "," + std::to_string(predictTime_pa2_2D.count()) + "," + std::to_string(predictTime_pa2_3D.count()) + "," + std::to_string(predictTime_pa2_5D.count())
     #endif
                             + "\n";
 

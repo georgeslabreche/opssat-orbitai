@@ -9,10 +9,18 @@ from enum import Enum
 class Algorithm(Enum):
     ADAM = 1    # A Method for Stochastic Optimization
     RDA = 2     # Adaptive Subgradient Methods for Online Learning and Stochastic Optimization (Adagarad = Adaptive Gradian, RDA = Regularized Dual Averaging)
-    AROW = 3
-    SCW = 4
-    NHERD = 5
-    PA = 6
+    AROW = 3    # Adaptive Regularization of Weight Vectors
+    SCW = 4     # Exact Soft Confidence-Weighted Learning
+    NHERD = 5   # Normal Herd (Learning via Gaussian Herding)
+    PA = 6      # Passive Aggressive
+    PA1 = 7     # Passive Aggressive I
+    PA2 = 8     # Passive Aggressive II
+
+ALGORITHMS = [
+    Algorithm.ADAM, Algorithm.RDA, Algorithm.AROW, 
+    Algorithm.SCW, Algorithm.NHERD,
+    Algorithm.PA, Algorithm.PA1, Algorithm.PA2
+]
 
 trackers = {
     'total': 0, # total predictions.
@@ -37,6 +45,14 @@ trackers = {
         'accuracy': [0, 0, 0, 0] 
     },
     'pa': {
+        'correct': [0, 0, 0, 0],
+        'accuracy': [0, 0, 0, 0] 
+    },
+    'pa1': {
+        'correct': [0, 0, 0, 0],
+        'accuracy': [0, 0, 0, 0] 
+    },
+    'pa2': {
         'correct': [0, 0, 0, 0],
         'accuracy': [0, 0, 0, 0] 
     }
@@ -65,6 +81,12 @@ def get_algo_name(algorithm):
 
     elif algorithm is Algorithm.PA:
         return 'pa'
+
+    elif algorithm is Algorithm.PA1:
+        return 'pa1'
+
+    elif algorithm is Algorithm.PA2:
+        return 'pa2'
 
     else:
         print('ERROR: Invalid algorithm.')
@@ -97,6 +119,12 @@ def count_correct_predictions(algorithm, expected_label, row):
 
     elif algorithm is Algorithm.PA:
         pred_label_index = 28
+
+    elif algorithm is Algorithm.PA1:
+        pred_label_index = 32
+
+    elif algorithm is Algorithm.PA2:
+        pred_label_index = 36
 
     else:
         print('ERROR: Invalid algorithm.')
@@ -143,12 +171,12 @@ with open('logs/inference.csv') as csvfile:
         expected_label = row[7]
 
         # Count number of correction predictions made by each algorithm.
-        for algo in [Algorithm.ADAM, Algorithm.RDA, Algorithm.AROW, Algorithm.SCW, Algorithm.NHERD, Algorithm.PA]:
+        for algo in ALGORITHMS:
             count_correct_predictions(algo, expected_label, row)
 
 
 # Calculate accuracies.
-for algo in [Algorithm.ADAM, Algorithm.RDA, Algorithm.AROW, Algorithm.SCW, Algorithm.NHERD, Algorithm.PA]:
+for algo in ALGORITHMS:
     calculate_accuracies(algo, trackers['total'])
 
 # Pretty print the results.
