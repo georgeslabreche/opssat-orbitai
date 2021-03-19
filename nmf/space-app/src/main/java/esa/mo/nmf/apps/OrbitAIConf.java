@@ -73,6 +73,18 @@ public class OrbitAIConf {
   public static final String PARAMS_TO_ENABLE = "esa.mo.nmf.apps.OrbitAI.params_to_enable";
 
   /**
+   * Property key: Whether or not we check the photo diodes values before sending them to the
+   * learning models.
+   */
+  public static final String CHECK_PD_VALUES = "esa.mo.nmf.apps.OrbitAI.check_pd_values";
+
+  /**
+   * Property key: Whether or not we check validity flags of the photo diodes before sending their
+   * values to the learning models.
+   */
+  public static final String CHECK_VALIDITY_FLAGS = "esa.mo.nmf.apps.OrbitAI.check_validity_flags";
+
+  /**
    * Property key: Port at which the Mochi server will be listening.
    */
   public static final String MOCHI_PORT = "esa.mo.nmf.apps.OrbitAI.mochi.port";

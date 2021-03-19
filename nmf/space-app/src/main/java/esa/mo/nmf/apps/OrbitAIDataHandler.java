@@ -9,7 +9,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
-import java.lang.reflect.Field;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -52,24 +51,24 @@ public class OrbitAIDataHandler {
   private static final float PD6_ELEVATION_THRESHOLD_HD_CAM = 1.0472f;
 
   /**
-   * Internal parameters default value.
-   */
-  public static final float PARAMS_DEFAULT_VALUE = 0;
-
-  /**
-   * Internal parameters default report interval in seconds.
-   */
-  public static final float PARAMS_DEFAULT_REPORT_INTERVAL = 5;
-
-  /**
    * M&C interface of the application.
    */
   private final OrbitAIMCAdapter adapter;
 
   /**
+   * Parameters default value before first acquisition.
+   */
+  private static final String PARAMS_DEFAULT_VALUE = "x";
+
+  /**
    * Lock for accessing our internal parameters
    */
   private final ReentrantLock parametersLock = new ReentrantLock();
+
+  /**
+   * Latest parameters values acquired from supervisor.
+   */
+  private final HashMap<String, String> parameters;
 
   /**
    * The listener for parameters values coming from supervisor.
@@ -81,9 +80,28 @@ public class OrbitAIDataHandler {
    */
   private FileOutputStream trainingDataOutputStream;
 
+  /**
+   * Storing supervisor parameters names for convenience.
+   */
+  public static final String PD1 = "CADC0884";
+  public static final String PD1_FLAG = "CADC0885";
+  public static final String PD2 = "CADC0886";
+  public static final String PD2_FLAG = "CADC0887";
+  public static final String PD3 = "CADC0888";
+  public static final String PD3_FLAG = "CADC0889";
+  public static final String PD4_FLAG = "CADC0891";
+  public static final String PD4 = "CADC0890";
+  public static final String PD5 = "CADC0892";
+  public static final String PD5_FLAG = "CADC0893";
+  public static final String PD6 = "CADC0894";
+  public static final String PD6_FLAG = "CADC0895";
+
+  private static List<String> parametersNames;
+
 
   public OrbitAIDataHandler(OrbitAIMCAdapter adapter) {
     this.adapter = adapter;
+    parameters = new HashMap<>();
   }
 
   /**
@@ -94,8 +112,9 @@ public class OrbitAIDataHandler {
    * @return null if it was successful. If not null, then the returned value holds the error number
    */
   public synchronized UInteger toggleSupervisorParametersSubscription(boolean subscribe) {
-    List<String> parametersNames = getParametersToEnable();
+    parametersNames = getParametersToEnable();
     if (parametersNames == null) {
+      parametersNames = new ArrayList<>();
       return new UInteger(1);
     }
     if (parametersNames.size() <= 0) {
@@ -131,7 +150,7 @@ public class OrbitAIDataHandler {
             LOGGER.log(Level.FINE, String.format(
                 "Received value %s from supervisor for parameter %s", dataS, parameterName));
 
-            setInternalParameter(parameterName, dataS);
+            setParameter(parameterName, dataS);
           }
         };
 
@@ -176,63 +195,30 @@ public class OrbitAIDataHandler {
   }
 
   /**
-   * Sets an internal parameter with the given value.
+   * Sets a parameter with the given value.
    *
-   * @param parameterName The internal parameter name
+   * @param parameterName The parameter name
    * @param value The new value for the parameter
    */
-  private void setInternalParameter(String parameterName, String value) {
+  private void setParameter(String parameterName, String value) {
     parametersLock.lock();
-    try {
-      Field internalParameter = adapter.getClass().getDeclaredField(parameterName);
-      internalParameter.setAccessible(true);
-      internalParameter.set(adapter, Float.parseFloat(value));
-      internalParameter.setAccessible(false);
-    } catch (NoSuchFieldException e1) {
-      LOGGER.log(Level.WARNING, String.format(
-          "Trying to set value %s for unknown internal parameter %s", value, parameterName));
-    } catch (SecurityException | IllegalArgumentException | IllegalAccessException e2) {
-      LOGGER.log(Level.SEVERE, "Error setting internal parameter", e2);
-    } finally {
-      parametersLock.unlock();
-    }
+    parameters.put(parameterName, value);
+    parametersLock.unlock();
   }
 
   /**
-   * Gets an internal parameter value.
+   * Returns latest parameters values fetched from supervisor at the time of call.
    *
-   * @param parameterName The internal parameter name
-   * @return the float value or PARAMS_DEFAULT_VALUE if an error happened
+   * @return The map of parameters names and their values
    */
-  private float getInternalParameter(String parameterName) {
+  private Map<String, String> getStampedParametersValues() {
+    Map<String, String> parametersValues = new HashMap<>();
     parametersLock.lock();
-    try {
-      Field internalParameter = adapter.getClass().getDeclaredField(parameterName);
-      internalParameter.setAccessible(true);
-      float value = internalParameter.getFloat(adapter);
-      internalParameter.setAccessible(false);
-      return value;
-    } catch (NoSuchFieldException e) {
-      LOGGER.log(Level.WARNING,
-          String.format("Trying to get value of unknown internal parameter %s", parameterName));
-    } catch (SecurityException | IllegalArgumentException | IllegalAccessException e2) {
-      LOGGER.log(Level.SEVERE, "Error getting internal parameter", e2);
-    } finally {
-      parametersLock.unlock();
+    for (String parameterName : parametersNames) {
+      parameters.computeIfAbsent(parameterName, k -> PARAMS_DEFAULT_VALUE);
+      parametersValues.put(parameterName, parameters.get(parameterName));
     }
-    return PARAMS_DEFAULT_VALUE;
-  }
-
-  /**
-   * Returns parameters values fetched from supervisor at the time of call.
-   *
-   * @return The map of parameters names and their values.
-   */
-  private Map<String, Float> getStampedParametersValues() {
-    Map<String, Float> parametersValues = new HashMap<String, Float>();
-    for (String parameterName : OrbitAIMCAdapter.parametersNames) {
-      parametersValues.put(parameterName, getInternalParameter(parameterName));
-    }
+    parametersLock.unlock();
 
     return parametersValues;
   }
@@ -274,18 +260,25 @@ public class OrbitAIDataHandler {
 
     // Open file stream
     String fileNameExtension = formatTimestamp(getTimestamp()) + ".csv";
-    String fileName = "";
-    for (String parameterName : OrbitAIMCAdapter.parametersNames) {
-      fileName += (parameterName + "_");
-    }
-    fileName += fileNameExtension;
+    String fileName = "data_" + fileNameExtension;
 
     if (trainingDataOutputStream == null) {
       try {
         trainingDataOutputStream =
             new FileOutputStream(Paths.get(dataDirectory.getPath(), fileName).toFile(), true);
+        // write first line with parameters names
+        StringBuffer line = new StringBuffer();
+        for (String parameterName : parametersNames) {
+          line.append(parameterName);
+          line.append(",");
+        }
+        line.append("\n");
+        trainingDataOutputStream.write(line.toString().getBytes());
       } catch (FileNotFoundException e) {
         LOGGER.log(Level.SEVERE, "Couldn't create data file stream", e);
+        return false;
+      } catch (IOException e) {
+        LOGGER.log(Level.SEVERE, "Couldn't write first line to data file stream", e);
         return false;
       }
       return true;
@@ -320,25 +313,28 @@ public class OrbitAIDataHandler {
    *
    * @return A time stamped map of parameters names and their values.
    */
-  public ImmutablePair<Long, Map<String, Float>> getDataSet() {
-    Map<String, Float> dataSet = getStampedParametersValues();
+  public ImmutablePair<Long, Map<String, String>> getDataSet() {
+    Map<String, String> dataSet = getStampedParametersValues();
     long timestamp = getTimestamp();
 
     // format line
-    String line = "";
-    for (String parameterName : OrbitAIMCAdapter.parametersNames) {
-      line += (dataSet.get(parameterName) + ",");
+    StringBuffer line = new StringBuffer();
+    line.append(timestamp);
+    line.append(",");
+    for (String parameterName : parametersNames) {
+      line.append(dataSet.get(parameterName));
+      line.append(",");
     }
-    line = timestamp + "," + line.substring(0, line.length() - 2) + "\n";
+    line.replace(line.length() - 1, line.length(), "\n");
 
     // write line
     try {
-      trainingDataOutputStream.write(line.getBytes());
+      trainingDataOutputStream.write(line.toString().getBytes());
     } catch (IOException e) {
       LOGGER.log(Level.WARNING, "Could not write to data file output stream", e);
     }
 
-    return new ImmutablePair<Long, Map<String, Float>>(timestamp, dataSet);
+    return new ImmutablePair<>(timestamp, dataSet);
   }
 
   /**

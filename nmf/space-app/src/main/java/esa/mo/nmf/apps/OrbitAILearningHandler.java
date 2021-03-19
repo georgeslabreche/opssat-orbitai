@@ -61,9 +61,21 @@ public class OrbitAILearningHandler {
   private int learningIterations = 1000;
 
   /**
-   * Keep in memory the last dataset time Fstamp
+   * Keep in memory the last time we got a valid data set
    */
   private long lastDataSetTimestamp = -1;
+
+  /**
+   * Whether or not we check photo diodes values before sending them to learning models.
+   */
+  private boolean checkPhotodiodesValues = true;
+
+  /**
+   * Whether or not we check the validity flags of the photo diodes before sending their values to
+   * the learning models.
+   */
+  private boolean checkValidityFlags = false;
+
 
 
   // ----- MOCHI MOCHI ----- //
@@ -139,6 +151,28 @@ public class OrbitAILearningHandler {
           String.format("Couldn't get experiment mode from configuration, %s will be used", mode));
     } else {
       mode = modeS;
+    }
+
+    // check photo diodes values
+    String checkPhotodiodesValuesS =
+        OrbitAIConf.getinstance().getProperty(OrbitAIConf.CHECK_PD_VALUES);
+    if (checkPhotodiodesValuesS == null) {
+      LOGGER.log(Level.WARNING,
+          String.format("Couldn't get checkPhotodiodesValues from configuration, %b will be used",
+              checkPhotodiodesValues));
+    } else {
+      checkPhotodiodesValues = Boolean.parseBoolean(checkPhotodiodesValuesS);
+    }
+
+    // check photo diodes validity flags
+    String checkValidityFlagsS =
+        OrbitAIConf.getinstance().getProperty(OrbitAIConf.CHECK_VALIDITY_FLAGS);
+    if (checkValidityFlagsS == null) {
+      LOGGER.log(Level.WARNING,
+          String.format("Couldn't get checkValidityFlags from configuration, %b will be used",
+              checkValidityFlags));
+    } else {
+      checkValidityFlags = Boolean.parseBoolean(checkValidityFlagsS);
     }
   }
 
@@ -391,10 +425,10 @@ public class OrbitAILearningHandler {
       // start "learning" loop
       while (keepRunning()) {
         try {
-          Thread.sleep(learningInterval * 1000);
-
           sendMochiLearnCommand();
           learningIterations--;
+
+          Thread.sleep(learningInterval * 1000);
         } catch (InterruptedException e) {
           LOGGER.log(Level.INFO, "Learning thread interrupted between two iterations");
         }
@@ -454,26 +488,98 @@ public class OrbitAILearningHandler {
      * The input data come from our data handler and from our data labeler.
      */
     private void sendMochiLearnCommand() {
-      ImmutablePair<Long, Map<String, Float>> stampedDataSet =
+      // get data
+      ImmutablePair<Long, Map<String, String>> stampedDataSet =
           adapter.getDataHandler().getDataSet();
+      Map<String, String> dataSet = stampedDataSet.getValue();
 
-      Map<String, Float> dataSet = stampedDataSet.getValue();
-      float PD1 = dataSet.get("CADC0884");
-      float PD2 = dataSet.get("CADC0886");
-      float PD3 = dataSet.get("CADC0888");
-      float PD4 = dataSet.get("CADC0890");
-      float PD5 = dataSet.get("CADC0892");
-      float PD6 = dataSet.get("CADC0894");
+      // get diodes related data
+      String[] PD = new String[7];
+      PD[1] = dataSet.get(OrbitAIDataHandler.PD1);
+      PD[2] = dataSet.get(OrbitAIDataHandler.PD2);
+      PD[3] = dataSet.get(OrbitAIDataHandler.PD3);
+      PD[4] = dataSet.get(OrbitAIDataHandler.PD4);
+      PD[5] = dataSet.get(OrbitAIDataHandler.PD5);
+      PD[6] = dataSet.get(OrbitAIDataHandler.PD6);
+      String[] PD_FLAGS = new String[7];
+      PD_FLAGS[1] = dataSet.get(OrbitAIDataHandler.PD1_FLAG);
+      PD_FLAGS[2] = dataSet.get(OrbitAIDataHandler.PD2_FLAG);
+      PD_FLAGS[3] = dataSet.get(OrbitAIDataHandler.PD3_FLAG);
+      PD_FLAGS[4] = dataSet.get(OrbitAIDataHandler.PD4_FLAG);
+      PD_FLAGS[5] = dataSet.get(OrbitAIDataHandler.PD5_FLAG);
+      PD_FLAGS[6] = dataSet.get(OrbitAIDataHandler.PD6_FLAG);
 
-      int label = OrbitAIDataHandler.getHDCameraLabel(PD6);
+      // check diodes values
+      float[] PDf = checkPhotodiodesValues(PD);
+      if (PDf == null) {
+        return;
+      }
+
+      // check diodes validity flags
+      if (!checkPhotodiodesValidityFlags(PD_FLAGS)) {
+        return;
+      }
+
+      // all correct, we send the Mochi command
+      int label = OrbitAIDataHandler.getHDCameraLabel(PDf[6]);
       long timestamp = stampedDataSet.getKey();
       lastDataSetTimestamp = timestamp;
       String subCommand = mode.equals(OrbitAIConf.INFERENCE_MODE) ? INFER_CMD : TRAIN_CMD;
 
       String command = String.format("%s %d %.2f %.2f %.2f %.2f %.2f %.2f %d", subCommand, label,
-          PD1, PD2, PD3, PD4, PD5, PD6, timestamp);
+          PDf[1], PDf[2], PDf[3], PDf[4], PDf[5], PDf[6], timestamp);
 
       sendMochiCommand(command);
     }
+  }
+
+
+  /**
+   * Checks the photo diodes values before sending them to the learning models. We carefully parse
+   * them to float and then verify if values are in expected range if enabled.
+   * 
+   * @param PD The photo diodes values (index 0 is unused).
+   * @return the photo diodes values or null if any of them is invalid
+   */
+  private float[] checkPhotodiodesValues(String[] PD) {
+    float[] PDf = new float[7];
+
+    for (int i = 1; i < PD.length; i++) {
+      // parse to float
+      try {
+        PDf[i] = Float.parseFloat(PD[i]);
+      } catch (NumberFormatException | NullPointerException e) {
+        return null;
+      }
+
+      // if enabled, check value is in range
+      if (checkPhotodiodesValues) {
+        if (PDf[i] < 0 || PDf[i] > Math.PI / 2.0) {
+          return null;
+        }
+      }
+    }
+
+    return PDf;
+  }
+
+  /**
+   * @param PD_FLAGS the flags (index 0 is unused)
+   * @return true if the validity flags are all equal to "1" or if the check of validity flags is
+   *         disabled.
+   */
+  private boolean checkPhotodiodesValidityFlags(String[] PD_FLAGS) {
+    // no need to check
+    if (!checkValidityFlags) {
+      return true;
+    }
+
+    // we check the flags
+    for (int i = 1; i < PD_FLAGS.length; i++) {
+      if (!"true".equals(PD_FLAGS[i])) {
+        return false;
+      }
+    }
+    return true;
   }
 }
