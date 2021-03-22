@@ -32,29 +32,30 @@ public class OrbitAIMCAdapter extends MonitorAndControlNMFAdapter {
 
   // ----------------------------------- Parameters -----------------------------------------------
 
-  // --- TODO Application's own parameters ---
-
-  @Parameter(description = "Experiment mode read from configuration", generationEnabled = true,
-      reportIntervalSeconds = PARAMS_DEFAULT_REPORT_INTERVAL, readOnly = true)
-  private String oai_mode = "unknown";
-
-  @Parameter(description = "Whether we are fetching data from supervisor", generationEnabled = true,
-      reportIntervalSeconds = PARAMS_DEFAULT_REPORT_INTERVAL, readOnly = true)
-  private boolean oai_isFetchingData = false;
-
-  @Parameter(description = "Whether we are currently learning", generationEnabled = true,
-      reportIntervalSeconds = PARAMS_DEFAULT_REPORT_INTERVAL, readOnly = true)
-  private boolean oai_isLearning = false;
-
-  @Parameter(description = "Interval between 2 iterations read from configuration",
-      generationEnabled = true, rawUnit = "seconds",
-      reportIntervalSeconds = PARAMS_DEFAULT_REPORT_INTERVAL, readOnly = true)
-  private int oai_iterationInterval = -1;
-
-  @Parameter(description = "Number of learning iterations left", generationEnabled = true,
-      reportIntervalSeconds = PARAMS_DEFAULT_REPORT_INTERVAL, readOnly = true)
-  private int oai_iterationsLeft = -1;
-
+  /*
+   * --- TODO Application's own parameters ---
+   * 
+   * @Parameter(description = "Experiment mode read from configuration", generationEnabled = true,
+   * reportIntervalSeconds = PARAMS_DEFAULT_REPORT_INTERVAL, readOnly = true) private String
+   * oai_mode = "unknown";
+   * 
+   * @Parameter(description = "Whether we are fetching data from supervisor", generationEnabled =
+   * true, reportIntervalSeconds = PARAMS_DEFAULT_REPORT_INTERVAL, readOnly = true) private boolean
+   * oai_isFetchingData = false;
+   * 
+   * @Parameter(description = "Whether we are currently learning", generationEnabled = true,
+   * reportIntervalSeconds = PARAMS_DEFAULT_REPORT_INTERVAL, readOnly = true) private boolean
+   * oai_isLearning = false;
+   * 
+   * @Parameter(description = "Interval between 2 iterations read from configuration",
+   * generationEnabled = true, rawUnit = "seconds", reportIntervalSeconds =
+   * PARAMS_DEFAULT_REPORT_INTERVAL, readOnly = true) private int oai_iterationInterval = -1;
+   * 
+   * @Parameter(description = "Number of learning iterations left", generationEnabled = true,
+   * reportIntervalSeconds = PARAMS_DEFAULT_REPORT_INTERVAL, readOnly = true) private int
+   * oai_iterationsLeft = -1;
+   * 
+   */
 
   // ----------------------------------- Actions --------------------------------------------------
 
@@ -77,28 +78,29 @@ public class OrbitAIMCAdapter extends MonitorAndControlNMFAdapter {
     return dataHandler;
   }
 
-  @Action(description = "Starts fetching data from the supervisor", stepCount = 1,
-      name = "startFetchingData")
+  // @Action(description = "Starts fetching data from the supervisor", stepCount = 1,
+  // name = "startFetchingData")
   public UInteger startFetchingData(Long actionInstanceObjId, boolean reportProgress,
       MALInteraction interaction) {
     return dataHandler.toggleSupervisorParametersSubscription(true);
   }
 
-  @Action(description = "Stops fetching data from the supervisor", stepCount = 1,
-      name = "stopFetchingData")
+  // @Action(description = "Stops fetching data from the supervisor", stepCount = 1,
+  // name = "stopFetchingData")
   public UInteger stopFetchingData(Long actionInstanceObjId, boolean reportProgress,
       MALInteraction interaction) {
     return dataHandler.toggleSupervisorParametersSubscription(false);
   }
 
-  @Action(description = "Starts learning depending on the experiment's mode (train, inference ...)",
-      stepCount = 1, name = "startLearning")
+  // @Action(description = "Starts learning depending on the experiment's mode (train, inference
+  // ...)",
+  // stepCount = 1, name = "startLearning")
   public UInteger startLearning(Long actionInstanceObjId, boolean reportProgress,
       MALInteraction interaction) {
     return learningHandler.startLearning();
   }
 
-  @Action(description = "Stops learning", stepCount = 1, name = "stopLearning")
+  // @Action(description = "Stops learning", stepCount = 1, name = "stopLearning")
   public UInteger stopLearning(Long actionInstanceObjId, boolean reportProgress,
       MALInteraction interaction) {
     return learningHandler.stopLearning(true);
