@@ -87,7 +87,7 @@ public class OrbitAILearningHandler {
   private static final String LOAD_CMD = "load";
   private static final String EXIT_CMD = "exit";
 
-  private static final String MOCHI_DIR = "/home/tanguy/Documents/code/opssat/opssat-orbitai/Mochi";
+  private static final String MOCHI_DIR = "bin/Mochi";
   private static final String MOCHI_MODELS_DIR = "models";
   private static final String MOCHI_LOGS_DIR = "logs";
 

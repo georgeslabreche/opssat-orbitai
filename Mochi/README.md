@@ -4,22 +4,30 @@ An executable binary for ESA's OPS-SAT spacecraft to enable Machine Learning usi
 2. The [v3.3 branch](https://gitlab.com/libeigen/eigen/-/tree/3.3) of the Eigen repository.
 
 ## Environments
-This project was successfully compiled in in Ubuntu 18.04 LTS. The target platform is the Ångström distribution is a Linux on the spacecraft's ARM processor.
+This project was successfully compiled in C++ on Ubuntu 18.04 LTS. The target platform is the Ångström distribution, it's a Linux on the spacecraft's ARM processor.
 
-### Development
-1. Install the ARM cross-compiler: `sudo apt-get install gcc-arm-linux-gnueabihf`.
-2. Install the Boost C++ libraries: `sudo apt-get install libboost-all-dev`.
+### Local development
+1. Install the Boost C++ libraries: `sudo apt-get install libboost-all-dev`
 
-### Spacecraft
-The Boost C++ library needs to be packaged for and deployed to the spacecraft:
-1. Cherry-pick download the ARM compiled libboost dependencies, [here](https://packages.debian.org/source/stretch/armhf/boost1.62).
-2. Make sure that the .so and .so.X.XX.X files are where the compiler expects them, e.g. in `/usr/lib/arm-linux-gnueabihf/`.
-3. Note that the .so files are simply symlink to the .so.X.XX.X file.
+### Spacecraft deployment
+On your local machine
+1. Install the ARM cross-compiler: `sudo apt-get install g++-arm-linux-gnueabihf`
+2. Install the ARM Boost C++ libraries
+    1. Download the ARM compiled libboost dependencies [here](https://packages.debian.org/sid/armhf/libboost-serialization1.74-dev/download). Choose a server an click "Save file".
+    2. Extract the libraries from the downloaded file
+        1. `mkdir extracted_deb`
+        2. `cp libboost-serialization1.74-dev_1.74.0-9_armhf.deb extracted_deb/`
+        3. `cd extracted_deb/ && ar x libboost-serialization1.74-dev_1.74.0-9_armhf.deb data.tar.xz` # ignore symlinks errors
+    3. Copy the extracted libraries file to correct location
+        1. `sudo cp usr/lib/arm-linux-gnueabihf/*.a /usr/lib/arm-linux-gnueabihf/`
+        2. `sudo chmod +r /usr/lib/arm-linux-gnueabihf/*.a`
+
+Nothing specific is required to do on the spacecraft since the libraries are statically linked when compiling.
 
 ## Getting Started
-Use `Make` to compile for either the local development environment or the spacecraft. 
+Use `Make` to compile for either local development or the spacecraft.
 
-### Compile and start for development
+### Compile and start for local development
 ```
 make clean
 make
@@ -27,9 +35,13 @@ make
 ```
 
 ### Compile and start for the spacecraft
+On your local machine
 ```
 make clean
 make TARGET=arm
+```
+On the spacecraft (transfer the binary there)
+```
 ./OrbitAI_Mochi
 ```
 
