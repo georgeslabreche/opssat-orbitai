@@ -475,7 +475,7 @@ public class OrbitAILearningHandler {
       if (mochiClient != null && !mochiClient.isClosed()) {
         try {
           mochiClient.getOutputStream().write(command.getBytes());
-          LOGGER.log(Level.INFO, String.format("Send command to MochiMochi: %s", command));
+          LOGGER.log(Level.FINE, String.format("Send command to MochiMochi: %s", command));
         } catch (IOException e) {
           LOGGER.log(Level.SEVERE, String.format("Error sending %s command to MochiMochi", command),
               e);
