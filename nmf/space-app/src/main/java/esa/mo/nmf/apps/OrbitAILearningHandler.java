@@ -526,7 +526,7 @@ public class OrbitAILearningHandler {
       lastDataSetTimestamp = timestamp;
       String subCommand = mode.equals(OrbitAIConf.INFERENCE_MODE) ? INFER_CMD : TRAIN_CMD;
 
-      String command = String.format("%s %d %.2f %.2f %.2f %.2f %.2f %.2f %d", subCommand, label,
+      String command = String.format("%s %d %.2f %.2f %.2f %.2f %.2f %.2f %d\n", subCommand, label,
           PDf[1], PDf[2], PDf[3], PDf[4], PDf[5], PDf[6], timestamp);
 
       sendMochiCommand(command);
