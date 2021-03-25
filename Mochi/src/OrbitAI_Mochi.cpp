@@ -582,7 +582,7 @@ int main(int argc, char *argv[])
             {
                 /**
                  * Expected command string format:
-                 *      train <label:int> <pd1:float> <pd2:float> <pd3:float> <pd4:float> <pd5:float> <pd6:float> <timestamp:long>
+                 *      train <label:int> <pd1:float> <pd2:float> <pd3:float> <pd4:float> <pd5:float> <pd6:float> <timestamp:string>
                  * 
                  * e.g.: 
                  *  train 1 0.11 0.22 0.33 0.44 0.55 1.23 1615253200322
@@ -611,7 +611,9 @@ int main(int argc, char *argv[])
                     float pd6 = std::stof(cmdTokens[7]);
 
                     // PD acquisition timestamp.
-                    long timestamp = std::stol(cmdTokens[8]);
+                    // A long in SEPP's ARM architecture is 32 bit so it can't fit the timestamp in ms.
+                    // Use a string instead (we only use this value for logging).
+                    std::string timestamp = cmdTokens[8];
 
                     // Training input error.
                     if(!(label == 0 || label == -1 || label == 1))
@@ -953,7 +955,7 @@ int main(int argc, char *argv[])
                         // Creating the training row string to append to the log file.
                         std::string trainingLogFileRow = 
 #if LOG_TIMES
-                            std::to_string(timestamp) + "," + 
+                            timestamp + "," + 
 #endif 
                             std::to_string(pd1) + "," + std::to_string(pd2) + "," + std::to_string(pd3) + "," + std::to_string(pd4) + "," + std::to_string(pd5) + "," + std::to_string(pd6) + "," + std::to_string(label) 
 #if LOG_TIMES
@@ -995,7 +997,7 @@ int main(int argc, char *argv[])
             {
                 /**
                  * Expected command string format:
-                 *      infer <expected_label:int> <pd1:float> <pd2:float> <pd3:float> <pd4:float> <pd5:float> <pd6:float> <timestamp:long>
+                 *      infer <expected_label:int> <pd1:float> <pd2:float> <pd3:float> <pd4:float> <pd5:float> <pd6:float> <timestamp:string>
                  * 
                  * e.g.: 
                  *  infer +1 0.11 0.22 0.33 0.44 0.55 1.23 1615253200322
@@ -1025,7 +1027,9 @@ int main(int argc, char *argv[])
                     float pd6 = std::stof(cmdTokens[7]);
 
                     // PD acquisition timestamp.
-                    long timestamp = std::stol(cmdTokens[8]);
+                    // A long in SEPP's ARM architecture is 32 bit so it can't fit the timestamp in ms.
+                    // Use a string instead (we only use this value for logging).
+                    std::string timestamp = cmdTokens[8];
 
                     // inference input error.
                     if(!(label == 0 || label == -1 || label == 1))
@@ -1280,7 +1284,7 @@ int main(int argc, char *argv[])
                         // Creating the inference results row string to append to the log file.
                         std::string inferenceLogFileRow =
     #if LOG_TIMES
-                            std::to_string(timestamp) + "," + 
+                            timestamp + "," +
     #endif                     
                             std::to_string(pd1) + "," + std::to_string(pd2) + "," + std::to_string(pd3) + "," + std::to_string(pd4) + "," + std::to_string(pd5) + "," + std::to_string(pd6) + "," + std::to_string(label) + ","
                             + predictions

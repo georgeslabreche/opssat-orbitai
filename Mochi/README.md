@@ -87,7 +87,7 @@ train 0 0.11 0.22 0.33 0.44 0.55 0.43 1615255010842
 1. Start the Online ML server: `./OrbitAI_Mochi`
 2. Send telnet commands to the server:
 ```
-eval 'input="test_data/camera_tiny.txt"; echo "reset"; while IFS= read -r line; do sleep 0.02; echo "train ${line/+/''} $(date +%s%3N)"; done < "$input";' | telnet localhost 9999
+eval 'input="test_data/camera_tiny.txt"; echo "reset"; while IFS= read -r line; do sleep 0.02; echo "train ${line/+/''} $(date +%s000)"; done < "$input";' | telnet localhost 9999
 ```
 3. Monitor a model file being updated: `watch -n 0.1 cat models/arow_2D`
 
@@ -103,7 +103,7 @@ eval 'input="test_data/camera_tiny.txt"; echo "reset"; while IFS= read -r line; 
 1. Start the Online ML server: `./OrbitAI_Mochi`
 2. Send telnet commands to the server: 
 ```
-eval 'echo "load"; sleep 1; input="test_data/camera_tiny.txt"; while IFS= read -r line; do sleep 0.02; echo "infer ${line/+/''} $(date +%s%3N)"; done < "$input";' | telnet localhost 9999
+eval 'echo "load"; sleep 1; input="test_data/camera_tiny.txt"; while IFS= read -r line; do sleep 0.02; echo "infer ${line/+/''} $(date +%s000)"; done < "$input";' | telnet localhost 9999
 ```
 
 ### Validation
@@ -111,7 +111,7 @@ As a pre-requisite, make sure that `src/OrbitAI_Mochi.cpp` is compiled with the 
 1. Start the Online ML server: `./OrbitAI_Mochi`
 2. Delete any previously saved models and log files followed by training and infering test data: 
 ```
-eval 'echo "reset"; sleep 1; input="test_data/camera_train_and_infer_small.txt"; while IFS= read -r line; do sleep 0.02; echo "${line/+/''} $(date +%s%3N)"; done < "$input";' | telnet localhost 9999
+eval 'echo "reset"; sleep 1; input="test_data/camera_train_and_infer_small.txt"; while IFS= read -r line; do sleep 0.02; echo "${line/+/''} $(date +%s000)"; done < "$input";' | telnet localhost 9999
 ```
 3. Rename the `logs/training.csv` file to `logs/training1.csv` so the logged trianing data is not lost the next time that the `reset` command is invoked: `mv logs/training.csv logs/training1.csv`
 4. Rename the `logs/inference.csv` file to `logs/inference1.csv` so the logged inference results are not lost the next time that the `reset` command is invoked: `mv logs/inference.csv logs/inference1.csv`
@@ -120,7 +120,7 @@ Retrain the models from scratch but this time skip the inference:
 1. Start the Online ML server: `./OrbitAI_Mochi`
 2. Train and save the models:
 ```
-eval 'echo "reset"; sleep 1; input="test_data/camera_small.txt"; while IFS= read -r line; do sleep 0.02; echo "train ${line/+/''} $(date +%s%3N)"; done < "$input";' | telnet localhost 9999
+eval 'echo "reset"; sleep 1; input="test_data/camera_small.txt"; while IFS= read -r line; do sleep 0.02; echo "train ${line/+/''} $(date +%s000)"; done < "$input";' | telnet localhost 9999
 ```
 3. Diff `logs/training1.csv` and `logs/training.csv`. Both files should be exactly the same: `diff logs/training1.csv logs/training.csv`
 
@@ -128,7 +128,7 @@ Load the saved models and infer given validation inputs. The inference results w
 1. Start the Online ML server: `./OrbitAI_Mochi`
 2. Load saved models and infer:
 ```
-eval 'echo "load"; sleep 1; input="test_data/camera_validation_small.txt"; while IFS= read -r line; do sleep 0.02; echo "infer ${line/+/''} $(date +%s%3N)"; done < "$input";' | telnet localhost 9999
+eval 'echo "load"; sleep 1; input="test_data/camera_validation_small.txt"; while IFS= read -r line; do sleep 0.02; echo "infer ${line/+/''} $(date +%s000)"; done < "$input";' | telnet localhost 9999
 ```
 3. Diff `logs/inference1.csv` and `logs/inference.csv`. Both files should be exactly the same: `diff logs/inference1.csv logs/inference.csv`
 
