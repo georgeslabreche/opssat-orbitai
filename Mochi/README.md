@@ -7,7 +7,7 @@ An executable binary for ESA's OPS-SAT spacecraft to enable Machine Learning usi
 This project was successfully compiled in C++ on Ubuntu 18.04 LTS. The target platform is the Ångström distribution, it's a Linux on the spacecraft's ARM processor.
 
 ### Local development
-1. Install the Boost C++ libraries: `sudo apt-get install libboost-all-dev`
+Install the Boost C++ libraries: `sudo apt-get install libboost-all-dev`
 
 ### Spacecraft deployment
 On your local machine
@@ -141,7 +141,7 @@ Some example training datasets are taken from:
 OPS-SAT photodiode sun elevation angles training data are taken from the spacecraft's WebMUST platform.
 
 ### Examples
-To compile the MochiMochi examples cd into an example director and use `Make`. E.g.:
+To compile the MochiMochi examples cd into an example directory and use `Make`. E.g.:
 ```
 cd MochiMochi/examples/binary_classifier/scw
 ./clean.sh
@@ -151,7 +151,7 @@ make
 
 For each ML methodology, two training examples are given in each of the following sections:
 - With training data taken from [SVMLight](http://svmlight.joachims.org/).
-- With training data taken from OPS-SAT's WebMUST and represent  photodiode elevation angles values.
+- With training data taken from OPS-SAT's WebMUST and represent photodiode elevation angles values.
 
 #### ADAM
 ```
