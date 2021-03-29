@@ -26,7 +26,7 @@ lwd = 2
 
 # Write to file or display the plot.
 if(WRITE_PNG == TRUE){
-  png('feature_spaces.png', width = 750, height = 250)
+  png('../plots/feature_spaces.png', width = 750, height = 250)
 }else{
   dev.new()
 }
@@ -113,7 +113,7 @@ data_3D = data[data$dimension=='3D',][,!(names(data) %in% drop_cols)]
 
 # Write to file or display the plot.
 if(WRITE_PNG == TRUE){
-  png('epoch_accuracies.png', width = 800, height = 400)
+  png('../plots/epoch_accuracies.png', width = 800, height = 400)
 }else{
   dev.new()
 }
