@@ -503,8 +503,6 @@ int main(int argc, char *argv[])
                         std::string response = "OK\n";
                         send(connection, response.c_str(), response.size(), 0);
 
-                        close(sockfd);
-
                     }
                     catch (const std::exception& e)
                     {
