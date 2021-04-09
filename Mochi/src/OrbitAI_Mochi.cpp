@@ -499,15 +499,11 @@ int main(int argc, char *argv[])
                         pa2_5D.load("models/pa2_5D");
                         logInfo("Loaded models/pa2_5D");
 #endif
-                        
-
 
                         std::string response = "OK\n";
                         send(connection, response.c_str(), response.size(), 0);
 
-                        //close(connection);
                         close(sockfd);
-                        //break;
 
                     }
                     catch (const std::exception& e)
