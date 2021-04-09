@@ -19,6 +19,7 @@
 #include <mochimochi/binary_classifier.hpp>
 #include <mochimochi/utility.hpp>
 
+#define ENABLE_PA                                      0
 
 #define COMMAND_BUFFER_LENGTH                        100
 #define SAVE_AFTER_UPDATE                              1    // Save/Serialize the models after each update.
@@ -458,6 +459,7 @@ int main(int argc, char *argv[])
                         nherd_5D.load("models/nherd_5D");
                         logInfo("Loaded models/nherd_5D");
 
+#if ENABLE_PA
                         // PA
                         pa_1D.load("models/pa_1D");
                         logInfo("Loaded models/pa_1D");
@@ -496,9 +498,16 @@ int main(int argc, char *argv[])
 
                         pa2_5D.load("models/pa2_5D");
                         logInfo("Loaded models/pa2_5D");
+#endif
+                        
+
 
                         std::string response = "OK\n";
                         send(connection, response.c_str(), response.size(), 0);
+
+                        //close(connection);
+                        close(sockfd);
+                        //break;
 
                     }
                     catch (const std::exception& e)
@@ -549,6 +558,7 @@ int main(int argc, char *argv[])
                 nherd_3D.save("models/nherd_3D");
                 nherd_5D.save("models/nherd_5D");
 
+#if ENABLE_PA
                 // PA
                 pa_1D.save("models/pa_1D");
                 pa_2D.save("models/pa_2D");
@@ -566,6 +576,7 @@ int main(int argc, char *argv[])
                 pa2_2D.save("models/pa2_2D");
                 pa2_3D.save("models/pa2_3D");
                 pa2_5D.save("models/pa2_5D");
+#endif
 
                 std::string response = "OK\n";
                 send(connection, response.c_str(), response.size(), 0);
@@ -930,6 +941,7 @@ int main(int argc, char *argv[])
                         nherd_3D.save("models/nherd_3D");
                         nherd_5D.save("models/nherd_5D");
 
+#if ENABLE_PA
                         // PA
                         pa_1D.save("models/pa_1D");
                         pa_2D.save("models/pa_2D");
@@ -947,6 +959,8 @@ int main(int argc, char *argv[])
                         pa2_2D.save("models/pa2_2D");
                         pa2_3D.save("models/pa2_3D");
                         pa2_5D.save("models/pa2_5D");
+#endif
+
 #endif
                         // Opening the training log file.
                         std::ofstream trainingLogFile;
