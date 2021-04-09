@@ -7,7 +7,7 @@
 - Maven 3.X.X (tested with Maven 3.6.3)
 
 ### Steps
-1. Install the `feature/OBSW_parameters_provisioning` branch of NanoSatMO Framework (NMF) following [the NMF quick start guide](https://nanosat-mo-framework.readthedocs.io/en/latest/quickstart.html)
+1. Install the `dev` branch of NanoSatMO Framework (NMF) following [the NMF quick start guide](https://nanosat-mo-framework.readthedocs.io/en/latest/quickstart.html)
 
 2. Get and build the OrbitAI space application
 ```

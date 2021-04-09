@@ -5,7 +5,7 @@
 # app info
 exp_id="exp144"
 exp_name="OrbitAI"
-exp_version="1.0" # TODO get git tag
+exp_version=$(git describe)
 exp_author="LabrecheSoto"
 
 if [ "$#" -ne 1 ]; then
