@@ -19,7 +19,7 @@
 #include <mochimochi/binary_classifier.hpp>
 #include <mochimochi/utility.hpp>
 
-#define ENABLE_PA                                      1
+#define ENABLE_PA                                      0
 
 #define COMMAND_BUFFER_LENGTH                        100
 #define SAVE_AFTER_UPDATE                              1    // Save/Serialize the models after each update.
