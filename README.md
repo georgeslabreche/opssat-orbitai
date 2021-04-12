@@ -3,7 +3,7 @@ The OrbitAI experiment on the European Space Agency's OPS-SAT spacecraft demonst
 
 ## Repository Structure
 - **Boost**: C++ implementation of Online Multi-Class LPBoost, Online Multi-Class Gradient Boost, and Online Random Forest algorithms. These were not included in the OrbitAI in the end due to unresolved serialization issues.
-- **Mochi**: C++ implementation of ADAM, Adagarad RDA, AROW, SCW, NHERD, and PA algorithms. These are included in the OrbitAI in the end.
+- **Mochi**: C++ implementation of ADAM, Adagarad RDA, AROW, SCW, NHERD, and PA algorithms. These are used by the OrbitAI app for online ML.
 - **ipk**: Script and guideline to generate a ZIP file and then an IPK file to install the experiment on the Satellite Experimental Processing Platform (SEPP) on-board OPS-SAT.
 - **nmf/space-app**: The OrbitAI [NMF](https://github.com/esa/nmf-mission-ops-sat) App.
 - **pub**: Publication assest, i.e. R scripts, plots, and diagram files.
