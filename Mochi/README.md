@@ -138,7 +138,7 @@ Some scripts are included in the tools folder:
 - **analyze.py**: Calculates classification metrics based on logged inference results in the inference.csv file.
 - **benchmark.sh**: Trains all models with a given number of epochs and calculates their classification metrics after each training epoch.
 
-Instructions on how to use this scripts are commended in their source file.
+Instructions on how to use this scripts are commented in their source file.
 
 ## MochiMochi
 Some example training datasets are taken from:
