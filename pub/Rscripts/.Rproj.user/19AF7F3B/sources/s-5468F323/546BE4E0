@@ -1,0 +1,26 @@
+{
+    "id": "546BE4E0",
+    "path": "//wsl$/Ubuntu-18.04/home/georges/dev/esa/opssat/opssat-orbitai/pub/Rscripts/balanced_accuracies.R",
+    "project_path": "balanced_accuracies.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1618268122655.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "72,13",
+        "scrollLine": "56"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1618268601,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1618268601109,
+    "read_only": false,
+    "read_only_alternatives": []
+}

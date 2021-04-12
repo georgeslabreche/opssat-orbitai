@@ -1,0 +1,26 @@
+{
+    "id": "67E90EBB",
+    "path": "//wsl$/Ubuntu-18.04/home/georges/dev/esa/opssat/opssat-orbitai/pub/Rscripts/feature_spaces.R",
+    "project_path": "feature_spaces.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1617429177755.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "0,62",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1618268523,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1618268523912,
+    "read_only": false,
+    "read_only_alternatives": []
+}
