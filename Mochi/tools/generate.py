@@ -3,19 +3,23 @@ import csv
 from datetime import datetime
 
 '''
-This script generates training commands that can be sent a running Mochi server.
-From the Mochi root directory, the list of generated commands are saved in:
-- test_data/generated_A.txt
-- test_data/generated_B.txt
-- test_data/generated_C.txt
+This script generates training commands that can be sent to a running Mochi server.
 
-From the Mochi root directory:
+The files containing the list of generated commands are saved in:
 
-1. Generated the training commands: python3 src/generate.py
-2. Start the Online ML server: ./OrbitAI_Mochi
-3. Train the models: eval 'echo "reset"; sleep 1; input="test_data/generated_A.txt"; while IFS= read -r cmd; do sleep 0.02; echo ${cmd}; done < "$input";' | telnet localhost 9999
+- cmds/generated_A.txt
+- cmds/generated_B.txt
+- cmds/generated_C.txt
+
+To run the generated commands and calculate the classification metrics of the trained models:
+
+1. Generate the training and inference commands: python3 generate.py
+2. Start the Online ML server: ../OrbitAI_Mochi &
+3. Train the models: eval 'echo "reset"; sleep 1; input="cmds/generated_A.txt"; while IFS= read -r cmd; do sleep 0.02; echo ${cmd}; done < "$input"; echo "exit"' | telnet localhost 9999
 4. Check that training log file was created: logs/training.csv
-5. Calculate inference/prediction accuracies: python3 src/accuracy.py
+5. Calculate classification metrics: python3 analyze.py logs/inference.csv metrics/performance.csv
+
+Steps 3 to 5 can be benchmarked across multiple epochs with the benchmark.sh bash script.
 '''
 
 # Write training and inference commands from generated data.
@@ -195,6 +199,6 @@ def write_commands_from_webmust_data(output_filepath, is_partial=True, skip_rows
 if __name__ == "__main__":
 
     # Write commands from generated data.
-    write_commands_from_generated_data("test_data/generated_A.txt", 0.7, 1.3, 0.01, False)
-    write_commands_from_generated_data("test_data/generated_B.txt", 0, 1.57, 0.01, False)
-    write_commands_from_generated_data("test_data/generated_C.txt", 0, 1.57, 0.01, True)
+    write_commands_from_generated_data("cmds/generated_A.txt", 0.7, 1.3, 0.01, False)
+    write_commands_from_generated_data("cmds/generated_B.txt", 0, 1.57, 0.01, False)
+    write_commands_from_generated_data("cmds/generated_C.txt", 0, 1.57, 0.01, True)

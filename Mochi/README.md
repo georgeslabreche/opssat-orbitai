@@ -132,6 +132,13 @@ eval 'echo "load"; sleep 1; input="test_data/camera_validation_small.txt"; while
 ```
 3. Diff `logs/inference1.csv` and `logs/inference.csv`. Both files should be exactly the same: `diff logs/inference1.csv logs/inference.csv`
 
+### Scripts
+Some scripts are included in the tools folder:
+- **generate.py**: Writes a list of generated commands to a file which can then be used for batch operations to train models and run inferences.
+- **analyze.py**: Calculates classification metrics based on logged inference results in the inference.csv file.
+- **benchmark.sh**: Trains all models with a given number of epochs and calculates their classification metrics after each training epoch.
+
+Instructions on how to use this scripts are commended in their source file.
 
 ## MochiMochi
 Some example training datasets are taken from:
