@@ -1,3 +1,5 @@
+![OPS-SAT Mission Patch](https://raw.githubusercontent.com/georgeslabreche/opssat-orbitai/main/ops-sat_mission_patch.png?raw=true)
+
 # OPS-SAT OrbitAI
 The OrbitAI experiment on the European Space Agency's OPS-SAT spacecraft demonstrates how on-board Machine Learning (ML) can be achieved given the availability of high processing power and access to the on-board software data pool. Past missions have limited the use of ML to that of in-flight inferences of models trained on the ground. OrbitAI breaks from this trend and pushes ML training from that of a pre-launch activity to that of an in-flight operation. To the authors' knowledge, the experiment is the first time that ML models are trained on-board a spacecraft in-orbit with real-time sensor inputs as training data.
 
