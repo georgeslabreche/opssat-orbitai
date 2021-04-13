@@ -4,7 +4,7 @@
 The OrbitAI experiment on the European Space Agency's OPS-SAT spacecraft demonstrates how on-board Machine Learning (ML) can be achieved given the availability of high processing power and access to the on-board software data pool. Past missions have limited the use of ML to that of in-flight inferences of models trained on the ground. OrbitAI breaks from this trend and pushes ML training from that of a pre-launch activity to that of an in-flight operation. To the authors' knowledge, the experiment is the first time that ML models are trained on-board a spacecraft in-orbit with real-time sensor inputs as training data.
 
 ## Repository Structure
-- **Boost**: C++ implementation of Online Multi-Class LPBoost, Online Multi-Class Gradient Boost, and Online Random Forest algorithms. These were not included in the OrbitAI in the end due to unresolved serialization issues.
+- **Boost**: C++ implementation of Online Multi-Class LPBoost, Online Multi-Class Gradient Boost, and Online Random Forest algorithms. These were not included in OrbitAI in the end due to unresolved serialization issues. Kept in the repository as a reference and in case of future use.
 - **Mochi**: C++ implementation of ADAM, Adagarad RDA, AROW, SCW, NHERD, and PA algorithms. These are used by the OrbitAI app for online ML.
 - **ipk**: Script and guideline to generate a ZIP file and then an IPK file to install the experiment on the Satellite Experimental Processing Platform (SEPP) on-board OPS-SAT.
 - **nmf/space-app**: The OrbitAI [NMF](https://github.com/esa/nmf-mission-ops-sat) App.
