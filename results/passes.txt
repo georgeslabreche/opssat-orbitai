@@ -1,0 +1,67 @@
+#07330 2021-04-16 17:04 UTC
+ESOC1        AOS_5DEG        17:06:09        37 deg        08min05s (11min47s RX)
+ESOC1        LOS_5DEG        17:14:14        37 deg
+TUG          AOS_5DEG        17:06:28        82 deg        09min29s (12min04s RX)
+TUG          LOS_5DEG        17:15:57        82 deg
+
+#07331 2021-04-16 18:40 UTC
+ESOC1        AOS_5DEG        18:40:31        22 deg        08min10s (11min03s RX)
+ESOC1        LOS_5DEG        18:48:41        22 deg
+TUG          AOS_5DEG        18:41:49        10 deg        05min45s (09min24s RX)
+TUG          LOS_5DEG        18:47:34        10 deg
+
+#07337 2021-04-17 03:49 UTC
+ESOC1        AOS_5DEG        03:51:50        33 deg        07min46s (11min28s RX)
+ESOC1        LOS_5DEG        03:59:36        33 deg
+TUG          AOS_5DEG        03:49:32        57 deg        09min13s (11min48s RX)
+TUG          LOS_5DEG        03:58:45        57 deg
+
+#07338 2021-04-17 05:25 UTC
+ESOC1        AOS_5DEG        05:25:17        22 deg        08min13s (11min07s RX)
+ESOC1        LOS_5DEG        05:33:30        22 deg
+TUG          AOS_5DEG        05:25:24        12 deg        06min23s (09min52s RX)
+TUG          LOS_5DEG        05:31:47        12 deg
+
+#07345 2021-04-17 16:50 UTC
+ESOC1        AOS_5DEG        16:51:49        26 deg        07min33s (11min28s RX)
+ESOC1        LOS_5DEG        16:59:22        26 deg
+TUG          AOS_5DEG        16:52:01        55 deg        09min23s (12min00s RX)
+TUG          LOS_5DEG        17:01:24        55 deg
+
+#07346 2021-04-17 18:25 UTC
+CORK         AOS_5DEG        18:25:48        48 deg        09min19s (09min19s RX)
+CORK         LOS_5DEG        18:35:07        48 deg
+ESOC1        AOS_5DEG        18:25:52        30 deg        08min43s (11min28s RX)
+ESOC1        LOS_5DEG        18:34:35        30 deg
+TUG          AOS_5DEG        18:26:53        14 deg        06min59s (10min12s RX)
+TUG          LOS_5DEG        18:33:52        14 deg
+
+#07352 2021-04-18 03:35 UTC
+ESOC1        AOS_5DEG        03:37:46        24 deg        07min12s (11min06s RX)
+ESOC1        LOS_5DEG        03:44:58        24 deg
+TUG          AOS_5DEG        03:35:15        39 deg        08min56s (11min35s RX)
+TUG          LOS_5DEG        03:44:11        39 deg
+
+#07353 2021-04-18 05:11 UTC
+CORK         AOS_5DEG        05:11:21        51 deg        09min10s (09min10s RX)
+CORK         LOS_5DEG        05:20:31        51 deg
+ESOC1        AOS_5DEG        05:10:27        31 deg        08min45s (11min31s RX)
+ESOC1        LOS_5DEG        05:19:12        31 deg
+TUG          AOS_5DEG        05:10:12        17 deg        07min34s (10min39s RX)
+TUG          LOS_5DEG        05:17:46        17 deg
+
+#07360 2021-04-18 16:36 UTC
+ESOC1        AOS_5DEG        16:37:34        19 deg        06min37s (10min59s RX)
+ESOC1        LOS_5DEG        16:44:18        19 deg
+TUG          AOS_5DEG        16:37:37        37 deg        09min07s (11min48s RX)
+TUG          LOS_5DEG        16:46:44        37 deg
+
+#07361 2021-04-18 18:09 UTC
+ESOC1        AOS_5DEG        18:11:16        41 deg        09min07s (11min47s RX)
+ESOC1        LOS_5DEG        18:20:23        41 deg
+TUG          AOS_5DEG        18:12:05        19 deg        07min54s (10min51s RX)
+TUG          LOS_5DEG        18:19:59        19 deg
+
+#07362 2021-04-18 19:45 UTC
+CORK         AOS_5DEG        19:45:39        26 deg        08min30s (08min30s RX)
+CORK         LOS_5DEG        19:54:09        26 deg

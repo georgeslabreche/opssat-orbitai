@@ -1,0 +1,150 @@
+[17-04-2021 05:28:30] COMMAND  Uplink to SEPP: ls -ltR /home/exp144/toGround/ && tail -n 2 /home/exp144/toGround/learning/mochi-*/logs/training.csv && tail -n 2 /home/exp144/toGround/data/data_*.csv
+[17-04-2021 05:28:32] DATA: START
+[17-04-2021 05:28:32] 6 19:58 mochi-2021-04-16_19-58-14
+[17-04-2021 05:28:32] drwxr-xr-x    4 exp144   exp144        4096 Apr 16 18:28 mochi-2021-04-16_18-28-31
+[17-04-2021 05:28:32] 
+[17-04-2021 05:28:32] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14:
+[17-04-2021 05:28:32] total 8
+[17-04-2021 05:28:32] drwxr-xr-x    2 exp144   exp144        4096 Apr 16 18:47 logs
+[17-04-2021 05:28:32] drwxr-xr-x    2 exp144   exp144        4096 Apr 16 17:17 models
+[17-04-2021 05:28:32] 
+[17-04-2021 05:28:32] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/logs:
+[17-04-2021 05:28:32] total 600
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144      607884 Apr 16 19:58 training.csv
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144        1076 Apr 16 18:47 orbitai.log
+[17-04-2021 05:28:32] 
+[17-04-2021 05:28:32] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models:
+[17-04-2021 05:28:32] total 80
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144          90 Apr 16 19:58 adam_1D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         163 Apr 16 19:58 adam_2D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         236 Apr 16 19:58 adam_3D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         382 Apr 16 19:58 adam_5D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144          85 Apr 16 19:58 arow_1D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         133 Apr 16 19:58 arow_2D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         181 Apr 16 19:58 arow_3D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         277 Apr 16 19:58 arow_5D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144          87 Apr 16 19:58 nherd_1D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         135 Apr 16 19:58 nherd_2D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         183 Apr 16 19:58 nherd_3D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         279 Apr 16 19:58 nherd_5D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         143 Apr 16 19:58 rda_1D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         216 Apr 16 19:58 rda_2D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         289 Apr 16 19:58 rda_3D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         434 Apr 16 19:58 rda_5D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         109 Apr 16 19:58 scw_1D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         157 Apr 16 19:58 scw_2D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         205 Apr 16 19:58 scw_3D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         301 Apr 16 19:58 scw_5D
+[17-04-2021 05:28:32] 
+[17-04-2021 05:28:32] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31:
+[17-04-2021 05:28:32] total 8
+[17-04-2021 05:28:32] drwxr-xr-x    2 exp144   exp144        4096 Apr 16 17:17 logs
+[17-04-2021 05:28:32] drwxr-xr-x    2 exp144   exp144        4096 Apr 16 17:17 models
+[17-04-2021 05:28:32] 
+[17-04-2021 05:28:32] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/logs:
+[17-04-2021 05:28:32] total 300
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144      303942 Apr 16 18:28 training.csv
+[17-04-2021 05:28:32] 
+[17-04-2021 05:28:32] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models:
+[17-04-2021 05:28:32] total 80
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144          90 Apr 16 18:28 adam_1D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         163 Apr 16 18:28 adam_2D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         236 Apr 16 18:28 adam_3D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         382 Apr 16 18:28 adam_5D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144          85 Apr 16 18:28 arow_1D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         133 Apr 16 18:28 arow_2D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         181 Apr 16 18:28 arow_3D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         277 Apr 16 18:28 arow_5D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144          87 Apr 16 18:28 nherd_1D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         135 Apr 16 18:28 nherd_2D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         183 Apr 16 18:28 nherd_3D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         279 Apr 16 18:28 nherd_5D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         142 Apr 16 18:28 rda_1D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         215 Apr 16 18:28 rda_2D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         288 Apr 16 18:28 rda_3D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         434 Apr 16 18:28 rda_5D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         109 Apr 16 18:28 scw_1D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         157 Apr 16 18:28 scw_2D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         205 Apr 16 18:28 scw_3D
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144         301 Apr 16 18:28 scw_5D
+[17-04-2021 05:28:32] 
+[17-04-2021 05:28:32] /home/exp144/toGround/data:
+[17-04-2021 05:28:32] total 264
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144      127122 Apr 16 19:58 data_2021-04-16_18-47-19.csv
+[17-04-2021 05:28:32] -rw-r--r--    1 exp144   exp144      129022 Apr 16 18:28 data_2021-04-16_17-17-36.csv
+[17-04-2021 05:28:32] ==> /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/logs/training.csv <==
+[17-04-2021 05:28:37] 1618597706004,0.130000,0.000000,0.000000,0.990000,0.240000,0.010000,1,0.017160,0.004010,0.005460,0.007980,0.004390,0.002710,0.002950,0.002200,0.003600,0.001850,0.002470,0.001800,0.005420,0.002570,0.002630,0.003190,0.005500,0.002220,0.003590,0.001840,0.003270,0.001830,0.001370,0.002170,0.001380,0.001790,0.002190,0.002190,0.001230,0.001790,0.002020,0.002090
+[17-04-2021 05:28:37] 1618597711011,0.130000,0.000000,0.000000,1.000000,0.150000,0.010000,1,0.023470,0.004430,0.006160,0.009270,0.005420,0.003070,0.002850,0.003510,0.003870,0.003390,0.003150,0.002290,0.008100,0.002530,0.003670,0.004260,0.007520,0.002220,0.004190,0.003030,0.003680,0.003550,0.001570,0.002750,0.001400,0.001820,0.001970,0.002200,0.001300,0.001820,0.002290,0.002410
+[17-04-2021 05:28:37] 
+[17-04-2021 05:28:37] ==> /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/logs/training.csv <==
+[17-04-2021 05:28:37] 1618603089374,0.850000,0.000000,0.570000,0.360000,0.000000,0.000000,1,0.030740,0.006390,0.007090,0.001210,0.008800,0.003770,0.002760,0.002200,0.003490,0.002200,0.002580,0.001780,0.009630,0.004470,0.002990,0.003770,0.006950,0.002360,0.004140,0.002460,0.004270,0.001860,0.001900,0.002750,0.001590,0.002000,0.002180,0.002330,0.002370,0.001820,0.002200,0.002320
+[17-04-2021 05:28:37] 1618603094377,0.850000,0.000000,0.570000,0.360000,0.000000,0.000000,1,0.033150,0.006180,0.006950,0.001780,0.007460,0.002580,0.003500,0.002210,0.003190,0.002430,0.003780,0.002620,0.006030,0.004990,0.003680,0.004610,0.008520,0.003460,0.005750,0.002980,0.006130,0.003060,0.001890,0.002210,0.002390,0.004400,0.003600,0.004020,0.002980,0.002830,0.002000,0.005330
+[17-04-2021 05:28:37] ==> /home/exp144/toGround/data/data_2021-04-16_17-17-36.csv <==
+[17-04-2021 05:28:37] 1618597706004,0.13210775,false,0.0,false,0.0,false,0.99301434,true,0.2442632,false,0.013210761,false,0.0,0.0,0.0,0.747472,-0.023120405,0.03841836,0.66521084
+[17-04-2021 05:28:37] 1618597711011,0.13210775,false,0.0,false,0.0,false,1.0015203,true,0.1483354,false,0.013210761,false,0.0,0.0,0.0,0.747472,-0.023120405,0.03841836,0.66521084
+[17-04-2021 05:28:37] 
+[17-04-2021 05:28:37] ==> /home/exp144/toGround/data/data_2021-04-16_18-47-19.csv <==
+[17-04-2021 05:28:37] 1618603089374,0.850975,true,0.0,false,0.5672371,true,0.35838518,false,0.0,false,0.0,false,0.0,0.0,0.0,-0.08945428,0.71847034,0.55697584,0.40568122
+[17-04-2021 05:28:37] 1618603094377,0.850975,true,0.0,false,0.5672371,true,0.35838518,false,0.0,false,0.0,false,0.0,0.0,0.0,-0.08945428,0.71847034,0.55697584,0.40568122
+[17-04-2021 05:28:37] DATA: STOP
+[17-04-2021 05:28:39] COMMAND  Uplink to SEPP: tar -czvf /home/exp144/exp144_results_20210417B.tar.gz /home/exp144/toGround
+[17-04-2021 05:28:48] DATA: START
+[17-04-2021 05:28:48] tar: Removing leading `/' from member names
+[17-04-2021 05:28:48] /home/exp144/toGround/
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/adam_5D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/rda_1D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/nherd_1D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/arow_1D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/adam_2D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/scw_1D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/adam_3D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/scw_2D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/arow_3D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/nherd_3D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/arow_2D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/adam_1D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/nherd_5D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/rda_3D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/rda_2D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/nherd_2D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/scw_5D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/arow_5D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/rda_5D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/scw_3D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/logs/
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/logs/training.csv
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/adam_5D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/rda_1D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/nherd_1D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/arow_1D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/adam_2D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/scw_1D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/adam_3D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/scw_2D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/arow_3D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/nherd_3D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/arow_2D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/adam_1D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/nherd_5D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/rda_3D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/rda_2D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/nherd_2D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/scw_5D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/arow_5D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/rda_5D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/scw_3D
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/logs/
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/logs/training.csv
+[17-04-2021 05:28:48] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/logs/orbitai.log
+[17-04-2021 05:28:48] /home/exp144/toGround/data/
+[17-04-2021 05:28:48] /home/exp144/toGround/data/data_2021-04-16_17-17-36.csv
+[17-04-2021 05:28:48] /home/exp144/toGround/data/data_2021-04-16_18-47-19.csv
+[17-04-2021 05:28:48] DATA: STOP
+[17-04-2021 05:28:50] COMMAND  Uplink to SEPP: split /home/exp144/exp144_results_20210417B.tar.gz -b 3M /home/exp144/exp144_results_20210417B.tar.gz_ && mv /home/exp144/exp144_results_20210417B.tar.gz_* /home/root/esoc-apps/fms/filestore/toGround
+[17-04-2021 05:28:57] DATA: START
+[17-04-2021 05:28:57] DATA: STOP
