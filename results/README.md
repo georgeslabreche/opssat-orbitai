@@ -19,7 +19,7 @@ Continued training the models. The training inputs were not diverse enough:
 - The PD6 sun elevation angle training inputs ranged from 0 to 0.23 radians.
 - Further training runs are required to cover inputs ranges from 1.05 to 1.57 radians.
 ### Run #3
-Was not triggered due to no bitlock during the time scheduled to send the StartExperiment TC to the spacecraft.
+Was not triggered due to no bitlock during the time scheduled to send the StartExperiment telecommand (TC) to the spacecraft.
 
 ### Run #4
 Was not triggered due to no bitlock during the time scheduled to send the StartExperiment TC to the spacecraft.
