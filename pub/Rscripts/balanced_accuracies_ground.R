@@ -6,7 +6,7 @@ library("RColorBrewer")
 library("here")
 
 # Flag to indicate if plots should be displayed or written to file.
-WRITE_PNG = TRUE
+WRITE_PNG = FALSE
 
 # DPI, or dots per inch.
 # A measure of the resolution of a printed document or digital scan.
@@ -56,7 +56,7 @@ color_palette = brewer.pal(8, 'Set1')
 
 # Write to file or display the plot.
 if(WRITE_PNG == TRUE){
-  png(here('plots', 'balanced_accuracies.png'),
+  png(here('plots', 'balanced_accuracies_ground.png'),
       height=PLOT_HEIGHT_PX, width=PLOT_WIDTH_PX, units='px', res=DPI)
 }else{
   windows(height=PLOT_HEIGHT_PX/DPI, width=PLOT_WIDTH_PX/DPI)
