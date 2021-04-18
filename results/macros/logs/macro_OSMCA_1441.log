@@ -1,0 +1,29 @@
+[16-04-2021 18:45:30] COMMAND  Uplink to SEPP: sed -i 's/=train/=continue_train/g' /home/exp144/orbit_ai.properties; cat /home/exp144/orbit_ai.properties
+[16-04-2021 18:45:38] DATA: START
+[16-04-2021 18:45:38] # GLOBAL
+[16-04-2021 18:45:38] 
+[16-04-2021 18:45:38] # Experiment mode:
+[16-04-2021 18:45:38] #  - train will train new models from scratch
+[16-04-2021 18:45:38] #  - continue_train will continue to train existing models
+[16-04-2021 18:45:38] #  - inference will use the trained models for inference
+[16-04-2021 18:45:38] esa.mo.nmf.apps.OrbitAI.mode=continue_train
+[16-04-2021 18:45:38] 
+[16-04-2021 18:45:38] # Number of iterations the experiment should last
+[16-04-2021 18:45:38] esa.mo.nmf.apps.OrbitAI.iterations=850
+[16-04-2021 18:45:38] 
+[16-04-2021 18:45:38] # Time interval between 2 iterations in seconds
+[16-04-2021 18:45:38] esa.mo.nmf.apps.OrbitAI.interval=5
+[16-04-2021 18:45:38] 
+[16-04-2021 18:45:38] # OBSW parameters for which the publishing will be enabled in NMF supervisor
+[16-04-2021 18:45:38] esa.mo.nmf.apps.OrbitAI.params_to_enable=CADC0884,CADC0885,CADC0886,CADC0887,CADC0888,CADC0889,CADC0890,CADC0891,CADC0892,CADC0893,CADC0894,CADC0895,CADC0900,CADC0901,CADC0902,CADC1002,CADC1003,CADC1004,CADC1005
+[16-04-2021 18:45:38] 
+[16-04-2021 18:45:38] # Whether or not we check the photo diodes values
+[16-04-2021 18:45:38] esa.mo.nmf.apps.OrbitAI.check_pd_values=true
+[16-04-2021 18:45:38] 
+[16-04-2021 18:45:38] # Whether or not we check the validity flags of the photo diodes
+[16-04-2021 18:45:38] esa.mo.nmf.apps.OrbitAI.check_validity_flags=false
+[16-04-2021 18:45:38] 
+[16-04-2021 18:45:38] # MOCHI
+[16-04-2021 18:45:38] 
+[16-04-2021 18:45:38] # Port at which the Mochi server will be listening
+[16-04-2021 18:45:38] esa.mo.nmf.apps.OrbitAI.mochi.port=9999DATA: STOP

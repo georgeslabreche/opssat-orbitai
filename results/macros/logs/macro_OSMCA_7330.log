@@ -1,0 +1,104 @@
+[16-04-2021 17:06:20] COMMAND  Uplink to SEPP: systemctl stop nmf_supervisor; opkg install --force-reinstall /home/root/opkg_pkg_repo/nmf-ops-sat_2.0.0-prerelease-10-g0b27984.ipk
+[16-04-2021 17:06:27] DATA: START
+[16-04-2021 17:06:27] DATA: STOP
+[16-04-2021 17:06:28] COMMAND  Run sleep 30 on MCS
+[16-04-2021 17:07:00] COMMAND  Uplink to SEPP: opkg status nmf-ops-sat; sed -i 's/.*helpertools.configurations.pollgps.*/helpertools.configurations.pollgps=false/' /home/nmf/supervisor/provider.properties; cat /home/nmf/supervisor/provider.properties
+[16-04-2021 17:07:07] DATA: START
+[16-04-2021 17:07:07] Package: nmf-ops-sat
+[16-04-2021 17:07:07] Version: 2.0.0-prerelease-10-g0b27984
+[16-04-2021 17:07:07] Status: install ok installed
+[16-04-2021 17:07:07] Architecture: sepp
+[16-04-2021 17:07:07] Installed-Size: 27561129
+[16-04-2021 17:07:07] Installed-Time: 1618592788
+[16-04-2021 17:07:07] 
+[16-04-2021 17:07:07] # MO App configurations
+[16-04-2021 17:07:07] helpertools.configurations.MOappName=nanosat-mo-supervisor
+[16-04-2021 17:07:07] helpertools.configurations.OrganizationName=esa
+[16-04-2021 17:07:07] 
+[16-04-2021 17:07:07] # NanoSat MO Framework transport configuration
+[16-04-2021 17:07:07] helpertools.configurations.provider.transportfilepath=transport.properties
+[16-04-2021 17:07:07] 
+[16-04-2021 17:07:07] # NanoSat MO Framework Settings
+[16-04-2021 17:07:07] esa.mo.nanosatmoframework.provider.settings=settings.properties
+[16-04-2021 17:07:07] 
+[16-04-2021 17:07:07] # NanoSat MO Framework dynamic configurations
+[16-04-2021 17:07:07] esa.mo.nanosatmoframework.provider.dynamicchanges=true
+[16-04-2021 17:07:07] 
+[16-04-2021 17:07:07] # Archive flag to drop the table
+[16-04-2021 17:07:07] esa.mo.com.impl.provider.ArchiveManager.droptable=false
+[16-04-2021 17:07:07] 
+[16-04-2021 17:07:07] # Relative path to the apps directory location
+[16-04-2021 17:07:07] esa.mo.sm.impl.provider.appslauncher.FolderLocation=../..
+[16-04-2021 17:07:07] 
+[16-04-2021 17:07:07] # Relative path to the packages directory location
+[16-04-2021 17:07:07] esa.mo.nmf.package.FolderLocation=../nmf_packages
+[16-04-2021 17:07:07] 
+[16-04-2021 17:07:07] # In OPS-SAT the APID asigned for the Supervisor is 100
+[16-04-2021 17:07:07] org.ccsds.moims.mo.malspp.apid=100
+[16-04-2021 17:07:07] 
+[16-04-2021 17:07:07] # Disable Domain in SPP header
+[16-04-2021 17:07:07] # (inferred from APID using mappingConfigurationParameters)
+[16-04-2021 17:07:07] org.ccsds.moims.mo.malspp.domainFlag=false
+[16-04-2021 17:07:07] 
+[16-04-2021 17:07:07] # configuration for gps polling behaviour
+[16-04-2021 17:07:07] helpertools.configurations.pollgps=false
+[16-04-2021 17:07:07] # pollrate in ms
+[16-04-2021 17:07:07] helpertools.configurations.gpspollrate=1000
+[16-04-2021 17:07:07] DATA: STOP
+[16-04-2021 17:07:09] COMMAND  Uplink to SEPP: systemctl restart nmf_supervisor; echo 'Restarting NMF supervisor after disabling GPS...'
+[16-04-2021 17:07:16] DATA: START
+[16-04-2021 17:07:16] Restarting NMF supervisor after disabling GPS...
+[16-04-2021 17:07:16] DATA: STOP
+[16-04-2021 17:07:18] COMMAND  Uplink to SEPP: sed -i 's/iterations=1000/iterations=850/g' /home/exp144/orbit_ai.properties; cat /home/exp144/orbit_ai.properties
+[16-04-2021 17:07:25] DATA: START
+[16-04-2021 17:07:25] # GLOBAL
+[16-04-2021 17:07:25] 
+[16-04-2021 17:07:25] # Experiment mode:
+[16-04-2021 17:07:25] #  - train will train new models from scratch
+[16-04-2021 17:07:25] #  - continue_train will continue to train existing models
+[16-04-2021 17:07:25] #  - inference will use the trained models for inference
+[16-04-2021 17:07:25] esa.mo.nmf.apps.OrbitAI.mode=train
+[16-04-2021 17:07:25] 
+[16-04-2021 17:07:25] # Number of iterations the experiment should last
+[16-04-2021 17:07:25] esa.mo.nmf.apps.OrbitAI.iterations=850
+[16-04-2021 17:07:25] 
+[16-04-2021 17:07:25] # Time interval between 2 iterations in seconds
+[16-04-2021 17:07:25] esa.mo.nmf.apps.OrbitAI.interval=5
+[16-04-2021 17:07:25] 
+[16-04-2021 17:07:25] # OBSW parameters for which the publishing will be enabled in NMF supervisor
+[16-04-2021 17:07:25] esa.mo.nmf.apps.OrbitAI.params_to_enable=CADC0884,CADC0885,CADC0886,CADC0887,CADC0888,CADC0889,CADC0890,CADC0891,CADC0892,CADC0893,CADC0894,CADC0895,CADC0900,CADC0901,CADC0902,CADC1002,CADC1003,CADC1004,CADC1005
+[16-04-2021 17:07:25] 
+[16-04-2021 17:07:25] # Whether or not we check the photo diodes values
+[16-04-2021 17:07:25] esa.mo.nmf.apps.OrbitAI.check_pd_values=true
+[16-04-2021 17:07:25] 
+[16-04-2021 17:07:25] # Whether or not we check the validity flags of the photo diodes
+[16-04-2021 17:07:25] esa.mo.nmf.apps.OrbitAI.check_validity_flags=false
+[16-04-2021 17:07:25] 
+[16-04-2021 17:07:25] # MOCHI
+[16-04-2021 17:07:25] 
+[16-04-2021 17:07:25] # Port at which the Mochi server will be listening
+[16-04-2021 17:07:25] esa.mo.nmf.apps.OrbitAI.mochi.port=9999DATA: STOP
+[16-04-2021 17:07:26] COMMAND  Uplink to SEPP: date; cp /home/exp122/imagesToProcessOffline/img_msec_1618086593411_2.png /home/root/esoc-apps/fms/filestore/toGroundLP/
+[16-04-2021 17:07:33] DATA: START
+[16-04-2021 17:07:33] Fri Apr 16 17:07:22 UTC 2021
+[16-04-2021 17:07:33] DATA: STOP
+[16-04-2021 17:07:35] COMMAND  Uplink to SEPP: chown root:root /home/root/esoc-apps/fms/filestore/toGroundLP/img_msec_1618086593411_2.png
+[16-04-2021 17:07:42] DATA: START
+[16-04-2021 17:07:42] DATA: STOP
+[16-04-2021 17:07:44] COMMAND  Uplink to SEPP: mv /home/exp1000/toGround/earth/img_msec_1618324718129_2.png /home/root/png_store/; cp /home/root/png_store/img_msec_1618324718129_2.png /home/root/esoc-apps/fms/filestore/toGroundLP/; echo "moved"; mkdir -p /home/exp_shared_lib
+[16-04-2021 17:07:52] DATA: START
+[16-04-2021 17:07:52] moved
+[16-04-2021 17:07:52] DATA: STOP
+[16-04-2021 17:07:54] COMMAND  Uplink to SEPP: cp /home/exp122/lib/common* /home/exp_shared_lib/; cp /home/exp122/lib/jai* /home/exp_shared_lib/
+[16-04-2021 17:08:01] DATA: START
+[16-04-2021 17:08:01] DATA: STOP
+[16-04-2021 17:08:04] COMMAND  Uplink to SEPP: chown root:root /home/exp_shared_lib/*; chmod 664 /home/exp_shared_lib/*;ls -al /home/exp_shared_lib
+[16-04-2021 17:08:10] DATA: START
+[16-04-2021 17:08:10] total 3512
+[16-04-2021 17:08:10] drwxr-xr-x    2 root     root          4096 Apr 16 17:07 .
+[16-04-2021 17:08:10] drwxr-xr-x   28 root     root          4096 Apr 16 17:07 ..
+[16-04-2021 17:08:10] -rw-rw-r--    1 root     root        284220 Apr 16 17:07 commons-lang-2.6.jar
+[16-04-2021 17:08:10] -rw-rw-r--    1 root     root        479881 Apr 16 17:07 commons-lang3-3.5.jar
+[16-04-2021 17:08:10] -rw-rw-r--    1 root     root       2213560 Apr 16 17:07 commons-math3-3.6.1.jar
+[16-04-2021 17:08:10] -rw-rw-r--    1 root     root        602022 Apr 16 17:07 jai-imageio-core-1.3.1.jar
+[16-04-2021 17:08:10] DATA: STOP

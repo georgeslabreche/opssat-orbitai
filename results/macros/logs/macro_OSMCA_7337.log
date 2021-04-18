@@ -1,0 +1,267 @@
+[17-04-2021 03:53:28] COMMAND  Uplink to SEPP: ls -ltR /home/exp144/toGround/ && tail -n 2 /home/exp144/toGround/learning/mochi-*/logs/training.csv && tail -n 2 /home/exp144/toGround/data/data_*.csv
+[17-04-2021 03:53:29] DATA: START
+[17-04-2021 03:53:29] 6 19:58 mochi-2021-04-16_19-58-14
+[17-04-2021 03:53:29] drwxr-xr-x    4 exp144   exp144        4096 Apr 16 18:28 mochi-2021-04-16_18-28-31
+[17-04-2021 03:53:29] 
+[17-04-2021 03:53:29] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14:
+[17-04-2021 03:53:29] total 8
+[17-04-2021 03:53:29] drwxr-xr-x    2 exp144   exp144        4096 Apr 16 18:47 logs
+[17-04-2021 03:53:29] drwxr-xr-x    2 exp144   exp144        4096 Apr 16 17:17 models
+[17-04-2021 03:53:29] 
+[17-04-2021 03:53:29] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/logs:
+[17-04-2021 03:53:29] total 600
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144      607884 Apr 16 19:58 training.csv
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144        1076 Apr 16 18:47 orbitai.log
+[17-04-2021 03:53:29] 
+[17-04-2021 03:53:29] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models:
+[17-04-2021 03:53:29] total 80
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144          90 Apr 16 19:58 adam_1D
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144         163 Apr 16 19:58 adam_2D
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144         236 Apr 16 19:58 adam_3D
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144         382 Apr 16 19:58 adam_5D
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144          85 Apr 16 19:58 arow_1D
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144         133 Apr 16 19:58 arow_2D
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144         181 Apr 16 19:58 arow_3D
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144         277 Apr 16 19:58 arow_5D
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144          87 Apr 16 19:58 nherd_1D
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144         135 Apr 16 19:58 nherd_2D
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144         183 Apr 16 19:58 nherd_3D
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144         279 Apr 16 19:58 nherd_5D
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144         143 Apr 16 19:58 rda_1D
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144         216 Apr 16 19:58 rda_2D
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144         289 Apr 16 19:58 rda_3D
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144         434 Apr 16 19:58 rda_5D
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144         109 Apr 16 19:58 scw_1D
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144         157 Apr 3 Apr 16 18:28 nherd_3D
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144         279 Apr 16 18:28 nherd_5D
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144         142 Apr 16 18:28 rda_1D
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144         215 Apr 16 18:28 rda_2D
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144         288 Apr 16 18:28 rda_3D
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144         434 Apr 16 18:28 rda_5D
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144         109 Apr 16 18:28 scw_1D
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144         157 Apr 16 18:28 scw_2D
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144         205 Apr 16 18:28 scw_3D
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144         301 Apr 16 18:28 scw_5D
+[17-04-2021 03:53:29] 
+[17-04-2021 03:53:29] /home/exp144/toGround/data:
+[17-04-2021 03:53:29] total 264
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144      127122 Apr 16 19:58 data_2021-04-16_18-47-19.csv
+[17-04-2021 03:53:29] -rw-r--r--    1 exp144   exp144      129022 Apr 16 18:28 data_2021-04-16_17-17-36.csv
+[17-04-2021 03:53:29] ==> /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/logs/training.csv <==
+[17-04-2021 03:53:29] 1618597706004,0.130000,0.000000,0.000000,0.990000,0.240000,0.010000,1,0.017160,0.004010,0.005460,0.007980,0.004390,0.002710,0.002950,0.002200,0.003600,0.001850,0.002470,0.001800,0.005420,0.002570,0.002630,0.003190,0.005500,0.002220,0.003590,0.001840,0.003270,0.001830,0.001370,0.002170,0.001380,0.001790,0.002190,0.002190,0.001230,0.001790,0.002020,0.002090
+[17-04-2021 03:53:29] 1618597711011,0.130000,0.000000,0.000000,1.000000,0.150000,0.010000,1,0.023470,0.004430,0.006160,0.009270,0.005420,0.003070,0.002850,0.003510,0.003870,0.003390,0.003150,0.002290,0.008100,0.002530,0.003670,0.004260,0.007520,0.002220,0.004190,0.003030,0.003680,0.003550,0.001570,0.002750,0.001400,0.001820,0.001970,0.002200,0.001300,0.001820,0.002290,0.002410
+[17-04-2021 03:53:29] 
+[17-04-2021 03:53:29] ==> /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/logs/training.csv <==
+[17-04-2021 03:53:29] 1618603089374,0.850000,0.000000,0.570000,0.360000,0.000000,0.000000,1,0.030740,0.006390,0.007090,0.001210,0.008800,0.003770,0.002760,0.002200,0.003490,0.002200,0.002580,0.001780,0.009630,0.004470,0.002990,0.003770,0.006950,0.002360,0.004140,0.002460,1618597706004,0.13210775,false,0.0,false,0.0,false,0.99301434,true,0.2442632,false,0.013210761,false,0.0,0.0,0.0,0.747472,-0.023120405,0.03841836,0.66521084
+[17-04-2021 03:53:29] 1618597711011,0.13210775,false,0.0,false,0.0,false,1.0015203,true,0.1483354,false,0.013210761,false,0.0,0.0,0.0,0.747472,-0.023120405,0.03841836,0.66521084
+[17-04-2021 03:53:29] 
+[17-04-2021 03:53:29] ==> /home/exp144/toGround/data/data_2021-04-16_18-47-19.csv <==
+[17-04-2021 03:53:35] 1618603089374,0.850975,true,0.0,false,0.5672371,true,0.35838518,false,0.0,false,0.0,false,0.0,0.0,0.0,-0.08945428,0.71847034,0.55697584,0.40568122
+[17-04-2021 03:53:35] 1618603094377,0.850975,true,0.0,false,0.5672371,true,0.35838518,false,0.0,false,0.0,false,0.0,0.0,0.0,-0.08945428,0.71847034,0.55697584,0.40568122
+[17-04-2021 03:53:35] DATA: STOP
+[17-04-2021 03:53:37] COMMAND  Uplink to SEPP: tar -czvf /home/exp144/exp144_results_20210417A.tar.gz /home/exp144/toGround
+[17-04-2021 03:53:47] DATA: START
+[17-04-2021 03:53:47] tar: Removing leading `/' from member names
+[17-04-2021 03:53:47] /home/exp144/toGround/
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/adam_5D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/rda_1D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/nherd_1D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/arow_1D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/adam_2D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/scw_1D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/adam_3D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/scw_2D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/arow_3D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/nherd_3D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/arow_2D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/adam_1D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/nherd_5D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/rda_3D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/rda_2D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/nherd_2D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/scw_5D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/arow_5D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/rda_5D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models/scw_3D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/logs/
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/logs/training.csv
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/adam_5D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/rda_1D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/nherd_1D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/arow_1D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/adam_2D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/scw_1D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/adam_3D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/scw_2D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/arow_3D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/nherd_3D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/arow_2D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/adam_1D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/nherd_5D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/rda_3D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/rda_2D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/nherd_2D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/scw_5D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/arow_5D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/rda_5D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/models/scw_3D
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/logs/
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/logs/training.csv
+[17-04-2021 03:53:47] /home/exp144/toGround/learning/mochi-2021-04-16_19-58-14/logs/orbitai.log
+[17-04-2021 03:53:47] /home/exp144/toGround/data/
+[17-04-2021 03:53:47] /home/exp144/toGround/data/data_2021-04-16_17-17-36.csv
+[17-04-2021 03:53:47] /home/exp144/toGround/data/data_2021-04-16_18-47-19.csv
+[17-04-2021 03:53:47] DATA: STOP
+[17-04-2021 03:53:49] COMMAND  Uplink to SEPP: split /home/exp144/exp144_results_20210417A.tar.gz -b 3M /home/exp144/exp144_results_20210417A.tar.gz_ && mv /home/exp144/exp144_results_20210417A.tar.gz_* /home/root/esoc-apps/fms/filestore/toGround
+[17-04-2021 03:53:55] DATA: START
+[17-04-2021 03:53:55] DATA: STOP
+[17-04-2021 03:53:57] COMMAND  Uplink to SEPP: cp /home/exp1000/toGround/earth/img_msec_1618358680605_2.png /home/root/esoc-apps/fms/filestore/toGroundLP/; cp /home/exp1000/toGround/earth/img_msec_1618363993084_2.png /home/root/esoc-apps/fms/filestore/toGroundLP/; echo "done"
+[17-04-2021 03:54:04] DATA: START
+[17-04-2021 03:54:04] done
+[17-04-2021 03:54:04] DATA: STOP
+[17-04-2021 03:54:08] COMMAND  Uplink to SEPP: cp /home/exp1000/toGround/earth/img_msec_1618364422204_2.png /home/root/esoc-apps/fms/filestore/toGroundLP/; cp /home/exp1000/toGround/earth/img_msec_1618364470523_2.png /home/root/esoc-apps/fms/filestore/toGroundLP/; echo "done"
+[17-04-2021 03:54:16] DATA: START
+[17-04-2021 03:54:16] done
+[17-04-2021 03:54:16] DATA: STOP
+[17-04-2021 03:54:17] COMMAND  Uplink to SEPP: cp /home/exp1000/toGround/earth/img_msec_1618358680605_2.png /home/root/png_store/; cp /home/exp1000/toGround/earth/img_msec_1618363993084_2.png /home/root/png_store/; echo "done"
+[17-04-2021 03:54:24] DATA: START
+[17-04-2021 03:54:24] done
+[17-04-2021 03:54:24] DATA: STOP
+[17-04-2021 03:54:26] COMMAND  Uplink to SEPP: cp /home/exp1000/toGround/earth/img_msec_1618364422204_2.png /home/root/png_store/; cp /home/exp1000/toGround/earth/img_msec_1618364470523_2.png /home/root/png_store/; ls -ltR /home/exp1000/toGround/; echo "done"
+[17-04-2021 03:54:30] DATA: START
+[17-04-2021 03:54:30] /home/exp1000/toGround/:
+[17-04-2021 03:54:30] total 20
+[17-04-2021 03:54:30] drwxr-xr-x    2 root     root         12288 Apr 16 17:07 earth
+[17-04-2021 03:54:30] drwxr-xr-x    2 root     root          4096 Apr 16 13:42 edge
+[17-04-2021 03:54:30] drwxr-xr-x    2 root     root          4096 Mar 23 21:45 bad
+[17-04-2021 03:54:30] 
+[17-04-2021 03:54:30] /home/exp1000/toGround/earth:
+[17-04-2021 03:54:30] total 284672
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root         40583 Apr 16 09:31 img_msec_1618565451234_2_thumbnail.jpeg
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       3665021 Apr 16 09:31 img_msec_1618565451234_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root         24228 Apr 16 09:30 img_msec_1618565384674_2_thumbnail.jpeg
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       3520612 Apr 16 09:30 img_msec_1618565384674_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root         56128 Apr 16 09:28 img_msec_1618565298675_2_thumbnail.jpeg
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4644565 Apr 16 09:28 img_msec_1618565298675_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root         30417 Apr 16 09:15 img_msec_1618564513714_2_thumbnail.jpeg
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       3258028 Apr 16 09:15 img_msec_1618564513714_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root         38041 Apr 16 09:13 img_msec_1618564378116_2_thumbnail.jpeg
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       3565306 Apr 16 09:13 img_msec_1618564378116_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root         73093 Apr 16 09:12 img_msec_1618564342116_2_thumbnail.jpeg
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4186077 Apr 16 09:12 img_msec_1618564342116_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root         79610 Apr 16 09:12 img_msec_1618564303794_2_thumbnail.jpeg
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4347299 Apr 16 09:12 img_msec_1618564303794_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root         76881 Apr 16 09:11 img_msec_1618564268835_2_thumbnail.jpeg
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4406629 Apr 16 09:11 img_msec_1618564268835_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root         71285 Apr 16 09:11 img_msec_1618564231395_2_thumbnail.jpeg
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4300558 Apr 16 09:10 img_msec_1618564231395_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root         58045 Apr 16 09:10 img_msec_1618564195957_2_thumbnail.jpeg
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4013550 Apr 16 09:10 img_msec_1618564195957_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root         56548 Apr 16 09:09 img_msec_1618564160675_2_thumbnail.jpeg
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4058565 Apr 16 09:09 img_msec_1618564160675_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root         57786 Apr 16 09:03 img_msec_1618563755794_2_thumbnail.jpeg
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       5080384 Apr 16 09:03 img_msec_1618563755794_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root         76796 Apr 16 09:02 img_msec_1618563723234_2_thumbnail.jpeg
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4907223 Apr 16 09:02 img_msec_1618563723234_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root         74513 Apr 16 09:01 img_msec_1618563691716_2_thumbnail.jpeg
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4592660 Apr 16 09:01 img_msec_1618563691716_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root         28266 Apr 16 07:38 img_msec_1618558700836_2_thumbnail.jpeg
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       3879636 Apr 16 07:38 img_msec_1618558700836_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root         41302 Apr 16 07:38 img_msec_1618558661315_2_thumbnail.jpeg
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4095533 Apr 16 07:38 img_msec_1618558661315_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root         56363 Apr 16 07:37 img_msec_1618558608356_2_thumbnail.jpeg
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4242774 Apr 16 07:37 img_msec_1618558608356_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root         65216 Apr 16 07:36 img_msec_1618558566764_2_thumbnail.jpeg
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4601169 Apr 16 07:36 img_msec_1618558566764_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root         45073 Apr 16 07:35 img_msec_1618558523795_2_thumbnail.jpeg
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4344358 Apr 16 07:35 img_msec_1618558523795_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root         51016 Apr 16 07:35 img_msec_1618558482996_2_thumbnail.jpeg
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4487510 Apr 16 07:35 img_msec_1618558482996_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4060039 Apr 14 01:41 img_msec_1618364470523_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4145253 Apr 14 01:40 img_msec_1618364422204_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4313893 Apr 14 01:40 img_msec_1618364376443_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4601651 Apr 14 01:39 img_msec_1618364325084_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4621746 Apr 14 01:36 img_msec_1618364184043_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4895862 Apr 14 01:33 img_msec_1618363993084_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4639012 Apr 14 01:33 img_msec_1618363948771_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4710031 Apr 14 01:32 img_msec_1618363903082_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4624281 Apr 14 01:31 img_msec_1618363856132_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4688580 Apr 14 01:30 img_msec_1618363808294_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4053571 Apr 14 00:05 img_msec_1618358680605_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4194392 Apr 13 21:25 img_msec_1618349106849_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       5431124 Apr 13 21:24 img_msec_1618349072702_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       5032421 Apr 13 21:24 img_msec_1618349030764_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4626631 Apr 13 21:23 img_msec_1618348990853_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       3719421 Apr 13 21:22 img_msec_1618348955804_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       3381983 Apr 13 21:22 img_msec_1618348922044_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       3350528 Apr 13 21:21 img_msec_1618348887653_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       3397136 Apr 13 21:21 img_msec_1618348852442_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       3558066 Apr 13 21:20 img_msec_1618348817083_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       3084190 Apr 13 21:20 img_msec_1618348785566_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       3229294 Apr 13 21:19 img_msec_1618348754860_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4920457 Apr 13 15:02 img_msec_1618326094929_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       5411055 Apr 13 15:01 img_msec_1618326050764_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       5114378 Apr 13 15:00 img_msec_1618326007732_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       5459287 Apr 13 14:39 img_msec_1618324763404_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4412149 Apr 13 14:38 img_msec_1618324672604_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       5500884 Apr 13 14:35 img_msec_1618324526042_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       5046569 Apr 11 13:32 img_msec_1618147951010_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       5520739 Apr 11 13:32 img_msec_1618147911653_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4586290 Apr 11 13:31 img_msec_1618147868689_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       5037819 Apr 11 13:30 img_msec_1618147813811_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4189092 Apr 10 20:31 img_msec_1618086664768_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       3470397 Apr 10 20:30 img_msec_1618086631888_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4357876 Apr 10 20:27 img_msec_1618086433569_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4503308 Apr  9 23:35 img_msec_1618011308769_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4003314 Apr  9 23:34 img_msec_1618011267409_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       3105292 Apr  9 22:20 img_msec_1618006840382_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       3167418 Apr  9 22:20 img_msec_1618006806214_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       3145610 Apr  9 22:19 img_msec_1618006775329_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       3601909 Apr  9 22:19 img_msec_1618006737410_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       3419675 Apr  9 22:18 img_msec_1618006702849_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       3222775 Apr  9 22:18 img_msec_1618006671568_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       3497675 Apr  9 22:17 img_msec_1618006637091_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4025250 Apr  9 22:17 img_msec_1618006594529_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       4697482 Apr  9 22:16 img_msec_1618006545889_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       3907611 Apr  9 22:15 img_msec_1618006515809_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       3153227 Apr  9 22:03 img_msec_1618005804454_2.png
+[17-04-2021 03:54:30] -rw-r--r--    1 root     root       3207288 Apr  9 22:03 img_msec_1618005771660_2.png
+[17-04-2021 03:54:30] 
+[17-04-2021 03:54:30] /home/exp1000/toGround/edge:
+[17-04-2021 03:54:30] total 79148
+[17-04-2021 03:54:36] -rw-r--r--    1 root     root         21288 Apr 16 13:42 img_msec_1618580534594_2_thumbnail.jpeg
+[17-04-2021 03:54:36] -rw-r--r--    1 root     root       2555467 Apr 16 13:42 img_msec_1618580534594_2.png
+[17-04-2021 03:54:36] -rw-r--r--    1 root     root         28726 Apr 16 13:42 img_msec_1618580510916_2_thumbnail.jpeg
+[17-04-2021 03:54:36] -rw-r--r--    1 root     root       2832591 Apr 16 13:42 img_msec_1618580510916_2.png
+[17-04-2021 03:54:36] -rw-r--r--    1 root     root         46176 Apr 16 13:41 img_msec_1618580486275_2_thumbnail.jpeg
+[17-04-2021 03:54:36] -rw-r--r--    1 root     root       3263727 Apr 16 13:41 img_msec_1618580486275_2.png
+[17-04-2021 03:54:36] -rw-r--r--    1 root     root       4292698 Apr 14 00:23 img_msec_1618359804763_2.png
+[17-04-2021 03:54:36] -rw-r--r--    1 root     root       4346720 Apr 14 00:23 img_msec_1618359771082_2.png
+[17-04-2021 03:54:36] -rw-r--r--    1 root     root       4171863 Apr 14 00:22 img_msec_1618359737803_2.png
+[17-04-2021 03:54:36] -rw-r--r--    1 root     root       3246053 Apr 13 14:56 img_msec_1618325757724_2.png
+[17-04-2021 03:54:36] -rw-r--r--    1 root     root       3394598 Apr 13 14:55 img_msec_1618325729644_2.png
+[17-04-2021 03:54:36] -rw-r--r--    1 root     root       3093148 Apr 13 14:55 img_msec_1618325703257_2.png
+[17-04-2021 03:54:36] -rw-r--r--    1 root     root       2675002 Apr 13 14:54 img_msec_1618325677404_2.png
+[17-04-2021 03:54:36] -rw-r--r--    1 root     root       2859995 Apr 11 13:37 img_msec_1618148236940_2.png
+[17-04-2021 03:54:36] -rw-r--r--    1 root     root       3035425 Apr 11 13:37 img_msec_1618148208768_2.png
+[17-04-2021 03:54:36] -rw-r--r--    1 root     root       3243533 Apr 11 13:36 img_msec_1618148177409_2.png
+[17-04-2021 03:54:36] -rw-r--r--    1 root     root       3430821 Apr 11 13:36 img_msec_1618148143490_2.png
+[17-04-2021 03:54:36] -rw-r--r--    1 root     root       3540803 Apr 11 13:35 img_msec_1618148106289_2.png
+[17-04-2021 03:54:36] -rw-r--r--    1 root     root       3839745 Apr 11 13:34 img_msec_1618148070528_2.png
+[17-04-2021 03:54:36] -rw-r--r--    1 root     root       4214374 Apr 11 13:34 img_msec_1618148031180_2.png
+[17-04-2021 03:54:36] -rw-r--r--    1 root     root       4458673 Apr 11 13:33 img_msec_1618147991331_2.png
+[17-04-2021 03:54:36] -rw-r--r--    1 root     root       2266817 Apr 10 22:14 img_msec_1618092834850_2.png
+[17-04-2021 03:54:36] -rw-r--r--    1 root     root       3554319 Apr  8 17:39 img_msec_1617903529728_2.png
+[17-04-2021 03:54:36] -rw-r--r--    1 root     root       3954084 Apr  1 16:12 img_msec_1617293503107_2.png
+[17-04-2021 03:54:36] -rw-r--r--    1 root     root       4752040 Mar 31 22:53 img_msec_1617231211349_2.png
+[17-04-2021 03:54:36] -rw-r--r--    1 root     root       3868373 Mar 31 09:58 img_msec_1617184696308_2.png
+[17-04-2021 03:54:36] 
+[17-04-2021 03:54:36] /home/exp1000/toGround/bad:
+[17-04-2021 03:54:36] total 0
+[17-04-2021 03:54:36] done
+[17-04-2021 03:54:36] DATA: STOP

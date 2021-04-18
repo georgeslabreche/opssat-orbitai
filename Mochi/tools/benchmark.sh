@@ -34,7 +34,7 @@ do
     # Start the Mochi server.
     ../OrbitAI_Mochi &
 
-    # Wait a bit to making sure that the Mochi server has started nicelye.
+    # Wait a bit to make sure that the Mochi server has started nicely.
     sleep 1
 
     # Send training and inference commands to the Mochi server.

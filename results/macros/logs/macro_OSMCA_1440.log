@@ -1,0 +1,74 @@
+[16-04-2021 18:47:07] COMMAND  Uplink to SEPP: ls -R /home/exp144/toGround/ && tail -n 2 /home/exp144/toGround/learning/mochi-*/logs/training.csv && tail -n 2 /home/exp144/toGround/data/data_*.csv
+[16-04-2021 18:47:14] DATA: START
+[16-04-2021 18:47:14] /home/exp144/toGround/:
+[16-04-2021 18:47:14] data
+[16-04-2021 18:47:14] learning
+[16-04-2021 18:47:14] 
+[16-04-2021 18:47:14] /home/exp144/toGround/data:
+[16-04-2021 18:47:14] data_2021-04-16_17-17-36.csv
+[16-04-2021 18:47:14] 
+[16-04-2021 18:47:14] /home/exp144/toGround/learning:
+[16-04-2021 18:47:14] mochi-2021-04-16_18-28-31
+[16-04-2021 18:47:14] 
+[16-04-2021 18:47:14] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31:
+[16-04-2021 18:47:14] logs
+[16-04-2021 18:47:14] models
+[16-04-2021 18:47:14] 
+[16-04-2021 18:47:14] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/logs:
+[16-04-2021 18:47:14] training.csv
+[16-04-2021 18:47:14] 
+[16-04-2021 18:47:14] /home/exp144/toGround/learning/mochi-2021-04-16_18-28-31/models:
+[16-04-2021 18:47:14] adam_1D
+[16-04-2021 18:47:14] adam_2D
+[16-04-2021 18:47:14] adam_3D
+[16-04-2021 18:47:14] adam_5D
+[16-04-2021 18:47:14] arow_1D
+[16-04-2021 18:47:14] arow_2D
+[16-04-2021 18:47:14] arow_3D
+[16-04-2021 18:47:14] arow_5D
+[16-04-2021 18:47:14] nherd_1D
+[16-04-2021 18:47:14] nherd_2D
+[16-04-2021 18:47:14] nherd_3D
+[16-04-2021 18:47:14] nherd_5D
+[16-04-2021 18:47:14] rda_1D
+[16-04-2021 18:47:14] rda_2D
+[16-04-2021 18:47:14] rda_3D
+[16-04-2021 18:47:14] rda_5D
+[16-04-2021 18:47:14] scw_1D
+[16-04-2021 18:47:14] scw_2D
+[16-04-2021 18:47:14] scw_3D
+[16-04-2021 18:47:14] scw_5D
+[16-04-2021 18:47:14] 1618597706004,0.130000,0.000000,0.000000,0.990000,0.240000,0.010000,1,0.017160,0.004010,0.005460,0.007980,0.004390,0.002710,0.002950,0.002200,0.003600,0.001850,0.002470,0.001800,0.005420,0.002570,0.002630,0.003190,0.005500,0.002220,0.003590,0.001840,0.003270,0.001830,0.001370,0.002170,0.001380,0.001790,0.002190,0.002190,0.001230,0.001790,0.002020,0.002090
+[16-04-2021 18:47:14] 1618597711011,0.130000,0.000000,0.000000,1.000000,0.150000,0.010000,1,0.023470,0.004430,0.006160,0.009270,0.005420,0.003070,0.002850,0.003510,0.003870,0.003390,0.003150,0.002290,0.008100,0.002530,0.003670,0.004260,0.007520,0.002220,0.004190,0.003030,0.003680,0.003550,0.001570,0.002750,0.001400,0.001820,0.001970,0.002200,0.001300,0.001820,0.002290,0.002410
+[16-04-2021 18:47:14] 1618597706004,0.13210775,false,0.0,false,0.0,false,0.99301434,true,0.2442632,false,0.013210761,false,0.0,0.0,0.0,0.747472,-0.023120405,0.03841836,0.66521084
+[16-04-2021 18:47:14] 1618597711011,0.13210775,false,0.0,false,0.0,false,1.0015203,true,0.1483354,false,0.013210761,false,0.0,0.0,0.0,0.747472,-0.023120405,0.03841836,0.66521084
+[16-04-2021 18:47:14] DATA: STOP
+[16-04-2021 18:47:17] COMMAND  Uplink to SEPP: sed -i 's/=train/=continue_train/g' /home/exp144/orbit_ai.properties; cat /home/exp144/orbit_ai.properties
+[16-04-2021 18:47:24] DATA: START
+[16-04-2021 18:47:24] # GLOBAL
+[16-04-2021 18:47:24] 
+[16-04-2021 18:47:24] # Experiment mode:
+[16-04-2021 18:47:24] #  - train will train new models from scratch
+[16-04-2021 18:47:24] #  - continue_train will continue to train existing models
+[16-04-2021 18:47:24] #  - inference will use the trained models for inference
+[16-04-2021 18:47:24] esa.mo.nmf.apps.OrbitAI.mode=continue_train
+[16-04-2021 18:47:24] 
+[16-04-2021 18:47:24] # Number of iterations the experiment should last
+[16-04-2021 18:47:24] esa.mo.nmf.apps.OrbitAI.iterations=850
+[16-04-2021 18:47:24] 
+[16-04-2021 18:47:24] # Time interval between 2 iterations in seconds
+[16-04-2021 18:47:24] esa.mo.nmf.apps.OrbitAI.interval=5
+[16-04-2021 18:47:24] 
+[16-04-2021 18:47:24] # OBSW parameters for which the publishing will be enabled in NMF supervisor
+[16-04-2021 18:47:24] esa.mo.nmf.apps.OrbitAI.params_to_enable=CADC0884,CADC0885,CADC0886,CADC0887,CADC0888,CADC0889,CADC0890,CADC0891,CADC0892,CADC0893,CADC0894,CADC0895,CADC0900,CADC0901,CADC0902,CADC1002,CADC1003,CADC1004,CADC1005
+[16-04-2021 18:47:24] 
+[16-04-2021 18:47:24] # Whether or not we check the photo diodes values
+[16-04-2021 18:47:24] esa.mo.nmf.apps.OrbitAI.check_pd_values=true
+[16-04-2021 18:47:24] 
+[16-04-2021 18:47:24] # Whether or not we check the validity flags of the photo diodes
+[16-04-2021 18:47:24] esa.mo.nmf.apps.OrbitAI.check_validity_flags=false
+[16-04-2021 18:47:24] 
+[16-04-2021 18:47:24] # MOCHI
+[16-04-2021 18:47:24] 
+[16-04-2021 18:47:24] # Port at which the Mochi server will be listening
+[16-04-2021 18:47:24] esa.mo.nmf.apps.OrbitAI.mochi.port=9999DATA: STOP
