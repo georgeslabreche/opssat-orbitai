@@ -28,12 +28,12 @@ Time-tagged commands were prepared to start the the OrbitAI app during the next 
 
 ### Pass 7337
 Via the 7337.OMAC.sh macro:
-- Logged the content of the the app's toGround folder to check if the app ran correctly.
+- Fetched the content of the the app's toGround folder to check if the app ran correctly.
 - Tarred the app's toGround folder for downlink and ground analysis.
 
 ### Pass 7338
 Via the 7338.OMAC.sh macro:
-- Logged the content of the the app's toGround folder to check if the app ran correctly.
+- Fetched the content of the the app's toGround folder to check if the app ran correctly.
 - Tarred the app's toGround folder for downlink and on-ground analysis.
 
 ### Pass 7345
@@ -41,7 +41,7 @@ To increase the chances of capturing training inputs for PD6 elevation angle val
 
 #### 7345.OMAC.sh
 - Reduced the number of iterations from 850 to 540 (from ~71 min to 45 min).
-- Logged the content of the the app's toGround folder to check if the app ran correctly.
+- Fetched the content of the the app's toGround folder to check if the app ran correctly.
 - Other operations unrelated to the OrbitAI experiment were executed.
 
 #### Matis
@@ -60,13 +60,20 @@ Via the 7346.OMAC.sh macro:
 - Other operations unrelated to the OrbitAI experiment were executed.
 
 ### Pass 7352
-Via the 7352.OMAC.sh macro:
-- Logged the content of the the app's toGround folder to check if the app ran correctly.
+The following was scheduled via the 7353.OMAC.sh macro but was not executed due to ground segment problems:
+- Fetched the content of the the app's toGround folder to check if the app ran correctly.
 - Tarred the app's toGround folder for downlink and ground analysis.
 - Other operations unrelated to the OrbitAI experiment were executed.
 
 ### Pass 7353
-Via the 7353.OMAC.sh macro:
-- Logged the content of the the app's toGround folder to check if the app ran correctly.
+The following was scheduled via the 7353.OMAC.sh macro but was not executed due to ground segment problems:
+- Fetched the content of the the app's toGround folder to check if the app ran correctly.
 - Tarred the app's toGround folder for downlink and ground analysis.
 - Moved log files for later deletion to manage disk usage.
+
+### Pass 7360
+Moved to from primary (Chain-A) to secondary (Chain-B) ground station due to problems in primary.
+- Fetched the content of the the app's toGround folder to check if the app ran correctly.
+- Tarred the app's toGround folder. Cound not downlink due to SpaceWire not being configured for Chain-B.
+- Moved log files for later deletion to manage disk usage.
+- In MATIS: Switched from SpaceWire to CAN to to attemp downlink in next pass.
