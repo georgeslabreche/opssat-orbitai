@@ -33,7 +33,7 @@ sleep 1
 eval 'echo "load"; sleep 1; input="$2"; while IFS= read -r cmd; do sleep $1; echo ${cmd}; done < "$input"; echo "exit"' | telnet localhost $PORT
 
 # Caculate classification metrics of the trained models.
-python3 analyze.py logs/inference.csv metrics/ground/inference.csv
+python3 analyze.py 1 logs/inference.csv metrics/space/inferences_2021-04-18.csv
 
 
 

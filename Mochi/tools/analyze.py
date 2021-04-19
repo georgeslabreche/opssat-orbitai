@@ -14,8 +14,13 @@ Calculates classification metrics for all models trained:
 - Balanced Accuracy
 - F1 Score
 
-Usage: python3 analyze.py <string:inference_csv_log_file> <string:metrics_results_output_csv_file>
-E.g.: python3 analyze.py logs/inference.csv metrics/performance.csv
+Usage: python3 analyze.py <int:analyze_5d_flag> <string:inference_csv_log_file> <string:metrics_results_output_csv_file>
+- analyze_5d_flag: Flag to indicate if classification metrics should be calculated for models trained in 5D input space.
+                   1 for True or 0 for False.
+- inference_csv_log_file: inference log file to analyze.
+- metrics_results_output_csv_file: results output filepath.
+
+E.g.: python3 analyze.py 1 logs/inference.csv metrics/performance.csv
 
 References:
 
@@ -28,12 +33,6 @@ https://statisticaloddsandends.wordpress.com/2020/01/23/what-is-balanced-accurac
 Balanced accuracy: what and why?
 http://mvpa.blogspot.com/2015/12/balanced-accuracy-what-and-why.html
 '''
-
-# Flag to indicate if classification metrics should be calculatd for models trained in 5D input space.
-# The reason we make optional is because when testing with training on the ground we don't generate any
-# valid 5D input space training data.
-# TODO: externalize as a parameter
-INCLUDE_5D_INPUT_SPACE = True
 
 class Algorithm(Enum):
     ADAM = 1    # A Method for Stochastic Optimization
@@ -252,11 +251,15 @@ def calculate_classification_metrics(algorithm):
 # Main application function.
 if __name__ == "__main__":
 
+    # Flag to indicate if classification metrics should be calculated for models trained in 5D input space.
+    # The reason we make this optional is because when testing training on the ground we don't generate any valid 5D input space training data.
+    INCLUDE_5D_INPUT_SPACE = True if int(sys.argv[1]) == 1 else False
+
     # Inference log file to process.
-    INFERENCE_LOG_FILENAME = sys.argv[1]
+    INFERENCE_LOG_FILENAME = sys.argv[2]
 
     # Metrics output filename.
-    OUTPUT_FILENAME = sys.argv[2]
+    OUTPUT_FILENAME = sys.argv[3]
 
     # Verbosity.
     print('Reading inference log file: ' + INFERENCE_LOG_FILENAME)
