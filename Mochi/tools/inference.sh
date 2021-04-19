@@ -21,14 +21,16 @@ fi
 rm logs/inference.csv
 rm logs/training.csv
 
+PORT=9999
+
 # Start the Mochi server.
-../OrbitAI_Mochi &
+../OrbitAI_Mochi $PORT &
 
 # Wait a bit to make sure that the Mochi server has started nicely.
 sleep 1
 
 # Load models and infer.
-eval 'echo "load"; sleep 1; input="$2"; while IFS= read -r cmd; do sleep $1; echo ${cmd}; done < "$input"; echo "exit"' | telnet localhost 9999
+eval 'echo "load"; sleep 1; input="$2"; while IFS= read -r cmd; do sleep $1; echo ${cmd}; done < "$input"; echo "exit"' | telnet localhost $PORT
 
 # Caculate classification metrics of the trained models.
 python3 analyze.py logs/inference.csv metrics/ground/inference.csv
