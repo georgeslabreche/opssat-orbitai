@@ -32,7 +32,8 @@ http://mvpa.blogspot.com/2015/12/balanced-accuracy-what-and-why.html
 # Flag to indicate if classification metrics should be calculatd for models trained in 5D input space.
 # The reason we make optional is because when testing with training on the ground we don't generate any
 # valid 5D input space training data.
-INCLUDE_5D_INPUT_SPACE = False
+# TODO: externalize as a parameter
+INCLUDE_5D_INPUT_SPACE = True
 
 class Algorithm(Enum):
     ADAM = 1    # A Method for Stochastic Optimization

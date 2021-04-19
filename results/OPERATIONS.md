@@ -45,11 +45,9 @@ To increase the chances of capturing training inputs for PD6 elevation angle val
 - Other operations unrelated to the OrbitAI experiment were executed.
 
 #### Matis
-Uplinked the schedule to start the app at the following UTC times: 
- - **April 17 - Run \#6 to \#9**: 18:45, 19:45, 21:20, and 22:55.
- - **April 18 - Run \#10 to \#19**: 0:30, 2:05, 3:55*, 5:25*, 6:50, 8:25, 10:00, 11:35, 13:10, and 14:45.
-
-App runs with an asterisk start time include both illuminated and eclipsed phases of the orbit. This is because the start time is delayed until after a ground pass is finished. 
+Uplinked the schedule to start the app at the following times (UTC): 
+ - **April 17 - Run \#6 to \#8**: 19:45, 21:20, and 22:55.
+ - **April 18 - Run \#9 to \#16**: 0:30, 2:05, 6:50, 8:25, 10:00, 11:35, 13:10, and 14:45.
 
 ### SCOS
 Run \#5: A StartExperiment command was sent to start the app. For reasons not investigated, the app did not run so no new data was created. The previous pass had SCOS/Matis delay problems which could be related to the issue.
@@ -73,7 +71,26 @@ The following was scheduled via the 7353.OMAC.sh macro but was not executed due 
 
 ### Pass 7360
 Moved to from primary (Chain-A) to secondary (Chain-B) ground station due to problems in primary.
+
+#### MATIS
+- Uplinked the schedule to start the app at the following times (UTC): 
+ - **April 18 - Run \#18 to \#20**: 19:30, 21:05, 22:40.
+ - **April 19 - Run \#21 to \#31**: 0:15, 1:50, 3:25, 5:00, 6:35, 8:10, 9:45, 11:20, 12:55, 14:30, 16:05.
+- Switched from SpaceWire to CAN to attempt downlink in next pass.
+
+### SCOS
+Run \#17 at 18:14 UTC. Live StartExperiment command to start the app.
+#### 7360.OMAC.sh
 - Fetched the content of the the app's toGround folder to check if the app ran correctly.
 - Tarred the app's toGround folder. Cound not downlink due to SpaceWire not being configured for Chain-B.
 - Moved log files for later deletion to manage disk usage.
-- In MATIS: Switched from SpaceWire to CAN to to attemp downlink in next pass.
+- Used the `cat` command on the serialized model files so that they could manually be recreated on the ground (because downlinking was not working in Chain-B).
+
+### Pass 7361
+#### 7361.OMAC.sh
+The following commands were not necessary because they had been done in the previous pass and the app had not run since.
+- Fetched the content of the the app's toGround folder to check if the app ran correctly.
+- Used the `cat` command on the serialized model files.
+
+#### SCOS
+- Sent command at 18:14 UTC to start the app.
