@@ -47,7 +47,7 @@ do
     fi
 
     # Caculate classification metrics of the trained models.
-    python3 analyze.py logs/inference.csv metrics/ground/epochs_$EPOCH.csv
+    python3 analyze.py 0 logs/inference.csv metrics/ground/epochs_$EPOCH.csv
 done
 
 
