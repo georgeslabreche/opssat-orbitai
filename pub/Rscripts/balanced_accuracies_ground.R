@@ -19,7 +19,7 @@ PLOT_HEIGHT_PX = 400
 # Filters.
 data_keep_2D = c('pa1', 'arow', 'scw')
 data_keep_3D = c('pa1', 'rda', 'arow', 'scw', 'nherd')
-keep_cols = c('algorithm', 'accuracy_biased', 'f1_score')
+keep_cols = c('algorithm', 'accuracy_balanced', 'f1_score')
 
 # Data frames
 data_2D = NULL
@@ -70,7 +70,7 @@ layout(matrix(c(1, 2), nrow=1, ncol=2, byrow=TRUE))
 
 # Empty plot canvas for balanced accuracy in 2D input space.
 plot(0, xlab='', ylab='',
-     xlim=c(1, 10), ylim=c(0.3, 1.0))
+     xlim=c(1, 10), ylim=c(0.5, 1.0))
 
 # Style for each line.
 lty_2D = c(2, 4, 5)
@@ -82,7 +82,7 @@ index_2D = 1
 # Plot balanced accuracy lines for 2D input space trained models.
 for(algo in data_keep_2D){
   lines(x=data_2D[data_2D$algorithm == algo,]$epochs,
-        y=data_2D[data_2D$algorithm == algo,]$accuracy_biased,
+        y=data_2D[data_2D$algorithm == algo,]$accuracy_balanced,
         lwd=2, lty=lty_2D[index_2D], col=col_2D[index_2D])
   
   index_2D = index_2D + 1
@@ -104,7 +104,7 @@ legend("bottomright",
 
 # Empty plot canvas for balanced accuracy in 3D input space.
 plot(0, xlab='', ylab='',
-     xlim=c(1, 10), ylim=c(0.3, 1.0),)
+     xlim=c(1, 10), ylim=c(0.5, 1.0))
 
 # Line type for each line.
 lty_3D = c(2, 3, 4, 5, 6)
@@ -115,7 +115,7 @@ index_3D = 1
 # Plot balanced accuracy lines for 3D input space trained models.
 for(algo in data_keep_3D){
   lines(x=data_3D[data_3D$algorithm == algo,]$epochs,
-        y=data_3D[data_3D$algorithm == algo,]$accuracy_biased,
+        y=data_3D[data_3D$algorithm == algo,]$accuracy_balanced,
         lwd=2, lty=lty_3D[index_3D], col=color_palette[index_3D])
   
   index_3D = index_3D + 1
