@@ -1,0 +1,568 @@
+[19-04-2021 03:24:04] COMMAND  Uplink to SEPP: ls -R /home/exp144/toGround/ && tail -n 2 /home/exp144/toGround/learning/mochi-*/logs/training.csv && tail -n 2 /home/exp144/toGround/data/data_*.csv; ls -ltr /home/root/esoc-apps/fms/filestore/toGround/
+[19-04-2021 03:24:06] DATA: START
+[19-04-2021 03:24:06] total 70368
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root           497 Sep  4  2018 opssat_smartcam_logs_exp1000_20180904_235852.tar.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root       2924694 Sep  5  2018 sepp_packetstore_exp510_20180905_000351.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root        536737 Sep  5  2018 sepp_packetstore_exp510_20210402_032706.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root       1104164 Sep  5  2018 sepp_packetstore_exp510_20180904_214043.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root        800801 Sep  5  2018 sepp_packetstore_exp510_20210414_024822.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root       1578071 Sep  5  2018 sepp_packetstore_exp510_20180905_033854.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root       1229797 Sep  5  2018 sepp_packetstore_exp510_20180905_034042.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root          7841 Sep  5  2018 opssat_smartcam_logs_exp1000_20180905_114043_previous.tar.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root           841 Sep  5  2018 opssat_smartcam_logs_exp1000_20180905_114043.tar.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root       1277586 Sep  5  2018 sepp_packetstore_exp510_20180905_094042.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root       2560551 Apr 13 01:19 sepp_packetstore_exp510_20210412_192630.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root       2573655 Apr 13 07:06 sepp_packetstore_exp510_20210413_011923.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root         49274 Apr 13 08:05 opssat_smartcam_logs_exp1000_20210413_080500_previous.tar.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root       2882207 Apr 13 10:41 sepp_packetstore_exp510_20210413_070645.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root       2769586 Apr 13 15:06 sepp_packetstore_exp510_20210413_104124.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root        866069 Apr 13 20:40 opssat_smartcam_jpeg_exp1000_20210413_204005_previous.tar.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root       2559277 Apr 13 20:53 sepp_packetstore_exp510_20210413_150616.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root       1315815 Apr 14 01:41 opssat_smartcam_jpeg_exp1000_20210413_204005.tar.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root       2573310 Apr 14 02:48 sepp_packetstore_exp510_20210413_205349.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root           495 Apr 14 19:12 opssat_smartcam_logs_exp1000_20210414_191245.tar.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root       2549774 Apr 15 01:55 sepp_packetstore_exp510_20210414_200002.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root         27530 Apr 15 01:58 sepp_packetstore_exp510_20210415_015504.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root       1582383 Apr 15 01:58 sepp_packetstore_exp510_20180905_060350.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root       2622281 Apr 15 07:30 sepp_packetstore_exp510_20210415_020000.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root        369781 Apr 15 07:58 sepp_packetstore_exp510_20210415_073050.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root       2847072 Apr 15 11:35 sepp_packetstore_exp510_20210415_080000.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root       1575829 Apr 15 13:58 sepp_packetstore_exp510_20210415_113503.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root       2563858 Apr 15 19:49 sepp_packetstore_exp510_20210415_135959.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root         69887 Apr 15 19:58 sepp_packetstore_exp510_20210415_194907.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root        471383 Apr 15 21:35 sepp_packetstore_exp510_20210415_203500.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root       1725116 Apr 16 01:58 sepp_packetstore_exp510_20210415_215958.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root        235919 Apr 16 04:08 exp122_v97_toGroundLP.tar.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root       1513003 Apr 16 04:08 exp122_v97_toGround.tar.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root       2577327 Apr 16 07:50 sepp_packetstore_exp510_20210416_015958.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root         63015 Apr 16 07:58 sepp_packetstore_exp510_20210416_075006.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root       2565976 Apr 16 13:55 sepp_packetstore_exp510_20210416_075957.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root         27486 Apr 16 13:58 sepp_packetstore_exp510_20210416_135506.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root         71684 Apr 16 18:43 exp144_results_20210416.tar.gz_aa
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root       2577255 Apr 16 19:50 sepp_packetstore_exp510_20210416_135957.gz
+[19-04-2021 03:24:06] -rw-r--r--    1 root     root       2555143 Apr 17 01:45 sepp_packetstore_exp510_20210416_195050.gz
+[19-04-2021 03:24:12] -rw-r--r--    1 root     root        183532 Apr 17 03:53 exp144_results_20210417A.tar.gz_aa
+[19-04-2021 03:24:12] -rw-r--r--    1 root     root        183532 Apr 17 05:28 exp144_results_20210417B.tar.gz_aa
+[19-04-2021 03:24:12] -rw-r--r--    1 root     root       1251055 Apr 17 06:59 opssat_smartcam_jpeg_exp1000_20210417_065958_previous.tar.gz
+[19-04-2021 03:24:12] -rw-r--r--    1 root     root       2564656 Apr 17 07:36 sepp_packetstore_exp510_20210417_014524.gz
+[19-04-2021 03:24:12] -rw-r--r--    1 root     root       2564436 Apr 17 13:31 sepp_packetstore_exp510_20210417_073642.gz
+[19-04-2021 03:24:12] -rw-r--r--    1 root     root        183532 Apr 17 16:52 exp144_results_20210417C.tar.gz_aa
+[19-04-2021 03:24:12] -rw-r--r--    1 root     root        183532 Apr 17 18:30 exp144_results_20210417D.tar.gz_aa
+[19-04-2021 03:24:12] -rw-r--r--    1 root     root       2574714 Apr 17 19:21 sepp_packetstore_exp510_20210417_133116.gz
+[19-04-2021 03:24:12] -rw-r--r--    1 root     root        203116 Apr 17 22:00 opssat_smartcam_jpeg_exp1000_20210417_220001_previous.tar.gz
+[19-04-2021 03:24:12] -rw-r--r--    1 root     root        587931 Apr 18 06:59 opssat_smartcam_jpeg_exp1000_20210418_065958_previous.tar.gz
+[19-04-2021 03:24:12] -rw-r--r--    1 root     root       2564527 Apr 18 07:51 sepp_packetstore_exp510_20210418_015959.gz
+[19-04-2021 03:24:12] -rw-r--r--    1 root     root         51638 Apr 18 07:58 sepp_packetstore_exp510_20210418_075142.gz
+[19-04-2021 03:24:12] -rw-r--r--    1 root     root        669496 Apr 18 07:58 sepp_packetstore_exp510_20210417_192112.gz
+[19-04-2021 03:24:12] -rw-r--r--    1 root     root       1746947 Apr 18 13:58 sepp_packetstore_exp510_20210418_075957.gz
+[19-04-2021 03:24:12] -rw-r--r--    1 root     root        212992 Apr 18 16:37 exp144_results_20210418B.tar.gz_aa
+[19-04-2021 03:24:12] DATA: STOP
+[19-04-2021 03:24:13] COMMAND  Uplink to SEPP: tar -czvf /home/exp144/exp144_results_20210419A.tar.gz /home/exp144/toGround; ls -ltr /home/exp144/bin/Mochi/logs; rm -f /home/root/esoc-apps/fms/filestore/toGroundLP/img_msec_1617*
+[19-04-2021 03:24:20] DATA: START
+[19-04-2021 03:24:20] tar: Removing leading `/' from member names
+[19-04-2021 03:24:20] tar: /home/exp144/toGround: Cannot stat: No such file or directory
+[19-04-2021 03:24:20] tar: Exiting with failure status due to previous errors
+[19-04-2021 03:24:20] total 8
+[19-04-2021 03:24:20] -rw-r--r--    1 exp144   exp144        5380 Apr 18 02:06 orbitai.log
+[19-04-2021 03:24:20] DATA: STOP
+[19-04-2021 03:24:22] COMMAND  Uplink to SEPP: split /home/exp144/exp144_results_20210419A.tar.gz -b 1M /home/exp144/exp144_results_20210419A.tar.gz_ && mv /home/exp144/exp144_results_20210419A.tar.gz_* /home/root/esoc-apps/fms/filestore/toGround
+[19-04-2021 03:24:29] DATA: START
+[19-04-2021 03:24:29] DATA: STOP
+[19-04-2021 03:24:31] COMMAND  Uplink to SEPP: eval 'for f in /home/exp144/bin/Mochi/models/*; do echo -e "\n\n${f}:\n"; cat ${f}; done'; cat /home/exp144/bin/Mochi/logs/orbitai.log; df -h; ls -ltr /home/root/esoc-apps/fms/filestore/toGroundLP/
+[19-04-2021 03:24:33] DATA: START
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] /home/exp144/bin/Mochi/models/adam_1D:
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] 0 0 1 0 4.36882907412133870e-01 1 0 -1.68696816999817374e-39 1 0 2.14703943361719933e-02 1
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] /home/exp144/bin/Mochi/models/adam_2D:
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] 0 0 2 0 4.36882907412133870e-01 2.52554501302800827e-01 2 0 -1.68696816999817374e-39 -1.68736135850314904e-41 2 0 2.14703943361719933e-02 1.31500911311528430e-02 2
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] /home/exp144/bin/Mochi/models/adam_3D:
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] 0 0 3 0 4.36882907412133870e-01 2.52554501302800827e-01 1.64775303243857502e-01 3 0 -1.68696816999817374e-39 -1.68736135850314904e-41 -1.68814783207082145e-43 3 0 2.14703943361719933e-02 1.31500911311528430e-02 1.11835842150498996e-02 3
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] /home/exp144/bin/Mochi/models/adam_5D:
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] 0 0 5 0 8.93605893839448551e-01 8.29310622616692306e-01 5.77343288259187570e-01 6.55515588911465441e-01 8.60423727314115427e-01 5 0 -5.99999841127584643e-01 -2.36797752414220567e-11 -9.22336698657129143e-12 -1.69999933270929243e-01 -4.10000153819439717e-01 5 0 1.43266165120646216e-01 1.40591224506260049e-01 1.87545591243262394e-01 8.05450628900642035e-02 1.97093092710605572e-01 5
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] /home/exp144/bin/Mochi/models/arow_1D:
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] 0 0 1 0 7.19454869045724286e-03 1 0 1.21722770656673585e+00 1 8.00000000000000044e-01
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] /home/exp144/bin/Mochi/models/arow_2D:
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] 0 0 2 0 7.47404814155608853e-03 1.11394603853488833e-02 2 0 2.58307196932672767e+00 -1.71102131522213452e+00 2 8.00000000000000044e-01
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] /home/exp144/bin/Mochi/models/arow_3D:
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] 0 0 3 0 1.64409093936696629e-02 2.06612918921943445e-02 1.97018403449371465e-02 3 0 3.14054809254985390e+00 3.10119393888134254e-01 -2.61181907726366758e+00 3 8.00000000000000044e-01
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] /home/exp144/bin/Mochi/models/arow_5D:
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] 0 0 5 0 2.11401272985704911e-03 1.19946890633724820e-02 7.83378615680794393e-03 1.62524250966252330e-02 2.22511329184678502e-02 5 0 4.85197610234770482e-01 1.03767096730676345e+00 7.85871756646666753e-01 1.08056583000675088e+00 1.32356413261626349e+00 5 8.00000000000000044e-01
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] /home/exp144/bin/Mochi/models/nherd_1D:
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] 0 0 1 0 4.15494173921317628e-02 1 0 1.05778661328172663e+00 1 1.00000000000000006e-01 0
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] /home/exp144/bin/Mochi/models/nherd_2D:
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] 0 0 2 0 4.30305786779866389e-02 6.38777854576961096e-02 2 0 1.24239628414409453e+00 -4.10894596200589213e-01 2 1.00000000000000006e-01 0
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] /home/exp144/bin/Mochi/models/nherd_3D:
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] 0 0 3 0 4.40355662238284956e-02 6.61262508046321362e-02 7.17187560521003048e-02 3 0 1.47794840818820461e+00 -5.60128962899789085e-03 -7.50148178152000522e-01 3 1.00000000000000006e-01 0
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] /home/exp144/bin/Mochi/models/nherd_5D:
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] 0 0 5 0 7.37945897309715600e-03 1.89827574097797928e-02 1.75727431616155005e-02 4.00888100986452403e-02 1.43269007536734674e-02 5 0 5.66719296266134598e-01 7.83948702307408873e-01 7.28499799106687163e-01 8.62505217777511102e-01 8.74154003423505244e-01 5 1.00000000000000006e-01 0
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] /home/exp144/bin/Mochi/models/rda_1D:
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] 0 0 1 0 1.38012655098133186e+00 1 0 1.18529600000000556e+02 1 0 -1.50259999999999337e+02 1 1.00000000000000006e-01 9.99999999999999955e-07 3828
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] /home/exp144/bin/Mochi/models/rda_2D:
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] 0 0 2 0 1.30927251846698534e+00 6.06907393771595527e-01 2 0 1.10559100000000512e+02 7.30605520299987603e+01 2 0 -1.37669999999999163e+02 -5.18795000000005757e+01 2 1.00000000000000006e-01 9.99999999999999955e-07 3808
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] /home/exp144/bin/Mochi/models/rda_3D:
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] 0 0 3 0 1.29190100169378974e+00 5.90632951193526212e-01 2.37463109944139772e-01 3 0 1.08996400000000520e+02 7.25646375999987754e+01 6.73361220728047130e+01 3 0 -1.34879999999999171e+02 -5.03168000000005549e+01 -1.94896910000002741e+01 3 1.00000000000000006e-01 9.99999999999999955e-07 3803
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] /home/exp144/bin/Mochi/models/rda_5D:
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] 0 0 5 0 9.85731481105972862e-01 1.19067419010486453e+00 9.64632159007223322e-01 1.01101574399888139e+00 1.22399167902237527e+00 5 0 6.19728000000000492e+01 9.15078000000000031e+01 7.25955000000000439e+01 3.35489999999999924e+01 1.09053000000000111e+02 5 0 -7.75999999999999091e+01 -1.13899999999999949e+02 -8.21900000000000688e+01 -5.85599999999999739e+01 -1.27820000000000093e+02 5 1.00000000000000006e-01 9.99999999999999955e-07 453
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] /home/exp144/bin/Mochi/models/scw_1D:
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] 0 0 1 0 2.05803837255026129e-01 1 0 4.32968865722275553e-01 1 8.28943873691518229e-01 1.00000000000000000e+00
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] /home/exp144/bin/Mochi/models/scw_2D:
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] 0 0 2 0 5.40469862870530671e-01 5.64487064963577367e-01 2 0 9.36895087444122865e-01 5.57118187724832681e-01 2 8.28943873691518229e-01 1.00000000000000000e+00
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] /home/exp144/bin/Mochi/models/scw_3D:
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] 0 0 3 0 7.23056697145188498e-01 7.91614176284203386e-01 8.04128152954256326e-01 3 0 7.88578034538156891e-01 4.42758178292326166e-01 2.47062837063087792e-01 3 8.28943873691518229e-01 1.00000000000000000e+00
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] /home/exp144/bin/Mochi/models/scw_5D:
+[19-04-2021 03:24:33] 
+[19-04-2021 03:24:33] 0 0 5 0 5.99015696721691082e-01 4.05095855104260549e-01 1.79403090523521935e-01 6.38924997650230586e-01 7.01121937152410557e-01 5 0 1.43004777810070594e+00 5.39987900124142439e-01 2.11860131953269887e-01 1.62281148483377025e+00 1.02181140686773997e+00 5 8.28943873691518229e-01 1.00000000000000000e+00[2021-04-16 18:47:22.815][INFO] Loaded models/adam_1D
+[19-04-2021 03:24:33] [2021-04-16 18:47:22.857][INFO] Loaded models/adam_2D
+[19-04-2021 03:24:33] [2021-04-16 18:47:22.868][INFO] Loaded models/adam_3D
+[19-04-2021 03:24:33] [2021-04-16 18:47:22.876][INFO] Loaded models/adam_5D
+[19-04-2021 03:24:33] [2021-04-16 18:47:22.894][INFO] Loaded models/rda_1D
+[19-04-2021 03:24:33] [2021-04-16 18:47:22.925][INFO] Loaded models/rda_2D
+[19-04-2021 03:24:33] [2021-04-16 18:47:22.936][INFO] Loaded models/rda_3D
+[19-04-2021 03:24:33] [2021-04-16 18:47:22.966][INFO] Loaded models/rda_5D
+[19-04-2021 03:24:33] [2021-04-16 18:47:22.977][INFO] Loaded models/arow_1D
+[19-04-2021 03:24:33] [2021-04-16 18:47:22.981][INFO] Loaded models/arow_2D
+[19-04-2021 03:24:33] [2021-04-16 18:47:22.989][INFO] Loaded models/arow_3D
+[19-04-2021 03:24:33] [2021-04-16 18:47:22.993][INFO] Loaded models/arow_5D
+[19-04-2021 03:24:33] [2021-04-16 18:47:22.997][INFO] Loaded models/scw_1D
+[19-04-2021 03:24:33] [2021-04-16 18:47:23.001][INFO] Loaded models/scw_2D
+[19-04-2021 03:24:33] [2021-04-16 18:47:23.009][INFO] Loaded models/scw_3D
+[19-04-2021 03:24:33] [2021-04-16 18:47:23.025][INFO] Loaded models/scw_5D
+[19-04-2021 03:24:33] [2021-04-16 18:47:23.032][INFO] Loaded models/nherd_1D
+[19-04-2021 03:24:33] [2021-04-16 18:47:23.037][INFO] Loaded models/nherd_2D
+[19-04-2021 03:24:33] [2021-04-16 18:47:23.080][INFO] Loaded models/nherd_3D
+[19-04-2021 03:24:33] [2021-04-16 18:47:23.095][INFO] Loaded models/nherd_5D
+[19-04-2021 03:24:33] [2021-04-17 21:20:38.232][INFO] Loaded models/adam_1D
+[19-04-2021 03:24:33] [2021-04-17 21:20:38.236][INFO] Loaded models/adam_2D
+[19-04-2021 03:24:33] [2021-04-17 21:20:38.238][INFO] Loaded models/adam_3D
+[19-04-2021 03:24:33] [2021-04-17 21:20:38.241][INFO] Loaded models/adam_5D
+[19-04-2021 03:24:33] [2021-04-17 21:20:38.243][INFO] Loaded models/rda_1D
+[19-04-2021 03:24:33] [2021-04-17 21:20:38.244][INFO] Loaded models/rda_2D
+[19-04-2021 03:24:33] [2021-04-17 21:20:38.251][INFO] Loaded models/rda_3D
+[19-04-2021 03:24:33] [2021-04-17 21:20:38.254][INFO] Loaded models/rda_5D
+[19-04-2021 03:24:33] [2021-04-17 21:20:38.256][INFO] Loaded models/arow_1D
+[19-04-2021 03:24:33] [2021-04-17 21:20:38.257][INFO] Loaded models/arow_2D
+[19-04-2021 03:24:33] [2021-04-17 21:20:38.259][INFO] Loaded models/arow_3D
+[19-04-2021 03:24:33] [2021-04-17 21:20:38.262][INFO] Loaded models/arow_5D
+[19-04-2021 03:24:33] [2021-04-17 21:20:38.271][INFO] Loaded models/scw_1D
+[19-04-2021 03:24:33] [2021-04-17 21:20:38.273][INFO] Loaded models/scw_2D
+[19-04-2021 03:24:33] [2021-04-17 21:20:38.275][INFO] Loaded models/scw_3D
+[19-04-2021 03:24:33] [2021-04-17 21:20:38.277][INFO] Loaded models/scw_5D
+[19-04-2021 03:24:33] [2021-04-17 21:20:38.279][INFO] Loaded models/nherd_1D
+[19-04-2021 03:24:33] [2021-04-17 21:20:38.282][INFO] Loaded models/nherd_2D
+[19-04-2021 03:24:33] [2021-04-17 21:20:38.307][INFO] Loaded models/nherd_3D
+[19-04-2021 03:24:33] [2021-04-17 21:20:38.321][INFO] Loaded models/nherd_5D
+[19-04-2021 03:24:33] [2021-04-17 22:56:34.672][INFO] Loaded models/adam_1D
+[19-04-2021 03:24:33] [2021-04-17 22:56:34.673][INFO] Loaded models/adam_2D
+[19-04-2021 03:24:33] [2021-04-17 22:56:34.674][INFO] Loaded models/adam_3D
+[19-04-2021 03:24:33] [2021-04-17 22:56:34.674][INFO] Loaded models/adam_5D
+[19-04-2021 03:24:33] [2021-04-17 22:56:34.674][INFO] Loaded models/rda_1D
+[19-04-2021 03:24:33] [2021-04-17 22:56:34.675][INFO] Loaded models/rda_2D
+[19-04-2021 03:24:33] [2021-04-17 22:56:34.705][INFO] Loaded models/rda_3D
+[19-04-2021 03:24:33] [2021-04-17 22:56:34.706][INFO] Loaded models/rda_5D
+[19-04-2021 03:24:33] [2021-04-17 22:56:34.707][INFO] Loaded models/arow_1D
+[19-04-2021 03:24:33] [2021-04-17 22:56:34.724][INFO] Loaded models/arow_2D
+[19-04-2021 03:24:33] [2021-04-17 22:56:34.732][INFO] Loaded models/arow_3D
+[19-04-2021 03:24:33] [2021-04-17 22:56:34.733][INFO] Loaded models/arow_5D
+[19-04-2021 03:24:33] [2021-04-17 22:56:34.733][INFO] Loaded models/scw_1D
+[19-04-2021 03:24:33] [2021-04-17 22:56:34.733][INFO] Loaded models/scw_2D
+[19-04-2021 03:24:33] [2021-04-17 22:56:34.734][INFO] Loaded models/scw_3D
+[19-04-2021 03:24:33] [2021-04-17 22:56:34.734][INFO] Loaded models/scw_5D
+[19-04-2021 03:24:33] [2021-04-17 22:56:34.734][INFO] Loaded models/nherd_1D
+[19-04-2021 03:24:33] [2021-04-17 22:56:34.734][INFO] Loaded models/nherd_2D
+[19-04-2021 03:24:33] [2021-04-17 22:56:34.735][INFO] Loaded models/nherd_3D
+[19-04-2021 03:24:33] [2021-04-17 22:56:34.735][INFO] Loaded models/nherd_5D
+[19-04-2021 03:24:34] [2021-04-18 00:31:51.295][INFO] Loaded models/adam_1D
+[19-04-2021 03:24:34] [2021-04-18 00:31:51.296][INFO] Loaded models/adam_2D
+[19-04-2021 03:24:34] [2021-04-18 00:31:51.296][INFO] Loaded models/adam_3D
+[19-04-2021 03:24:34] [2021-04-18 00:31:51.296][INFO] Loaded models/adam_5D
+[19-04-2021 03:24:34] [2021-04-18 00:31:51.297][INFO] Loaded models/rda_1D
+[19-04-2021 03:24:34] [2021-04-18 00:31:51.297][INFO] Loaded models/rda_2D
+[19-04-2021 03:24:34] [2021-04-18 00:31:51.297][INFO] Loaded models/rda_3D
+[19-04-2021 03:24:34] [2021-04-18 00:31:51.298][INFO] Loaded models/rda_5D
+[19-04-2021 03:24:34] [2021-04-18 00:31:51.298][INFO] Loaded models/arow_1D
+[19-04-2021 03:24:34] [2021-04-18 00:31:51.298][INFO] Loaded models/arow_2D
+[19-04-2021 03:24:34] [2021-04-18 00:31:51.299][INFO] Loaded models/arow_3D
+[19-04-2021 03:24:34] [2021-04-18 00:31:51.299][INFO] Loaded models/arow_5D
+[19-04-2021 03:24:34] [2021-04-18 00:31:51.299][INFO] Loaded models/scw_1D
+[19-04-2021 03:24:34] [2021-04-18 00:31:51.300][INFO] Loaded models/scw_2D
+[19-04-2021 03:24:34] [2021-04-18 00:31:51.324][INFO] Loaded models/scw_3D
+[19-04-2021 03:24:34] [2021-04-18 00:31:51.325][INFO] Loaded models/scw_5D
+[19-04-2021 03:24:34] [2021-04-18 00:31:51.325][INFO] Loaded models/nherd_1D
+[19-04-2021 03:24:34] [2021-04-18 00:31:51.325][INFO] Loaded models/nherd_2D
+[19-04-2021 03:24:34] [2021-04-18 00:31:51.326][INFO] Loaded models/nherd_3D
+[19-04-2021 03:24:34] [2021-04-18 00:31:51.326][INFO] Loaded models/nherd_5D
+[19-04-2021 03:24:34] [2021-04-18 02:06:42.304][INFO] Loaded models/adam_1D
+[19-04-2021 03:24:34] [2021-04-18 02:06:42.327][INFO] Loaded models/adam_2D
+[19-04-2021 03:24:34] [2021-04-18 02:06:42.344][INFO] Loaded models/adam_3D
+[19-04-2021 03:24:34] [2021-04-18 02:06:42.351][INFO] Loaded models/adam_5D
+[19-04-2021 03:24:34] [2021-04-18 02:06:42.361][INFO] Loaded models/rda_1D
+[19-04-2021 03:24:34] [2021-04-18 02:06:42.366][INFO] Loaded models/rda_2D
+[19-04-2021 03:24:34] [2021-04-18 02:06:42.371][INFO] Loaded models/rda_3D
+[19-04-2021 03:24:34] [2021-04-18 02:06:42.388][INFO] Loaded models/rda_5D
+[19-04-2021 03:24:34] [2021-04-18 02:06:42.391][INFO] Loaded models/arow_1D
+[19-04-2021 03:24:34] [2021-04-18 02:06:42.396][INFO] Loaded models/arow_2D
+[19-04-2021 03:24:34] [2021-04-18 02:06:42.419][INFO] Loaded models/arow_3D
+[19-04-2021 03:24:34] [2021-04-18 02:06:42.443][INFO] Loaded models/arow_5D
+[19-04-2021 03:24:34] [2021-04-18 02:06:42.453][INFO] Loaded models/scw_1D
+[19-04-2021 03:24:34] [2021-04-18 02:06:42.464][INFO] Loaded models/scw_2D
+[19-04-2021 03:24:34] [2021-04-18 02:06:42.619][INFO] Loaded models/scw_3D
+[19-04-2021 03:24:34] [2021-04-18 02:06:42.629][INFO] Loaded models/scw_5D
+[19-04-2021 03:24:34] [2021-04-18 02:06:42.649][INFO] Loaded models/nherd_1D
+[19-04-2021 03:24:34] [2021-04-18 02:06:42.654][INFO] Loaded models/nherd_2D
+[19-04-2021 03:24:34] [2021-04-18 02:06:42.661][INFO] Loaded models/nherd_3D
+[19-04-2021 03:24:34] [2021-04-18 02:06:42.666][INFO] Loaded models/nherd_5D
+[19-04-2021 03:24:34] Filesystem                Size      Used Available Use% Mounted on
+[19-04-2021 03:24:34] /dev/root                 3.8G      2.6G      1.0G  71% /
+[19-04-2021 03:24:34] devtmpfs                207.4M         0    207.4M   0% /dev
+[19-04-2021 03:24:34] tmpfs                   215.9M         0    215.9M   0% /dev/shm
+[19-04-2021 03:24:34] tmpfs                   215.9M    336.0K    215.6M   0% /run
+[19-04-2021 03:24:34] tmpfs                   215.9M         0    215.9M   0% /sys/fs/cgroup
+[19-04-2021 03:24:34] tmpfs                   215.9M      1.6M    214.3M   1% /tmp
+[19-04-2021 03:24:34] tmpfs                   215.9M         0    215.9M   0% /var/volatile
+[19-04-2021 03:24:34] tmpfs                    43.2M         0     43.2M   0% /run/user/1042
+[19-04-2021 03:24:34] tmpfs                    43.2M         0     43.2M   0% /run/user/0
+[19-04-2021 03:24:34] total 205712
+[19-04-2021 03:24:34] -rw-r--r--    1 root     root        748953 Mar 24 03:26 exp122_toGroundLP_first.tar.gz
+[19-04-2021 03:24:34] -rw-r--r--    1 root     root       4368701 Mar 26 22:33 img_msec_1616797964948_2.png
+[19-04-2021 03:24:34] -rw-r--r--    1 root     root       3838165 Mar 26 22:34 img_msec_1616798016786_2.png
+[19-04-2021 03:24:34] -rw-r--r--    1 root     root       4129707 Mar 26 22:34 img_msec_1616798063215_2.png
+[19-04-2021 03:24:34] -rw-r--r--    1 root     root       5047532 Mar 27 15:57 img_msec_1616860618786_2.png
+[19-04-2021 03:24:34] -rw-r--r--    1 root     root       4971026 Mar 27 15:57 img_msec_1616860653424_2.png
+[19-04-2021 03:24:34] -rw-r--r--    1 root     root       4958675 Mar 27 15:58 img_msec_1616860689825_2.png
+[19-04-2021 03:24:34] -rw-r--r--    1 root     root       4683711 Mar 27 15:59 img_msec_1616860732067_2.png
+[19-04-2021 03:24:34] -rw-r--r--    1 root     root       4474441 Mar 27 16:00 img_msec_1616860773667_2.png
+[19-04-2021 03:24:34] -rw-r--r--    1 root     root       4879290 Mar 27 16:00 img_msec_1616860815264_2.png
+[19-04-2021 03:24:34] -rw-r--r--    1 root     root       4776076 Mar 27 16:01 img_msec_1616860894474_2.png
+[19-04-2021 03:24:34] -rw-r--r--    1 root     root       3610730 Mar 27 16:02 img_msec_1616860931827_2.png
+[19-04-2021 03:24:34] -rw-r--r--    1 root     root       4180782 Mar 27 16:03 img_msec_1616860962945_2.png
+[19-04-2021 03:24:34] -rw-r--r--    1 root     root       3590176 Mar 27 16:03 img_msec_1616861002305_2.png
+[19-04-2021 03:24:34] -rw-r--r--    1 root     root       3639691 Mar 27 16:04 img_msec_1616861034146_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       3597197 Mar 27 16:04 img_msec_1616861069265_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       5111822 Apr  1 17:41 img_msec_1615413085031_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       4433358 Apr  1 17:41 img_msec_1615413181911_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       4143149 Apr  1 17:41 img_msec_1615658817829_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       4089190 Apr  1 17:41 img_msec_1615669110951_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       4230519 Apr  1 17:41 img_msec_1615669000629_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       3436285 Apr  1 17:41 img_msec_1615658927991_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       4827319 Apr  4 16:54 img_msec_1615412977270_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       4798162 Apr  4 16:54 img_msec_1615412763431_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       4652588 Apr  4 16:54 img_msec_1615669219112_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       3619959 Apr  4 16:54 img_msec_1615668901590_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       4647360 Apr  4 16:54 img_msec_1615658701833_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       3470397 Apr 12 18:06 img_msec_1618086631888_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       4003314 Apr 12 18:06 img_msec_1618011267409_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       3984874 Apr 13 17:51 img_msec_1616888454386_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       4253449 Apr 13 17:52 img_msec_1616888344306_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       4439459 Apr 13 17:52 img_msec_1616888418946_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       5459287 Apr 15 18:59 img_msec_1618324763404_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       5500884 Apr 15 18:59 img_msec_1618324526042_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       4688580 Apr 15 18:59 img_msec_1618363808294_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       4194392 Apr 15 18:59 img_msec_1618349106849_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       3867888 Apr 16 17:07 img_msec_1618086593411_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       4713436 Apr 16 17:07 img_msec_1618324718129_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       4053571 Apr 17 03:53 img_msec_1618358680605_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       4895862 Apr 17 03:53 img_msec_1618363993084_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       4060039 Apr 17 03:54 img_msec_1618364470523_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       4145253 Apr 17 03:54 img_msec_1618364422204_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       4626631 Apr 17 16:52 img_msec_1618348990853_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       4412149 Apr 17 16:53 img_msec_1618324672604_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       5520739 Apr 17 16:53 img_msec_1618147911653_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       4013550 Apr 17 18:30 img_msec_1618564195957_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       4058565 Apr 17 18:30 img_msec_1618564160675_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       4300558 Apr 17 18:30 img_msec_1618564231395_2.png
+[19-04-2021 03:24:40] -rw-r--r--    1 root     root       4406629 Apr 17 18:30 img_msec_1618564268835_2.png
+[19-04-2021 03:24:40] DATA: STOP
+[19-04-2021 03:24:42] COMMAND  Uplink to SEPP: rm -f /home/root/esoc-apps/fms/filestore/toGround/sepp_packetstore_exp510_201809*; rm -f /home/root/esoc-apps/fms/filestore/toGround/sepp_packetstore_exp510_20210413*
+[19-04-2021 03:24:49] DATA: START
+[19-04-2021 03:24:49] DATA: STOP
+[19-04-2021 03:24:50] COMMAND  Uplink to SEPP: rm -f /home/root/esoc-apps/fms/filestore/toGroundLP/img_msec_1616*; rm -f /home/root/esoc-apps/fms/filestore/toGroundLP/img_msec_1615*; tail /home/nmf/supervisor/log0.log.* -n 50; tail /home/exp144/log0.log.* -n 50
+[19-04-2021 03:24:51] DATA: START
+[19-04-2021 03:24:51] ==> /home/nmf/supervisor/log0.log.0 <==
+[19-04-2021 03:24:51] Apr 18, 2021 2:51:56 AM esa.mo.mal.transport.gen.util.GENMessagePoller run
+[19-04-2021 03:24:51] INFO: Client closing connection: maltcp://127.0.0.1:1025
+[19-04-2021 03:24:51] Apr 18, 2021 2:51:56 AM esa.mo.mal.transport.gen.sending.GENConcurrentMessageSender terminate
+[19-04-2021 03:24:51] INFO: Terminating all processing threads for sender for URI:maltcp://127.0.0.1:1025
+[19-04-2021 03:24:51] Apr 18, 2021 5:58:16 AM esa.mo.sm.impl.provider.AppsLauncherManager stopApps
+[19-04-2021 03:24:51] INFO: Stop script present for app exp1000. Invoking it.
+[19-04-2021 03:24:51] Apr 18, 2021 5:58:16 AM esa.mo.sm.impl.provider.AppsLauncherManager stopNativeApp
+[19-04-2021 03:24:51] INFO: Stopping 'exp1000' app in dir: /home/nmf/supervisor/../../exp1000, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp1000;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI= NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./stop_exp1000.sh]
+[19-04-2021 03:24:51] Apr 18, 2021 6:49:56 AM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 03:24:51] INFO: Initializing 'exp144' app in dir: /home/nmf/supervisor/../../exp144, using launcher command: [su, -, exp144, -c, cd /home/nmf/supervisor/../../exp144;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp144.sh]
+[19-04-2021 03:24:51] Apr 18, 2021 6:50:14 AM esa.mo.mal.transport.tcpip.TCPIPServerConnectionListener run
+[19-04-2021 03:24:51] INFO: Socket accepted at port 37,408
+[19-04-2021 03:24:51] Apr 18, 2021 6:50:20 AM esa.mo.common.impl.provider.DirectoryProviderServiceImpl publishProvider
+[19-04-2021 03:24:51] WARNING: There was already a provider with the same name in the Directory service. Removing the old one and adding the new one...
+[19-04-2021 03:24:51] Apr 18, 2021 6:59:56 AM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 03:24:51] INFO: Initializing 'exp1000' app in dir: /home/nmf/supervisor/../../exp1000, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp1000;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp1000.sh]
+[19-04-2021 03:24:51] Apr 18, 2021 7:58:16 AM esa.mo.sm.impl.provider.AppsLauncherManager stopApps
+[19-04-2021 03:24:51] INFO: Stop script present for app exp510. Invoking it.
+[19-04-2021 03:24:51] Apr 18, 2021 7:58:16 AM esa.mo.sm.impl.provider.AppsLauncherManager stopNativeApp
+[19-04-2021 03:24:51] INFO: Stopping 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI= NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./stop_exp510.sh]
+[19-04-2021 03:24:51] Apr 18, 2021 7:58:21 AM esa.mo.sm.impl.provider.AppsLauncherManager stopNativeApp
+[19-04-2021 03:24:51] WARNING: App exp510 stop script did not exit within the timeout (5,000 ms). Killing the stop script and forcing the app exit.
+[19-04-2021 03:24:51] Apr 18, 2021 7:59:56 AM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 03:24:51] INFO: Initializing 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp510.sh]
+[19-04-2021 03:24:51] Apr 18, 2021 1:58:16 PM esa.mo.sm.impl.provider.AppsLauncherManager stopApps
+[19-04-2021 03:24:51] INFO: Stop script present for app exp510. Invoking it.
+[19-04-2021 03:24:51] Apr 18, 2021 1:58:16 PM esa.mo.sm.impl.provider.AppsLauncherManager stopNativeApp
+[19-04-2021 03:24:51] INFO: Stopping 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI= NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./stop_exp510.sh]
+[19-04-2021 03:24:51] Apr 18, 2021 1:58:21 PM esa.mo.sm.impl.provider.AppsLauncherManager stopNativeApp
+[19-04-2021 03:24:51] WARNING: App exp510 stop script did not exit within the timeout (5,000 ms). Killing the stop script and forcing the app exit.
+[19-04-2021 03:24:51] Apr 18, 2021 1:59:56 PM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 03:24:51] INFO: Initializing 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp510.sh]
+[19-04-2021 03:24:51] Apr 18, 2021 2:58:16 PM esa.mo.sm.impl.provider.AppsLauncherManager stopApps
+[19-04-2021 03:24:51] INFO: Stop script present for app exp1000. Invoking it.
+[19-04-2021 03:24:51] Apr 18, 2021 2:58:16 PM esa.mo.sm.impl.provider.AppsLauncherManager stopNativeApp
+[19-04-2021 03:24:51] INFO: Stopping 'exp1000' app in dir: /home/nmf/supervisor/../../exp1000, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp1000;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI= NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./stop_exp1000.sh]
+[19-04-2021 03:24:51] Apr 18, 2021 2:58:21 PM esa.mo.sm.impl.provider.AppsLauncherManager stopNativeApp
+[19-04-2021 03:24:51] WARNING: App exp1000 stop script did not exit within the timeout (5,000 ms). Killing the stop script and forcing the app exit.
+[19-04-2021 03:24:51] Apr 18, 2021 7:58:15 PM esa.mo.sm.impl.provider.AppsLauncherManager stopApps
+[19-04-2021 03:24:51] INFO: Stop script present for app exp510. Invoking it.
+[19-04-2021 03:24:51] Apr 18, 2021 7:58:15 PM esa.mo.sm.impl.provider.AppsLauncherManager stopNativeApp
+[19-04-2021 03:24:51] INFO: Stopping 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI= NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./stop_exp510.sh]
+[19-04-2021 03:24:51] Apr 18, 2021 7:59:55 PM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 03:24:51] INFO: Initializing 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp510.sh]
+[19-04-2021 03:24:51] Apr 19, 2021 1:58:15 AM esa.mo.sm.impl.provider.AppsLauncherManager stopApps
+[19-04-2021 03:24:51] INFO: Stop script present for app exp510. Invoking it.
+[19-04-2021 03:24:51] Apr 19, 2021 1:58:15 AM esa.mo.sm.impl.provider.AppsLauncherManager stopNativeApp
+[19-04-2021 03:24:51] INFO: Stopping 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI= NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./stop_exp510.sh]
+[19-04-2021 03:24:51] Apr 19, 2021 1:59:54 AM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 03:24:51] INFO: Initializing 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp510.sh]
+[19-04-2021 03:24:51] 
+[19-04-2021 03:24:51] ==> /home/nmf/supervisor/log0.log.0.lck <==
+[19-04-2021 03:24:51] 
+[19-04-2021 03:24:51] ==> /home/nmf/supervisor/log0.log.1 <==
+[19-04-2021 03:24:51] 	at esa.opssat.nanomind.mc.aggregation.consumer.AggregationStub.getValue(AggregationStub.java:85)
+[19-04-2021 03:24:51] 	at esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler.getNanomindAggregationValue(NanomindAggregationsHandler.java:150)
+[19-04-2021 03:24:51] 	at esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler.getNewValue(NanomindAggregationsHandler.java:355)
+[19-04-2021 03:24:51] 	at esa.mo.nanomind.impl.parameters_provisioning.NanomindParameterValuesProvider.getNewValue(NanomindParameterValuesProvider.java:222)
+[19-04-2021 03:24:51] 	at esa.mo.nanomind.impl.parameters_provisioning.NanomindParameterValuesProvider.getValue(NanomindParameterValuesProvider.java:236)
+[19-04-2021 03:24:51] 	at esa.mo.nmf.nanosatmosupervisor.parameter.OBSWParameterManager.getValue(OBSWParameterManager.java:158)
+[19-04-2021 03:24:51] 	at esa.mo.nmf.nanosatmosupervisor.parameter.OBSWParameterManager.getValue(OBSWParameterManager.java:140)
+[19-04-2021 03:24:51] 	at esa.mo.nmf.nanosatmosupervisor.MCSupervisorBasicAdapter.onGetValue(MCSupervisorBasicAdapter.java:126)
+[19-04-2021 03:24:51] 	at esa.mo.mc.impl.provider.ParameterManager.getRawValue(ParameterManager.java:786)
+[19-04-2021 03:24:51] 	at esa.mo.mc.impl.provider.ParameterManager.getParameterValue(ParameterManager.java:338)
+[19-04-2021 03:24:51] 	at esa.mo.mc.impl.provider.ParameterManager.getParameterValue(ParameterManager.java:300)
+[19-04-2021 03:24:51] 	at esa.mo.mc.impl.provider.ParameterProviderServiceImpl.publishPeriodicParameterUpdate(ParameterProviderServiceImpl.java:1103)
+[19-04-2021 03:24:51] 	at esa.mo.mc.impl.provider.ParameterProviderServiceImpl.access$000(ParameterProviderServiceImpl.java:99)
+[19-04-2021 03:24:52] 	at esa.mo.mc.impl.provider.ParameterProviderServiceImpl$PeriodicReportingManager$1.run(ParameterProviderServiceImpl.java:855)
+[19-04-2021 03:24:52] 	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+[19-04-2021 03:24:52] 	at java.util.concurrent.FutureTask.runAndReset(Unknown Source)
+[19-04-2021 03:24:52] 	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(Unknown Source)
+[19-04-2021 03:24:52] 	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(Unknown Source)
+[19-04-2021 03:24:52] 	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+[19-04-2021 03:24:52] 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+[19-04-2021 03:24:52] 	at java.lang.Thread.run(Unknown Source)
+[19-04-2021 03:24:52] 
+[19-04-2021 03:24:52] Apr 16, 2021 7:58:21 PM esa.mo.mal.transport.gen.util.GENMessagePoller run
+[19-04-2021 03:24:52] INFO: Client closing connection: maltcp://127.0.0.1:1025
+[19-04-2021 03:24:52] Apr 16, 2021 7:58:21 PM esa.mo.mal.transport.gen.sending.GENConcurrentMessageSender terminate
+[19-04-2021 03:24:52] INFO: Terminating all processing threads for sender for URI:maltcp://127.0.0.1:1025
+[19-04-2021 03:24:52] Apr 16, 2021 7:59:55 PM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 03:24:52] INFO: Initializing 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp510.sh]
+[19-04-2021 03:24:52] Apr 17, 2021 1:59:55 AM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 03:24:52] INFO: Initializing 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp510.sh]
+[19-04-2021 03:24:52] Apr 17, 2021 3:53:55 AM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 03:24:52] INFO: Initializing 'exp166' app in dir: /home/nmf/supervisor/../../exp166, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp166;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp166.sh]
+[19-04-2021 03:24:52] Apr 17, 2021 6:59:54 AM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 03:24:52] INFO: Initializing 'exp1000' app in dir: /home/nmf/supervisor/../../exp1000, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp1000;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp1000.sh]
+[19-04-2021 03:24:52] Apr 17, 2021 7:59:54 AM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 03:24:52] INFO: Initializing 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp510.sh]
+[19-04-2021 03:24:52] Apr 17, 2021 1:59:53 PM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 03:24:52] INFO: Initializing 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp510.sh]
+[19-04-2021 03:24:52] Apr 17, 2021 2:58:13 PM esa.mo.sm.impl.provider.AppsLauncherManager stopApps
+[19-04-2021 03:24:52] INFO: Stop script present for app exp1000. Invoking it.
+[19-04-2021 03:24:52] Apr 17, 2021 2:58:13 PM esa.mo.sm.impl.provider.AppsLauncherManager stopNativeApp
+[19-04-2021 03:24:52] INFO: Stopping 'exp1000' app in dir: /home/nmf/supervisor/../../exp1000, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp1000;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI= NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./stop_exp1000.sh]
+[19-04-2021 03:24:52] Apr 17, 2021 4:54:40 PM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 03:24:52] INFO: Initializing 'exp144' app in dir: /home/nmf/supervisor/../../exp144, using launcher command: [su, -, exp144, -c, cd /home/nmf/supervisor/../../exp144;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp144.sh]
+[19-04-2021 03:24:52] Apr 17, 2021 4:55:06 PM esa.mo.mal.transport.tcpip.TCPIPServerConnectionListener run
+[19-04-2021 03:24:52] INFO: Socket accepted at port 14,189
+[19-04-2021 03:24:52] Apr 17, 2021 4:55:12 PM esa.mo.common.impl.provider.DirectoryProviderServiceImpl publishProvider
+[19-04-2021 03:24:52] WARNING: There was already a provider with the same name in the Directory service. Removing the old one and adding the new one...
+[19-04-2021 03:24:52] Apr 17, 2021 7:59:59 PM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 03:24:52] INFO: Initializing 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp510.sh]
+[19-04-2021 03:24:52] ==> /home/exp144/log0.log.0 <==
+[19-04-2021 03:24:52] INFO: Parameter service READY
+[19-04-2021 03:24:52] Apr 18, 2021 6:50:19 AM esa.mo.mc.impl.provider.ActionProviderServiceImpl init
+[19-04-2021 03:24:52] INFO: Action service READY
+[19-04-2021 03:24:52] Apr 18, 2021 6:50:19 AM esa.mo.mc.impl.provider.AlertProviderServiceImpl init
+[19-04-2021 03:24:52] INFO: Alert service READY
+[19-04-2021 03:24:52] Apr 18, 2021 6:50:19 AM esa.mo.mc.impl.provider.AggregationProviderServiceImpl init
+[19-04-2021 03:24:52] INFO: Aggregation service READY
+[19-04-2021 03:24:52] Apr 18, 2021 6:50:19 AM esa.mo.common.impl.provider.DirectoryProviderServiceImpl init
+[19-04-2021 03:24:52] INFO: Directory service READY
+[19-04-2021 03:24:52] Apr 18, 2021 6:50:19 AM esa.mo.sm.impl.provider.HeartbeatProviderServiceImpl init
+[19-04-2021 03:24:52] INFO: Heartbeat service READY
+[19-04-2021 03:24:52] Apr 18, 2021 6:50:19 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[19-04-2021 03:24:52] INFO: Populating local Directory service...
+[19-04-2021 03:24:52] Apr 18, 2021 6:50:19 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[19-04-2021 03:24:52] INFO: Loading properties file:/home/exp144/providerURIs.properties
+[19-04-2021 03:24:52] Apr 18, 2021 6:50:19 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[19-04-2021 03:24:52] INFO: Loading properties file:/home/exp144/providerURIsSecondary.properties
+[19-04-2021 03:24:52] Apr 18, 2021 6:50:20 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[19-04-2021 03:24:52] INFO: Populating Central Directory service on URI: maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory
+[19-04-2021 03:24:52] Apr 18, 2021 6:50:20 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[19-04-2021 03:24:52] INFO: Populated! And the connection to the Directory service has been successfully closed!
+[19-04-2021 03:24:52] Apr 18, 2021 6:50:21 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[19-04-2021 03:24:52] INFO: Loading previous configurations...
+[19-04-2021 03:24:52] Apr 18, 2021 6:50:21 AM org.ccsds.moims.mo.mal.encoding.MALElementStreamFactory newFactory
+[19-04-2021 03:24:52] INFO: New encoding factory registered with classname: de.dlr.gsoc.mo.malspp.encoding.SPPElementStreamFactory
+[19-04-2021 03:24:52] Apr 18, 2021 6:50:21 AM esa.mo.nmf.MonitorAndControlNMFAdapter registerParameters
+[19-04-2021 03:24:52] INFO: Registering Parameters:
+[19-04-2021 03:24:52] Apr 18, 2021 6:50:21 AM esa.mo.nmf.MonitorAndControlNMFAdapter registerActions
+[19-04-2021 03:24:52] INFO: Registering Actions
+[19-04-2021 03:24:52] Apr 18, 2021 6:50:21 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[19-04-2021 03:24:52] INFO: NanoSat MO Connector initialized in 21.377 seconds!
+[19-04-2021 03:24:52] Apr 18, 2021 6:50:21 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[19-04-2021 03:24:52] INFO: URI: malspp:247/1168/11
+[19-04-2021 03:24:52] 
+[19-04-2021 03:24:52] Apr 18, 2021 6:50:22 AM esa.mo.nmf.spacemoadapter.SpaceMOApdapterImpl getNMFSupervisorProviderSummary
+[19-04-2021 03:24:52] INFO: Found nanosat-mo-supervisor provider
+[19-04-2021 03:24:52] Apr 18, 2021 6:50:22 AM esa.mo.common.impl.util.HelperCommon providerSummaryToConnectionConsumer
+[19-04-2021 03:24:52] WARNING: The service could not be found in the MAL factory. Maybe the Helper for that service was not initialized. The service key is: (area=7, service=1, version=1)
+[19-04-2021 03:24:52] Apr 18, 2021 6:50:22 AM esa.mo.common.impl.util.HelperCommon providerSummaryToConnectionConsumer
+[19-04-2021 03:24:52] WARNING: The service could not be found in the MAL factory. Maybe the Helper for that service was not initialized. The service key is: (area=7, service=3, version=1)
+[19-04-2021 03:24:52] Apr 18, 2021 6:50:22 AM esa.mo.common.impl.util.HelperCommon providerSummaryToConnectionConsumer
+[19-04-2021 03:24:52] WARNING: The service could not be found in the MAL factory. Maybe the Helper for that service was not initialized. The service key is: (area=7, service=5, version=1)
+[19-04-2021 03:24:52] Apr 18, 2021 6:50:22 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[19-04-2021 03:24:52] INFO: Loading properties file:/home/exp144/consumer.properties
+[19-04-2021 03:24:52] Apr 18, 2021 6:50:23 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[19-04-2021 03:24:58] INFO: Reloading properties file:/home/exp144/consumer.properties
+[19-04-2021 03:24:58] Apr 18, 2021 6:50:23 AM esa.mo.nmf.apps.OrbitAIApp <init>
+[19-04-2021 03:24:58] INFO: OrbitAI initialized.
+[19-04-2021 03:24:58] Apr 18, 2021 6:50:23 AM esa.mo.nmf.apps.OrbitAIApp start
+[19-04-2021 03:24:58] INFO: Starting OrbitAI
+[19-04-2021 03:24:58] 
+[19-04-2021 03:24:58] ==> /home/exp144/log0.log.0.lck <==
+[19-04-2021 03:24:58] 
+[19-04-2021 03:24:58] ==> /home/exp144/log0.log.1 <==
+[19-04-2021 03:24:58] INFO: Loading properties file:/home/exp144/providerURIsSecondary.properties
+[19-04-2021 03:24:58] Apr 18, 2021 2:06:24 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[19-04-2021 03:24:58] INFO: Populating Central Directory service on URI: maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory
+[19-04-2021 03:24:58] Apr 18, 2021 2:06:25 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[19-04-2021 03:24:58] INFO: Populated! And the connection to the Directory service has been successfully closed!
+[19-04-2021 03:24:58] Apr 18, 2021 2:06:25 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[19-04-2021 03:24:58] INFO: Loading previous configurations...
+[19-04-2021 03:24:58] Apr 18, 2021 2:06:26 AM org.ccsds.moims.mo.mal.encoding.MALElementStreamFactory newFactory
+[19-04-2021 03:24:58] INFO: New encoding factory registered with classname: de.dlr.gsoc.mo.malspp.encoding.SPPElementStreamFactory
+[19-04-2021 03:24:58] Apr 18, 2021 2:06:26 AM esa.mo.nmf.MonitorAndControlNMFAdapter registerParameters
+[19-04-2021 03:24:58] INFO: Registering Parameters:
+[19-04-2021 03:24:58] Apr 18, 2021 2:06:26 AM esa.mo.nmf.MonitorAndControlNMFAdapter registerActions
+[19-04-2021 03:24:58] INFO: Registering Actions
+[19-04-2021 03:24:58] Apr 18, 2021 2:06:26 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[19-04-2021 03:24:58] INFO: NanoSat MO Connector initialized in 77.362 seconds!
+[19-04-2021 03:24:58] Apr 18, 2021 2:06:26 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[19-04-2021 03:24:58] INFO: URI: malspp:247/1168/11
+[19-04-2021 03:24:58] 
+[19-04-2021 03:24:58] Apr 18, 2021 2:06:27 AM esa.mo.nmf.spacemoadapter.SpaceMOApdapterImpl getNMFSupervisorProviderSummary
+[19-04-2021 03:24:58] INFO: Found nanosat-mo-supervisor provider
+[19-04-2021 03:24:58] Apr 18, 2021 2:06:28 AM esa.mo.common.impl.util.HelperCommon providerSummaryToConnectionConsumer
+[19-04-2021 03:24:58] WARNING: The service could not be found in the MAL factory. Maybe the Helper for that service was not initialized. The service key is: (area=7, service=1, version=1)
+[19-04-2021 03:24:58] Apr 18, 2021 2:06:28 AM esa.mo.common.impl.util.HelperCommon providerSummaryToConnectionConsumer
+[19-04-2021 03:24:58] WARNING: The service could not be found in the MAL factory. Maybe the Helper for that service was not initialized. The service key is: (area=7, service=3, version=1)
+[19-04-2021 03:24:58] Apr 18, 2021 2:06:28 AM esa.mo.common.impl.util.HelperCommon providerSummaryToConnectionConsumer
+[19-04-2021 03:24:58] WARNING: The service could not be found in the MAL factory. Maybe the Helper for that service was not initialized. The service key is: (area=7, service=5, version=1)
+[19-04-2021 03:24:58] Apr 18, 2021 2:06:28 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[19-04-2021 03:24:58] INFO: Loading properties file:/home/exp144/consumer.properties
+[19-04-2021 03:24:58] Apr 18, 2021 2:06:31 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[19-04-2021 03:24:58] INFO: Reloading properties file:/home/exp144/consumer.properties
+[19-04-2021 03:24:58] Apr 18, 2021 2:06:31 AM esa.mo.nmf.apps.OrbitAIApp <init>
+[19-04-2021 03:24:58] INFO: OrbitAI initialized.
+[19-04-2021 03:24:58] Apr 18, 2021 2:06:31 AM esa.mo.nmf.apps.OrbitAIApp start
+[19-04-2021 03:24:58] INFO: Starting OrbitAI
+[19-04-2021 03:24:58] Apr 18, 2021 2:06:38 AM esa.mo.nmf.apps.OrbitAIDataHandler toggleSupervisorParametersSubscription
+[19-04-2021 03:24:58] INFO: Started fetching parameters from supervisor
+[19-04-2021 03:24:58] Apr 18, 2021 2:06:39 AM esa.mo.nmf.apps.OrbitAILearningHandler startAndConnectToMochi
+[19-04-2021 03:24:58] INFO: MochiMochi process started
+[19-04-2021 03:24:58] Apr 18, 2021 2:06:42 AM esa.mo.nmf.apps.OrbitAILearningHandler startAndConnectToMochi
+[19-04-2021 03:24:58] INFO: Connected to MochiMochi
+[19-04-2021 03:24:58] Apr 18, 2021 2:06:42 AM esa.mo.nmf.apps.OrbitAILearningHandler$LearningRunnable run
+[19-04-2021 03:24:58] INFO: Learning thread started
+[19-04-2021 03:24:58] Apr 18, 2021 2:51:54 AM esa.mo.nmf.apps.OrbitAIDataHandler toggleSupervisorParametersSubscription
+[19-04-2021 03:24:58] INFO: Stopped fetching parameters from supervisor
+[19-04-2021 03:24:58] Apr 18, 2021 2:51:54 AM esa.mo.nmf.apps.OrbitAILearningHandler stopAndDisconnectFromMochi
+[19-04-2021 03:24:58] INFO: Disconnected from MochiMochi process
+[19-04-2021 03:24:58] Apr 18, 2021 2:51:55 AM esa.mo.nmf.apps.OrbitAILearningHandler exportLearningData
+[19-04-2021 03:24:58] INFO: Exported trained models to the toGround/ directory
+[19-04-2021 03:24:58] Apr 18, 2021 2:51:56 AM esa.mo.nmf.apps.OrbitAIMCAdapter onClose
+[19-04-2021 03:24:58] INFO: Closed application successfully: true
+[19-04-2021 03:24:58] DATA: STOP
+[19-04-2021 03:24:59] COMMAND  Uplink to SEPP: mv /home/root/esoc-apps/fms/filestore/toGround/sepp_packetstore_exp510_20210417_133116.gz /home/root/esoc-apps/fms/filestore/toGround/sepp_packetstore_exp510_20210417_133116_1.gz; echo "moved"
+[19-04-2021 03:25:06] DATA: START
+[19-04-2021 03:25:06] DATA: STOP
+[19-04-2021 03:25:25] COMMAND  Uplink to SEPP: mv /home/root/esoc-apps/fms/filestore/toGround/opssat_smartcam_jpeg_exp1000_20210418_065958_previous.tar.gz /home/root/esoc-apps/fms/filestore/toGround/opssat_smartcam_jpeg_exp1000_20210418_065958_1.tar.gz; echo "moved!"
+[19-04-2021 03:25:32] DATA: START
+[19-04-2021 03:25:32] moved!
+[19-04-2021 03:25:32] DATA: STOP
+[19-04-2021 03:25:40] COMMAND  Uplink to SEPP: mv /home/root/esoc-apps/fms/filestore/toGround/sepp_packetstore_exp510_20210418_015959.gz /home/root/esoc-apps/fms/filestore/toGround/sepp_packetstore_exp510_20210418_015959_1.gz; echo "moved"
+[19-04-2021 03:25:47] DATA: START
+[19-04-2021 03:25:47] moved
+[19-04-2021 03:25:47] DATA: STOP
+[19-04-2021 03:25:48] COMMAND  Uplink to SEPP: mv /home/root/esoc-apps/fms/filestore/toGround/sepp_packetstore_exp510_20210417_192112.gz /home/root/esoc-apps/fms/filestore/toGround/sepp_packetstore_exp510_20210417_192112_1.gz; echo "moved"
+[19-04-2021 03:25:55] DATA: START
+[19-04-2021 03:25:55] moved
+[19-04-2021 03:25:55] DATA: STOP
+[19-04-2021 03:25:57] COMMAND  Uplink to SEPP: mv /home/root/esoc-apps/fms/filestore/toGround/sepp_packetstore_exp510_20210418_075957.gz /home/root/esoc-apps/fms/filestore/toGround/sepp_packetstore_exp510_20210418_075957_1.gz; echo "moved"
+[19-04-2021 03:26:05] DATA: START
+[19-04-2021 03:26:05] moved
+[19-04-2021 03:26:05] DATA: STOP
+[19-04-2021 03:26:07] COMMAND  Uplink to SEPP: mv /home/root/esoc-apps/fms/filestore/toGround/sepp_packetstore_exp510_20210418_13* /home/root/esoc-apps/fms/filestore/toGround/sepp_packetstore_exp510_20210418_1400.gz; echo "moved"
+[19-04-2021 03:26:15] DATA: START
+[19-04-2021 03:26:15] mv: can't rename '/home/root/esoc-apps/fms/filestore/toGround/sepp_packetstore_exp510_20210418_13*': No such file or directory
+[19-04-2021 03:26:15] moved
+[19-04-2021 03:26:15] DATA: STOP
+[19-04-2021 03:26:17] COMMAND  Uplink to SEPP: mv /home/root/esoc-apps/fms/filestore/toGround/sepp_packetstore_exp510_20210418_19* /home/root/esoc-apps/fms/filestore/toGround/sepp_packetstore_exp510_20210418_2000.gz; df -h; echo "moved"
+[19-04-2021 03:26:24] DATA: START
+[19-04-2021 03:26:24] mv: can't rename '/home/root/esoc-apps/fms/filestore/toGround/sepp_packetstore_exp510_20210418_19*': No such file or directory
+[19-04-2021 03:26:24] Filesystem                Size      Used Available Use% Mounted on
+[19-04-2021 03:26:24] /dev/root                 3.8G      2.4G      1.2G  68% /
+[19-04-2021 03:26:24] devtmpfs                207.4M         0    207.4M   0% /dev
+[19-04-2021 03:26:24] tmpfs                   215.9M         0    215.9M   0% /dev/shm
+[19-04-2021 03:26:24] tmpfs                   215.9M    336.0K    215.6M   0% /run
+[19-04-2021 03:26:24] tmpfs                   215.9M         0    215.9M   0% /sys/fs/cgroup
+[19-04-2021 03:26:24] tmpfs                   215.9M      1.6M    214.3M   1% /tmp
+[19-04-2021 03:26:24] tmpfs                   215.9M         0    215.9M   0% /var/volatile
+[19-04-2021 03:26:24] tmpfs                    43.2M         0     43.2M   0% /run/user/1042
+[19-04-2021 03:26:24] tmpfs                    43.2M         0     43.2M   0% /run/user/0
+[19-04-2021 03:26:24] moved
+[19-04-2021 03:26:24] DATA: STOP

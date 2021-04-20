@@ -1,0 +1,844 @@
+[19-04-2021 16:23:37] COMMAND  Uplink to SEPP: systemctl restart fms_can
+[19-04-2021 16:23:44] DATA: START
+[19-04-2021 16:23:44] DATA: STOP
+[19-04-2021 16:23:46] COMMAND  Run sleep 25 on MCS
+[19-04-2021 16:25:13] COMMAND  Run /home/osops/os-tools/fms_upload_wrapper_simple.csh /home/osops/tmp updatedDataASTERIA.zip can on MCS
+[19-04-2021 16:25:15] Apr 19, 2021 4:25:15 PM esa.mo.opssat.vfs.VirtualFileSystemApp parseProviders
+[19-04-2021 16:25:15] INFO: Found 2 providers: [sat, mcs]
+[19-04-2021 16:25:15] Apr 19, 2021 4:25:15 PM esa.mo.opssat.vfs.VirtualFileSystemApp parseProviders
+[19-04-2021 16:25:15] INFO: Found 1 local providers: [mcs]
+[19-04-2021 16:25:15] Apr 19, 2021 4:25:15 PM esa.mo.opssat.vfs.VirtualFileSystemApp parseProviders
+[19-04-2021 16:25:15] INFO: Adding provider: [sat, localhost, 17001, 125, ../space/filestore, [[2]], false]
+[19-04-2021 16:25:15] Apr 19, 2021 4:25:15 PM esa.mo.opssat.vfs.VirtualFileSystemApp parseProviders
+[19-04-2021 16:25:15] INFO: Adding provider: [mcs, localhost, 17002, 125, ../ground/filestore, [[0]], true]
+[19-04-2021 16:25:15] Apr 19, 2021 4:25:15 PM esa.mo.opssat.vfs.Connection start
+[19-04-2021 16:25:15] INFO: Starting MO Consumer on 125@localhost:17002
+[19-04-2021 16:25:15] Apr 19, 2021 4:25:15 PM esa.mo.opssat.vfs.VfsConsumer getSink
+[19-04-2021 16:25:15] INFO: Application VFS_CONSUMER_CLIENT will run as TCP/IP client to localhost:17002
+[19-04-2021 16:25:15] Apr 19, 2021 4:25:15 PM esa.mo.opssat.fileapp.TCPIPtransportLayer <init>
+[19-04-2021 16:25:15] INFO: Creating TCP/IP transport layer on localhost:17002 for VFS_CONSUMER_CLIENT
+[19-04-2021 16:25:15] Apr 19, 2021 4:25:15 PM esa.mo.opssat.fileapp.TCPIPtransportLayer <init>
+[19-04-2021 16:25:15] INFO: Socket send buffer size 1048576
+[19-04-2021 16:25:15] Apr 19, 2021 4:25:15 PM esa.mo.opssat.pus_mo_adapter.interfaces.SocketInterfaceInfo <init>
+[19-04-2021 16:25:15] INFO: Created CLIENT Socket Interface VFS_CONSUMER_CLIENT on localhost:17002
+[19-04-2021 16:25:15] Apr 19, 2021 4:25:15 PM esa.mo.opssat.vfs.VfsConsumer start
+[19-04-2021 16:25:15] INFO: Starting VFS_CONSUMER_CLIENT with local name (APID) 1024 for connection to 125
+[19-04-2021 16:25:15] Apr 19, 2021 4:25:15 PM esa.mo.opssat.pus_mo_adapter.interfaces.SocketInterface runClient
+[19-04-2021 16:25:15] INFO: Opening VFS_CONSUMER_CLIENT Client Channel on localhost:17002
+[19-04-2021 16:25:15] Apr 19, 2021 4:25:15 PM esa.mo.opssat.pus_mo_adapter.interfaces.SocketInterface runClient
+[19-04-2021 16:25:15] INFO: Attempting connection to localhost:17002
+[19-04-2021 16:25:16] Apr 19, 2021 4:25:16 PM esa.mo.mal.transport.gen.GENTransport <init>
+[19-04-2021 16:25:16] INFO: GEN Creating element stream : esa.mo.mal.encoder.spp.SPPBinaryStreamFactory
+[19-04-2021 16:25:16] Apr 19, 2021 4:25:16 PM esa.mo.opssat.pus_mo_adapter.interfaces.SocketInterface runClient
+[19-04-2021 16:25:16] INFO: Connected to localhost:17002
+[19-04-2021 16:25:16] Apr 19, 2021 4:25:16 PM esa.mo.mal.transport.gen.GENTransport <init>
+[19-04-2021 16:25:16] INFO: GEN Wrapping body parts set to  : false
+[19-04-2021 16:25:16] Apr 19, 2021 4:25:16 PM esa.mo.opssat.pus_mo_adapter.interfaces.SocketInterfaceHandler channelActive
+[19-04-2021 16:25:16] INFO: VFS_CONSUMER_CLIENT: channelActive
+[19-04-2021 16:25:16] Apr 19, 2021 4:25:16 PM esa.mo.mal.transport.gen.GENTransport createEndpoint
+[19-04-2021 16:25:16] INFO: GEN Creating endpoint 
+[19-04-2021 16:25:16] Apr 19, 2021 4:25:16 PM esa.mo.mal.transport.gen.GENEndpoint startMessageDelivery
+[19-04-2021 16:25:16] INFO: GENEndpoint (1024) Activating message delivery
+[19-04-2021 16:25:16] Apr 19, 2021 4:25:16 PM esa.mo.mal.transport.gen.GENTransport createEndpoint
+[19-04-2021 16:25:16] INFO: GEN Creating endpoint 
+[19-04-2021 16:25:16] Apr 19, 2021 4:25:16 PM esa.mo.mal.transport.gen.GENEndpoint startMessageDelivery
+[19-04-2021 16:25:16] INFO: GENEndpoint (1025) Activating message delivery
+[19-04-2021 16:25:16] Apr 19, 2021 4:25:16 PM esa.mo.opssat.fm.filetransfer.FileTransferConsumerImpl transfer
+[19-04-2021 16:25:16] INFO: transfer(): transfer updatedDataASTERIA.zip to 02:updatedDataASTERIA.zip with priority 1 and Tx mode RELIABLE
+[19-04-2021 16:25:16] Apr 19, 2021 4:25:16 PM esa.mo.mal.transport.inproc.InProcTransport internalSendMessage
+[19-04-2021 16:25:16] INFO: InProc Sending data remotely to malspp:125/1
+[19-04-2021 16:25:16] Apr 19, 2021 4:25:16 PM esa.mo.mal.transport.gen.body.GENMessageBody encodeMessageBody
+[19-04-2021 16:25:16] INFO: GEN Message encoding body ... pc (5)
+[19-04-2021 16:25:16] Apr 19, 2021 4:25:16 PM esa.mo.mal.transport.inproc.InProcTransport internalSendMessage
+[19-04-2021 16:25:16] INFO: InProc Sending data remotely to malspp:125/1 : 187dc0010057050014001e000101040100000000000000000000d00101607daeec00026d0100167570646174656444617461415354455249412e7a6970010001020100167570646174656444617461415354455249412e7a697001010101
+[19-04-2021 16:25:16] Apr 19, 2021 4:25:16 PM esa.mo.opssat.pus_mo_adapter.interfaces.SocketInterfaceHandler channelWrite
+[19-04-2021 16:25:16] INFO: VFS_CONSUMER_CLIENT: write 94 bytes to channel
+[19-04-2021 16:25:16] Apr 19, 2021 4:25:16 PM esa.mo.opssat.pus_mo_adapter.interfaces.SocketInterfaceHandler channelRead
+[19-04-2021 16:25:16] INFO: VFS_CONSUMER_CLIENT: channelRead
+[19-04-2021 16:25:16] Apr 19, 2021 4:25:16 PM esa.mo.opssat.pus_mo_adapter.interfaces.SocketInterface handleReceive
+[19-04-2021 16:25:16] INFO: VFS_CONSUMER_CLIENT: handleReceive
+[19-04-2021 16:25:16] Apr 19, 2021 4:25:16 PM esa.mo.opssat.fileapp.TCPIPtransportLayer$FileAppDataListener newData
+[19-04-2021 16:25:16] INFO: New data from OTHER
+[19-04-2021 16:25:16] Apr 19, 2021 4:25:16 PM esa.mo.opssat.fileapp.TCPIPtransportLayer sendMessage
+[19-04-2021 16:25:16] INFO: Received message (TC) from APID 125 with size 49
+[19-04-2021 16:25:16] Apr 19, 2021 4:25:16 PM esa.mo.opssat.vfs.VfsConsumer receiveMessage
+[19-04-2021 16:25:16] INFO: receiveMessage() - APID 125 and size 49
+[19-04-2021 16:25:16] Apr 19, 2021 4:25:16 PM esa.mo.opssat.vfs.VfsConsumer receiveMessage
+[19-04-2021 16:25:16] INFO: Sending message to FileTransfer service
+[19-04-2021 16:25:16] Apr 19, 2021 4:25:16 PM esa.mo.mal.transport.gen.GENTransport receive
+[19-04-2021 16:25:16] INFO: GEN Receiving data (creating thread) : 087dc002002a060014001e000101040100000000000000000000d00101607daeec0002e3010001000002001f0100002cfb
+[19-04-2021 16:25:16] Apr 19, 2021 4:25:16 PM esa.mo.mal.transport.gen.GENTransport receiveMessageThreadMain
+[19-04-2021 16:25:16] INFO: GEN Receiving and processing data : 087dc002002a060014001e000101040100000000000000000000d00101607daeec0002e3010001000002001f0100002cfb
+[19-04-2021 16:25:16] Apr 19, 2021 4:25:16 PM esa.mo.mal.transport.gen.GENTransport receiveMessageThreadMain
+[19-04-2021 16:25:16] INFO: GEN Passing to message handler 1025 : 087dc002002a060014001e000101040100000000000000000000d00101607daeec0002e3010001000002001f0100002cfb
+[19-04-2021 16:25:16] Apr 19, 2021 4:25:16 PM esa.mo.mal.impl.MessageReceive onMessage
+[19-04-2021 16:25:16] INFO: MAL Receiving message
+[19-04-2021 16:25:16] Apr 19, 2021 4:25:16 PM esa.mo.mal.transport.gen.body.GENMessageBody decodeMessageBody
+[19-04-2021 16:25:16] INFO: GEN Message decoded body
+[19-04-2021 16:25:33] Apr 19, 2021 4:25:33 PM esa.mo.opssat.pus_mo_adapter.interfaces.SocketInterfaceHandler channelRead
+[19-04-2021 16:25:33] INFO: VFS_CONSUMER_CLIENT: channelRead
+[19-04-2021 16:25:33] Apr 19, 2021 4:25:33 PM esa.mo.opssat.pus_mo_adapter.interfaces.SocketInterface handleReceive
+[19-04-2021 16:25:33] INFO: VFS_CONSUMER_CLIENT: handleReceive
+[19-04-2021 16:25:33] Apr 19, 2021 4:25:33 PM esa.mo.opssat.fileapp.TCPIPtransportLayer$FileAppDataListener newData
+[19-04-2021 16:25:33] INFO: New data from OTHER
+[19-04-2021 16:25:33] Apr 19, 2021 4:25:33 PM esa.mo.opssat.fileapp.TCPIPtransportLayer sendMessage
+[19-04-2021 16:25:33] INFO: Received message (TC) from APID 125 with size 94
+[19-04-2021 16:25:33] Apr 19, 2021 4:25:33 PM esa.mo.opssat.vfs.VfsConsumer receiveMessage
+[19-04-2021 16:25:33] INFO: receiveMessage() - APID 125 and size 94
+[19-04-2021 16:25:33] Apr 19, 2021 4:25:33 PM esa.mo.opssat.vfs.VfsConsumer receiveMessage
+[19-04-2021 16:25:33] INFO: Sending message to FileTransfer service
+[19-04-2021 16:25:33] Apr 19, 2021 4:25:33 PM esa.mo.mal.transport.gen.GENTransport receive
+[19-04-2021 16:25:33] INFO: GEN Receiving data (creating thread) : 087dc0030057070014001e000101040100000000000000000000d00101607daefd00030f010001000002001f020200167570646174656444617461415354455249412e7a697000167570646174656444617461415354455249412e7a6970
+[19-04-2021 16:25:33] Apr 19, 2021 4:25:33 PM esa.mo.mal.transport.gen.GENTransport receiveMessageThreadMain
+[19-04-2021 16:25:33] INFO: GEN Receiving and processing data : 087dc0030057070014001e000101040100000000000000000000d00101607daefd00030f010001000002001f020200167570646174656444617461415354455249412e7a697000167570646174656444617461415354455249412e7a6970
+[19-04-2021 16:25:33] Apr 19, 2021 4:25:33 PM esa.mo.mal.transport.gen.GENTransport receiveMessageThreadMain
+[19-04-2021 16:25:33] INFO: GEN Passing to message handler 1025 : 087dc0030057070014001e000101040100000000000000000000d00101607daefd00030f010001000002001f020200167570646174656444617461415354455249412e7a697000167570646174656444617461415354455249412e7a6970
+[19-04-2021 16:25:33] Apr 19, 2021 4:25:33 PM esa.mo.mal.impl.MessageReceive onMessage
+[19-04-2021 16:25:33] INFO: MAL Receiving message
+[19-04-2021 16:25:33] Apr 19, 2021 4:25:33 PM esa.mo.mal.transport.gen.body.GENMessageBody decodeMessageBody
+[19-04-2021 16:25:33] INFO: GEN Message decoded body
+[19-04-2021 16:25:36] COMMAND  Uplink to SEPP: md5sum /home/root/esoc-apps/fms/filestore/updatedDataASTERIA.zip | grep 9fc6f3d && mv /home/root/esoc-apps/fms/filestore/updatedDataASTERIA.zip /home/exp119/fromGround; ls -lart /home/exp119/fromGround
+[19-04-2021 16:25:43] DATA: START
+[19-04-2021 16:25:43] 9fc6f3da7b5c19ca01c7c63b4b278856  /home/root/esoc-apps/fms/filestore/updatedDataASTERIA.zip
+[19-04-2021 16:25:43] total 620
+[19-04-2021 16:25:43] -rwxrwx---    1 supervis users       613894 Mar 18 09:47 opssatConfigASTERIA.zip
+[19-04-2021 16:25:43] drwxrwx---    5 supervis users         4096 Mar 22 10:07 ..
+[19-04-2021 16:25:43] -rw-r--r--    1 root     root         11515 Apr 19 16:25 updatedDataASTERIA.zip
+[19-04-2021 16:25:43] drwxrwx---    2 supervis users         4096 Apr 19 16:25 .
+[19-04-2021 16:25:43] DATA: STOP
+[19-04-2021 16:25:46] COMMAND  Uplink to SEPP: tail /home/nmf/supervisor/log0.log.* -n 200; tail /home/exp144/log0.log.* -n 200; sed -i 's/=inference/=continue_train/g' /home/exp144/orbit_ai.properties; cat /home/exp144/orbit_ai.properties; df -h
+[19-04-2021 16:25:47] DATA: START
+[19-04-2021 16:25:47] ==> /home/nmf/supervisor/log0.log.0 <==
+[19-04-2021 16:25:47] Apr 17, 2021 11:07:13 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 17, 2021 11:12:13 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 17, 2021 11:17:13 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 17, 2021 11:22:13 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 17, 2021 11:27:13 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 17, 2021 11:32:13 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 17, 2021 11:37:13 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 17, 2021 11:41:52 PM esa.mo.mal.transport.gen.util.GENMessagePoller run
+[19-04-2021 16:25:47] INFO: Client closing connection: maltcp://127.0.0.1:1025
+[19-04-2021 16:25:47] Apr 17, 2021 11:41:52 PM esa.mo.mal.transport.gen.sending.GENConcurrentMessageSender terminate
+[19-04-2021 16:25:47] INFO: Terminating all processing threads for sender for URI:maltcp://127.0.0.1:1025
+[19-04-2021 16:25:47] Apr 17, 2021 11:42:13 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 17, 2021 11:47:13 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 17, 2021 11:52:13 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 17, 2021 11:57:13 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 18, 2021 12:02:13 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 18, 2021 12:07:13 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 18, 2021 12:12:13 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 18, 2021 12:17:13 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 18, 2021 12:22:13 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 18, 2021 12:27:13 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 18, 2021 12:29:57 AM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 16:25:47] INFO: Initializing 'exp144' app in dir: /home/nmf/supervisor/../../exp144, using launcher command: [su, -, exp144, -c, cd /home/nmf/supervisor/../../exp144;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp144.sh]
+[19-04-2021 16:25:47] Apr 18, 2021 12:31:11 AM esa.mo.mal.transport.tcpip.TCPIPServerConnectionListener run
+[19-04-2021 16:25:47] INFO: Socket accepted at port 3,369
+[19-04-2021 16:25:47] Apr 18, 2021 12:31:34 AM esa.mo.common.impl.provider.DirectoryProviderServiceImpl publishProvider
+[19-04-2021 16:25:47] WARNING: There was already a provider with the same name in the Directory service. Removing the old one and adding the new one...
+[19-04-2021 16:25:47] Apr 18, 2021 12:32:13 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 18, 2021 12:37:13 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 18, 2021 12:42:13 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 18, 2021 12:47:13 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 18, 2021 12:52:13 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 18, 2021 12:57:13 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 18, 2021 1:02:13 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 18, 2021 1:07:13 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 18, 2021 1:12:13 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 18, 2021 1:17:10 AM esa.mo.mal.transport.gen.util.GENMessagePoller run
+[19-04-2021 16:25:47] INFO: Client closing connection: maltcp://127.0.0.1:1025
+[19-04-2021 16:25:47] Apr 18, 2021 1:17:10 AM esa.mo.mal.transport.gen.sending.GENConcurrentMessageSender terminate
+[19-04-2021 16:25:47] INFO: Terminating all processing threads for sender for URI:maltcp://127.0.0.1:1025
+[19-04-2021 16:25:47] Apr 18, 2021 1:17:13 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 18, 2021 1:22:13 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 18, 2021 1:27:13 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 18, 2021 1:32:13 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 18, 2021 1:37:13 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 18, 2021 1:42:13 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 18, 2021 1:47:13 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 18, 2021 1:52:13 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 18, 2021 1:57:13 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 18, 2021 1:59:57 AM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 16:25:47] INFO: Initializing 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp510.sh]
+[19-04-2021 16:25:47] Apr 18, 2021 2:02:13 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 18, 2021 2:04:57 AM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 16:25:47] INFO: Initializing 'exp144' app in dir: /home/nmf/supervisor/../../exp144, using launcher command: [su, -, exp144, -c, cd /home/nmf/supervisor/../../exp144;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp144.sh]
+[19-04-2021 16:25:47] Apr 18, 2021 2:06:01 AM esa.mo.mal.transport.tcpip.TCPIPServerConnectionListener run
+[19-04-2021 16:25:47] INFO: Socket accepted at port 21,667
+[19-04-2021 16:25:47] Apr 18, 2021 2:06:24 AM esa.mo.common.impl.provider.DirectoryProviderServiceImpl publishProvider
+[19-04-2021 16:25:47] WARNING: There was already a provider with the same name in the Directory service. Removing the old one and adding the new one...
+[19-04-2021 16:25:47] Apr 18, 2021 2:07:13 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 18, 2021 2:12:13 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 18, 2021 2:17:13 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 18, 2021 2:51:54 AM esa.mo.mal.impl.state.OperationResponseHolder waitForResponseSignal
+[19-04-2021 16:25:47] WARNING: Interrupted waiting for handler lock 
+[19-04-2021 16:25:47] java.lang.InterruptedException
+[19-04-2021 16:25:47] 	at java.lang.Object.wait(Native Method)
+[19-04-2021 16:25:47] 	at java.lang.Object.wait(Unknown Source)
+[19-04-2021 16:25:47] 	at esa.mo.mal.impl.state.OperationResponseHolder.waitForResponseSignal(OperationResponseHolder.java:70)
+[19-04-2021 16:25:47] 	at esa.mo.mal.impl.InteractionConsumerMap.waitForResponse(InteractionConsumerMap.java:195)
+[19-04-2021 16:25:47] 	at esa.mo.mal.impl.MessageSend.initiateSynchronousInteraction(MessageSend.java:668)
+[19-04-2021 16:25:47] 	at esa.mo.mal.impl.MessageSend.synchronousInteraction(MessageSend.java:314)
+[19-04-2021 16:25:47] 	at esa.mo.mal.impl.consumer.MALConsumerImpl.request(MALConsumerImpl.java:200)
+[19-04-2021 16:25:47] 	at esa.opssat.nanomind.mc.aggregation.consumer.AggregationStub.getValue(AggregationStub.java:85)
+[19-04-2021 16:25:47] 	at esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler.getNanomindAggregationValue(NanomindAggregationsHandler.java:150)
+[19-04-2021 16:25:47] 	at esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler.getNewValue(NanomindAggregationsHandler.java:355)
+[19-04-2021 16:25:47] 	at esa.mo.nanomind.impl.parameters_provisioning.NanomindParameterValuesProvider.getNewValue(NanomindParameterValuesProvider.java:222)
+[19-04-2021 16:25:47] 	at esa.mo.nanomind.impl.parameters_provisioning.NanomindParameterValuesProvider.getValue(NanomindParameterValuesProvider.java:236)
+[19-04-2021 16:25:47] 	at esa.mo.nmf.nanosatmosupervisor.parameter.OBSWParameterManager.getValue(OBSWParameterManager.java:158)
+[19-04-2021 16:25:47] 	at esa.mo.nmf.nanosatmosupervisor.parameter.OBSWParameterManager.getValue(OBSWParameterManager.java:140)
+[19-04-2021 16:25:47] 	at esa.mo.nmf.nanosatmosupervisor.MCSupervisorBasicAdapter.onGetValue(MCSupervisorBasicAdapter.java:126)
+[19-04-2021 16:25:47] 	at esa.mo.mc.impl.provider.ParameterManager.getRawValue(ParameterManager.java:786)
+[19-04-2021 16:25:47] 	at esa.mo.mc.impl.provider.ParameterManager.getParameterValue(ParameterManager.java:338)
+[19-04-2021 16:25:47] 	at esa.mo.mc.impl.provider.ParameterManager.getParameterValue(ParameterManager.java:300)
+[19-04-2021 16:25:47] 	at esa.mo.mc.impl.provider.ParameterProviderServiceImpl.publishPeriodicParameterUpdate(ParameterProviderServiceImpl.java:1103)
+[19-04-2021 16:25:47] 	at esa.mo.mc.impl.provider.ParameterProviderServiceImpl.access$000(ParameterProviderServiceImpl.java:99)
+[19-04-2021 16:25:47] 	at esa.mo.mc.impl.provider.ParameterProviderServiceImpl$PeriodicReportingManager$1.run(ParameterProviderServiceImpl.java:855)
+[19-04-2021 16:25:47] 	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+[19-04-2021 16:25:47] 	at java.util.concurrent.FutureTask.runAndReset(Unknown Source)
+[19-04-2021 16:25:47] 	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(Unknown Source)
+[19-04-2021 16:25:47] 	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(Unknown Source)
+[19-04-2021 16:25:47] 	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+[19-04-2021 16:25:47] 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+[19-04-2021 16:25:47] 	at java.lang.Thread.run(Unknown Source)
+[19-04-2021 16:25:47] 
+[19-04-2021 16:25:47] Apr 18, 2021 2:51:56 AM esa.mo.mal.transport.gen.util.GENMessagePoller run
+[19-04-2021 16:25:47] INFO: Client closing connection: maltcp://127.0.0.1:1025
+[19-04-2021 16:25:47] Apr 18, 2021 2:51:56 AM esa.mo.mal.transport.gen.sending.GENConcurrentMessageSender terminate
+[19-04-2021 16:25:47] INFO: Terminating all processing threads for sender for URI:maltcp://127.0.0.1:1025
+[19-04-2021 16:25:47] Apr 18, 2021 5:58:16 AM esa.mo.sm.impl.provider.AppsLauncherManager stopApps
+[19-04-2021 16:25:47] INFO: Stop script present for app exp1000. Invoking it.
+[19-04-2021 16:25:47] Apr 18, 2021 5:58:16 AM esa.mo.sm.impl.provider.AppsLauncherManager stopNativeApp
+[19-04-2021 16:25:47] INFO: Stopping 'exp1000' app in dir: /home/nmf/supervisor/../../exp1000, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp1000;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI= NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./stop_exp1000.sh]
+[19-04-2021 16:25:47] Apr 18, 2021 6:49:56 AM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 16:25:47] INFO: Initializing 'exp144' app in dir: /home/nmf/supervisor/../../exp144, using launcher command: [su, -, exp144, -c, cd /home/nmf/supervisor/../../exp144;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp144.sh]
+[19-04-2021 16:25:47] Apr 18, 2021 6:50:14 AM esa.mo.mal.transport.tcpip.TCPIPServerConnectionListener run
+[19-04-2021 16:25:47] INFO: Socket accepted at port 37,408
+[19-04-2021 16:25:47] Apr 18, 2021 6:50:20 AM esa.mo.common.impl.provider.DirectoryProviderServiceImpl publishProvider
+[19-04-2021 16:25:47] WARNING: There was already a provider with the same name in the Directory service. Removing the old one and adding the new one...
+[19-04-2021 16:25:47] Apr 18, 2021 6:59:56 AM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 16:25:47] INFO: Initializing 'exp1000' app in dir: /home/nmf/supervisor/../../exp1000, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp1000;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp1000.sh]
+[19-04-2021 16:25:47] Apr 18, 2021 7:58:16 AM esa.mo.sm.impl.provider.AppsLauncherManager stopApps
+[19-04-2021 16:25:47] INFO: Stop script present for app exp510. Invoking it.
+[19-04-2021 16:25:47] Apr 18, 2021 7:58:16 AM esa.mo.sm.impl.provider.AppsLauncherManager stopNativeApp
+[19-04-2021 16:25:47] INFO: Stopping 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI= NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./stop_exp510.sh]
+[19-04-2021 16:25:47] Apr 18, 2021 7:58:21 AM esa.mo.sm.impl.provider.AppsLauncherManager stopNativeApp
+[19-04-2021 16:25:47] WARNING: App exp510 stop script did not exit within the timeout (5,000 ms). Killing the stop script and forcing the app exit.
+[19-04-2021 16:25:47] Apr 18, 2021 7:59:56 AM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 16:25:47] INFO: Initializing 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp510.sh]
+[19-04-2021 16:25:47] Apr 18, 2021 1:58:16 PM esa.mo.sm.impl.provider.AppsLauncherManager stopApps
+[19-04-2021 16:25:47] INFO: Stop script present for app exp510. Invoking it.
+[19-04-2021 16:25:47] Apr 18, 2021 1:58:16 PM esa.mo.sm.impl.provider.AppsLauncherManager stopNativeApp
+[19-04-2021 16:25:47] INFO: Stopping 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI= NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./stop_exp510.sh]
+[19-04-2021 16:25:47] Apr 18, 2021 1:58:21 PM esa.mo.sm.impl.provider.AppsLauncherManager stopNativeApp
+[19-04-2021 16:25:47] WARNING: App exp510 stop script did not exit within the timeout (5,000 ms). Killing the stop script and forcing the app exit.
+[19-04-2021 16:25:47] Apr 18, 2021 1:59:56 PM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 16:25:47] INFO: Initializing 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp510.sh]
+[19-04-2021 16:25:47] Apr 18, 2021 2:58:16 PM esa.mo.sm.impl.provider.AppsLauncherManager stopApps
+[19-04-2021 16:25:47] INFO: Stop script present for app exp1000. Invoking it.
+[19-04-2021 16:25:47] Apr 18, 2021 2:58:16 PM esa.mo.sm.impl.provider.AppsLauncherManager stopNativeApp
+[19-04-2021 16:25:47] INFO: Stopping 'exp1000' app in dir: /home/nmf/supervisor/../../exp1000, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp1000;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI= NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./stop_exp1000.sh]
+[19-04-2021 16:25:47] Apr 18, 2021 2:58:21 PM esa.mo.sm.impl.provider.AppsLauncherManager stopNativeApp
+[19-04-2021 16:25:47] WARNING: App exp1000 stop script did not exit within the timeout (5,000 ms). Killing the stop script and forcing the app exit.
+[19-04-2021 16:25:47] Apr 18, 2021 7:58:15 PM esa.mo.sm.impl.provider.AppsLauncherManager stopApps
+[19-04-2021 16:25:47] INFO: Stop script present for app exp510. Invoking it.
+[19-04-2021 16:25:47] Apr 18, 2021 7:58:15 PM esa.mo.sm.impl.provider.AppsLauncherManager stopNativeApp
+[19-04-2021 16:25:47] INFO: Stopping 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI= NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./stop_exp510.sh]
+[19-04-2021 16:25:47] Apr 18, 2021 7:59:55 PM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 16:25:47] INFO: Initializing 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp510.sh]
+[19-04-2021 16:25:47] Apr 19, 2021 1:58:15 AM esa.mo.sm.impl.provider.AppsLauncherManager stopApps
+[19-04-2021 16:25:47] INFO: Stop script present for app exp510. Invoking it.
+[19-04-2021 16:25:47] Apr 19, 2021 1:58:15 AM esa.mo.sm.impl.provider.AppsLauncherManager stopNativeApp
+[19-04-2021 16:25:47] INFO: Stopping 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI= NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./stop_exp510.sh]
+[19-04-2021 16:25:47] Apr 19, 2021 1:59:54 AM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 16:25:47] INFO: Initializing 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp510.sh]
+[19-04-2021 16:25:47] Apr 19, 2021 5:59:54 AM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 16:25:47] INFO: Initializing 'exp1000' app in dir: /home/nmf/supervisor/../../exp1000, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp1000;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp1000.sh]
+[19-04-2021 16:25:47] Apr 19, 2021 7:58:14 AM esa.mo.sm.impl.provider.AppsLauncherManager stopApps
+[19-04-2021 16:25:47] INFO: Stop script present for app exp510. Invoking it.
+[19-04-2021 16:25:47] Apr 19, 2021 7:58:14 AM esa.mo.sm.impl.provider.AppsLauncherManager stopNativeApp
+[19-04-2021 16:25:47] INFO: Stopping 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI= NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./stop_exp510.sh]
+[19-04-2021 16:25:47] Apr 19, 2021 7:59:54 AM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 16:25:47] INFO: Initializing 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp510.sh]
+[19-04-2021 16:25:47] Apr 19, 2021 1:58:13 PM esa.mo.sm.impl.provider.AppsLauncherManager stopApps
+[19-04-2021 16:25:47] INFO: Stop script present for app exp510. Invoking it.
+[19-04-2021 16:25:47] Apr 19, 2021 1:58:13 PM esa.mo.sm.impl.provider.AppsLauncherManager stopNativeApp
+[19-04-2021 16:25:47] INFO: Stopping 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI= NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./stop_exp510.sh]
+[19-04-2021 16:25:47] Apr 19, 2021 1:58:18 PM esa.mo.sm.impl.provider.AppsLauncherManager stopApps
+[19-04-2021 16:25:47] INFO: Stop script present for app exp1000. Invoking it.
+[19-04-2021 16:25:47] Apr 19, 2021 1:58:18 PM esa.mo.sm.impl.provider.AppsLauncherManager stopNativeApp
+[19-04-2021 16:25:47] INFO: Stopping 'exp1000' app in dir: /home/nmf/supervisor/../../exp1000, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp1000;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI= NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./stop_exp1000.sh]
+[19-04-2021 16:25:47] Apr 19, 2021 1:59:53 PM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 16:25:47] INFO: Initializing 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp510.sh]
+[19-04-2021 16:25:47] 
+[19-04-2021 16:25:47] ==> /home/nmf/supervisor/log0.log.0.lck <==
+[19-04-2021 16:25:47] 
+[19-04-2021 16:25:47] ==> /home/nmf/supervisor/log0.log.1 <==
+[19-04-2021 16:25:47] INFO: Action registered: Clock.setTimeUsingDeltaMilliseconds
+[19-04-2021 16:25:47] Apr 16, 2021 5:07:31 PM esa.mo.nmf.MonitorAndControlNMFAdapter registerActions
+[19-04-2021 16:25:47] INFO: Action registered: ADCS.sunpointing
+[19-04-2021 16:25:47] Apr 16, 2021 5:07:31 PM esa.mo.nmf.MonitorAndControlNMFAdapter registerActions
+[19-04-2021 16:25:47] INFO: Action registered: ADCS.nadirPointing
+[19-04-2021 16:25:47] Apr 16, 2021 5:07:31 PM esa.mo.nmf.MonitorAndControlNMFAdapter registerActions
+[19-04-2021 16:25:47] INFO: Action registered: ADCS.unsetAttitude
+[19-04-2021 16:25:47] Apr 16, 2021 5:07:31 PM esa.mo.nmf.nanosatmosupervisor.parameter.ParameterLister <init>
+[19-04-2021 16:25:47] INFO: Loading OBSW parameters from datapool
+[19-04-2021 16:25:47] Apr 16, 2021 5:07:41 PM esa.mo.nmf.nanosatmosupervisor.NanoSatMOSupervisor init
+[19-04-2021 16:25:47] INFO: Populating Directory service...
+[19-04-2021 16:25:47] Apr 16, 2021 5:07:41 PM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[19-04-2021 16:25:47] INFO: Reloading properties file:/home/nmf/supervisor/providerURIs.properties
+[19-04-2021 16:25:47] Apr 16, 2021 5:07:41 PM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[19-04-2021 16:25:47] INFO: Loading properties file:/home/nmf/supervisor/providerURIsSecondary.properties
+[19-04-2021 16:25:47] Apr 16, 2021 5:07:43 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanAllAggregations
+[19-04-2021 16:25:47] INFO: Cleaning aggregations definitions in Nanomind
+[19-04-2021 16:25:47] Apr 16, 2021 5:07:45 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanAllAggregations
+[19-04-2021 16:25:47] INFO: Cleaned aggregations definitions in Nanomind
+[19-04-2021 16:25:47] Apr 16, 2021 5:08:05 PM esa.mo.nmf.nanosatmosupervisor.NanoSatMOSupervisor init
+[19-04-2021 16:25:47] INFO: NanoSat MO Supervisor initialized in 57.382 seconds!
+[19-04-2021 16:25:47] Apr 16, 2021 5:08:05 PM esa.mo.nmf.nanosatmosupervisor.NanoSatMOSupervisor init
+[19-04-2021 16:25:47] INFO: URI: malspp:247/100/5
+[19-04-2021 16:25:47] 
+[19-04-2021 16:25:47] Apr 16, 2021 5:08:06 PM esa.mo.nmf.nanosatmosupervisor.MCSupervisorBasicAdapter startAdcsAttitudeMonitoring
+[19-04-2021 16:25:47] SEVERE: Error when setting up attitude monitoring.
+[19-04-2021 16:25:47] MALInteractionException{standardError=(errorNumber=10510,errorName=DEVICE_NOT_AVAILABLE,extraInformation=null)}
+[19-04-2021 16:25:47] 	at esa.mo.mal.impl.MessageSend.initiateSynchronousInteraction(MessageSend.java:677)
+[19-04-2021 16:25:47] 	at esa.mo.mal.impl.MessageSend.synchronousInteraction(MessageSend.java:314)
+[19-04-2021 16:25:47] 	at esa.mo.mal.impl.consumer.MALConsumerImpl.submit(MALConsumerImpl.java:178)
+[19-04-2021 16:25:47] 	at org.ccsds.moims.mo.platform.autonomousadcs.consumer.AutonomousADCSStub.enableMonitoring(AutonomousADCSStub.java:85)
+[19-04-2021 16:25:47] 	at esa.mo.nmf.nanosatmosupervisor.MCSupervisorBasicAdapter.startAdcsAttitudeMonitoring(MCSupervisorBasicAdapter.java:142)
+[19-04-2021 16:25:47] 	at esa.mo.nmf.nanosatmosupervisor.NanosatMOSupervisorBasicImpl.main(NanosatMOSupervisorBasicImpl.java:93)
+[19-04-2021 16:25:47] 
+[19-04-2021 16:25:47] Apr 16, 2021 5:12:33 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 16, 2021 5:16:55 PM esa.mo.sm.impl.provider.AppsLauncherManager refreshAvailableAppsList
+[19-04-2021 16:25:47] INFO: New app found! Adding new app: exp503
+[19-04-2021 16:25:47] Apr 16, 2021 5:16:55 PM esa.mo.sm.impl.provider.AppsLauncherManager refreshAvailableAppsList
+[19-04-2021 16:25:47] INFO: New app found! Adding new app: exp119
+[19-04-2021 16:25:47] Apr 16, 2021 5:16:57 PM esa.mo.sm.impl.provider.AppsLauncherManager refreshAvailableAppsList
+[19-04-2021 16:25:47] INFO: New app found! Adding new app: exp121
+[19-04-2021 16:25:47] Apr 16, 2021 5:16:57 PM esa.mo.sm.impl.provider.AppsLauncherManager refreshAvailableAppsList
+[19-04-2021 16:25:47] INFO: New app found! Adding new app: exp511
+[19-04-2021 16:25:47] Apr 16, 2021 5:16:57 PM esa.mo.sm.impl.provider.AppsLauncherManager refreshAvailableAppsList
+[19-04-2021 16:25:47] INFO: New app found! Adding new app: exp1001
+[19-04-2021 16:25:47] Apr 16, 2021 5:16:58 PM esa.mo.sm.impl.provider.AppsLauncherManager refreshAvailableAppsList
+[19-04-2021 16:25:47] INFO: New app found! Adding new app: exp501
+[19-04-2021 16:25:47] Apr 16, 2021 5:16:58 PM esa.mo.sm.impl.provider.AppsLauncherManager refreshAvailableAppsList
+[19-04-2021 16:25:47] INFO: New app found! Adding new app: exp150
+[19-04-2021 16:25:47] Apr 16, 2021 5:16:59 PM esa.mo.sm.impl.provider.AppsLauncherManager refreshAvailableAppsList
+[19-04-2021 16:25:47] INFO: New app found! Adding new app: exp507
+[19-04-2021 16:25:47] Apr 16, 2021 5:16:59 PM esa.mo.sm.impl.provider.AppsLauncherManager refreshAvailableAppsList
+[19-04-2021 16:25:47] INFO: New app found! Adding new app: exp5122
+[19-04-2021 16:25:47] Apr 16, 2021 5:16:59 PM esa.mo.sm.impl.provider.AppsLauncherManager refreshAvailableAppsList
+[19-04-2021 16:25:47] INFO: New app found! Adding new app: payloads-test
+[19-04-2021 16:25:47] Apr 16, 2021 5:16:59 PM esa.mo.sm.impl.provider.AppsLauncherManager refreshAvailableAppsList
+[19-04-2021 16:25:47] INFO: New app found! Adding new app: exp144
+[19-04-2021 16:25:47] Apr 16, 2021 5:17:00 PM esa.mo.sm.impl.provider.AppsLauncherManager refreshAvailableAppsList
+[19-04-2021 16:25:47] INFO: New app found! Adding new app: exp510
+[19-04-2021 16:25:47] Apr 16, 2021 5:17:00 PM esa.mo.com.impl.util.HelperArchive getFromArchive
+[19-04-2021 16:25:47] INFO: (MALInteractionException) The object (area=7, service=5, version=1, number=1), domain = esa.nanosat-mo-supervisor, objIds = [1534] could not be retrieved from the Archive! A null will be returned!
+[19-04-2021 16:25:47] Apr 16, 2021 5:17:00 PM esa.mo.sm.impl.provider.AppsLauncherManager refreshAvailableAppsList
+[19-04-2021 16:25:47] INFO: New app found! Adding new app: exp114
+[19-04-2021 16:25:47] Apr 16, 2021 5:17:00 PM esa.mo.sm.impl.provider.AppsLauncherManager refreshAvailableAppsList
+[19-04-2021 16:25:47] INFO: New app found! Adding new app: exp502
+[19-04-2021 16:25:47] Apr 16, 2021 5:17:00 PM esa.mo.sm.impl.provider.AppsLauncherManager refreshAvailableAppsList
+[19-04-2021 16:25:47] INFO: New app found! Adding new app: exp122
+[19-04-2021 16:25:47] Apr 16, 2021 5:17:00 PM esa.mo.sm.impl.provider.AppsLauncherManager refreshAvailableAppsList
+[19-04-2021 16:25:47] INFO: New app found! Adding new app: exp504
+[19-04-2021 16:25:47] Apr 16, 2021 5:17:01 PM esa.mo.sm.impl.provider.AppsLauncherManager refreshAvailableAppsList
+[19-04-2021 16:25:47] INFO: New app found! Adding new app: exp1000
+[19-04-2021 16:25:47] Apr 16, 2021 5:17:01 PM esa.mo.sm.impl.provider.AppsLauncherManager refreshAvailableAppsList
+[19-04-2021 16:25:47] INFO: New app found! Adding new app: exp505
+[19-04-2021 16:25:47] Apr 16, 2021 5:17:01 PM esa.mo.sm.impl.provider.AppsLauncherManager refreshAvailableAppsList
+[19-04-2021 16:25:47] INFO: New app found! Adding new app: exp509
+[19-04-2021 16:25:47] Apr 16, 2021 5:17:01 PM esa.mo.sm.impl.provider.AppsLauncherManager refreshAvailableAppsList
+[19-04-2021 16:25:47] INFO: New app found! Adding new app: exp166
+[19-04-2021 16:25:47] Apr 16, 2021 5:17:02 PM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 16:25:47] INFO: Initializing 'exp144' app in dir: /home/nmf/supervisor/../../exp144, using launcher command: [su, -, exp144, -c, cd /home/nmf/supervisor/../../exp144;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp144.sh]
+[19-04-2021 16:25:47] Apr 16, 2021 5:17:18 PM esa.mo.mal.transport.tcpip.TCPIPServerConnectionListener run
+[19-04-2021 16:25:47] INFO: Socket accepted at port 36,906
+[19-04-2021 16:25:47] Apr 16, 2021 5:17:33 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 16, 2021 5:22:33 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 16, 2021 5:27:33 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 16, 2021 5:32:33 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 16, 2021 5:37:33 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 16, 2021 5:42:33 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 16, 2021 5:47:33 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 16, 2021 5:52:33 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 16, 2021 5:57:33 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 16, 2021 6:02:33 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 16, 2021 6:07:33 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 16, 2021 6:12:33 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 16, 2021 6:17:33 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 16, 2021 6:22:33 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 16, 2021 6:27:33 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 16, 2021 6:28:38 PM esa.mo.mal.transport.gen.util.GENMessagePoller run
+[19-04-2021 16:25:47] INFO: Client closing connection: maltcp://127.0.0.1:1025
+[19-04-2021 16:25:47] Apr 16, 2021 6:28:38 PM esa.mo.mal.transport.gen.sending.GENConcurrentMessageSender terminate
+[19-04-2021 16:25:47] INFO: Terminating all processing threads for sender for URI:maltcp://127.0.0.1:1025
+[19-04-2021 16:25:47] Apr 16, 2021 6:32:33 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 16, 2021 6:37:33 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 16, 2021 6:42:33 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 16, 2021 6:46:30 PM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 16:25:47] INFO: Initializing 'exp144' app in dir: /home/nmf/supervisor/../../exp144, using launcher command: [su, -, exp144, -c, cd /home/nmf/supervisor/../../exp144;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp144.sh]
+[19-04-2021 16:25:47] Apr 16, 2021 6:47:04 PM esa.mo.mal.transport.tcpip.TCPIPServerConnectionListener run
+[19-04-2021 16:25:47] INFO: Socket accepted at port 23,609
+[19-04-2021 16:25:47] Apr 16, 2021 6:47:09 PM esa.mo.common.impl.provider.DirectoryProviderServiceImpl publishProvider
+[19-04-2021 16:25:47] WARNING: There was already a provider with the same name in the Directory service. Removing the old one and adding the new one...
+[19-04-2021 16:25:47] Apr 16, 2021 6:47:33 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 16, 2021 6:52:33 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 16, 2021 6:57:33 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:47] Apr 16, 2021 7:02:33 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:47] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:48] Apr 16, 2021 7:07:33 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:48] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:48] Apr 16, 2021 7:12:33 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[19-04-2021 16:25:48] INFO: Cleaning unused parameters from aggregations
+[19-04-2021 16:25:48] Apr 16, 2021 7:58:20 PM esa.mo.mal.impl.state.OperationResponseHolder waitForResponseSignal
+[19-04-2021 16:25:48] WARNING: Interrupted waiting for handler lock 
+[19-04-2021 16:25:48] java.lang.InterruptedException
+[19-04-2021 16:25:48] 	at java.lang.Object.wait(Native Method)
+[19-04-2021 16:25:48] 	at java.lang.Object.wait(Unknown Source)
+[19-04-2021 16:25:48] 	at esa.mo.mal.impl.state.OperationResponseHolder.waitForResponseSignal(OperationResponseHolder.java:70)
+[19-04-2021 16:25:48] 	at esa.mo.mal.impl.InteractionConsumerMap.waitForResponse(InteractionConsumerMap.java:195)
+[19-04-2021 16:25:48] 	at esa.mo.mal.impl.MessageSend.initiateSynchronousInteraction(MessageSend.java:668)
+[19-04-2021 16:25:48] 	at esa.mo.mal.impl.MessageSend.synchronousInteraction(MessageSend.java:314)
+[19-04-2021 16:25:48] 	at esa.mo.mal.impl.consumer.MALConsumerImpl.request(MALConsumerImpl.java:200)
+[19-04-2021 16:25:48] 	at esa.opssat.nanomind.mc.aggregation.consumer.AggregationStub.getValue(AggregationStub.java:85)
+[19-04-2021 16:25:48] 	at esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler.getNanomindAggregationValue(NanomindAggregationsHandler.java:150)
+[19-04-2021 16:25:48] 	at esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler.getNewValue(NanomindAggregationsHandler.java:355)
+[19-04-2021 16:25:48] 	at esa.mo.nanomind.impl.parameters_provisioning.NanomindParameterValuesProvider.getNewValue(NanomindParameterValuesProvider.java:222)
+[19-04-2021 16:25:48] 	at esa.mo.nanomind.impl.parameters_provisioning.NanomindParameterValuesProvider.getValue(NanomindParameterValuesProvider.java:236)
+[19-04-2021 16:25:48] 	at esa.mo.nmf.nanosatmosupervisor.parameter.OBSWParameterManager.getValue(OBSWParameterManager.java:158)
+[19-04-2021 16:25:48] 	at esa.mo.nmf.nanosatmosupervisor.parameter.OBSWParameterManager.getValue(OBSWParameterManager.java:140)
+[19-04-2021 16:25:48] 	at esa.mo.nmf.nanosatmosupervisor.MCSupervisorBasicAdapter.onGetValue(MCSupervisorBasicAdapter.java:126)
+[19-04-2021 16:25:48] 	at esa.mo.mc.impl.provider.ParameterManager.getRawValue(ParameterManager.java:786)
+[19-04-2021 16:25:48] 	at esa.mo.mc.impl.provider.ParameterManager.getParameterValue(ParameterManager.java:338)
+[19-04-2021 16:25:48] 	at esa.mo.mc.impl.provider.ParameterManager.getParameterValue(ParameterManager.java:300)
+[19-04-2021 16:25:48] 	at esa.mo.mc.impl.provider.ParameterProviderServiceImpl.publishPeriodicParameterUpdate(ParameterProviderServiceImpl.java:1103)
+[19-04-2021 16:25:48] 	at esa.mo.mc.impl.provider.ParameterProviderServiceImpl.access$000(ParameterProviderServiceImpl.java:99)
+[19-04-2021 16:25:48] 	at esa.mo.mc.impl.provider.ParameterProviderServiceImpl$PeriodicReportingManager$1.run(ParameterProviderServiceImpl.java:855)
+[19-04-2021 16:25:48] 	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+[19-04-2021 16:25:48] 	at java.util.concurrent.FutureTask.runAndReset(Unknown Source)
+[19-04-2021 16:25:48] 	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(Unknown Source)
+[19-04-2021 16:25:48] 	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(Unknown Source)
+[19-04-2021 16:25:48] 	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+[19-04-2021 16:25:48] 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+[19-04-2021 16:25:48] 	at java.lang.Thread.run(Unknown Source)
+[19-04-2021 16:25:48] 
+[19-04-2021 16:25:48] Apr 16, 2021 7:58:21 PM esa.mo.mal.transport.gen.util.GENMessagePoller run
+[19-04-2021 16:25:48] INFO: Client closing connection: maltcp://127.0.0.1:1025
+[19-04-2021 16:25:48] Apr 16, 2021 7:58:21 PM esa.mo.mal.transport.gen.sending.GENConcurrentMessageSender terminate
+[19-04-2021 16:25:48] INFO: Terminating all processing threads for sender for URI:maltcp://127.0.0.1:1025
+[19-04-2021 16:25:48] Apr 16, 2021 7:59:55 PM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 16:25:48] INFO: Initializing 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp510.sh]
+[19-04-2021 16:25:48] Apr 17, 2021 1:59:55 AM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 16:25:48] INFO: Initializing 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp510.sh]
+[19-04-2021 16:25:48] Apr 17, 2021 3:53:55 AM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 16:25:48] INFO: Initializing 'exp166' app in dir: /home/nmf/supervisor/../../exp166, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp166;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp166.sh]
+[19-04-2021 16:25:48] Apr 17, 2021 6:59:54 AM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 16:25:48] INFO: Initializing 'exp1000' app in dir: /home/nmf/supervisor/../../exp1000, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp1000;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp1000.sh]
+[19-04-2021 16:25:48] Apr 17, 2021 7:59:54 AM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 16:25:48] INFO: Initializing 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp510.sh]
+[19-04-2021 16:25:48] Apr 17, 2021 1:59:53 PM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 16:25:48] INFO: Initializing 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp510.sh]
+[19-04-2021 16:25:48] Apr 17, 2021 2:58:13 PM esa.mo.sm.impl.provider.AppsLauncherManager stopApps
+[19-04-2021 16:25:48] INFO: Stop script present for app exp1000. Invoking it.
+[19-04-2021 16:25:48] Apr 17, 2021 2:58:13 PM esa.mo.sm.impl.provider.AppsLauncherManager stopNativeApp
+[19-04-2021 16:25:48] INFO: Stopping 'exp1000' app in dir: /home/nmf/supervisor/../../exp1000, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp1000;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI= NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./stop_exp1000.sh]
+[19-04-2021 16:25:48] Apr 17, 2021 4:54:40 PM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 16:25:48] INFO: Initializing 'exp144' app in dir: /home/nmf/supervisor/../../exp144, using launcher command: [su, -, exp144, -c, cd /home/nmf/supervisor/../../exp144;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp144.sh]
+[19-04-2021 16:25:48] Apr 17, 2021 4:55:06 PM esa.mo.mal.transport.tcpip.TCPIPServerConnectionListener run
+[19-04-2021 16:25:48] INFO: Socket accepted at port 14,189
+[19-04-2021 16:25:48] Apr 17, 2021 4:55:12 PM esa.mo.common.impl.provider.DirectoryProviderServiceImpl publishProvider
+[19-04-2021 16:25:48] WARNING: There was already a provider with the same name in the Directory service. Removing the old one and adding the new one...
+[19-04-2021 16:25:48] Apr 17, 2021 7:59:59 PM esa.mo.sm.impl.provider.AppsLauncherManager startAppProcess
+[19-04-2021 16:25:48] INFO: Initializing 'exp510' app in dir: /home/nmf/supervisor/../../exp510, using launcher command: [su, -, root, -c, cd /home/nmf/supervisor/../../exp510;JAVA_OPTS=-Desa.mo.nmf.centralDirectoryURI=maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory NMF_LIB=/home/nmf/lib NMF_HOME=/home/nmf ./start_exp510.sh]
+[19-04-2021 16:25:48] ==> /home/exp144/log0.log.0 <==
+[19-04-2021 16:25:48] Apr 18, 2021 6:49:59 AM esa.mo.nmf.apps.OrbitAIConf loadProperties
+[19-04-2021 16:25:48] INFO: Loaded configuration properties from file orbit_ai.properties
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:00 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[19-04-2021 16:25:48] INFO: Loading properties file:/home/exp144/provider.properties
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:00 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[19-04-2021 16:25:48] INFO: Loading properties file:/home/exp144/settings.properties
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:00 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[19-04-2021 16:25:48] INFO: Loading properties file:/home/exp144/transport.properties
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:01 AM esa.mo.com.impl.archive.db.DatabaseBackend createEMFactory
+[19-04-2021 16:25:48] INFO: Creating Entity Manager Factory...
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:10 AM esa.mo.com.impl.archive.db.DatabaseBackend startBackendDatabase
+[19-04-2021 16:25:48] INFO: The EntityManagerFactory was created.
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:10 AM esa.mo.com.impl.archive.db.DatabaseBackend startDatabaseDriver
+[19-04-2021 16:25:48] INFO: Attempting to establish a connection to the database: jdbc:sqlite:comArchive.db
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:11 AM org.ccsds.moims.mo.mal.transport.MALTransportFactory newFactory
+[19-04-2021 16:25:48] INFO: New transport factory registered with classname: de.dlr.gsoc.mo.malspp.transport.SPPTransportFactory
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:11 AM org.ccsds.moims.mo.mal.transport.MALTransportFactory newFactory
+[19-04-2021 16:25:48] INFO: New transport factory registered with classname: esa.mo.mal.transport.tcpip.TCPIPTransportFactoryImpl
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:12 AM org.ccsds.moims.mo.mal.encoding.MALElementStreamFactory newFactory
+[19-04-2021 16:25:48] INFO: New encoding factory registered with classname: esa.mo.mal.encoder.binary.fixed.FixedBinaryStreamFactory
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:12 AM esa.mo.mal.transport.tcpip.TCPIPTransport createTransportAddress
+[19-04-2021 16:25:48] INFO: Transport address created is 127.0.0.1:1025
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:12 AM esa.mo.com.impl.provider.ArchiveProviderServiceImpl init
+[19-04-2021 16:25:48] INFO: Archive service READY
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:13 AM esa.mo.com.impl.provider.EventProviderServiceImpl init
+[19-04-2021 16:25:48] INFO: Event service: READY
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:13 AM esa.mo.com.impl.provider.ActivityTrackingProviderServiceImpl init
+[19-04-2021 16:25:48] INFO: Activity Tracking service READY
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:14 AM esa.mo.com.impl.provider.ArchiveSyncProviderServiceImpl init
+[19-04-2021 16:25:48] INFO: ArchiveSync service READY
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:14 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[19-04-2021 16:25:48] INFO: Attempting to connect to Central Directory service at: maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:14 AM esa.mo.mal.transport.gen.GENTransport manageCommunicationChannel
+[19-04-2021 16:25:48] INFO: Establishing connection to remote root URI: maltcp://127.0.0.1:1024
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:14 AM esa.mo.mal.transport.tcpip.TCPIPConnectionPoolManager get
+[19-04-2021 16:25:48] INFO: The socket doesn't exist! Creating a new one...
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:15 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[19-04-2021 16:25:48] INFO: The Central Directory service is operational!
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:18 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[19-04-2021 16:25:48] INFO: Successfully connected to Platform services on: nanosat-mo-supervisor
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:19 AM esa.mo.mc.impl.provider.ParameterProviderServiceImpl init
+[19-04-2021 16:25:48] INFO: Parameter service READY
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:19 AM esa.mo.mc.impl.provider.ActionProviderServiceImpl init
+[19-04-2021 16:25:48] INFO: Action service READY
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:19 AM esa.mo.mc.impl.provider.AlertProviderServiceImpl init
+[19-04-2021 16:25:48] INFO: Alert service READY
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:19 AM esa.mo.mc.impl.provider.AggregationProviderServiceImpl init
+[19-04-2021 16:25:48] INFO: Aggregation service READY
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:19 AM esa.mo.common.impl.provider.DirectoryProviderServiceImpl init
+[19-04-2021 16:25:48] INFO: Directory service READY
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:19 AM esa.mo.sm.impl.provider.HeartbeatProviderServiceImpl init
+[19-04-2021 16:25:48] INFO: Heartbeat service READY
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:19 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[19-04-2021 16:25:48] INFO: Populating local Directory service...
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:19 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[19-04-2021 16:25:48] INFO: Loading properties file:/home/exp144/providerURIs.properties
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:19 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[19-04-2021 16:25:48] INFO: Loading properties file:/home/exp144/providerURIsSecondary.properties
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:20 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[19-04-2021 16:25:48] INFO: Populating Central Directory service on URI: maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:20 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[19-04-2021 16:25:48] INFO: Populated! And the connection to the Directory service has been successfully closed!
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:21 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[19-04-2021 16:25:48] INFO: Loading previous configurations...
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:21 AM org.ccsds.moims.mo.mal.encoding.MALElementStreamFactory newFactory
+[19-04-2021 16:25:48] INFO: New encoding factory registered with classname: de.dlr.gsoc.mo.malspp.encoding.SPPElementStreamFactory
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:21 AM esa.mo.nmf.MonitorAndControlNMFAdapter registerParameters
+[19-04-2021 16:25:48] INFO: Registering Parameters:
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:21 AM esa.mo.nmf.MonitorAndControlNMFAdapter registerActions
+[19-04-2021 16:25:48] INFO: Registering Actions
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:21 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[19-04-2021 16:25:48] INFO: NanoSat MO Connector initialized in 21.377 seconds!
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:21 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[19-04-2021 16:25:48] INFO: URI: malspp:247/1168/11
+[19-04-2021 16:25:48] 
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:22 AM esa.mo.nmf.spacemoadapter.SpaceMOApdapterImpl getNMFSupervisorProviderSummary
+[19-04-2021 16:25:48] INFO: Found nanosat-mo-supervisor provider
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:22 AM esa.mo.common.impl.util.HelperCommon providerSummaryToConnectionConsumer
+[19-04-2021 16:25:48] WARNING: The service could not be found in the MAL factory. Maybe the Helper for that service was not initialized. The service key is: (area=7, service=1, version=1)
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:22 AM esa.mo.common.impl.util.HelperCommon providerSummaryToConnectionConsumer
+[19-04-2021 16:25:48] WARNING: The service could not be found in the MAL factory. Maybe the Helper for that service was not initialized. The service key is: (area=7, service=3, version=1)
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:22 AM esa.mo.common.impl.util.HelperCommon providerSummaryToConnectionConsumer
+[19-04-2021 16:25:48] WARNING: The service could not be found in the MAL factory. Maybe the Helper for that service was not initialized. The service key is: (area=7, service=5, version=1)
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:22 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[19-04-2021 16:25:48] INFO: Loading properties file:/home/exp144/consumer.properties
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:23 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[19-04-2021 16:25:48] INFO: Reloading properties file:/home/exp144/consumer.properties
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:23 AM esa.mo.nmf.apps.OrbitAIApp <init>
+[19-04-2021 16:25:48] INFO: OrbitAI initialized.
+[19-04-2021 16:25:48] Apr 18, 2021 6:50:23 AM esa.mo.nmf.apps.OrbitAIApp start
+[19-04-2021 16:25:48] INFO: Starting OrbitAI
+[19-04-2021 16:25:48] 
+[19-04-2021 16:25:48] ==> /home/exp144/log0.log.0.lck <==
+[19-04-2021 16:25:48] 
+[19-04-2021 16:25:48] ==> /home/exp144/log0.log.1 <==
+[19-04-2021 16:25:48] Apr 18, 2021 2:05:02 AM esa.mo.nmf.apps.OrbitAIConf loadProperties
+[19-04-2021 16:25:48] INFO: Loaded configuration properties from file orbit_ai.properties
+[19-04-2021 16:25:48] Apr 18, 2021 2:05:09 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[19-04-2021 16:25:48] INFO: Loading properties file:/home/exp144/provider.properties
+[19-04-2021 16:25:48] Apr 18, 2021 2:05:09 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[19-04-2021 16:25:48] INFO: Loading properties file:/home/exp144/settings.properties
+[19-04-2021 16:25:48] Apr 18, 2021 2:05:09 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[19-04-2021 16:25:48] INFO: Loading properties file:/home/exp144/transport.properties
+[19-04-2021 16:25:48] Apr 18, 2021 2:05:15 AM esa.mo.com.impl.archive.db.DatabaseBackend createEMFactory
+[19-04-2021 16:25:48] INFO: Creating Entity Manager Factory...
+[19-04-2021 16:25:48] Apr 18, 2021 2:05:44 AM esa.mo.com.impl.archive.db.DatabaseBackend startBackendDatabase
+[19-04-2021 16:25:48] INFO: The EntityManagerFactory was created.
+[19-04-2021 16:25:48] Apr 18, 2021 2:05:44 AM esa.mo.com.impl.archive.db.DatabaseBackend startDatabaseDriver
+[19-04-2021 16:25:48] INFO: Attempting to establish a connection to the database: jdbc:sqlite:comArchive.db
+[19-04-2021 16:25:48] Apr 18, 2021 2:05:47 AM org.ccsds.moims.mo.mal.transport.MALTransportFactory newFactory
+[19-04-2021 16:25:48] INFO: New transport factory registered with classname: de.dlr.gsoc.mo.malspp.transport.SPPTransportFactory
+[19-04-2021 16:25:48] Apr 18, 2021 2:05:50 AM org.ccsds.moims.mo.mal.transport.MALTransportFactory newFactory
+[19-04-2021 16:25:48] INFO: New transport factory registered with classname: esa.mo.mal.transport.tcpip.TCPIPTransportFactoryImpl
+[19-04-2021 16:25:48] Apr 18, 2021 2:05:52 AM org.ccsds.moims.mo.mal.encoding.MALElementStreamFactory newFactory
+[19-04-2021 16:25:48] INFO: New encoding factory registered with classname: esa.mo.mal.encoder.binary.fixed.FixedBinaryStreamFactory
+[19-04-2021 16:25:48] Apr 18, 2021 2:05:53 AM esa.mo.mal.transport.tcpip.TCPIPTransport createTransportAddress
+[19-04-2021 16:25:48] INFO: Transport address created is 127.0.0.1:1025
+[19-04-2021 16:25:48] Apr 18, 2021 2:05:53 AM esa.mo.com.impl.provider.ArchiveProviderServiceImpl init
+[19-04-2021 16:25:48] INFO: Archive service READY
+[19-04-2021 16:25:48] Apr 18, 2021 2:05:55 AM esa.mo.com.impl.provider.EventProviderServiceImpl init
+[19-04-2021 16:25:48] INFO: Event service: READY
+[19-04-2021 16:25:48] Apr 18, 2021 2:05:56 AM esa.mo.com.impl.provider.ActivityTrackingProviderServiceImpl init
+[19-04-2021 16:25:48] INFO: Activity Tracking service READY
+[19-04-2021 16:25:48] Apr 18, 2021 2:05:58 AM esa.mo.com.impl.provider.ArchiveSyncProviderServiceImpl init
+[19-04-2021 16:25:48] INFO: ArchiveSync service READY
+[19-04-2021 16:25:48] Apr 18, 2021 2:05:58 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[19-04-2021 16:25:48] INFO: Attempting to connect to Central Directory service at: maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory
+[19-04-2021 16:25:48] Apr 18, 2021 2:06:01 AM esa.mo.mal.transport.gen.GENTransport manageCommunicationChannel
+[19-04-2021 16:25:48] INFO: Establishing connection to remote root URI: maltcp://127.0.0.1:1024
+[19-04-2021 16:25:48] Apr 18, 2021 2:06:01 AM esa.mo.mal.transport.tcpip.TCPIPConnectionPoolManager get
+[19-04-2021 16:25:48] INFO: The socket doesn't exist! Creating a new one...
+[19-04-2021 16:25:48] Apr 18, 2021 2:06:05 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[19-04-2021 16:25:48] INFO: The Central Directory service is operational!
+[19-04-2021 16:25:48] Apr 18, 2021 2:06:15 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[19-04-2021 16:25:48] INFO: Successfully connected to Platform services on: nanosat-mo-supervisor
+[19-04-2021 16:25:48] Apr 18, 2021 2:06:19 AM esa.mo.mc.impl.provider.ParameterProviderServiceImpl init
+[19-04-2021 16:25:48] INFO: Parameter service READY
+[19-04-2021 16:25:48] Apr 18, 2021 2:06:20 AM esa.mo.mc.impl.provider.ActionProviderServiceImpl init
+[19-04-2021 16:25:48] INFO: Action service READY
+[19-04-2021 16:25:48] Apr 18, 2021 2:06:21 AM esa.mo.mc.impl.provider.AlertProviderServiceImpl init
+[19-04-2021 16:25:48] INFO: Alert service READY
+[19-04-2021 16:25:48] Apr 18, 2021 2:06:22 AM esa.mo.mc.impl.provider.AggregationProviderServiceImpl init
+[19-04-2021 16:25:48] INFO: Aggregation service READY
+[19-04-2021 16:25:48] Apr 18, 2021 2:06:22 AM esa.mo.common.impl.provider.DirectoryProviderServiceImpl init
+[19-04-2021 16:25:48] INFO: Directory service READY
+[19-04-2021 16:25:48] Apr 18, 2021 2:06:22 AM esa.mo.sm.impl.provider.HeartbeatProviderServiceImpl init
+[19-04-2021 16:25:48] INFO: Heartbeat service READY
+[19-04-2021 16:25:48] Apr 18, 2021 2:06:22 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[19-04-2021 16:25:48] INFO: Populating local Directory service...
+[19-04-2021 16:25:48] Apr 18, 2021 2:06:22 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[19-04-2021 16:25:48] INFO: Loading properties file:/home/exp144/providerURIs.properties
+[19-04-2021 16:25:48] Apr 18, 2021 2:06:22 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[19-04-2021 16:25:48] INFO: Loading properties file:/home/exp144/providerURIsSecondary.properties
+[19-04-2021 16:25:48] Apr 18, 2021 2:06:24 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[19-04-2021 16:25:48] INFO: Populating Central Directory service on URI: maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory
+[19-04-2021 16:25:48] Apr 18, 2021 2:06:25 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[19-04-2021 16:25:48] INFO: Populated! And the connection to the Directory service has been successfully closed!
+[19-04-2021 16:25:48] Apr 18, 2021 2:06:25 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[19-04-2021 16:25:48] INFO: Loading previous configurations...
+[19-04-2021 16:25:48] Apr 18, 2021 2:06:26 AM org.ccsds.moims.mo.mal.encoding.MALElementStreamFactory newFactory
+[19-04-2021 16:25:48] INFO: New encoding factory registered with classname: de.dlr.gsoc.mo.malspp.encoding.SPPElementStreamFactory
+[19-04-2021 16:25:48] Apr 18, 2021 2:06:26 AM esa.mo.nmf.MonitorAndControlNMFAdapter registerParameters
+[19-04-2021 16:25:48] INFO: Registering Parameters:
+[19-04-2021 16:25:48] Apr 18, 2021 2:06:26 AM esa.mo.nmf.MonitorAndControlNMFAdapter registerActions
+[19-04-2021 16:25:48] INFO: Registering Actions
+[19-04-2021 16:25:48] Apr 18, 2021 2:06:26 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[19-04-2021 16:25:48] INFO: NanoSat MO Connector initialized in 77.362 seconds!
+[19-04-2021 16:25:48] Apr 18, 2021 2:06:26 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[19-04-2021 16:25:48] INFO: URI: malspp:247/1168/11
+[19-04-2021 16:25:48] 
+[19-04-2021 16:25:48] Apr 18, 2021 2:06:27 AM esa.mo.nmf.spacemoadapter.SpaceMOApdapterImpl getNMFSupervisorProviderSummary
+[19-04-2021 16:25:48] INFO: Found nanosat-mo-supervisor provider
+[19-04-2021 16:25:48] Apr 18, 2021 2:06:28 AM esa.mo.common.impl.util.HelperCommon providerSummaryToConnectionConsumer
+[19-04-2021 16:25:48] WARNING: The service could not be found in the MAL factory. Maybe the Helper for that service was not initialized. The service key is: (area=7, service=1, version=1)
+[19-04-2021 16:25:48] Apr 18, 2021 2:06:28 AM esa.mo.common.impl.util.HelperCommon providerSummaryToConnectionConsumer
+[19-04-2021 16:25:48] WARNING: The service could not be found in the MAL factory. Maybe the Helper for that service was not initialized. The service key is: (area=7, service=3, version=1)
+[19-04-2021 16:25:48] Apr 18, 2021 2:06:28 AM esa.mo.common.impl.util.HelperCommon providerSummaryToConnectionConsumer
+[19-04-2021 16:25:48] WARNING: The service could not be found in the MAL factory. Maybe the Helper for that service was not initialized. The service key is: (area=7, service=5, version=1)
+[19-04-2021 16:25:48] Apr 18, 2021 2:06:28 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[19-04-2021 16:25:48] INFO: Loading properties file:/home/exp144/consumer.properties
+[19-04-2021 16:25:54] Apr 18, 2021 2:06:31 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[19-04-2021 16:25:54] INFO: Reloading properties file:/home/exp144/consumer.properties
+[19-04-2021 16:25:54] Apr 18, 2021 2:06:31 AM esa.mo.nmf.apps.OrbitAIApp <init>
+[19-04-2021 16:25:54] INFO: OrbitAI initialized.
+[19-04-2021 16:25:54] Apr 18, 2021 2:06:31 AM esa.mo.nmf.apps.OrbitAIApp start
+[19-04-2021 16:25:54] INFO: Starting OrbitAI
+[19-04-2021 16:25:54] Apr 18, 2021 2:06:38 AM esa.mo.nmf.apps.OrbitAIDataHandler toggleSupervisorParametersSubscription
+[19-04-2021 16:25:54] INFO: Started fetching parameters from supervisor
+[19-04-2021 16:25:54] Apr 18, 2021 2:06:39 AM esa.mo.nmf.apps.OrbitAILearningHandler startAndConnectToMochi
+[19-04-2021 16:25:54] INFO: MochiMochi process started
+[19-04-2021 16:25:54] Apr 18, 2021 2:06:42 AM esa.mo.nmf.apps.OrbitAILearningHandler startAndConnectToMochi
+[19-04-2021 16:25:54] INFO: Connected to MochiMochi
+[19-04-2021 16:25:54] Apr 18, 2021 2:06:42 AM esa.mo.nmf.apps.OrbitAILearningHandler$LearningRunnable run
+[19-04-2021 16:25:54] INFO: Learning thread started
+[19-04-2021 16:25:54] Apr 18, 2021 2:51:54 AM esa.mo.nmf.apps.OrbitAIDataHandler toggleSupervisorParametersSubscription
+[19-04-2021 16:25:54] INFO: Stopped fetching parameters from supervisor
+[19-04-2021 16:25:54] Apr 18, 2021 2:51:54 AM esa.mo.nmf.apps.OrbitAILearningHandler stopAndDisconnectFromMochi
+[19-04-2021 16:25:54] INFO: Disconnected from MochiMochi process
+[19-04-2021 16:25:54] Apr 18, 2021 2:51:55 AM esa.mo.nmf.apps.OrbitAILearningHandler exportLearningData
+[19-04-2021 16:25:54] INFO: Exported trained models to the toGround/ directory
+[19-04-2021 16:25:54] Apr 18, 2021 2:51:56 AM esa.mo.nmf.apps.OrbitAIMCAdapter onClose
+[19-04-2021 16:25:54] INFO: Closed application successfully: true
+[19-04-2021 16:25:54] # GLOBAL
+[19-04-2021 16:25:54] 
+[19-04-2021 16:25:54] # Experiment mode:
+[19-04-2021 16:25:54] #  - train will train new models from scratch
+[19-04-2021 16:25:54] #  - continue_train will continue to train existing models
+[19-04-2021 16:25:54] #  - inference will use the trained models for inference
+[19-04-2021 16:25:54] esa.mo.nmf.apps.OrbitAI.mode=continue_train
+[19-04-2021 16:25:54] 
+[19-04-2021 16:25:54] # Number of iterations the experiment should last
+[19-04-2021 16:25:54] esa.mo.nmf.apps.OrbitAI.iterations=540
+[19-04-2021 16:25:54] 
+[19-04-2021 16:25:54] # Time interval between 2 iterations in seconds
+[19-04-2021 16:25:54] esa.mo.nmf.apps.OrbitAI.interval=5
+[19-04-2021 16:25:54] 
+[19-04-2021 16:25:54] # OBSW parameters for which the publishing will be enabled in NMF supervisor
+[19-04-2021 16:25:54] esa.mo.nmf.apps.OrbitAI.params_to_enable=CADC0884,CADC0885,CADC0886,CADC0887,CADC0888,CADC0889,CADC0890,CADC0891,CADC0892,CADC0893,CADC0894,CADC0895,CADC0900,CADC0901,CADC0902,CADC1002,CADC1003,CADC1004,CADC1005
+[19-04-2021 16:25:54] 
+[19-04-2021 16:25:54] # Whether or not we check the photo diodes values
+[19-04-2021 16:25:54] esa.mo.nmf.apps.OrbitAI.check_pd_values=true
+[19-04-2021 16:25:54] 
+[19-04-2021 16:25:54] # Whether or not we check the validity flags of the photo diodes
+[19-04-2021 16:25:54] esa.mo.nmf.apps.OrbitAI.check_validity_flags=false
+[19-04-2021 16:25:54] 
+[19-04-2021 16:25:54] # MOCHI
+[19-04-2021 16:25:54] 
+[19-04-2021 16:25:54] # Port at which the Mochi server will be listening
+[19-04-2021 16:25:54] esa.mo.nmf.apps.OrbitAI.mochi.port=9999Filesystem                Size      Used Available Use% Mounted on
+[19-04-2021 16:25:54] /dev/root                 3.8G      2.6G      1.0G  72% /
+[19-04-2021 16:25:54] devtmpfs                207.4M         0    207.4M   0% /dev
+[19-04-2021 16:25:54] tmpfs                   215.9M         0    215.9M   0% /dev/shm
+[19-04-2021 16:25:54] tmpfs                   215.9M    336.0K    215.6M   0% /run
+[19-04-2021 16:25:54] tmpfs                   215.9M         0    215.9M   0% /sys/fs/cgroup
+[19-04-2021 16:25:54] tmpfs                   215.9M      1.6M    214.3M   1% /tmp
+[19-04-2021 16:25:54] tmpfs                   215.9M         0    215.9M   0% /var/volatile
+[19-04-2021 16:25:54] tmpfs                    43.2M         0     43.2M   0% /run/user/1042
+[19-04-2021 16:25:54] tmpfs                    43.2M         0     43.2M   0% /run/user/0
+[19-04-2021 16:25:54] DATA: STOP
+[19-04-2021 16:25:57] COMMAND  Uplink to SEPP: du -sh /home/*; du -sh /home/root/*; tar -czvf /home/exp144/exp144_results_20210419_1.tar.gz /home/exp144/toGround; tar -czvf /home/exp144/exp144_results_20210419_old.tar.gz /home/exp144/old_toGround; ls -ltr /home/exp144 
+[19-04-2021 16:26:06] DATA: START
+[19-04-2021 16:26:06] 8.0K	/home/esoc-apps
+[19-04-2021 16:26:06] 4.0K	/home/exp-1024
+[19-04-2021 16:26:06] 508.6M	/home/exp1000
+[19-04-2021 16:26:06] 32.0K	/home/exp1001
+[19-04-2021 16:26:06] 27.7M	/home/exp114
+[19-04-2021 16:26:06] 11.5M	/home/exp119
+[19-04-2021 16:26:06] 108.0K	/home/exp121
+[19-04-2021 16:26:06] 93.7M	/home/exp122
+[19-04-2021 16:26:06] 12.1M	/home/exp144
+[19-04-2021 16:26:06] 21.3M	/home/exp150
+[19-04-2021 16:26:06] 340.0K	/home/exp166
+[19-04-2021 16:26:06] 28.0K	/home/exp501
+[19-04-2021 16:26:06] 32.0K	/home/exp502
+[19-04-2021 16:26:06] 18.3M	/home/exp503
+[19-04-2021 16:26:06] 36.0K	/home/exp504
+[19-04-2021 16:26:06] 32.0K	/home/exp505
+[19-04-2021 16:26:06] 32.0K	/home/exp507
+[19-04-2021 16:26:06] 70.9M	/home/exp509
+[19-04-2021 16:26:06] 329.4M	/home/exp510
+[19-04-2021 16:26:06] 40.0K	/home/exp511
+[19-04-2021 16:26:06] 15.6M	/home/exp5122
+[19-04-2021 16:26:06] 3.4M	/home/exp_shared_lib
+[19-04-2021 16:26:06] 69.2M	/home/nmf
+[19-04-2021 16:26:06] 32.6M	/home/payloads-test
+[19-04-2021 16:26:06] 806.2M	/home/root
+[19-04-2021 16:26:06] 104.0K	/home/supervisor
+[19-04-2021 16:26:06] 0	/home/root/À@8a@8
+[19-04-2021 16:26:06] 8.0K	/home/root/20190429_iadcs_temperature.log
+[19-04-2021 16:26:06] 16.0K	/home/root/20190617_iadcs_temperature.log
+[19-04-2021 16:26:06] 7.7M	/home/root/SVF-Console
+[19-04-2021 16:26:06] 4.0K	/home/root/archive
+[19-04-2021 16:26:06] 21.1M	/home/root/backup
+[19-04-2021 16:26:06] 4.7M	/home/root/dual_core
+[19-04-2021 16:26:06] 249.0M	/home/root/esoc-apps
+[19-04-2021 16:26:06] 14.3M	/home/root/experiments
+[19-04-2021 16:26:06] 792.0K	/home/root/firmware_0v4.rbf.gz
+[19-04-2021 16:26:06] 6.5M	/home/root/fms_1.0_sepp.ipk
+[19-04-2021 16:26:06] 8.0M	/home/root/fpga_ddr
+[19-04-2021 16:26:06] 13.4M	/home/root/fpga_image
+[19-04-2021 16:26:06] 12.0K	/home/root/housekeeping
+[19-04-2021 16:26:06] 432.0K	/home/root/iadcs_read_sensor_tm
+[19-04-2021 16:26:06] 4.0K	/home/root/iadcs_temp.sh
+[19-04-2021 16:26:06] 34.9M	/home/root/iadcs_test
+[19-04-2021 16:26:06] 6.5M	/home/root/iadcs_test.tar.gz
+[19-04-2021 16:26:06] 2.5M	/home/root/iadcs_test_cmds.tar.gz
+[19-04-2021 16:26:06] 124.0K	/home/root/mtd-utils-ubifs_2.0.0-r0.2_armv7at2hf-neon.ipk
+[19-04-2021 16:26:06] 38.4M	/home/root/opkg_diff
+[19-04-2021 16:26:06] 184.5M	/home/root/opkg_pkg_repo
+[19-04-2021 16:26:06] 0	/home/root/ops-sat-image-sepp.tar.gz
+[19-04-2021 16:26:06] 88.0K	/home/root/optrx
+[19-04-2021 16:26:06] 144.0K	/home/root/optrx_read
+[19-04-2021 16:26:06] 18.3M	/home/root/packages.zip
+[19-04-2021 16:26:06] 101.2M	/home/root/png_store
+[19-04-2021 16:26:06] 256.0K	/home/root/preloader-mkpimage.bin
+[19-04-2021 16:26:06] 12.0K	/home/root/scripts
+[19-04-2021 16:26:06] 3.8M	/home/root/sdr
+[19-04-2021 16:26:06] 13.1M	/home/root/sdr2
+[19-04-2021 16:26:06] 1.4M	/home/root/sdr_read_reg
+[19-04-2021 16:26:06] 464.0K	/home/root/sdr_test
+[19-04-2021 16:26:06] 4.0K	/home/root/sepp1_eeprom.bin
+[19-04-2021 16:26:06] 6.7M	/home/root/sepp_5csx.rbf
+[19-04-2021 16:26:06] 3.0M	/home/root/sepp_sdr_openfield.tar.gz
+[19-04-2021 16:26:06] 17.8M	/home/root/sepp_sw
+[19-04-2021 16:26:06] 4.0K	/home/root/shaker_test.sh
+[19-04-2021 16:26:06] 4.0K	/home/root/shaker_test_log_example.txt
+[19-04-2021 16:26:06] 32.0K	/home/root/spiget
+[19-04-2021 16:26:06] 36.0K	/home/root/spitransfer
+[19-04-2021 16:26:06] 41.5M	/home/root/svt
+[19-04-2021 16:26:06] 4.0K	/home/root/thermal_cycling_test.sh
+[19-04-2021 16:26:06] 12.0K	/home/root/tinymembench_0.4.0+git0+2c78984970-r0.0_armv7ahf-neon.ipk
+[19-04-2021 16:26:06] 724.0K	/home/root/u-boot-20181025.dump
+[19-04-2021 16:26:06] 468.0K	/home/root/u-boot-sepp.img-qspi
+[19-04-2021 16:26:06] 728.0K	/home/root/u-boot-with-spl.sfp-sepp-2017.09-r0-emmc_20191111
+[19-04-2021 16:26:06] 724.0K	/home/root/u-boot-with-spl.sfp-sepp-2017.09-r0-qspi-2017.09-r0
+[19-04-2021 16:26:06] 720.0K	/home/root/u-boot-with-spl.sfp-sepp-emmc
+[19-04-2021 16:26:06] 724.0K	/home/root/u-boot-with-spl.sfp-sepp-emmc_20190725
+[19-04-2021 16:26:06] 728.0K	/home/root/u-boot-with-spl.sfp-sepp-emmc_diag_20190726
+[19-04-2021 16:26:06] 724.0K	/home/root/u-boot-with-spl.sfp-sepp-qspi
+[19-04-2021 16:26:06] 236.0K	/home/root/u-boot.img
+[19-04-2021 16:26:06] 32.0K	/home/root/zImage-socfpga_cyclone5_sepp.dtb
+[19-04-2021 16:26:06] tar: Removing leading `/' from member names
+[19-04-2021 16:26:06] tar: /home/exp144/toGround: Cannot stat: No such file or directory
+[19-04-2021 16:26:06] tar: Exiting with failure status due to previous errors
+[19-04-2021 16:26:06] tar: Removing leading `/' from member names
+[19-04-2021 16:26:06] /home/exp144/old_toGround/
+[19-04-2021 16:26:06] /home/exp144/old_toGround/training.csv
+[19-04-2021 16:26:06] DATA: STOP
