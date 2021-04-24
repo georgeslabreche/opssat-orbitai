@@ -83,7 +83,7 @@ index_2D = 1
 for(algo in data_keep_2D){
   lines(x=data_2D[data_2D$algorithm == algo,]$epochs,
         y=data_2D[data_2D$algorithm == algo,]$accuracy_balanced,
-        lwd=2, lty=lty_2D[index_2D], col=col_2D[index_2D])
+        lwd=3, lty=lty_2D[index_2D], col=col_2D[index_2D])
   
   index_2D = index_2D + 1
 }
@@ -99,7 +99,7 @@ mtext('(a) 2D', side=1, line=3.5, cex=1.3, font=2)
 legend("bottomright", 
        legend = c('SCW', 'AROW', 'PA-I', 'NHERD', 'RDA'),
        lty = c(5, 4, 2, 6, 3),
-       lwd = 1, seg.len = 3,
+       lwd = 2, seg.len = 3,
        col = color_palette[c(4, 3, 1, 5, 2)])
 
 # Empty plot canvas for balanced accuracy in 3D input space.
@@ -116,7 +116,7 @@ index_3D = 1
 for(algo in data_keep_3D){
   lines(x=data_3D[data_3D$algorithm == algo,]$epochs,
         y=data_3D[data_3D$algorithm == algo,]$accuracy_balanced,
-        lwd=2, lty=lty_3D[index_3D], col=color_palette[index_3D])
+        lwd=3, lty=lty_3D[index_3D], col=color_palette[index_3D])
   
   index_3D = index_3D + 1
 }

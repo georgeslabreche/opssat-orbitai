@@ -56,7 +56,7 @@ plot(x = elev_angles,
 )
 
 # X label.
-title(xlab='PD6', line=1.5, cex.lab=1.3)
+title(xlab='PD', line=1.5, cex.lab=1.3)
 
 # Plot title.
 mtext('(a) 1D', side=1, line=3.5, cex=1, font=2)
@@ -77,8 +77,8 @@ plot(x = elev_angles,
 )
 
 # Labels
-title(xlab='PD6', line=1.5, cex.lab=1.3)
-title(ylab='PD6^2', line=2, cex.lab=1.3)
+title(xlab='PD', line=1.5, cex.lab=1.3)
+title(ylab=parse(text='PD^2'), line=2, cex.lab=1.3)
 
 # Plot title.
 mtext('(b) 2D', side=1, line=3.5, cex=1, font=2)
@@ -87,9 +87,9 @@ mtext('(b) 2D', side=1, line=3.5, cex=1, font=2)
 scatterplot3d(x = elev_angles,
               y = elev_angles_squared,
               z = elev_angles_cubed,
-              xlab = 'PD6',
-              ylab = 'PD6^2',
-              zlab = 'PD6^3',
+              xlab = 'PD',
+              ylab = parse(text='PD^2'),
+              zlab = parse(text='PD^3'),
               color = ifelse(elev_angles <= threshold, col_ON, col_OFF),
               pch = pch, lwd = lwd, cex.lab=0.9,
               grid = TRUE,
