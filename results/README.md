@@ -4,9 +4,6 @@ The confusion matrices and classification metrics obtained by the trained models
 ## Results
 Only 6 of the attempted 35 runs succeeded in starting the experiment. This is due to a series of ground segment problems as well as an issue with the NMF Supervisor. Despite these setbacks, at least one model received enough training inputs that resulted in 89% balanced accuracy and a F1 score of 91%. This model in particular was the one trained with the AROW alogirthm in 3D input space.<br><br>The [serialized models](https://github.com/georgeslabreche/opssat-orbitai/tree/main/Mochi/tools/models_space/2021-04-18) were downlinked and their [classificaiton metrics](https://github.com/georgeslabreche/opssat-orbitai/blob/main/Mochi/tools/metrics/space/inferences_2021-04-18.csv) calculated on the ground with an exhaustive sun elevation angle dataset ranging from 0 to 1.57 radians in steps of 0.01. Although this could have been evaluated on-board with the OrbitAI app's inference mode, it was not done to prioritize training the models given the limited amount successuful app runs.
 
-
-
-
 ### Balanced accuracies of predictions made by models trained in-flight
 |       | 1D    | 2D    | 3D    |
 |-------|-------|-------|-------|
@@ -15,7 +12,6 @@ Only 6 of the attempted 35 runs succeeded in starting the experiment. This is du
 | AROW  | 0.500 | 0.561 | **0.891** |
 | SCW   | 0.500 | 0.500 | 0.500 |
 | NHERD | 0.495 | 0.495 | 0.665 |
-
 
 ### Confusion matrix for AROW 3D
 |      | **OFF*** | **ON*** |
