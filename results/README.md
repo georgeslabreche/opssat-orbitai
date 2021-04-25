@@ -2,7 +2,10 @@
 The confusion matrices and classification metrics obtained by the trained models as well as a summary of each app runs. The PA, PA1, and PA2 algorithms were disabled due to serialization issues identified during experiment validation on the Engineering Model (EM) flatsat. This eliminated the risk of an unhandled error preventing the models from being loaded to resume training rather than being re-initialized at every run. 
 
 ## Results
-Only 6 of the attempted 35 runs succeeded in starting the experiment. This is due to a series of ground segment problems as well as an issue with the NMF Supervisor. Despite these setbacks, at least one model received enough training inputs that resulted in 89% balanced accuracy and a F1 score of 91%. This model was trained with the AROW alogirthm in 3D input space. <br>The serialized models were downlinked and the balanced accuracies of their predictions calculated on the ground with an exhaustive sun elevation angle dataset ranging from 0 to 1.57 radians in steps of 0.01. Although this could have been evaluated on-board with the OrbitAI app's inference mode, it was not done to prioritize training the models given the limited amount successuful app runs.
+Only 6 of the attempted 35 runs succeeded in starting the experiment. This is due to a series of ground segment problems as well as an issue with the NMF Supervisor. Despite these setbacks, at least one model received enough training inputs that resulted in 89% balanced accuracy and a F1 score of 91%. This model in particular was the one trained with the AROW alogirthm in 3D input space.<br><br>The [serialized models](https://github.com/georgeslabreche/opssat-orbitai/tree/main/Mochi/tools/models_space/2021-04-18) were downlinked and their [classificaiton metrics](https://github.com/georgeslabreche/opssat-orbitai/blob/main/Mochi/tools/metrics/space/inferences_2021-04-18.csv) calculated on the ground with an exhaustive sun elevation angle dataset ranging from 0 to 1.57 radians in steps of 0.01. Although this could have been evaluated on-board with the OrbitAI app's inference mode, it was not done to prioritize training the models given the limited amount successuful app runs.
+
+
+
 
 ### Balanced accuracies of predictions made by models trained in-flight
 |       | 1D    | 2D    | 3D    |
@@ -59,7 +62,7 @@ The runs at the following start times failed to start: 19:45, 6:50, 8:25, 10:00,
 
 The app failed to start for all scheduled runs. Suspected issues with NMF Supervisor but not investigated.
 
-### Runs #32 to #35:
+### Runs #32 to #35
 **April 20**: 19:00, 20:35, 22:10, and 23:45.
 
 The app failed to start for all scheduled runs. Suspected issues with NMF Supervisor but not investigated.
