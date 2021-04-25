@@ -1,0 +1,2 @@
+# Notes
+The csv files in the `data` folder are downlinked from the spacecraft and their first column header are missing. This results in all headers shifted to the left by one column. This is due to [Issue #10](https://github.com/georgeslabreche/opssat-orbitai/issues/10).

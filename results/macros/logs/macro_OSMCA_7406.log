@@ -1,0 +1,1035 @@
+[21-04-2021 17:28:16] COMMAND  Uplink to SEPP: sed -i 's/.*debug.*/debug = 0/' /home/exp510/config.ini; cat /home/exp510/config.ini; echo 1 > /sys/devices/system/cpu/cpu1/online; echo 'enabled second CPU'; cat /proc/cpuinfo; devmem 0xff200004
+[21-04-2021 17:28:23] DATA: START
+[21-04-2021 17:28:23] DATA: STOP
+[21-04-2021 17:28:25] COMMAND  Uplink to SEPP: uptime; ip -s -s link show spw0; systemctl restart fms_spacewire; echo "restarting FMS spacewire!"
+[21-04-2021 17:28:33] DATA: START
+[21-04-2021 17:28:33]  17:28:15 up 3 days, 20:33,  load average: 0.00, 0.00, 0.00
+[21-04-2021 17:28:33] Device "spw0" does not exist.
+[21-04-2021 17:28:33] restarting FMS spacewire!
+[21-04-2021 17:28:33] DATA: STOP
+[21-04-2021 17:28:35] COMMAND  Uplink to SEPP: ip -s -s link show spw0; ip link set dev spw0 down; ip -s -s link show spw0; sleep 3; ip link set dev spw0 up; ip -s -s link show spw0; sleep 1; devmem 0xff206208 32 0x0d; devmem 0xff206200 32 0x420c
+[21-04-2021 17:28:46] DATA: START
+[21-04-2021 17:28:46] Device "spw0" does not exist.
+[21-04-2021 17:28:46] Cannot find device "spw0"
+[21-04-2021 17:28:46] Device "spw0" does not exist.
+[21-04-2021 17:28:46] Cannot find device "spw0"
+[21-04-2021 17:28:46] Device "spw0" does not exist.
+[21-04-2021 17:28:46] DATA: STOP
+[21-04-2021 17:28:48] COMMAND  Uplink to SEPP: ls -al /home/exp122/toGround; ls -al /home/exp122/toGroundLP; mkdir /home/exp122/exp122_v97_toGround; df -h
+[21-04-2021 17:28:54] DATA: START
+[21-04-2021 17:28:54] total 8
+[21-04-2021 17:28:54] drwxrwx---    2 exp122   exp122        4096 Apr 20 17:43 .
+[21-04-2021 17:28:54] drwxrwx---    7 exp122   exp122        4096 Apr 16 04:08 ..
+[21-04-2021 17:28:54] total 8
+[21-04-2021 17:28:54] drwxrwx---    2 exp122   exp122        4096 Apr 20 17:43 .
+[21-04-2021 17:28:54] drwxrwx---    7 exp122   exp122        4096 Apr 16 04:08 ..
+[21-04-2021 17:28:54] Filesystem                Size      Used Available Use% Mounted on
+[21-04-2021 17:28:54] /dev/root                 3.8G      2.2G      1.4G  62% /
+[21-04-2021 17:28:54] devtmpfs                207.4M         0    207.4M   0% /dev
+[21-04-2021 17:28:54] tmpfs                   215.9M         0    215.9M   0% /dev/shm
+[21-04-2021 17:28:54] tmpfs                   215.9M    296.0K    215.6M   0% /run
+[21-04-2021 17:28:54] tmpfs                   215.9M         0    215.9M   0% /sys/fs/cgroup
+[21-04-2021 17:28:54] tmpfs                   215.9M    812.0K    215.1M   0% /tmp
+[21-04-2021 17:28:54] tmpfs                   215.9M         0    215.9M   0% /var/volatile
+[21-04-2021 17:28:54] DATA: STOP
+[21-04-2021 17:28:56] COMMAND  Uplink to SEPP: mv /home/exp122/toGround/*718129* /home/exp122/exp122_v97_toGround; mv /home/exp122/toGroundLP/*718129* /home/exp122/exp122_v97_toGround
+[21-04-2021 17:29:03] DATA: START
+[21-04-2021 17:29:03] mv: can't rename '/home/exp122/toGround/*718129*': No such file or directory
+[21-04-2021 17:29:03] mv: can't rename '/home/exp122/toGroundLP/*718129*': No such file or directory
+[21-04-2021 17:29:03] DATA: STOP
+[21-04-2021 17:29:05] COMMAND  Uplink to SEPP: ls -al /home/exp122/exp122_v97_toGround; tar czf /home/exp122/exp122_v97_toGround_21042021.tar.gz -C /home/exp122 exp122_v97_toGround
+[21-04-2021 17:29:12] DATA: START
+[21-04-2021 17:29:12] total 8
+[21-04-2021 17:29:12] drwxr-xr-x    2 root     root          4096 Apr 21 17:28 .
+[21-04-2021 17:29:12] drwxrwx---    8 exp122   exp122        4096 Apr 21 17:28 ..
+[21-04-2021 17:29:12] DATA: STOP
+[21-04-2021 17:29:14] COMMAND  Uplink to SEPP: mv /home/exp122/exp122_v97_toGround_21042021.tar.gz /home/root/esoc-apps/fms/filestore/toGround/
+[21-04-2021 17:29:20] DATA: START
+[21-04-2021 17:29:20] DATA: STOP
+[21-04-2021 17:29:22] COMMAND  Uplink to SEPP: ls -ltR /home/exp144/toGround/ && tail -n 2 /home/exp144/toGround/learning/mochi-*/logs/training.csv && tail -n 2 /home/exp144/toGround/data/data_*.csv; ls -ltr /home/root/esoc-apps/fms/filestore/toGround/; df -h
+[21-04-2021 17:29:24] DATA: START
+[21-04-2021 17:29:24] ls: /home/exp144/toGround/: No such file or directory
+[21-04-2021 17:29:24] total 49828
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root           497 Sep  4  2018 opssat_smartcam_logs_exp1000_20180904_235852.tar.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root        536737 Sep  5  2018 sepp_packetstore_exp510_20210402_032706.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root        800801 Sep  5  2018 sepp_packetstore_exp510_20210414_024822.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root          7841 Sep  5  2018 opssat_smartcam_logs_exp1000_20180905_114043_previous.tar.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root           841 Sep  5  2018 opssat_smartcam_logs_exp1000_20180905_114043.tar.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root       2560551 Apr 13 01:19 sepp_packetstore_exp510_20210412_192630.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root         49274 Apr 13 08:05 opssat_smartcam_logs_exp1000_20210413_080500_previous.tar.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root        866069 Apr 13 20:40 opssat_smartcam_jpeg_exp1000_20210413_204005_previous.tar.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root       1315815 Apr 14 01:41 opssat_smartcam_jpeg_exp1000_20210413_204005.tar.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root           495 Apr 14 19:12 opssat_smartcam_logs_exp1000_20210414_191245.tar.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root       2549774 Apr 15 01:55 sepp_packetstore_exp510_20210414_200002.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root         27530 Apr 15 01:58 sepp_packetstore_exp510_20210415_015504.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root       2622281 Apr 15 07:30 sepp_packetstore_exp510_20210415_020000.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root        369781 Apr 15 07:58 sepp_packetstore_exp510_20210415_073050.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root       2847072 Apr 15 11:35 sepp_packetstore_exp510_20210415_080000.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root       1575829 Apr 15 13:58 sepp_packetstore_exp510_20210415_113503.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root       2563858 Apr 15 19:49 sepp_packetstore_exp510_20210415_135959.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root         69887 Apr 15 19:58 sepp_packetstore_exp510_20210415_194907.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root        471383 Apr 15 21:35 sepp_packetstore_exp510_20210415_203500.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root       1725116 Apr 16 01:58 sepp_packetstore_exp510_20210415_215958.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root        235919 Apr 16 04:08 exp122_v97_toGroundLP.tar.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root       1513003 Apr 16 04:08 exp122_v97_toGround.tar.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root       2577327 Apr 16 07:50 sepp_packetstore_exp510_20210416_015958.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root         63015 Apr 16 07:58 sepp_packetstore_exp510_20210416_075006.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root       2565976 Apr 16 13:55 sepp_packetstore_exp510_20210416_075957.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root         27486 Apr 16 13:58 sepp_packetstore_exp510_20210416_135506.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root         71684 Apr 16 18:43 exp144_results_20210416.tar.gz_aa
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root       2577255 Apr 16 19:50 sepp_packetstore_exp510_20210416_135957.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root       2555143 Apr 17 01:45 sepp_packetstore_exp510_20210416_195050.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root        183532 Apr 17 03:53 exp144_results_20210417A.tar.gz_aa
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root        183532 Apr 17 05:28 exp144_results_20210417B.tar.gz_aa
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root       1251055 Apr 17 06:59 opssat_smartcam_jpeg_exp1000_20210417_065958_previous.tar.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root       2564656 Apr 17 07:36 sepp_packetstore_exp510_20210417_014524.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root       2564436 Apr 17 13:31 sepp_packetstore_exp510_20210417_073642.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root        183532 Apr 17 16:52 exp144_results_20210417C.tar.gz_aa
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root        183532 Apr 17 18:30 exp144_results_20210417D.tar.gz_aa
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root       2574714 Apr 17 19:21 sepp_packetstore_exp510_20210417_133116_1.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root        203116 Apr 17 22:00 opssat_smartcam_jpeg_exp1000_20210417_220001_previous.tar.gz
+[21-04-2021 17:29:24] -rw-r--r--    1 root     root        587931 Apr 18 06:59 opssat_smartcam_jpeg_exp1000_20210418_065958_1.tar.gz
+[21-04-2021 17:29:30] -rw-r--r--    1 root     root       2564527 Apr 18 07:51 sepp_packetstore_exp510_20210418_015959_1.gz
+[21-04-2021 17:29:30] -rw-r--r--    1 root     root         51638 Apr 18 07:58 sepp_packetstore_exp510_20210418_075142.gz
+[21-04-2021 17:29:30] -rw-r--r--    1 root     root        669496 Apr 18 07:58 sepp_packetstore_exp510_20210417_192112_1.gz
+[21-04-2021 17:29:30] -rw-r--r--    1 root     root       1746947 Apr 18 13:58 sepp_packetstore_exp510_20210418_075957_1.gz
+[21-04-2021 17:29:30] -rw-r--r--    1 root     root        212992 Apr 18 16:37 exp144_results_20210418B.tar.gz_aa
+[21-04-2021 17:29:30] -rw-r--r--    1 root     root            45 Apr 19 03:24 exp144_results_20210419A.tar.gz_aa
+[21-04-2021 17:29:30] -rw-r--r--    1 root     root            45 Apr 19 05:00 exp144_results_20210419B.tar.gz_aa
+[21-04-2021 17:29:30] -rw-r--r--    1 root     root        896819 Apr 19 06:00 opssat_smartcam_jpeg_exp1000_20210419_055959_previous.tar.gz
+[21-04-2021 17:29:30] -rw-r--r--    1 root     root            45 Apr 19 16:25 exp144_results_20210419_1.tar.gz
+[21-04-2021 17:29:30] -rw-r--r--    1 root     root       1125443 Apr 19 16:26 exp144_results_20210419_old.tar.gz
+[21-04-2021 17:29:30] -rw-r--r--    1 root     root            45 Apr 19 17:57 exp144_results_20210419_2.tar.gz_aa
+[21-04-2021 17:29:30] -rw-r--r--    1 root     root            45 Apr 21 15:56 exp144_results_20210421A.tar.gz
+[21-04-2021 17:29:30] -rw-r--r--    1 root     root           120 Apr 21 17:28 exp122_v97_toGround_21042021.tar.gz
+[21-04-2021 17:29:30] Filesystem                Size      Used Available Use% Mounted on
+[21-04-2021 17:29:30] /dev/root                 3.8G      2.2G      1.4G  62% /
+[21-04-2021 17:29:30] devtmpfs                207.4M         0    207.4M   0% /dev
+[21-04-2021 17:29:30] tmpfs                   215.9M         0    215.9M   0% /dev/shm
+[21-04-2021 17:29:30] tmpfs                   215.9M    296.0K    215.6M   0% /run
+[21-04-2021 17:29:30] tmpfs                   215.9M         0    215.9M   0% /sys/fs/cgroup
+[21-04-2021 17:29:30] tmpfs                   215.9M    812.0K    215.1M   0% /tmp
+[21-04-2021 17:29:30] tmpfs                   215.9M         0    215.9M   0% /var/volatile
+[21-04-2021 17:29:30] DATA: STOP
+[21-04-2021 17:29:32] COMMAND  Uplink to SEPP: tar -czvf /home/exp144/exp144_results_20210421B.tar.gz /home/exp144/toGround; ls -ltr /home/exp144/bin/Mochi/logs; du -sh /home/exp510/*; tail /home/nmf/supervisor/log0.log.* -n 200; tail /home/exp144/log0.log.* -n 200
+[21-04-2021 17:29:33] DATA: START
+[21-04-2021 17:29:33] tar: Removing leading `/' from member names
+[21-04-2021 17:29:33] tar: /home/exp144/toGround: Cannot stat: No such file or directory
+[21-04-2021 17:29:33] tar: Exiting with failure status due to previous errors
+[21-04-2021 17:29:33] total 8
+[21-04-2021 17:29:33] -rw-r--r--    1 exp144   exp144        5380 Apr 18 02:06 orbitai.log
+[21-04-2021 17:29:33] 6.2M	/home/exp510/compressed1.bin
+[21-04-2021 17:29:33] 4.0K	/home/exp510/config.ini
+[21-04-2021 17:29:33] 4.0K	/home/exp510/log
+[21-04-2021 17:29:33] 28.0K	/home/exp510/ppcompr
+[21-04-2021 17:29:33] 4.0K	/home/exp510/provider.properties
+[21-04-2021 17:29:33] 12.0K	/home/exp510/run_spp_packetstore.py
+[21-04-2021 17:29:33] 4.0K	/home/exp510/start_exp510.sh
+[21-04-2021 17:29:33] 4.0K	/home/exp510/stop_exp510.sh
+[21-04-2021 17:29:33] 4.0K	/home/exp510/stop_spp_packetstore.py
+[21-04-2021 17:29:33] 4.0K	/home/exp510/toGround
+[21-04-2021 17:29:33] ==> /home/nmf/supervisor/log0.log.0 <==
+[21-04-2021 17:29:33] Apr 21, 2021 9:13:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 9:18:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 9:23:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 9:28:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 9:33:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 9:38:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 9:43:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 9:48:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 9:53:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 9:58:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 10:03:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 10:08:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 10:13:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 10:18:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 10:23:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 10:28:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 10:33:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 10:38:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 10:43:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 10:48:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 10:53:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 10:58:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 11:03:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 11:08:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 11:13:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 11:18:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 11:23:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 11:28:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 11:33:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 11:38:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 11:43:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 11:48:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 11:53:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 11:58:42 AM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 12:03:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 12:08:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 12:13:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 12:18:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 12:23:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 12:28:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 12:33:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 12:38:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 12:43:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 12:48:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 12:53:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 12:58:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 1:03:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 1:08:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 1:13:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 1:18:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 1:23:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 1:28:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 1:33:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 1:38:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 1:43:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 1:48:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 1:53:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 1:58:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 2:03:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 2:08:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 2:13:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 2:18:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 2:23:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 2:28:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 2:33:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 2:38:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 2:43:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 2:48:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 2:53:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 2:58:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 3:03:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 3:08:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 3:13:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 3:18:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 3:23:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 3:28:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 3:33:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 3:38:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 3:43:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 3:48:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 3:53:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 3:58:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 4:03:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 4:08:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 4:13:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 4:18:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 4:23:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 4:28:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 4:33:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 4:38:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 4:43:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 4:48:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 4:53:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 4:58:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 5:03:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 5:08:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 5:13:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 5:18:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 5:23:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] Apr 21, 2021 5:28:42 PM esa.mo.nanomind.impl.parameters_provisioning.NanomindAggregationsHandler cleanParametersFromAggregations
+[21-04-2021 17:29:33] INFO: Cleaning unused parameters from aggregations
+[21-04-2021 17:29:33] 
+[21-04-2021 17:29:33] ==> /home/nmf/supervisor/log0.log.0.lck <==
+[21-04-2021 17:29:33] 
+[21-04-2021 17:29:33] ==> /home/nmf/supervisor/log0.log.1 <==
+[21-04-2021 17:29:33] Apr 19, 2021 5:56:51 PM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[21-04-2021 17:29:33] INFO: Loading properties file:/home/nmf/supervisor/provider.properties
+[21-04-2021 17:29:33] Apr 19, 2021 5:56:52 PM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[21-04-2021 17:29:33] INFO: Loading properties file:/home/nmf/supervisor/settings.properties
+[21-04-2021 17:29:33] Apr 19, 2021 5:56:53 PM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[21-04-2021 17:29:33] INFO: Loading properties file:/home/nmf/supervisor/transport.properties
+[21-04-2021 17:29:33] Apr 19, 2021 5:56:55 PM esa.mo.com.impl.archive.db.DatabaseBackend createEMFactory
+[21-04-2021 17:29:33] INFO: Creating Entity Manager Factory...
+[21-04-2021 17:29:33] Apr 19, 2021 5:57:14 PM esa.mo.com.impl.archive.db.DatabaseBackend startBackendDatabase
+[21-04-2021 17:29:33] INFO: The EntityManagerFactory was created.
+[21-04-2021 17:29:33] Apr 19, 2021 5:57:14 PM esa.mo.com.impl.archive.db.DatabaseBackend startDatabaseDriver
+[21-04-2021 17:29:33] INFO: Attempting to establish a connection to the database: jdbc:sqlite:comArchive.db
+[21-04-2021 17:29:33] Apr 19, 2021 5:57:15 PM org.ccsds.moims.mo.mal.transport.MALTransportFactory newFactory
+[21-04-2021 17:29:33] INFO: New transport factory registered with classname: de.dlr.gsoc.mo.malspp.transport.SPPTransportFactory
+[21-04-2021 17:29:33] Apr 19, 2021 5:57:16 PM org.ccsds.moims.mo.mal.transport.MALTransportFactory newFactory
+[21-04-2021 17:29:33] INFO: New transport factory registered with classname: esa.mo.mal.transport.tcpip.TCPIPTransportFactoryImpl
+[21-04-2021 17:29:33] Apr 19, 2021 5:57:16 PM org.ccsds.moims.mo.mal.encoding.MALElementStreamFactory newFactory
+[21-04-2021 17:29:33] INFO: New encoding factory registered with classname: esa.mo.mal.encoder.binary.fixed.FixedBinaryStreamFactory
+[21-04-2021 17:29:33] Apr 19, 2021 5:57:20 PM esa.mo.mal.transport.tcpip.TCPIPTransport createTransportAddress
+[21-04-2021 17:29:33] INFO: Transport address created is 127.0.0.1:1024
+[21-04-2021 17:29:33] Apr 19, 2021 5:57:21 PM esa.mo.com.impl.provider.ArchiveProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: Archive service READY
+[21-04-2021 17:29:33] Apr 19, 2021 5:57:22 PM esa.mo.com.impl.provider.EventProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: Event service: READY
+[21-04-2021 17:29:33] Apr 19, 2021 5:57:22 PM esa.mo.com.impl.provider.ActivityTrackingProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: Activity Tracking service READY
+[21-04-2021 17:29:33] Apr 19, 2021 5:57:22 PM esa.mo.sm.impl.provider.HeartbeatProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: Heartbeat service READY
+[21-04-2021 17:29:33] Apr 19, 2021 5:57:23 PM esa.mo.common.impl.provider.DirectoryProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: Directory service READY
+[21-04-2021 17:29:33] Apr 19, 2021 5:57:24 PM esa.mo.sm.impl.provider.AppsLauncherProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: Apps Launcher service: READY
+[21-04-2021 17:29:33] Apr 19, 2021 5:57:25 PM esa.mo.sm.impl.provider.CommandExecutorProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: READY
+[21-04-2021 17:29:33] Apr 19, 2021 5:57:26 PM esa.mo.sm.impl.provider.PackageManagementProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: Package Management service READY
+[21-04-2021 17:29:33] Apr 19, 2021 5:57:27 PM esa.mo.com.impl.provider.ArchiveSyncProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: ArchiveSync service READY
+[21-04-2021 17:29:33] Apr 19, 2021 5:57:31 PM esa.mo.mc.impl.provider.ParameterProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: Parameter service READY
+[21-04-2021 17:29:33] Apr 19, 2021 5:57:32 PM esa.mo.mc.impl.provider.ActionProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: Action service READY
+[21-04-2021 17:29:33] Apr 19, 2021 5:57:32 PM esa.mo.mc.impl.provider.AlertProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: Alert service READY
+[21-04-2021 17:29:33] Apr 19, 2021 5:57:33 PM esa.mo.mc.impl.provider.AggregationProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: Aggregation service READY
+[21-04-2021 17:29:33] Apr 19, 2021 5:57:33 PM org.ccsds.moims.mo.mal.encoding.MALElementStreamFactory newFactory
+[21-04-2021 17:29:33] INFO: New encoding factory registered with classname: de.dlr.gsoc.mo.malspp.encoding.SPPElementStreamFactory
+[21-04-2021 17:29:33] Apr 19, 2021 5:57:37 PM esa.mo.platform.impl.provider.opssat.PowerControlOPSSATAdapter <init>
+[21-04-2021 17:29:33] INFO: Initialisation
+[21-04-2021 17:29:33] Apr 19, 2021 5:57:37 PM esa.mo.platform.impl.provider.gen.PowerControlProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: Power Control service READY
+[21-04-2021 17:29:33] Apr 19, 2021 5:57:37 PM esa.mo.platform.impl.provider.gen.GPSProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: GPS service READY
+[21-04-2021 17:29:33] Apr 19, 2021 5:57:38 PM esa.mo.platform.impl.provider.opssat.AutonomousADCSOPSSATAdapter <init>
+[21-04-2021 17:29:33] INFO: Initialisation
+[21-04-2021 17:29:33] ==> /home/exp144/log0.log.0 <==
+[21-04-2021 17:29:33] Apr 18, 2021 6:49:59 AM esa.mo.nmf.apps.OrbitAIConf loadProperties
+[21-04-2021 17:29:33] INFO: Loaded configuration properties from file orbit_ai.properties
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:00 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[21-04-2021 17:29:33] INFO: Loading properties file:/home/exp144/provider.properties
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:00 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[21-04-2021 17:29:33] INFO: Loading properties file:/home/exp144/settings.properties
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:00 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[21-04-2021 17:29:33] INFO: Loading properties file:/home/exp144/transport.properties
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:01 AM esa.mo.com.impl.archive.db.DatabaseBackend createEMFactory
+[21-04-2021 17:29:33] INFO: Creating Entity Manager Factory...
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:10 AM esa.mo.com.impl.archive.db.DatabaseBackend startBackendDatabase
+[21-04-2021 17:29:33] INFO: The EntityManagerFactory was created.
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:10 AM esa.mo.com.impl.archive.db.DatabaseBackend startDatabaseDriver
+[21-04-2021 17:29:33] INFO: Attempting to establish a connection to the database: jdbc:sqlite:comArchive.db
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:11 AM org.ccsds.moims.mo.mal.transport.MALTransportFactory newFactory
+[21-04-2021 17:29:33] INFO: New transport factory registered with classname: de.dlr.gsoc.mo.malspp.transport.SPPTransportFactory
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:11 AM org.ccsds.moims.mo.mal.transport.MALTransportFactory newFactory
+[21-04-2021 17:29:33] INFO: New transport factory registered with classname: esa.mo.mal.transport.tcpip.TCPIPTransportFactoryImpl
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:12 AM org.ccsds.moims.mo.mal.encoding.MALElementStreamFactory newFactory
+[21-04-2021 17:29:33] INFO: New encoding factory registered with classname: esa.mo.mal.encoder.binary.fixed.FixedBinaryStreamFactory
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:12 AM esa.mo.mal.transport.tcpip.TCPIPTransport createTransportAddress
+[21-04-2021 17:29:33] INFO: Transport address created is 127.0.0.1:1025
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:12 AM esa.mo.com.impl.provider.ArchiveProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: Archive service READY
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:13 AM esa.mo.com.impl.provider.EventProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: Event service: READY
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:13 AM esa.mo.com.impl.provider.ActivityTrackingProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: Activity Tracking service READY
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:14 AM esa.mo.com.impl.provider.ArchiveSyncProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: ArchiveSync service READY
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:14 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[21-04-2021 17:29:33] INFO: Attempting to connect to Central Directory service at: maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:14 AM esa.mo.mal.transport.gen.GENTransport manageCommunicationChannel
+[21-04-2021 17:29:33] INFO: Establishing connection to remote root URI: maltcp://127.0.0.1:1024
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:14 AM esa.mo.mal.transport.tcpip.TCPIPConnectionPoolManager get
+[21-04-2021 17:29:33] INFO: The socket doesn't exist! Creating a new one...
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:15 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[21-04-2021 17:29:33] INFO: The Central Directory service is operational!
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:18 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[21-04-2021 17:29:33] INFO: Successfully connected to Platform services on: nanosat-mo-supervisor
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:19 AM esa.mo.mc.impl.provider.ParameterProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: Parameter service READY
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:19 AM esa.mo.mc.impl.provider.ActionProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: Action service READY
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:19 AM esa.mo.mc.impl.provider.AlertProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: Alert service READY
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:19 AM esa.mo.mc.impl.provider.AggregationProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: Aggregation service READY
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:19 AM esa.mo.common.impl.provider.DirectoryProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: Directory service READY
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:19 AM esa.mo.sm.impl.provider.HeartbeatProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: Heartbeat service READY
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:19 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[21-04-2021 17:29:33] INFO: Populating local Directory service...
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:19 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[21-04-2021 17:29:33] INFO: Loading properties file:/home/exp144/providerURIs.properties
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:19 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[21-04-2021 17:29:33] INFO: Loading properties file:/home/exp144/providerURIsSecondary.properties
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:20 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[21-04-2021 17:29:33] INFO: Populating Central Directory service on URI: maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:20 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[21-04-2021 17:29:33] INFO: Populated! And the connection to the Directory service has been successfully closed!
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:21 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[21-04-2021 17:29:33] INFO: Loading previous configurations...
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:21 AM org.ccsds.moims.mo.mal.encoding.MALElementStreamFactory newFactory
+[21-04-2021 17:29:33] INFO: New encoding factory registered with classname: de.dlr.gsoc.mo.malspp.encoding.SPPElementStreamFactory
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:21 AM esa.mo.nmf.MonitorAndControlNMFAdapter registerParameters
+[21-04-2021 17:29:33] INFO: Registering Parameters:
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:21 AM esa.mo.nmf.MonitorAndControlNMFAdapter registerActions
+[21-04-2021 17:29:33] INFO: Registering Actions
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:21 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[21-04-2021 17:29:33] INFO: NanoSat MO Connector initialized in 21.377 seconds!
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:21 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[21-04-2021 17:29:33] INFO: URI: malspp:247/1168/11
+[21-04-2021 17:29:33] 
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:22 AM esa.mo.nmf.spacemoadapter.SpaceMOApdapterImpl getNMFSupervisorProviderSummary
+[21-04-2021 17:29:33] INFO: Found nanosat-mo-supervisor provider
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:22 AM esa.mo.common.impl.util.HelperCommon providerSummaryToConnectionConsumer
+[21-04-2021 17:29:33] WARNING: The service could not be found in the MAL factory. Maybe the Helper for that service was not initialized. The service key is: (area=7, service=1, version=1)
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:22 AM esa.mo.common.impl.util.HelperCommon providerSummaryToConnectionConsumer
+[21-04-2021 17:29:33] WARNING: The service could not be found in the MAL factory. Maybe the Helper for that service was not initialized. The service key is: (area=7, service=3, version=1)
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:22 AM esa.mo.common.impl.util.HelperCommon providerSummaryToConnectionConsumer
+[21-04-2021 17:29:33] WARNING: The service could not be found in the MAL factory. Maybe the Helper for that service was not initialized. The service key is: (area=7, service=5, version=1)
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:22 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[21-04-2021 17:29:33] INFO: Loading properties file:/home/exp144/consumer.properties
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:23 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[21-04-2021 17:29:33] INFO: Reloading properties file:/home/exp144/consumer.properties
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:23 AM esa.mo.nmf.apps.OrbitAIApp <init>
+[21-04-2021 17:29:33] INFO: OrbitAI initialized.
+[21-04-2021 17:29:33] Apr 18, 2021 6:50:23 AM esa.mo.nmf.apps.OrbitAIApp start
+[21-04-2021 17:29:33] INFO: Starting OrbitAI
+[21-04-2021 17:29:33] 
+[21-04-2021 17:29:33] ==> /home/exp144/log0.log.1 <==
+[21-04-2021 17:29:33] Apr 18, 2021 2:05:02 AM esa.mo.nmf.apps.OrbitAIConf loadProperties
+[21-04-2021 17:29:33] INFO: Loaded configuration properties from file orbit_ai.properties
+[21-04-2021 17:29:33] Apr 18, 2021 2:05:09 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[21-04-2021 17:29:33] INFO: Loading properties file:/home/exp144/provider.properties
+[21-04-2021 17:29:33] Apr 18, 2021 2:05:09 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[21-04-2021 17:29:33] INFO: Loading properties file:/home/exp144/settings.properties
+[21-04-2021 17:29:33] Apr 18, 2021 2:05:09 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[21-04-2021 17:29:33] INFO: Loading properties file:/home/exp144/transport.properties
+[21-04-2021 17:29:33] Apr 18, 2021 2:05:15 AM esa.mo.com.impl.archive.db.DatabaseBackend createEMFactory
+[21-04-2021 17:29:33] INFO: Creating Entity Manager Factory...
+[21-04-2021 17:29:33] Apr 18, 2021 2:05:44 AM esa.mo.com.impl.archive.db.DatabaseBackend startBackendDatabase
+[21-04-2021 17:29:33] INFO: The EntityManagerFactory was created.
+[21-04-2021 17:29:33] Apr 18, 2021 2:05:44 AM esa.mo.com.impl.archive.db.DatabaseBackend startDatabaseDriver
+[21-04-2021 17:29:33] INFO: Attempting to establish a connection to the database: jdbc:sqlite:comArchive.db
+[21-04-2021 17:29:33] Apr 18, 2021 2:05:47 AM org.ccsds.moims.mo.mal.transport.MALTransportFactory newFactory
+[21-04-2021 17:29:33] INFO: New transport factory registered with classname: de.dlr.gsoc.mo.malspp.transport.SPPTransportFactory
+[21-04-2021 17:29:33] Apr 18, 2021 2:05:50 AM org.ccsds.moims.mo.mal.transport.MALTransportFactory newFactory
+[21-04-2021 17:29:33] INFO: New transport factory registered with classname: esa.mo.mal.transport.tcpip.TCPIPTransportFactoryImpl
+[21-04-2021 17:29:33] Apr 18, 2021 2:05:52 AM org.ccsds.moims.mo.mal.encoding.MALElementStreamFactory newFactory
+[21-04-2021 17:29:33] INFO: New encoding factory registered with classname: esa.mo.mal.encoder.binary.fixed.FixedBinaryStreamFactory
+[21-04-2021 17:29:33] Apr 18, 2021 2:05:53 AM esa.mo.mal.transport.tcpip.TCPIPTransport createTransportAddress
+[21-04-2021 17:29:33] INFO: Transport address created is 127.0.0.1:1025
+[21-04-2021 17:29:33] Apr 18, 2021 2:05:53 AM esa.mo.com.impl.provider.ArchiveProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: Archive service READY
+[21-04-2021 17:29:33] Apr 18, 2021 2:05:55 AM esa.mo.com.impl.provider.EventProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: Event service: READY
+[21-04-2021 17:29:33] Apr 18, 2021 2:05:56 AM esa.mo.com.impl.provider.ActivityTrackingProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: Activity Tracking service READY
+[21-04-2021 17:29:33] Apr 18, 2021 2:05:58 AM esa.mo.com.impl.provider.ArchiveSyncProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: ArchiveSync service READY
+[21-04-2021 17:29:33] Apr 18, 2021 2:05:58 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[21-04-2021 17:29:33] INFO: Attempting to connect to Central Directory service at: maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory
+[21-04-2021 17:29:33] Apr 18, 2021 2:06:01 AM esa.mo.mal.transport.gen.GENTransport manageCommunicationChannel
+[21-04-2021 17:29:33] INFO: Establishing connection to remote root URI: maltcp://127.0.0.1:1024
+[21-04-2021 17:29:33] Apr 18, 2021 2:06:01 AM esa.mo.mal.transport.tcpip.TCPIPConnectionPoolManager get
+[21-04-2021 17:29:33] INFO: The socket doesn't exist! Creating a new one...
+[21-04-2021 17:29:33] Apr 18, 2021 2:06:05 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[21-04-2021 17:29:33] INFO: The Central Directory service is operational!
+[21-04-2021 17:29:33] Apr 18, 2021 2:06:15 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[21-04-2021 17:29:33] INFO: Successfully connected to Platform services on: nanosat-mo-supervisor
+[21-04-2021 17:29:33] Apr 18, 2021 2:06:19 AM esa.mo.mc.impl.provider.ParameterProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: Parameter service READY
+[21-04-2021 17:29:33] Apr 18, 2021 2:06:20 AM esa.mo.mc.impl.provider.ActionProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: Action service READY
+[21-04-2021 17:29:33] Apr 18, 2021 2:06:21 AM esa.mo.mc.impl.provider.AlertProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: Alert service READY
+[21-04-2021 17:29:33] Apr 18, 2021 2:06:22 AM esa.mo.mc.impl.provider.AggregationProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: Aggregation service READY
+[21-04-2021 17:29:33] Apr 18, 2021 2:06:22 AM esa.mo.common.impl.provider.DirectoryProviderServiceImpl init
+[21-04-2021 17:29:33] INFO: Directory service READY
+[21-04-2021 17:29:33] Apr 18, 2021 2:06:22 AM esa.mo.sm.impl.provider.HeartbeatProviderServiceImpl init
+[21-04-2021 17:29:39] INFO: Heartbeat service READY
+[21-04-2021 17:29:39] Apr 18, 2021 2:06:22 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[21-04-2021 17:29:39] INFO: Populating local Directory service...
+[21-04-2021 17:29:39] Apr 18, 2021 2:06:22 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[21-04-2021 17:29:39] INFO: Loading properties file:/home/exp144/providerURIs.properties
+[21-04-2021 17:29:39] Apr 18, 2021 2:06:22 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[21-04-2021 17:29:39] INFO: Loading properties file:/home/exp144/providerURIsSecondary.properties
+[21-04-2021 17:29:39] Apr 18, 2021 2:06:24 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[21-04-2021 17:29:39] INFO: Populating Central Directory service on URI: maltcp://127.0.0.1:1024/nanosat-mo-supervisor-Directory
+[21-04-2021 17:29:39] Apr 18, 2021 2:06:25 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[21-04-2021 17:29:39] INFO: Populated! And the connection to the Directory service has been successfully closed!
+[21-04-2021 17:29:39] Apr 18, 2021 2:06:25 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[21-04-2021 17:29:39] INFO: Loading previous configurations...
+[21-04-2021 17:29:39] Apr 18, 2021 2:06:26 AM org.ccsds.moims.mo.mal.encoding.MALElementStreamFactory newFactory
+[21-04-2021 17:29:39] INFO: New encoding factory registered with classname: de.dlr.gsoc.mo.malspp.encoding.SPPElementStreamFactory
+[21-04-2021 17:29:39] Apr 18, 2021 2:06:26 AM esa.mo.nmf.MonitorAndControlNMFAdapter registerParameters
+[21-04-2021 17:29:39] INFO: Registering Parameters:
+[21-04-2021 17:29:39] Apr 18, 2021 2:06:26 AM esa.mo.nmf.MonitorAndControlNMFAdapter registerActions
+[21-04-2021 17:29:39] INFO: Registering Actions
+[21-04-2021 17:29:39] Apr 18, 2021 2:06:26 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[21-04-2021 17:29:39] INFO: NanoSat MO Connector initialized in 77.362 seconds!
+[21-04-2021 17:29:39] Apr 18, 2021 2:06:26 AM esa.mo.nmf.nanosatmoconnector.NanoSatMOConnectorImpl init
+[21-04-2021 17:29:39] INFO: URI: malspp:247/1168/11
+[21-04-2021 17:29:39] 
+[21-04-2021 17:29:39] Apr 18, 2021 2:06:27 AM esa.mo.nmf.spacemoadapter.SpaceMOApdapterImpl getNMFSupervisorProviderSummary
+[21-04-2021 17:29:39] INFO: Found nanosat-mo-supervisor provider
+[21-04-2021 17:29:39] Apr 18, 2021 2:06:28 AM esa.mo.common.impl.util.HelperCommon providerSummaryToConnectionConsumer
+[21-04-2021 17:29:39] WARNING: The service could not be found in the MAL factory. Maybe the Helper for that service was not initialized. The service key is: (area=7, service=1, version=1)
+[21-04-2021 17:29:39] Apr 18, 2021 2:06:28 AM esa.mo.common.impl.util.HelperCommon providerSummaryToConnectionConsumer
+[21-04-2021 17:29:39] WARNING: The service could not be found in the MAL factory. Maybe the Helper for that service was not initialized. The service key is: (area=7, service=3, version=1)
+[21-04-2021 17:29:39] Apr 18, 2021 2:06:28 AM esa.mo.common.impl.util.HelperCommon providerSummaryToConnectionConsumer
+[21-04-2021 17:29:39] WARNING: The service could not be found in the MAL factory. Maybe the Helper for that service was not initialized. The service key is: (area=7, service=5, version=1)
+[21-04-2021 17:29:39] Apr 18, 2021 2:06:28 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[21-04-2021 17:29:39] INFO: Loading properties file:/home/exp144/consumer.properties
+[21-04-2021 17:29:39] Apr 18, 2021 2:06:31 AM esa.mo.helpertools.helpers.HelperMisc loadProperties
+[21-04-2021 17:29:39] INFO: Reloading properties file:/home/exp144/consumer.properties
+[21-04-2021 17:29:39] Apr 18, 2021 2:06:31 AM esa.mo.nmf.apps.OrbitAIApp <init>
+[21-04-2021 17:29:39] INFO: OrbitAI initialized.
+[21-04-2021 17:29:39] Apr 18, 2021 2:06:31 AM esa.mo.nmf.apps.OrbitAIApp start
+[21-04-2021 17:29:39] INFO: Starting OrbitAI
+[21-04-2021 17:29:39] Apr 18, 2021 2:06:38 AM esa.mo.nmf.apps.OrbitAIDataHandler toggleSupervisorParametersSubscription
+[21-04-2021 17:29:39] INFO: Started fetching parameters from supervisor
+[21-04-2021 17:29:39] Apr 18, 2021 2:06:39 AM esa.mo.nmf.apps.OrbitAILearningHandler startAndConnectToMochi
+[21-04-2021 17:29:39] INFO: MochiMochi process started
+[21-04-2021 17:29:39] Apr 18, 2021 2:06:42 AM esa.mo.nmf.apps.OrbitAILearningHandler startAndConnectToMochi
+[21-04-2021 17:29:39] INFO: Connected to MochiMochi
+[21-04-2021 17:29:39] Apr 18, 2021 2:06:42 AM esa.mo.nmf.apps.OrbitAILearningHandler$LearningRunnable run
+[21-04-2021 17:29:39] INFO: Learning thread started
+[21-04-2021 17:29:39] Apr 18, 2021 2:51:54 AM esa.mo.nmf.apps.OrbitAIDataHandler toggleSupervisorParametersSubscription
+[21-04-2021 17:29:39] INFO: Stopped fetching parameters from supervisor
+[21-04-2021 17:29:39] Apr 18, 2021 2:51:54 AM esa.mo.nmf.apps.OrbitAILearningHandler stopAndDisconnectFromMochi
+[21-04-2021 17:29:39] INFO: Disconnected from MochiMochi process
+[21-04-2021 17:29:39] Apr 18, 2021 2:51:55 AM esa.mo.nmf.apps.OrbitAILearningHandler exportLearningData
+[21-04-2021 17:29:39] INFO: Exported trained models to the toGround/ directory
+[21-04-2021 17:29:39] Apr 18, 2021 2:51:56 AM esa.mo.nmf.apps.OrbitAIMCAdapter onClose
+[21-04-2021 17:29:39] INFO: Closed application successfully: true
+[21-04-2021 17:29:39] DATA: STOP
+[21-04-2021 17:29:41] COMMAND  Uplink to SEPP: mv /home/exp144/exp144_results_20210421B.tar.gz /home/root/esoc-apps/fms/filestore/toGround/; df -h; du -sh /home/*; du -sh /home/root/*; du -sh /home/root/esoc-apps/fms/filestore/*; ps -ef | grep exp
+[21-04-2021 17:29:43] DATA: START
+[21-04-2021 17:29:43] Filesystem                Size      Used Available Use% Mounted on
+[21-04-2021 17:29:43] /dev/root                 3.8G      2.2G      1.4G  62% /
+[21-04-2021 17:29:43] devtmpfs                207.4M         0    207.4M   0% /dev
+[21-04-2021 17:29:43] tmpfs                   215.9M         0    215.9M   0% /dev/shm
+[21-04-2021 17:29:43] tmpfs                   215.9M    296.0K    215.6M   0% /run
+[21-04-2021 17:29:43] tmpfs                   215.9M         0    215.9M   0% /sys/fs/cgroup
+[21-04-2021 17:29:43] tmpfs                   215.9M    812.0K    215.1M   0% /tmp
+[21-04-2021 17:29:43] tmpfs                   215.9M         0    215.9M   0% /var/volatile
+[21-04-2021 17:29:43] 8.0K	/home/esoc-apps
+[21-04-2021 17:29:43] 4.0K	/home/exp-1024
+[21-04-2021 17:29:43] 508.6M	/home/exp1000
+[21-04-2021 17:29:43] 32.0K	/home/exp1001
+[21-04-2021 17:29:43] 27.7M	/home/exp114
+[21-04-2021 17:29:43] 11.5M	/home/exp119
+[21-04-2021 17:29:43] 108.0K	/home/exp121
+[21-04-2021 17:29:43] 91.7M	/home/exp122
+[21-04-2021 17:29:43] 12.1M	/home/exp144
+[21-04-2021 17:29:43] 21.3M	/home/exp150
+[21-04-2021 17:29:43] 340.0K	/home/exp166
+[21-04-2021 17:29:43] 28.0K	/home/exp501
+[21-04-2021 17:29:43] 32.0K	/home/exp502
+[21-04-2021 17:29:43] 18.3M	/home/exp503
+[21-04-2021 17:29:43] 36.0K	/home/exp504
+[21-04-2021 17:29:43] 32.0K	/home/exp505
+[21-04-2021 17:29:43] 32.0K	/home/exp507
+[21-04-2021 17:29:43] 70.9M	/home/exp509
+[21-04-2021 17:29:43] 6.3M	/home/exp510
+[21-04-2021 17:29:43] 40.0K	/home/exp511
+[21-04-2021 17:29:43] 15.6M	/home/exp5122
+[21-04-2021 17:29:43] 3.4M	/home/exp_shared_lib
+[21-04-2021 17:29:43] 33.8M	/home/nmf
+[21-04-2021 17:29:43] 32.6M	/home/payloads-test
+[21-04-2021 17:29:43] 802.8M	/home/root
+[21-04-2021 17:29:43] 104.0K	/home/supervisor
+[21-04-2021 17:29:43] 0	/home/root/¿@8a@8
+[21-04-2021 17:29:43] 8.0K	/home/root/20190429_iadcs_temperature.log
+[21-04-2021 17:29:43] 16.0K	/home/root/20190617_iadcs_temperature.log
+[21-04-2021 17:29:43] 7.7M	/home/root/SVF-Console
+[21-04-2021 17:29:43] 4.0K	/home/root/archive
+[21-04-2021 17:29:43] 21.1M	/home/root/backup
+[21-04-2021 17:29:43] 4.7M	/home/root/dual_core
+[21-04-2021 17:29:43] 250.1M	/home/root/esoc-apps
+[21-04-2021 17:29:43] 14.3M	/home/root/experiments
+[21-04-2021 17:29:43] 792.0K	/home/root/firmware_0v4.rbf.gz
+[21-04-2021 17:29:43] 6.5M	/home/root/fms_1.0_sepp.ipk
+[21-04-2021 17:29:43] 8.0M	/home/root/fpga_ddr
+[21-04-2021 17:29:43] 13.4M	/home/root/fpga_image
+[21-04-2021 17:29:43] 12.0K	/home/root/housekeeping
+[21-04-2021 17:29:43] 432.0K	/home/root/iadcs_read_sensor_tm
+[21-04-2021 17:29:43] 4.0K	/home/root/iadcs_temp.sh
+[21-04-2021 17:29:43] 34.9M	/home/root/iadcs_test
+[21-04-2021 17:29:43] 6.5M	/home/root/iadcs_test.tar.gz
+[21-04-2021 17:29:43] 2.5M	/home/root/iadcs_test_cmds.tar.gz
+[21-04-2021 17:29:43] 124.0K	/home/root/mtd-utils-ubifs_2.0.0-r0.2_armv7at2hf-neon.ipk
+[21-04-2021 17:29:43] 38.4M	/home/root/opkg_diff
+[21-04-2021 17:29:43] 184.5M	/home/root/opkg_pkg_repo
+[21-04-2021 17:29:43] 0	/home/root/ops-sat-image-sepp.tar.gz
+[21-04-2021 17:29:43] 88.0K	/home/root/optrx
+[21-04-2021 17:29:43] 144.0K	/home/root/optrx_read
+[21-04-2021 17:29:43] 18.3M	/home/root/packages.zip
+[21-04-2021 17:29:43] 96.7M	/home/root/png_store
+[21-04-2021 17:29:43] 256.0K	/home/root/preloader-mkpimage.bin
+[21-04-2021 17:29:43] 12.0K	/home/root/scripts
+[21-04-2021 17:29:43] 3.8M	/home/root/sdr
+[21-04-2021 17:29:43] 13.1M	/home/root/sdr2
+[21-04-2021 17:29:43] 1.4M	/home/root/sdr_read_reg
+[21-04-2021 17:29:43] 464.0K	/home/root/sdr_test
+[21-04-2021 17:29:43] 4.0K	/home/root/sepp1_eeprom.bin
+[21-04-2021 17:29:43] 6.7M	/home/root/sepp_5csx.rbf
+[21-04-2021 17:29:43] 3.0M	/home/root/sepp_sdr_openfield.tar.gz
+[21-04-2021 17:29:43] 17.8M	/home/root/sepp_sw
+[21-04-2021 17:29:43] 4.0K	/home/root/shaker_test.sh
+[21-04-2021 17:29:43] 4.0K	/home/root/shaker_test_log_example.txt
+[21-04-2021 17:29:43] 32.0K	/home/root/spiget
+[21-04-2021 17:29:43] 36.0K	/home/root/spitransfer
+[21-04-2021 17:29:43] 41.5M	/home/root/svt
+[21-04-2021 17:29:43] 4.0K	/home/root/thermal_cycling_test.sh
+[21-04-2021 17:29:43] 12.0K	/home/root/tinymembench_0.4.0+git0+2c78984970-r0.0_armv7ahf-neon.ipk
+[21-04-2021 17:29:43] 724.0K	/home/root/u-boot-20181025.dump
+[21-04-2021 17:29:43] 468.0K	/home/root/u-boot-sepp.img-qspi
+[21-04-2021 17:29:43] 728.0K	/home/root/u-boot-with-spl.sfp-sepp-2017.09-r0-emmc_20191111
+[21-04-2021 17:29:43] 724.0K	/home/root/u-boot-with-spl.sfp-sepp-2017.09-r0-qspi-2017.09-r0
+[21-04-2021 17:29:43] 720.0K	/home/root/u-boot-with-spl.sfp-sepp-emmc
+[21-04-2021 17:29:43] 724.0K	/home/root/u-boot-with-spl.sfp-sepp-emmc_20190725
+[21-04-2021 17:29:43] 728.0K	/home/root/u-boot-with-spl.sfp-sepp-emmc_diag_20190726
+[21-04-2021 17:29:43] 724.0K	/home/root/u-boot-with-spl.sfp-sepp-qspi
+[21-04-2021 17:29:43] 236.0K	/home/root/u-boot.img
+[21-04-2021 17:29:43] 32.0K	/home/root/zImage-socfpga_cyclone5_sepp.dtb
+[21-04-2021 17:29:43] 100.0K	/home/root/esoc-apps/fms/filestore/100kb.bin
+[21-04-2021 17:29:43] 1.7M	/home/root/esoc-apps/fms/filestore/20180904_205012_myPicture.jpg
+[21-04-2021 17:29:43] 4.8M	/home/root/esoc-apps/fms/filestore/20180904_205344_myPicture.gz
+[21-04-2021 17:29:43] 5.2M	/home/root/esoc-apps/fms/filestore/20180904_205439_myPicture.gz
+[21-04-2021 17:29:43] 8.0K	/home/root/esoc-apps/fms/filestore/20190418_logs.tgz
+[21-04-2021 17:29:43] 8.0K	/home/root/esoc-apps/fms/filestore/bsdiff_4.3+gitr0+44d3885842-r0.0_armv7at2hf-neon.ipk
+[21-04-2021 17:29:43] 20.0K	/home/root/esoc-apps/fms/filestore/candump_20190418_1112_payloads-test_poweroff_hdcam.log
+[21-04-2021 17:29:43] 12.0K	/home/root/esoc-apps/fms/filestore/candump_20190418_1116_payloads-test_poweroff_hdcam.log
+[21-04-2021 17:29:43] 192.0K	/home/root/esoc-apps/fms/filestore/collectd_5.7.2-r0.20_armv7at2hf-neon.ipk
+[21-04-2021 17:29:43] 140.0K	/home/root/esoc-apps/fms/filestore/exp-ipe_0.1-r0.3_armv7at2hf-neon.ipk
+[21-04-2021 17:29:43] 1.1M	/home/root/esoc-apps/fms/filestore/exp-spw_0.3-r2.11_armv7at2hf-neon.ipk
+[21-04-2021 17:29:43] 1.1M	/home/root/esoc-apps/fms/filestore/exp-spw_0.3-r2.12_armv7at2hf-neon.ipk
+[21-04-2021 17:29:43] 9.6M	/home/root/esoc-apps/fms/filestore/exp1000_2.0_sepp.ipk
+[21-04-2021 17:29:43] 4.0K	/home/root/esoc-apps/fms/filestore/exp1001_v1.0-2-g2ef707a_sepp.ipk
+[21-04-2021 17:29:43] 10.5M	/home/root/esoc-apps/fms/filestore/exp119_2.4_sepp.ipk
+[21-04-2021 17:29:43] 716.0K	/home/root/esoc-apps/fms/filestore/exp119_2.4_sepp.ipkaa
+[21-04-2021 17:29:43] 716.0K	/home/root/esoc-apps/fms/filestore/exp119_2.4_sepp.ipkab
+[21-04-2021 17:29:43] 716.0K	/home/root/esoc-apps/fms/filestore/exp119_2.4_sepp.ipkac
+[21-04-2021 17:29:43] 716.0K	/home/root/esoc-apps/fms/filestore/exp119_2.4_sepp.ipkad
+[21-04-2021 17:29:43] 716.0K	/home/root/esoc-apps/fms/filestore/exp119_2.4_sepp.ipkae
+[21-04-2021 17:29:43] 716.0K	/home/root/esoc-apps/fms/filestore/exp119_2.4_sepp.ipkaf
+[21-04-2021 17:29:43] 716.0K	/home/root/esoc-apps/fms/filestore/exp119_2.4_sepp.ipkag
+[21-04-2021 17:29:43] 716.0K	/home/root/esoc-apps/fms/filestore/exp119_2.4_sepp.ipkah
+[21-04-2021 17:29:43] 716.0K	/home/root/esoc-apps/fms/filestore/exp119_2.4_sepp.ipkai
+[21-04-2021 17:29:43] 716.0K	/home/root/esoc-apps/fms/filestore/exp119_2.4_sepp.ipkaj
+[21-04-2021 17:29:43] 716.0K	/home/root/esoc-apps/fms/filestore/exp119_2.4_sepp.ipkak
+[21-04-2021 17:29:43] 716.0K	/home/root/esoc-apps/fms/filestore/exp119_2.4_sepp.ipkal
+[21-04-2021 17:29:43] 716.0K	/home/root/esoc-apps/fms/filestore/exp119_2.4_sepp.ipkam
+[21-04-2021 17:29:43] 716.0K	/home/root/esoc-apps/fms/filestore/exp119_2.4_sepp.ipkan
+[21-04-2021 17:29:43] 716.0K	/home/root/esoc-apps/fms/filestore/exp119_2.4_sepp.ipkao
+[21-04-2021 17:29:43] 8.0K	/home/root/esoc-apps/fms/filestore/exp121_1.2_sepp.ipk
+[21-04-2021 17:29:43] 1.4M	/home/root/esoc-apps/fms/filestore/exp122-firmware_93_sepp.ipk
+[21-04-2021 17:29:43] 1.4M	/home/root/esoc-apps/fms/filestore/exp122-firmware_97_sepp.ipk
+[21-04-2021 17:29:43] 3.2M	/home/root/esoc-apps/fms/filestore/exp122_1.8_sepp.ipk
+[21-04-2021 17:29:43] 1.2M	/home/root/esoc-apps/fms/filestore/exp130-firmware_101_sepp.ipk
+[21-04-2021 17:29:43] 1.5M	/home/root/esoc-apps/fms/filestore/exp144_1.2_sepp.ipk
+[21-04-2021 17:29:43] 32.0K	/home/root/esoc-apps/fms/filestore/exp150_1.93_1.94.patch
+[21-04-2021 17:29:43] 4.0K	/home/root/esoc-apps/fms/filestore/exp150_1.93_1.94.patch_checksum.md5
+[21-04-2021 17:29:43] 3.1M	/home/root/esoc-apps/fms/filestore/exp150_1.93_sepp.ipk
+[21-04-2021 17:29:43] 644.0K	/home/root/esoc-apps/fms/filestore/exp150_1.93_sepp.ipkaa
+[21-04-2021 17:29:43] 644.0K	/home/root/esoc-apps/fms/filestore/exp150_1.93_sepp.ipkab
+[21-04-2021 17:29:43] 644.0K	/home/root/esoc-apps/fms/filestore/exp150_1.93_sepp.ipkac
+[21-04-2021 17:29:43] 644.0K	/home/root/esoc-apps/fms/filestore/exp150_1.93_sepp.ipkad
+[21-04-2021 17:29:43] 644.0K	/home/root/esoc-apps/fms/filestore/exp150_1.93_sepp.ipkae
+[21-04-2021 17:29:43] 3.1M	/home/root/esoc-apps/fms/filestore/exp150_1.94_sepp.ipk
+[21-04-2021 17:29:43] 4.0K	/home/root/esoc-apps/fms/filestore/exp501_v1.0-4-g8390321_sepp.ipk
+[21-04-2021 17:29:43] 4.0K	/home/root/esoc-apps/fms/filestore/exp502_v1.2-4-g4f7eba5_sepp.ipk
+[21-04-2021 17:29:43] 4.0K	/home/root/esoc-apps/fms/filestore/exp504_v2.4-6-gc1351af_sepp.ipk
+[21-04-2021 17:29:43] 4.0K	/home/root/esoc-apps/fms/filestore/exp505_v1.2-1-gfee39a8_sepp.ipk
+[21-04-2021 17:29:43] 4.0K	/home/root/esoc-apps/fms/filestore/exp507_v1.8-3-gdbb308d_sepp.ipk
+[21-04-2021 17:29:43] 4.0K	/home/root/esoc-apps/fms/filestore/exp509_v1.8-7-g58646f2_sepp.ipk
+[21-04-2021 17:29:43] 20.0K	/home/root/esoc-apps/fms/filestore/exp510_2648b1c_sepp.ipk
+[21-04-2021 17:29:43] 8.8M	/home/root/esoc-apps/fms/filestore/fms_2.0_sepp.ipk
+[21-04-2021 17:29:43] 600.0K	/home/root/esoc-apps/fms/filestore/fms_2.0_sepp.ipkaa
+[21-04-2021 17:29:43] 600.0K	/home/root/esoc-apps/fms/filestore/fms_2.0_sepp.ipkab
+[21-04-2021 17:29:43] 600.0K	/home/root/esoc-apps/fms/filestore/fms_2.0_sepp.ipkac
+[21-04-2021 17:29:43] 600.0K	/home/root/esoc-apps/fms/filestore/fms_2.0_sepp.ipkad
+[21-04-2021 17:29:43] 600.0K	/home/root/esoc-apps/fms/filestore/fms_2.0_sepp.ipkae
+[21-04-2021 17:29:43] 600.0K	/home/root/esoc-apps/fms/filestore/fms_2.0_sepp.ipkaf
+[21-04-2021 17:29:43] 600.0K	/home/root/esoc-apps/fms/filestore/fms_2.0_sepp.ipkag
+[21-04-2021 17:29:43] 600.0K	/home/root/esoc-apps/fms/filestore/fms_2.0_sepp.ipkah
+[21-04-2021 17:29:43] 600.0K	/home/root/esoc-apps/fms/filestore/fms_2.0_sepp.ipkai
+[21-04-2021 17:29:43] 600.0K	/home/root/esoc-apps/fms/filestore/fms_2.0_sepp.ipkaj
+[21-04-2021 17:29:43] 600.0K	/home/root/esoc-apps/fms/filestore/fms_2.0_sepp.ipkak
+[21-04-2021 17:29:43] 600.0K	/home/root/esoc-apps/fms/filestore/fms_2.0_sepp.ipkal
+[21-04-2021 17:29:43] 600.0K	/home/root/esoc-apps/fms/filestore/fms_2.0_sepp.ipkam
+[21-04-2021 17:29:43] 600.0K	/home/root/esoc-apps/fms/filestore/fms_2.0_sepp.ipkan
+[21-04-2021 17:29:43] 600.0K	/home/root/esoc-apps/fms/filestore/fms_2.0_sepp.ipkao
+[21-04-2021 17:29:43] 76.0K	/home/root/esoc-apps/fms/filestore/fms_can_50mb_uplink_fail_20191804_1220.log
+[21-04-2021 17:29:43] 4.0K	/home/root/esoc-apps/fms/filestore/folder_2
+[21-04-2021 17:29:43] 4.0K	/home/root/esoc-apps/fms/filestore/ipk-patcher_1.4_sepp.ipk
+[21-04-2021 17:29:43] 8.0K	/home/root/esoc-apps/fms/filestore/kernel-module-ltc2978-4.9.76-rt61-ltsi-altera_4.9.76-ltsi-rt+git2+99b7c8bb80-r0.102_sepp.ipk
+[21-04-2021 17:29:43] 52.0K	/home/root/esoc-apps/fms/filestore/libgeos-c_1.9.1_sepp.ipk
+[21-04-2021 17:29:43] 460.0K	/home/root/esoc-apps/fms/filestore/libgeos_3.5.1_sepp.ipk
+[21-04-2021 17:29:43] 92.0K	/home/root/esoc-apps/fms/filestore/libjpeg62_1.5.2-r0.1_armv7at2hf-neon.ipk
+[21-04-2021 17:29:43] 16.0K	/home/root/esoc-apps/fms/filestore/libltdl7_2.4.6-r0.7_armv7at2hf-neon.ipk
+[21-04-2021 17:29:49] 92.0K	/home/root/esoc-apps/fms/filestore/libnetpbm11_10.73.31-r0.6_armv7at2hf-neon.ipk
+[21-04-2021 17:29:49] 1.6M	/home/root/esoc-apps/fms/filestore/libpatch.zip
+[21-04-2021 17:29:49] 96.0K	/home/root/esoc-apps/fms/filestore/libpcap1_1.8.1-r0.4_armv7at2hf-neon.ipk
+[21-04-2021 17:29:49] 84.0K	/home/root/esoc-apps/fms/filestore/libpng16-16_1.6.31-r0.4_armv7at2hf-neon.ipk
+[21-04-2021 17:29:49] 24.0K	/home/root/esoc-apps/fms/filestore/libsensors4_3.4.0-r0.0_armv7at2hf-neon.ipk
+[21-04-2021 17:29:49] 128.0K	/home/root/esoc-apps/fms/filestore/ncat_7.60-r0.2_armv7at2hf-neon.ipk
+[21-04-2021 17:29:49] 64.0K	/home/root/esoc-apps/fms/filestore/netpbm-mini_10.73.31-r0.12_armv7at2hf-neon.ipk
+[21-04-2021 17:29:49] 4.4M	/home/root/esoc-apps/fms/filestore/nmflib.tgz
+[21-04-2021 17:29:49] 100.0K	/home/root/esoc-apps/fms/filestore/nmfpatch_2019_04_18_1220.tgz
+[21-04-2021 17:29:49] 1.5M	/home/root/esoc-apps/fms/filestore/orekit-7.2.jar
+[21-04-2021 17:29:49] 1.6M	/home/root/esoc-apps/fms/filestore/patch.tgz
+[21-04-2021 17:29:49] 36.0K	/home/root/esoc-apps/fms/filestore/pngnq-s9_2.0.2-r0.2_armv7at2hf-neon.ipk
+[21-04-2021 17:29:49] 984.0K	/home/root/esoc-apps/fms/filestore/python35-ephem_3.7.6.0_sepp.ipk
+[21-04-2021 17:29:49] 688.0K	/home/root/esoc-apps/fms/filestore/python35-shapely_1.7.0_sepp.ipk
+[21-04-2021 17:29:49] 200.0K	/home/root/esoc-apps/fms/filestore/rsync_3.1.3-r0.1_armv7at2hf-neon.ipk
+[21-04-2021 17:29:49] 896.0K	/home/root/esoc-apps/fms/filestore/sepp-api_1.8-54-gd3670a5_sepp.ipk
+[21-04-2021 17:29:49] 16.0K	/home/root/esoc-apps/fms/filestore/sepp-hdcam_1.8-54-gd3670a5_sepp.ipk
+[21-04-2021 17:29:49] 16.0K	/home/root/esoc-apps/fms/filestore/sepp-hdcam_1.8-63-g800eb56_sepp.ipk
+[21-04-2021 17:29:49] 4.0K	/home/root/esoc-apps/fms/filestore/sepp-hk_v1.0-0-g21b5810_sepp.ipk
+[21-04-2021 17:29:49] 212.0K	/home/root/esoc-apps/fms/filestore/sepp-iadcs_1.8-54-gd3670a5_sepp.ipk
+[21-04-2021 17:29:49] 12.0K	/home/root/esoc-apps/fms/filestore/sepp-optrx_1.8-54-gd3670a5_sepp.ipk
+[21-04-2021 17:29:49] 60.0K	/home/root/esoc-apps/fms/filestore/sepp-sdr_1.8-54-gd3670a5_sepp.ipk
+[21-04-2021 17:29:49] 740.0K	/home/root/esoc-apps/fms/filestore/sepp_libs.tgz
+[21-04-2021 17:29:49] 28.0K	/home/root/esoc-apps/fms/filestore/spp-bridge2_1.1_sepp.ipk
+[21-04-2021 17:29:49] 64.0K	/home/root/esoc-apps/fms/filestore/supervisor_20190412.log
+[21-04-2021 17:29:49] 68.0K	/home/root/esoc-apps/fms/filestore/supervisor_20190412_comArchive.db
+[21-04-2021 17:29:49] 176.0K	/home/root/esoc-apps/fms/filestore/tar_1.29-r0.1_armv7at2hf-neon.ipk
+[21-04-2021 17:29:49] 48.7M	/home/root/esoc-apps/fms/filestore/toGround
+[21-04-2021 17:29:49] 81.2M	/home/root/esoc-apps/fms/filestore/toGroundLP
+[21-04-2021 17:29:49] 12.0K	/home/root/esoc-apps/fms/filestore/updatedDataASTERIA.zip-00_001E.cfdp.tmp
+[21-04-2021 17:29:49] 12.0K	/home/root/esoc-apps/fms/filestore/updatedDataSESAM.zip
+[21-04-2021 17:29:49] 40.0K	/home/root/esoc-apps/fms/filestore/xz_5.2.0-r0.8_armv7at2hf-neon.ipk
+[21-04-2021 17:29:49] 16088 root       0:00 sh -c mv /home/exp144/exp144_results_20210421B.tar.gz /home/root/esoc-apps/fms/filestore/toGround/; df -h; du -sh /home/*; du -sh /home/root/*; du -sh /home/root/esoc-apps/fms/filestore/*; ps -ef | grep exp
+[21-04-2021 17:29:49] 16095 root       0:00 grep exp
+[21-04-2021 17:29:49] DATA: STOP
+[21-04-2021 17:29:51] COMMAND  Uplink to SEPP: eval 'for f in /home/exp144/bin/Mochi/models/*; do echo -e "\n\n${f}:\n"; cat ${f}; done'; cat /home/exp144/bin/Mochi/logs/orbitai.log; df -h; ls -ltr /home/root/esoc-apps/fms/filestore/toGround/
+[21-04-2021 17:29:53] DATA: START
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] /home/exp144/bin/Mochi/models/adam_1D:
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] 0 0 1 0 4.36882907412133870e-01 1 0 -1.68696816999817374e-39 1 0 2.14703943361719933e-02 1
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] /home/exp144/bin/Mochi/models/adam_2D:
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] 0 0 2 0 4.36882907412133870e-01 2.52554501302800827e-01 2 0 -1.68696816999817374e-39 -1.68736135850314904e-41 2 0 2.14703943361719933e-02 1.31500911311528430e-02 2
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] /home/exp144/bin/Mochi/models/adam_3D:
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] 0 0 3 0 4.36882907412133870e-01 2.52554501302800827e-01 1.64775303243857502e-01 3 0 -1.68696816999817374e-39 -1.68736135850314904e-41 -1.68814783207082145e-43 3 0 2.14703943361719933e-02 1.31500911311528430e-02 1.11835842150498996e-02 3
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] /home/exp144/bin/Mochi/models/adam_5D:
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] 0 0 5 0 8.93605893839448551e-01 8.29310622616692306e-01 5.77343288259187570e-01 6.55515588911465441e-01 8.60423727314115427e-01 5 0 -5.99999841127584643e-01 -2.36797752414220567e-11 -9.22336698657129143e-12 -1.69999933270929243e-01 -4.10000153819439717e-01 5 0 1.43266165120646216e-01 1.40591224506260049e-01 1.87545591243262394e-01 8.05450628900642035e-02 1.97093092710605572e-01 5
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] /home/exp144/bin/Mochi/models/arow_1D:
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] 0 0 1 0 7.19454869045724286e-03 1 0 1.21722770656673585e+00 1 8.00000000000000044e-01
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] /home/exp144/bin/Mochi/models/arow_2D:
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] 0 0 2 0 7.47404814155608853e-03 1.11394603853488833e-02 2 0 2.58307196932672767e+00 -1.71102131522213452e+00 2 8.00000000000000044e-01
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] /home/exp144/bin/Mochi/models/arow_3D:
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] 0 0 3 0 1.64409093936696629e-02 2.06612918921943445e-02 1.97018403449371465e-02 3 0 3.14054809254985390e+00 3.10119393888134254e-01 -2.61181907726366758e+00 3 8.00000000000000044e-01
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] /home/exp144/bin/Mochi/models/arow_5D:
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] 0 0 5 0 2.11401272985704911e-03 1.19946890633724820e-02 7.83378615680794393e-03 1.62524250966252330e-02 2.22511329184678502e-02 5 0 4.85197610234770482e-01 1.03767096730676345e+00 7.85871756646666753e-01 1.08056583000675088e+00 1.32356413261626349e+00 5 8.00000000000000044e-01
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] /home/exp144/bin/Mochi/models/nherd_1D:
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] 0 0 1 0 4.15494173921317628e-02 1 0 1.05778661328172663e+00 1 1.00000000000000006e-01 0
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] /home/exp144/bin/Mochi/models/nherd_2D:
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] 0 0 2 0 4.30305786779866389e-02 6.38777854576961096e-02 2 0 1.24239628414409453e+00 -4.10894596200589213e-01 2 1.00000000000000006e-01 0
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] /home/exp144/bin/Mochi/models/nherd_3D:
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] 0 0 3 0 4.40355662238284956e-02 6.61262508046321362e-02 7.17187560521003048e-02 3 0 1.47794840818820461e+00 -5.60128962899789085e-03 -7.50148178152000522e-01 3 1.00000000000000006e-01 0
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] /home/exp144/bin/Mochi/models/nherd_5D:
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] 0 0 5 0 7.37945897309715600e-03 1.89827574097797928e-02 1.75727431616155005e-02 4.00888100986452403e-02 1.43269007536734674e-02 5 0 5.66719296266134598e-01 7.83948702307408873e-01 7.28499799106687163e-01 8.62505217777511102e-01 8.74154003423505244e-01 5 1.00000000000000006e-01 0
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] /home/exp144/bin/Mochi/models/rda_1D:
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] 0 0 1 0 1.38012655098133186e+00 1 0 1.18529600000000556e+02 1 0 -1.50259999999999337e+02 1 1.00000000000000006e-01 9.99999999999999955e-07 3828
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] /home/exp144/bin/Mochi/models/rda_2D:
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] 0 0 2 0 1.30927251846698534e+00 6.06907393771595527e-01 2 0 1.10559100000000512e+02 7.30605520299987603e+01 2 0 -1.37669999999999163e+02 -5.18795000000005757e+01 2 1.00000000000000006e-01 9.99999999999999955e-07 3808
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] /home/exp144/bin/Mochi/models/rda_3D:
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] 0 0 3 0 1.29190100169378974e+00 5.90632951193526212e-01 2.37463109944139772e-01 3 0 1.08996400000000520e+02 7.25646375999987754e+01 6.73361220728047130e+01 3 0 -1.34879999999999171e+02 -5.03168000000005549e+01 -1.94896910000002741e+01 3 1.00000000000000006e-01 9.99999999999999955e-07 3803
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] /home/exp144/bin/Mochi/models/rda_5D:
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] 0 0 5 0 9.85731481105972862e-01 1.19067419010486453e+00 9.64632159007223322e-01 1.01101574399888139e+00 1.22399167902237527e+00 5 0 6.19728000000000492e+01 9.15078000000000031e+01 7.25955000000000439e+01 3.35489999999999924e+01 1.09053000000000111e+02 5 0 -7.75999999999999091e+01 -1.13899999999999949e+02 -8.21900000000000688e+01 -5.85599999999999739e+01 -1.27820000000000093e+02 5 1.00000000000000006e-01 9.99999999999999955e-07 453
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] /home/exp144/bin/Mochi/models/scw_1D:
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] 0 0 1 0 2.05803837255026129e-01 1 0 4.32968865722275553e-01 1 8.28943873691518229e-01 1.00000000000000000e+00
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] /home/exp144/bin/Mochi/models/scw_2D:
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] 0 0 2 0 5.40469862870530671e-01 5.64487064963577367e-01 2 0 9.36895087444122865e-01 5.57118187724832681e-01 2 8.28943873691518229e-01 1.00000000000000000e+00
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] /home/exp144/bin/Mochi/models/scw_3D:
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] 0 0 3 0 7.23056697145188498e-01 7.91614176284203386e-01 8.04128152954256326e-01 3 0 7.88578034538156891e-01 4.42758178292326166e-01 2.47062837063087792e-01 3 8.28943873691518229e-01 1.00000000000000000e+00
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] /home/exp144/bin/Mochi/models/scw_5D:
+[21-04-2021 17:29:53] 
+[21-04-2021 17:29:53] 0 0 5 0 5.99015696721691082e-01 4.05095855104260549e-01 1.79403090523521935e-01 6.38924997650230586e-01 7.01121937152410557e-01 5 0 1.43004777810070594e+00 5.39987900124142439e-01 2.11860131953269887e-01 1.62281148483377025e+00 1.02181140686773997e+00 5 8.28943873691518229e-01 1.00000000000000000e+00[2021-04-16 18:47:22.815][INFO] Loaded models/adam_1D
+[21-04-2021 17:29:53] [2021-04-16 18:47:22.857][INFO] Loaded models/adam_2D
+[21-04-2021 17:29:53] [2021-04-16 18:47:22.868][INFO] Loaded models/adam_3D
+[21-04-2021 17:29:53] [2021-04-16 18:47:22.876][INFO] Loaded models/adam_5D
+[21-04-2021 17:29:53] [2021-04-16 18:47:22.894][INFO] Loaded models/rda_1D
+[21-04-2021 17:29:53] [2021-04-16 18:47:22.925][INFO] Loaded models/rda_2D
+[21-04-2021 17:29:53] [2021-04-16 18:47:22.936][INFO] Loaded models/rda_3D
+[21-04-2021 17:29:53] [2021-04-16 18:47:22.966][INFO] Loaded models/rda_5D
+[21-04-2021 17:29:53] [2021-04-16 18:47:22.977][INFO] Loaded models/arow_1D
+[21-04-2021 17:29:53] [2021-04-16 18:47:22.981][INFO] Loaded models/arow_2D
+[21-04-2021 17:29:53] [2021-04-16 18:47:22.989][INFO] Loaded models/arow_3D
+[21-04-2021 17:29:53] [2021-04-16 18:47:22.993][INFO] Loaded models/arow_5D
+[21-04-2021 17:29:53] [2021-04-16 18:47:22.997][INFO] Loaded models/scw_1D
+[21-04-2021 17:29:53] [2021-04-16 18:47:23.001][INFO] Loaded models/scw_2D
+[21-04-2021 17:29:53] [2021-04-16 18:47:23.009][INFO] Loaded models/scw_3D
+[21-04-2021 17:29:53] [2021-04-16 18:47:23.025][INFO] Loaded models/scw_5D
+[21-04-2021 17:29:53] [2021-04-16 18:47:23.032][INFO] Loaded models/nherd_1D
+[21-04-2021 17:29:53] [2021-04-16 18:47:23.037][INFO] Loaded models/nherd_2D
+[21-04-2021 17:29:53] [2021-04-16 18:47:23.080][INFO] Loaded models/nherd_3D
+[21-04-2021 17:29:53] [2021-04-16 18:47:23.095][INFO] Loaded models/nherd_5D
+[21-04-2021 17:29:53] [2021-04-17 21:20:38.232][INFO] Loaded models/adam_1D
+[21-04-2021 17:29:53] [2021-04-17 21:20:38.236][INFO] Loaded models/adam_2D
+[21-04-2021 17:29:53] [2021-04-17 21:20:38.238][INFO] Loaded models/adam_3D
+[21-04-2021 17:29:53] [2021-04-17 21:20:38.241][INFO] Loaded models/adam_5D
+[21-04-2021 17:29:53] [2021-04-17 21:20:38.243][INFO] Loaded models/rda_1D
+[21-04-2021 17:29:53] [2021-04-17 21:20:38.244][INFO] Loaded models/rda_2D
+[21-04-2021 17:29:53] [2021-04-17 21:20:38.251][INFO] Loaded models/rda_3D
+[21-04-2021 17:29:53] [2021-04-17 21:20:38.254][INFO] Loaded models/rda_5D
+[21-04-2021 17:29:53] [2021-04-17 21:20:38.256][INFO] Loaded models/arow_1D
+[21-04-2021 17:29:53] [2021-04-17 21:20:38.257][INFO] Loaded models/arow_2D
+[21-04-2021 17:29:53] [2021-04-17 21:20:38.259][INFO] Loaded models/arow_3D
+[21-04-2021 17:29:53] [2021-04-17 21:20:38.262][INFO] Loaded models/arow_5D
+[21-04-2021 17:29:53] [2021-04-17 21:20:38.271][INFO] Loaded models/scw_1D
+[21-04-2021 17:29:53] [2021-04-17 21:20:38.273][INFO] Loaded models/scw_2D
+[21-04-2021 17:29:53] [2021-04-17 21:20:38.275][INFO] Loaded models/scw_3D
+[21-04-2021 17:29:53] [2021-04-17 21:20:38.277][INFO] Loaded models/scw_5D
+[21-04-2021 17:29:53] [2021-04-17 21:20:38.279][INFO] Loaded models/nherd_1D
+[21-04-2021 17:29:53] [2021-04-17 21:20:38.282][INFO] Loaded models/nherd_2D
+[21-04-2021 17:29:53] [2021-04-17 21:20:38.307][INFO] Loaded models/nherd_3D
+[21-04-2021 17:29:53] [2021-04-17 21:20:38.321][INFO] Loaded models/nherd_5D
+[21-04-2021 17:29:53] [2021-04-17 22:56:34.672][INFO] Loaded models/adam_1D
+[21-04-2021 17:29:53] [2021-04-17 22:56:34.673][INFO] Loaded models/adam_2D
+[21-04-2021 17:29:53] [2021-04-17 22:56:34.674][INFO] Loaded models/adam_3D
+[21-04-2021 17:29:53] [2021-04-17 22:56:34.674][INFO] Loaded models/adam_5D
+[21-04-2021 17:29:53] [2021-04-17 22:56:34.674][INFO] Loaded models/rda_1D
+[21-04-2021 17:29:53] [2021-04-17 22:56:34.675][INFO] Loaded models/rda_2D
+[21-04-2021 17:29:53] [2021-04-17 22:56:34.705][INFO] Loaded models/rda_3D
+[21-04-2021 17:29:53] [2021-04-17 22:56:34.706][INFO] Loaded models/rda_5D
+[21-04-2021 17:29:53] [2021-04-17 22:56:34.707][INFO] Loaded models/arow_1D
+[21-04-2021 17:29:53] [2021-04-17 22:56:34.724][INFO] Loaded models/arow_2D
+[21-04-2021 17:29:53] [2021-04-17 22:56:34.732][INFO] Loaded models/arow_3D
+[21-04-2021 17:29:53] [2021-04-17 22:56:34.733][INFO] Loaded models/arow_5D
+[21-04-2021 17:29:53] [2021-04-17 22:56:34.733][INFO] Loaded models/scw_1D
+[21-04-2021 17:29:53] [2021-04-17 22:56:34.733][INFO] Loaded models/scw_2D
+[21-04-2021 17:29:53] [2021-04-17 22:56:34.734][INFO] Loaded models/scw_3D
+[21-04-2021 17:29:53] [2021-04-17 22:56:34.734][INFO] Loaded models/scw_5D
+[21-04-2021 17:29:53] [2021-04-17 22:56:34.734][INFO] Loaded models/nherd_1D
+[21-04-2021 17:29:53] [2021-04-17 22:56:34.734][INFO] Loaded models/nherd_2D
+[21-04-2021 17:29:53] [2021-04-17 22:56:34.735][INFO] Loaded models/nherd_3D
+[21-04-2021 17:29:53] [2021-04-17 22:56:34.735][INFO] Loaded models/nherd_5D
+[21-04-2021 17:29:53] [2021-04-18 00:31:51.295][INFO] Loaded models/adam_1D
+[21-04-2021 17:29:53] [2021-04-18 00:31:51.296][INFO] Loaded models/adam_2D
+[21-04-2021 17:29:53] [2021-04-18 00:31:51.296][INFO] Loaded models/adam_3D
+[21-04-2021 17:29:53] [2021-04-18 00:31:51.296][INFO] Loaded models/adam_5D
+[21-04-2021 17:29:53] [2021-04-18 00:31:51.297][INFO] Loaded models/rda_1D
+[21-04-2021 17:29:53] [2021-04-18 00:31:51.297][INFO] Loaded models/rda_2D
+[21-04-2021 17:29:53] [2021-04-18 00:31:51.297][INFO] Loaded models/rda_3D
+[21-04-2021 17:29:53] [2021-04-18 00:31:51.298][INFO] Loaded models/rda_5D
+[21-04-2021 17:29:53] [2021-04-18 00:31:51.298][INFO] Loaded models/arow_1D
+[21-04-2021 17:29:53] [2021-04-18 00:31:51.298][INFO] Loaded models/arow_2D
+[21-04-2021 17:29:53] [2021-04-18 00:31:51.299][INFO] Loaded models/arow_3D
+[21-04-2021 17:29:53] [2021-04-18 00:31:51.299][INFO] Loaded models/arow_5D
+[21-04-2021 17:29:53] [2021-04-18 00:31:51.299][INFO] Loaded models/scw_1D
+[21-04-2021 17:29:53] [2021-04-18 00:31:51.300][INFO] Loaded models/scw_2D
+[21-04-2021 17:29:53] [2021-04-18 00:31:51.324][INFO] Loaded models/scw_3D
+[21-04-2021 17:29:53] [2021-04-18 00:31:51.325][INFO] Loaded models/scw_5D
+[21-04-2021 17:29:53] [2021-04-18 00:31:51.325][INFO] Loaded models/nherd_1D
+[21-04-2021 17:29:53] [2021-04-18 00:31:51.325][INFO] Loaded models/nherd_2D
+[21-04-2021 17:29:53] [2021-04-18 00:31:51.326][INFO] Loaded models/nherd_3D
+[21-04-2021 17:29:53] [2021-04-18 00:31:51.326][INFO] Loaded models/nherd_5D
+[21-04-2021 17:29:53] [2021-04-18 02:06:42.304][INFO] Loaded models/adam_1D
+[21-04-2021 17:29:53] [2021-04-18 02:06:42.327][INFO] Loaded models/adam_2D
+[21-04-2021 17:29:53] [2021-04-18 02:06:42.344][INFO] Loaded models/adam_3D
+[21-04-2021 17:29:53] [2021-04-18 02:06:42.351][INFO] Loaded models/adam_5D
+[21-04-2021 17:29:53] [2021-04-18 02:06:42.361][INFO] Loaded models/rda_1D
+[21-04-2021 17:29:53] [2021-04-18 02:06:42.366][INFO] Loaded models/rda_2D
+[21-04-2021 17:29:53] [2021-04-18 02:06:42.371][INFO] Loaded models/rda_3D
+[21-04-2021 17:29:53] [2021-04-18 02:06:42.388][INFO] Loaded models/rda_5D
+[21-04-2021 17:29:53] [2021-04-18 02:06:42.391][INFO] Loaded models/arow_1D
+[21-04-2021 17:29:53] [2021-04-18 02:06:42.396][INFO] Loaded models/arow_2D
+[21-04-2021 17:29:53] [2021-04-18 02:06:42.419][INFO] Loaded models/arow_3D
+[21-04-2021 17:29:53] [2021-04-18 02:06:42.443][INFO] Loaded models/arow_5D
+[21-04-2021 17:29:53] [2021-04-18 02:06:42.453][INFO] Loaded models/scw_1D
+[21-04-2021 17:29:53] [2021-04-18 02:06:42.464][INFO] Loaded models/scw_2D
+[21-04-2021 17:29:53] [2021-04-18 02:06:42.619][INFO] Loaded models/scw_3D
+[21-04-2021 17:29:53] [2021-04-18 02:06:42.629][INFO] Loaded models/scw_5D
+[21-04-2021 17:29:53] [2021-04-18 02:06:42.649][INFO] Loaded models/nherd_1D
+[21-04-2021 17:29:53] [2021-04-18 02:06:42.654][INFO] Loaded models/nherd_2D
+[21-04-2021 17:29:53] [2021-04-18 02:06:42.661][INFO] Loaded models/nherd_3D
+[21-04-2021 17:29:53] [2021-04-18 02:06:42.666][INFO] Loaded models/nherd_5D
+[21-04-2021 17:29:53] Filesystem                Size      Used Available Use% Mounted on
+[21-04-2021 17:29:53] /dev/root                 3.8G      2.2G      1.4G  62% /
+[21-04-2021 17:29:53] devtmpfs                207.4M         0    207.4M   0% /dev
+[21-04-2021 17:29:53] tmpfs                   215.9M         0    215.9M   0% /dev/shm
+[21-04-2021 17:29:53] tmpfs                   215.9M    296.0K    215.6M   0% /run
+[21-04-2021 17:29:53] tmpfs                   215.9M         0    215.9M   0% /sys/fs/cgroup
+[21-04-2021 17:29:53] tmpfs                   215.9M    812.0K    215.1M   0% /tmp
+[21-04-2021 17:29:53] tmpfs                   215.9M         0    215.9M   0% /var/volatile
+[21-04-2021 17:29:53] total 49832
+[21-04-2021 17:29:53] -rw-r--r--    1 root     root           497 Sep  4  2018 opssat_smartcam_logs_exp1000_20180904_235852.tar.gz
+[21-04-2021 17:29:53] -rw-r--r--    1 root     root        536737 Sep  5  2018 sepp_packetstore_exp510_20210402_032706.gz
+[21-04-2021 17:29:53] -rw-r--r--    1 root     root        800801 Sep  5  2018 sepp_packetstore_exp510_20210414_024822.gz
+[21-04-2021 17:29:53] -rw-r--r--    1 root     root          7841 Sep  5  2018 opssat_smartcam_logs_exp1000_20180905_114043_previous.tar.gz
+[21-04-2021 17:29:53] -rw-r--r--    1 root     root           841 Sep  5  2018 opssat_smartcam_logs_exp1000_20180905_114043.tar.gz
+[21-04-2021 17:29:53] -rw-r--r--    1 root     root       2560551 Apr 13 01:19 sepp_packetstore_exp510_20210412_192630.gz
+[21-04-2021 17:29:53] -rw-r--r--    1 root     root         49274 Apr 13 08:05 opssat_smartcam_logs_exp1000_20210413_080500_previous.tar.gz
+[21-04-2021 17:29:53] -rw-r--r--    1 root     root        866069 Apr 13 20:40 opssat_smartcam_jpeg_exp1000_20210413_204005_previous.tar.gz
+[21-04-2021 17:29:53] -rw-r--r--    1 root     root       1315815 Apr 14 01:41 opssat_smartcam_jpeg_exp1000_20210413_204005.tar.gz
+[21-04-2021 17:29:53] -rw-r--r--    1 root     root           495 Apr 14 19:12 opssat_smartcam_logs_exp1000_20210414_191245.tar.gz
+[21-04-2021 17:29:53] -rw-r--r--    1 root     root       2549774 Apr 15 01:55 sepp_packetstore_exp510_20210414_200002.gz
+[21-04-2021 17:29:53] -rw-r--r--    1 root     root         27530 Apr 15 01:58 sepp_packetstore_exp510_20210415_015504.gz
+[21-04-2021 17:29:53] -rw-r--r--    1 root     root       2622281 Apr 15 07:30 sepp_packetstore_exp510_20210415_020000.gz
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root        369781 Apr 15 07:58 sepp_packetstore_exp510_20210415_073050.gz
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root       2847072 Apr 15 11:35 sepp_packetstore_exp510_20210415_080000.gz
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root       1575829 Apr 15 13:58 sepp_packetstore_exp510_20210415_113503.gz
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root       2563858 Apr 15 19:49 sepp_packetstore_exp510_20210415_135959.gz
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root         69887 Apr 15 19:58 sepp_packetstore_exp510_20210415_194907.gz
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root        471383 Apr 15 21:35 sepp_packetstore_exp510_20210415_203500.gz
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root       1725116 Apr 16 01:58 sepp_packetstore_exp510_20210415_215958.gz
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root        235919 Apr 16 04:08 exp122_v97_toGroundLP.tar.gz
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root       1513003 Apr 16 04:08 exp122_v97_toGround.tar.gz
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root       2577327 Apr 16 07:50 sepp_packetstore_exp510_20210416_015958.gz
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root         63015 Apr 16 07:58 sepp_packetstore_exp510_20210416_075006.gz
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root       2565976 Apr 16 13:55 sepp_packetstore_exp510_20210416_075957.gz
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root         27486 Apr 16 13:58 sepp_packetstore_exp510_20210416_135506.gz
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root         71684 Apr 16 18:43 exp144_results_20210416.tar.gz_aa
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root       2577255 Apr 16 19:50 sepp_packetstore_exp510_20210416_135957.gz
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root       2555143 Apr 17 01:45 sepp_packetstore_exp510_20210416_195050.gz
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root        183532 Apr 17 03:53 exp144_results_20210417A.tar.gz_aa
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root        183532 Apr 17 05:28 exp144_results_20210417B.tar.gz_aa
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root       1251055 Apr 17 06:59 opssat_smartcam_jpeg_exp1000_20210417_065958_previous.tar.gz
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root       2564656 Apr 17 07:36 sepp_packetstore_exp510_20210417_014524.gz
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root       2564436 Apr 17 13:31 sepp_packetstore_exp510_20210417_073642.gz
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root        183532 Apr 17 16:52 exp144_results_20210417C.tar.gz_aa
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root        183532 Apr 17 18:30 exp144_results_20210417D.tar.gz_aa
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root       2574714 Apr 17 19:21 sepp_packetstore_exp510_20210417_133116_1.gz
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root        203116 Apr 17 22:00 opssat_smartcam_jpeg_exp1000_20210417_220001_previous.tar.gz
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root        587931 Apr 18 06:59 opssat_smartcam_jpeg_exp1000_20210418_065958_1.tar.gz
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root       2564527 Apr 18 07:51 sepp_packetstore_exp510_20210418_015959_1.gz
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root         51638 Apr 18 07:58 sepp_packetstore_exp510_20210418_075142.gz
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root        669496 Apr 18 07:58 sepp_packetstore_exp510_20210417_192112_1.gz
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root       1746947 Apr 18 13:58 sepp_packetstore_exp510_20210418_075957_1.gz
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root        212992 Apr 18 16:37 exp144_results_20210418B.tar.gz_aa
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root            45 Apr 19 03:24 exp144_results_20210419A.tar.gz_aa
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root            45 Apr 19 05:00 exp144_results_20210419B.tar.gz_aa
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root        896819 Apr 19 06:00 opssat_smartcam_jpeg_exp1000_20210419_055959_previous.tar.gz
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root            45 Apr 19 16:25 exp144_results_20210419_1.tar.gz
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root       1125443 Apr 19 16:26 exp144_results_20210419_old.tar.gz
+[21-04-2021 17:29:59] -rw-r--r--    1 root     root          1ÆõŒW‚=FgﬂUv∑ê)U›~@hdäH+∏Ij”©Pl-º)kB·ﬁ±s∞}VEC;#dJ›#dA´øq&ü˚)ŸåÿøDATA: STOP

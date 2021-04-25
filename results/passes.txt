@@ -75,3 +75,23 @@ ESOC1        AOS_5DEG        04:55:43        45 deg        09min07s (11min47s RX
 ESOC1        LOS_5DEG        05:04:50        45 deg
 TUG          AOS_5DEG        04:55:12        24 deg        08min21s (11min13s RX)        BRITE_A_CONFLICT
 TUG          LOS_5DEG        05:03:33        24 deg
+
+#07390 2021-04-20 16:07 UTC
+ESOC1        AOS_5DEG        16:09:29        09 deg        02min50s (09min27s RX)
+ESOC1        LOS_5DEG        16:12:19        09 deg
+TUG          AOS_5DEG        16:09:04        18 deg        07min53s (10min56s RX)
+TUG          LOS_5DEG        16:16:57        18 deg
+
+#07391 2021-04-20 17:40 UTC
+ESOC1        AOS_5DEG        17:42:09        87 deg        09min29s (12min05s RX)
+ESOC1        LOS_5DEG        17:51:38        87 deg
+TUG          AOS_5DEG        17:42:42        38 deg        09min04s (11min43s RX)
+TUG          LOS_5DEG        17:51:46        38 deg
+
+#07392 2021-04-20 19:16 UTC
+TUG          AOS_MIN         19:17:00        03 deg                 (06min28s RX)
+TUG          LOS_MIN         19:23:28        03 deg
+CORK         AOS_5DEG        19:16:25        48 deg        09min16s (09min16s RX)
+CORK         LOS_5DEG        19:25:41        48 deg
+ESOC1        AOS_5DEG        19:17:24        11 deg        05min53s (09min30s RX)
+ESOC1        LOS_5DEG        19:23:17        11 deg

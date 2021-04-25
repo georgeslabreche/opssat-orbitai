@@ -1,8 +1,27 @@
 # OrbitAI Results
-The confusion matrices and classification metrics obtained by the trained models as well as a summary of each app runs.
+The confusion matrices and classification metrics obtained by the trained models as well as a summary of each app runs. The PA, PA1, and PA2 algorithms were disabled due to serialization issues identified during experiment validation on the Engineering Model (EM) flatsat. This eliminated the risk of an unhandled error preventing the models from being loaded to resume training rather than being re-initialized at every run. 
 
 ## Results
-_TODO_.
+Only 6 of the attempted 35 runs succeeded in starting the experiment. This is due to a series of ground segment problems as well as an issue with the NMF Supervisor. Despite these setbacks, at least one model received enough training inputs that resulted in 89% balanced accuracy and a F1 score of 91%. This model was trained with the AROW alogirthm in 3D input space. <br>The serialized models were downlinked and the balanced accuracies of their predictions calculated on the ground with an exhaustive sun elevation angle dataset ranging from 0 to 1.57 radians in steps of 0.01. Although this could have been evaluated on-board with the OrbitAI app's inference mode, it was not done to prioritize training the models given the limited amount successuful app runs.
+
+### Balanced accuracies of predictions made by models trained in-flight
+|       | 1D    | 2D    | 3D    |
+|-------|-------|-------|-------|
+| Adam  | 0.495 | 0.495 | 0.495 |
+| RDA   | 0.495 | 0.495 | 0.495 |
+| AROW  | 0.500 | 0.561 | **0.891** |
+| SCW   | 0.500 | 0.500 | 0.500 |
+| NHERD | 0.495 | 0.495 | 0.665 |
+
+
+### Confusion matrix for AROW 3D
+|      | **OFF*** | **ON*** |
+|------|------|-----|
+| **OFF**** | 43   | 11  |
+| **ON****  | 1    | 104 |
+
+\* Labels predicted by the mode.<br>
+\** Expected labels included in the test data set.
 
 ## Ground Operations
 - All passes in which OrbitAI related ground operations took place are listed in [passes.txt](passes.txt).
@@ -32,11 +51,15 @@ To increase the chances of capturing training inputs for PD6 elevation angle val
  - **April 17 - Run \#6 to \#8**: 19:45, 21:20, and 22:55.
  - **April 18 - Run \#9 to \#16**: 0:30, 2:05, 6:50, 8:25, 10:00, 11:35, 13:10, and 14:45.
 
-The runs at the following start times failed to start: 19:45, 6:50, 8:25, 10:00, 11:35, 13:10, and 14:45. An issue with the NMF Supervisor is supsected.
+The runs at the following start times failed to start: 19:45, 6:50, 8:25, 10:00, 11:35, 13:10, and 14:45. Downlinked logs confirmed a problem with the NMF Supervisor which prevented the experiment from running.
 
 ### Runs #17 to #31
- - **April 18 - Run \#17 to \#20**: 18:14, 19:30, 21:05, 22:40.
- - **April 19 - Run \#21 to \#31**: 0:15, 1:50, 3:25, 5:00, 6:35, 8:10, 9:45, 11:20, 12:55, 14:30, 16:05.
+ - **April 18 - Run \#17 to \#20**: 18:14, 19:30, 21:05, and 22:40.
+ - **April 19 - Run \#21 to \#31**: 0:15, 1:50, 3:25, 5:00, 6:35, 8:10, 9:45, 11:20, 12:55, 14:30, and 16:05.
 
-## Notes
-The csv files in the `data` folder are downlinked from the spacecraft and their first column header are missing. This results in all headers shifted to the left by one column. This is due to [Issue #10](https://github.com/georgeslabreche/opssat-orbitai/issues/10).
+The app failed to start for all scheduled runs. Suspected issues with NMF Supervisor but not investigated.
+
+### Runs #32 to #35:
+**April 20**: 19:00, 20:35, 22:10, and 23:45.
+
+The app failed to start for all scheduled runs. Suspected issues with NMF Supervisor but not investigated.

@@ -74,8 +74,8 @@ Moved to from primary (Chain-A) to secondary (Chain-B) ground station due to pro
 
 #### MATIS
 - Uplinked the schedule to start the app at the following times (UTC): 
- - **April 18 - Run \#18 to \#20**: 19:30, 21:05, 22:40.
- - **April 19 - Run \#21 to \#31**: 0:15, 1:50, 3:25, 5:00, 6:35, 8:10, 9:45, 11:20, 12:55, 14:30, 16:05.
+ - **April 18 - Run \#18 to \#20**: 19:30, 21:05, and 22:40.
+ - **April 19 - Run \#21 to \#31**: 0:15, 1:50, 3:25, 5:00, 6:35, 8:10, 9:45, 11:20, 12:55, 14:30, and 16:05.
 - Switched from SpaceWire to CAN to attempt downlink in next pass.
 
 ### SCOS
@@ -94,3 +94,14 @@ The following commands were not necessary because they had been done in the prev
 
 #### SCOS
 - Sent command at 18:14 UTC to start the app.
+
+### Pass XXXX (7390 or 7391?)
+
+#### MATIS
+Uplinked the schedule to start the app for runs \#33 to\# 35 at the following times on April 20: 20:35, 22:10, and 23:45.
+
+#### SCOS
+Run \#32 at 19:00 UTC. Live StartExperiment command to start the app.
+
+### Remain Passes
+No other experiment runs were scheduled and the remaining macros were to inspect and fetch experiment outputs.
