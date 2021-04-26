@@ -103,5 +103,5 @@ Uplinked the schedule to start the app for runs \#33 to\# 35 at the following ti
 #### SCOS
 Run \#32: Time tagged StartExperiment command was sent to start the app at 19:00 UTC.
 
-### Remain Passes
+### Remaining Passes
 No other experiment runs were scheduled and the remaining macros were to inspect and fetch experiment outputs.
