@@ -1,5 +1,5 @@
 # OrbitAI Ground Operations
-SpaceShell commands were sent to the spacecraft's Satellite Experimental Processing Platform (SEPP) in order to configure and run the OrbitAI app. These commands are written files referred to as "macros" by the Flight Control Tream (FCT). Their execution is summarized here. The macro executions and their logs are archived in the `scripts` and `logs` directories. The files operate on OrbitAI's `exp144` directory in the SEPP's file system.
+SpaceShell commands were sent to the spacecraft's Satellite Experimental Processing Platform (SEPP) in order to configure and run the OrbitAI app. These commands are written files referred to as "macros" by the Flight Control Tream (FCT). Their execution is summarized here. The macro executions and their logs are archived in the `scripts` and `logs` directories. Missing macro logs indicate that the macro failed to run (e.g., due to not bitlock). The files operate on OrbitAI's `exp144` directory in the SEPP's file system.
 ## Summary
 This is a summary of FCT operations to run the OrbitAI app.
 ### Pass 7330
@@ -95,13 +95,13 @@ The following commands were not necessary because they had been done in the prev
 #### SCOS
 - Sent command at 18:14 UTC to start the app.
 
-### Pass XXXX (7390 or 7391?)
+### Pass 7391
 
 #### MATIS
 Uplinked the schedule to start the app for runs \#33 to\# 35 at the following times on April 20: 20:35, 22:10, and 23:45.
 
 #### SCOS
-Run \#32 at 19:00 UTC. Live StartExperiment command to start the app.
+Run \#32: Time tagged StartExperiment command was sent to start the app at 19:00 UTC.
 
 ### Remain Passes
 No other experiment runs were scheduled and the remaining macros were to inspect and fetch experiment outputs.
