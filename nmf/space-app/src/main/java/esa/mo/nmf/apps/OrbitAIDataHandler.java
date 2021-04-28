@@ -268,11 +268,12 @@ public class OrbitAIDataHandler {
             new FileOutputStream(Paths.get(dataDirectory.getPath(), fileName).toFile(), true);
         // write first line with parameters names
         StringBuffer line = new StringBuffer();
+        line.append("timestamp,");
         for (String parameterName : parametersNames) {
           line.append(parameterName);
           line.append(",");
         }
-        line.append("\n");
+        line.replace(line.length() - 1, line.length(), "\n");
         trainingDataOutputStream.write(line.toString().getBytes());
       } catch (FileNotFoundException e) {
         LOGGER.log(Level.SEVERE, "Couldn't create data file stream", e);
