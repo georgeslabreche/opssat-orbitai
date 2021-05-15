@@ -10,20 +10,6 @@ ranger is a fast implementation of random forests (Breiman 2001) or recursive pa
 ranger is written in C++, but a version for R is available, too. We recommend to use the R version. It is easy to install and use and the results are readily available for further analysis. The R version is as fast as the standalone C++ version.
 
 ### Installation
-#### R version
-To install the ranger R package from CRAN, just run
-
-```R
-install.packages("ranger")
-```
-
-R version >= 3.1 is required. With recent R versions, multithreading on Windows platforms should just work. If you compile yourself, the new RTools toolchain is required.
-
-To install the development version from GitHub using `devtools`, run
-
-```R
-devtools::install_github("imbs-hl/ranger")
-```
 
 #### Standalone C++ version
 To install the C++ version of ranger in Linux or Mac OS X you will need a compiler supporting C++11 (i.e. gcc >= 4.7 or Clang >= 3.0) and Cmake. To build start a terminal from the ranger main directory and run the following commands
@@ -41,12 +27,6 @@ After compilation there should be an executable called "ranger" in the build dir
 To run the C++ version in Microsoft Windows please cross compile or ask for a binary.
 
 ### Usage
-#### R version
-For usage of the R version see ?ranger in R. Most importantly, see the Examples section. As a first example you could try 
-
-```R  
-ranger(Species ~ ., data = iris)
-```
 
 #### Standalone C++ version
 In the C++ version type 
