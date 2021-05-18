@@ -25,9 +25,8 @@ cp -r models_space/2021-05-15/* models/
 ```
 
 ### 5D models
-#### Background
 The 1D, 2D, and 3D models are trained with PD6 input values. The 5D models are trained with PD1 to PD5 input values to experiment with training models that could be used as fallback in case of PD6 failure.
-#### Instructions
+#### Evaluating with PD data collected on-board the spacecraft
 Only 1D, 2D, and 3D models can be evaluated with the generated inference commands listed in `cmds/inferences_A.txt`. This is because those commands have dummy values for elevation angle values PD1–PD5 (the data that 5D models use as training and inference inputs). Evaluating 5D inference is done with PD1–PD5 values that are collected on-board the spacecraft, downlinked, and then included in inference commands listed in the `cmds/inferences_5D.txt` file. The following is a sample call to the inference script to evaluate 5D models with data fetched from the OrbitAI logs:
 ```
 ./inference.sh 1 0.03 cmds/inferences_5D.txt metrics/space/inferences_include5D_2021-05-15.csv
@@ -35,5 +34,5 @@ Only 1D, 2D, and 3D models can be evaluated with the generated inference command
 
 Note that `cmds/inferences_5D.txt` contains a lot of inference commands with the same PD1–PD5 input values and would thus benefit from being downsampled to only contain commands with unique combinations of PD1–PD5 values.
 
-### On-board inference
+#### On-board inference
 Evaluating the 5D models is preferably done directly on-board the spacecraft be setting the OrbitAI mode to "inference" and downlinking the results. In this may, the model is evaluated with data that wasn't used as training data.
