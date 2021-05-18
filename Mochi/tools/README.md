@@ -8,6 +8,7 @@ A collection of scripts to generate test commands, calculate classification metr
 Instructions on how to use this scripts are commented in their respective source files.
 
 ## Evaluating models trained in space
+### 1D, 2D, and 3D models
 From this `tools` directory:
 
 1. Put the downlinked model files inside a yyyy-MM-dd folder in the `models_space` directory.
@@ -23,4 +24,16 @@ cp -r models_space/2021-05-15/* models/
 ./inference.sh 0 0.05 cmds/inferences_A.txt metrics/space/inferences_2021-05-15.csv
 ```
 
-Note that only 1D, 2D, and 3D models are evaluated from the ground because there are not test commands with 5D inference inputs in `cmds/inferences_A.txt`. Test 5D inference inputs can be compiled from the experiment's log files on-board the spacecraft or inference can be directly evaluated in space.
+### 5D models
+#### Background
+The 1D, 2D, and 3D models are trained with PD6 input values. The 5D models are trained with PD1 to PD5 input values to experiment with training models that could be used as fallback in case of PD6 failure.
+#### Instructions
+Only 1D, 2D, and 3D models can be evaluated with the generated inference commands listed in `cmds/inferences_A.txt`. This is because those commands have dummy values for elevation angle values PD1–PD5 (the data that 5D models use as training and inference inputs). Evaluating 5D inference is done with PD1–PD5 values that are collected on-board the spacecraft, downlinked, and then included in inference commands listed in the `cmds/inferences_5D.txt` file. The following is a sample call to the inference script to evaluate 5D models with data fetched from the OrbitAI logs:
+```
+./inference.sh 1 0.03 cmds/inferences_5D.txt metrics/space/inferences_include5D_2021-05-15.csv
+```
+
+Note that `cmds/inferences_5D.txt` contains a lot of inference commands with the same PD1–PD5 input values and would thus benefit from being downsampled to only contain commands with unique combinations of PD1–PD5 values.
+
+### On-board inference
+Evaluating the 5D models is preferably done directly on-board the spacecraft be setting the OrbitAI mode to "inference" and downlinking the results. In this may, the model is evaluated with data that wasn't used as training data.
