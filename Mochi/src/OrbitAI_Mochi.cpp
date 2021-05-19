@@ -4,9 +4,6 @@
  * - Create a SocketServer class and move all socker server logic inside of it.
  * - Create a MochiFacade class and move all calls to the Mochi logic inside of it.
  */
-
-#include <sys/socket.h> // For socket functions
-#include <netinet/in.h> // For sockaddr_in
 #include <cstdlib> // For exit()
 #include <iostream> // For cout
 #include <fstream>
@@ -16,49 +13,24 @@
 #include <sys/types.h> // For mkdkir
 #include <sys/stat.h> // For mkdkir
 
-#include <chrono>
 #include <map>
 #include <string>
 #include <sstream>
 #include <algorithm>
 #include <iterator>
-#include <ctime>
+
 
 // For machine learning.
 #include <mochimochi/binary_classifier.hpp>
 #include <mochimochi/utility.hpp>
 #include <mochimochi/classifier/factory/binary_oml_factory.hpp>
 
+#include "Constants.hpp"
+#include "Utils.hpp"
 #include "PropertiesParser.hpp"
 #include "HyperParameters.hpp"
+#include "SocketServer.hpp"
 
-// TODO: Figure out if this is enough or too much.
-#define COMMAND_BUFFER_LENGTH                                 10000
-
-#define DIR_PATH_LOGS                                         "logs"
-#define DIR_PATH_MODELS                                     "models"
-
-#define LOG_FILEPATH_TRAINING                   "logs/training.csv"
-#define LOG_FILEPATH_INFERENCE                 "logs/inference.csv"
-#define LOG_FILEPATH_ORBITAI                     "logs/orbitai.log"
-
-/* Error codes. */
-#define ERROR_SUCCESS                                             0
-#define ERROR_UNKNOWN                                             1
-#define ERROR_PARSE_ARGS                                          2
-#define ERROR_INVALID_PORT_NUM                                    3
-#define ERROR_CREATE_SOCKET                                       4
-#define ERROR_BIND_PORT                                           5
-#define ERROR_LISTEN_SOCKET                                       6
-#define ERROR_GRAB_CONNECTION                                     7
-
-/* Commands. */
-#define COMMAND_RESET                                       "reset"
-#define COMMAND_RESET_LENGTH                                      5
-#define COMMAND_SAVE                                         "save"
-#define COMMAND_SAVE_LENGTH                                       4
-#define COMMAND_EXIT                                         "exit"
-#define COMMAND_EXIT_LENGTH                                       4
 
 using namespace std;
 
@@ -74,26 +46,6 @@ enum class Mode {
 
 /* Flag to keep track if models were loaded or not. */
 int gModelsLoadedFlag = 0;
-
-/**
- * Get a precise timestamp as a string.
- */
-string getTimestamp();
-
-/**
- * Logging into log file.
- */
-static inline void log(string message, string level);
-
-/**
- * Logging errors into the log file.
- */
-void logError(string message);
-
-/**
- * Logging info into the log file.
- */
-void logInfo(string message);
 
 /**
  * Create the enabled algorithm via the Factory Pattern implemented in the MochiMochi library.
@@ -162,83 +114,7 @@ void initAlgorithms(int dim, PropertiesParser *pPropParser, map<string, vector<s
     }
 }
 
-/**
- * Initialize the socket server. 
- */
-void initSocketServer(int portNumber, int *pSockfd, int *pConnection)
-{
-    // Create a socket (IPv4, TCP)
-    *pSockfd = socket(AF_INET, SOCK_STREAM, 0);
 
-    if (*pSockfd == -1)
-    {
-        // Log error.
-        logError("Failed to create socket. errno: " + to_string(errno));
-
-        // Exit with error code.
-        exit(ERROR_CREATE_SOCKET);
-    }
-
-    // Listen to port on any address
-    sockaddr_in sockaddr;
-    sockaddr.sin_family = AF_INET;
-    sockaddr.sin_addr.s_addr = INADDR_ANY;
-
-    // Invoking htons is necessary to convert a number to network byte order.
-    // FIXME: Read port num from properties file.
-    sockaddr.sin_port = htons(portNumber);
-
-    // Bind to the given port.
-    if (bind(*pSockfd, (struct sockaddr*)&sockaddr, sizeof(sockaddr)) < 0)
-    {
-        // Log error.
-        logError("Failed to bind to port " + to_string(portNumber) + ". errno: " + to_string(errno));
-
-        // Exit with error code.
-        exit(ERROR_BIND_PORT);
-    }
-
-    // Start listening. Hold at most 1 connection in the queue
-    if (listen(*pSockfd, 1) < 0)
-    {
-        // Log error.
-        logError("Failed to listen on socket. errno: " + to_string(errno));
-
-        // Exit with error code.
-        exit(ERROR_LISTEN_SOCKET);
-    }
-
-    // Grab a connection from the queue
-    auto addrlen = sizeof(sockaddr);
-    *pConnection = accept(*pSockfd, (struct sockaddr*)&sockaddr, (socklen_t*)&addrlen);
-
-    if (*pConnection < 0)
-    {
-        // Log error.
-        logError("Failed to grab connection. errno: " + to_string(errno));
-
-        // Exit with error code.
-        exit(ERROR_GRAB_CONNECTION);
-    }
-}
-
-/**
- * Close server socket and connection.
- */
-void shutdownSocketServer(int *pSockfd, int *pConnection)
-{
-    /* Close the connection */
-    if(*pConnection)
-    {
-        close(*pConnection);
-    }
-
-    /* Close the socket. */
-    if(*pSockfd)
-    {
-        close(*pSockfd);
-    }
-}
 
 /**
  * Delete all model and log files.
@@ -440,29 +316,38 @@ int main(int argc, char *argv[])
         HyperParameters hyperParams;
         map<string, vector<string>> hpMap = hyperParams.getHyperParamsMap();
 
-        
         /* Init the online ML algorithms. */
         initAlgorithms(dim, &propParser, &hpMap, &bomlCreatorMap);
 
         /* The buffer for received commands. */
         char buffer[COMMAND_BUFFER_LENGTH];
 
-        /* Init Socket Server. */
+        /* Create Socket Server object. */
+        SocketServer socketServer;
+
+        /* Init the Socket Server and start listening for connections. */ 
         int connection;
         int sockfd;
+        int errorCode = socketServer.initSocketServer(portNumber, &sockfd, &connection);
 
-        initSocketServer(portNumber, &sockfd, &connection);
+        if(errorCode != NO_ERROR)
+        {
+            logError("Error Code " + to_string(errorCode) + ": Failed to initialized Socket Server.");
+            exit(errorCode);
+        }
 
-        // Read from the connection
+        /* Wait for a connection. */
+
+        /* Read from the connection. */
         while(1)
         {
-            // Read received command.
+            /* Read received command. */
             auto bytesRead = read(connection, buffer, COMMAND_BUFFER_LENGTH);
 
-            // Get string representation of the command.
+            /* Get string representation of the command. */
             string receivedCmd(buffer, bytesRead);
 
-            // Print out received command.
+            /* Print out received command. */
             //std::cout << "Received: " << receivedCmd << std::endl;
 
             /* Process the received command and break out the server loop if it's an exit command. */
@@ -473,10 +358,10 @@ int main(int argc, char *argv[])
         }
 
         /* Close connection and socket. */
-        shutdownSocketServer(&sockfd, &connection);
+        socketServer.shutdownSocketServer(&sockfd, &connection);
 
         /* Exit program. */
-        exit(ERROR_SUCCESS);
+        exit(NO_ERROR);
     }
     catch(const std::exception& e)
     {
@@ -496,59 +381,4 @@ int main(int argc, char *argv[])
         delete it->second;
         bomlCreatorMap.erase(it);
     }
-}
-
-
-/**
- * Get a precise timestamp as a string.
- * Taken from: https://gist.github.com/bschlinker/844a88c09dcf7a61f6a8df1e52af7730
- */
-std::string getTimestamp() 
-{
-  const auto now = std::chrono::system_clock::now();
-  const auto nowAsTimeT = std::chrono::system_clock::to_time_t(now);
-  const auto nowMs = std::chrono::duration_cast<std::chrono::milliseconds>(
-      now.time_since_epoch()) % 1000;
-
-  std::stringstream nowSs;
-  nowSs
-      << std::put_time(std::localtime(&nowAsTimeT), "%Y-%m-%d %T")
-      << '.' << std::setfill('0') << std::setw(3) << nowMs.count();
-
-  return nowSs.str();
-}
-
-/**
- * Logging a message.
- */
-static inline void log(std::string message, std::string level)
-{
-    /* Print out error message. */
-    std::cout << message << std::endl;
-    
-    /* Open the error log file. */
-    std::ofstream logFile;
-    logFile.open(LOG_FILEPATH_ORBITAI, std::ios_base::out | std::ios_base::app);
-
-    /* Append the log message into the error log file. */
-    logFile << "[" << getTimestamp() << "][" << level << "] " << message << "\n";
-
-    /* Close the log file. */
-    logFile.close();
-}
-
-/**
- * Logging errors into the application log file.
- */
-void logError(std::string message)
-{
-    log(message, "ERROR");
-}
-
-/**
- * Logging info into the application log file.
- */
-void logInfo(std::string message)
-{
-    log(message, "INFO");
 }
