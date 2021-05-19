@@ -15,7 +15,7 @@ LDFLAGS = -lboost_serialization
 
 # Source directory and files.
 SOURCEDIR = src
-HEADERS := $(wildcard $(SOURCEDIR)/*.h)
+HEADERS := $(wildcard $(SOURCEDIR)/*.hpp)
 SOURCES := $(wildcard $(SOURCEDIR)/*.cpp)
 
 # Target output.
