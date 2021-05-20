@@ -1,41 +1,19 @@
-/**
- * TODO: Refactoring
- * - Create a Logging class and move all logging logic inside of it.
- * - Create a SocketServer class and move all socker server logic inside of it.
- * - Create a MochiFacade class and move all calls to the Mochi logic inside of it.
- */
-#include <cstdlib> // For exit()
-#include <iostream> // For cout
-#include <fstream>
-#include <unistd.h> // For read
-#include <dirent.h>
-
-#include <sys/types.h> // For mkdkir
-#include <sys/stat.h> // For mkdkir
-
-#include <map>
+#include <cstdlib>      /* For exit() */
+#include <iostream>     /* For cout */
+#include <sys/types.h>  /* For mkdkir */
+#include <sys/stat.h>   /* For mkdkir */
+#include <unistd.h>
 #include <string>
-#include <sstream>
-#include <algorithm>
-#include <iterator>
-
-
-// For machine learning.
-#include <mochimochi/binary_classifier.hpp>
-#include <mochimochi/utility.hpp>
-#include <mochimochi/classifier/factory/binary_oml_factory.hpp>
+#include <map>
 
 #include "Constants.hpp"
 #include "Utils.hpp"
 #include "PropertiesParser.hpp"
 #include "HyperParameters.hpp"
 #include "SocketServer.hpp"
-
+#include "MochiMochiProxy.hpp"
 
 using namespace std;
-
-/* Direcotry paths */
-string gDirPathModels(DIR_PATH_MODELS);
 
 /* Modes */
 enum class Mode {
@@ -48,169 +26,25 @@ enum class Mode {
 int gModelsLoadedFlag = 0;
 
 /**
- * Create the enabled algorithm via the Factory Pattern implemented in the MochiMochi library.
- */
-void initAlgorithms(int dim, PropertiesParser *pPropParser, map<string, vector<string>> *pHpMap, map<string, BinaryOMLCreator*> *pBomlCreatorMap)
-{
-    for(map<string, vector<string>>::iterator it=pHpMap->begin(); it!=pHpMap->end(); ++it)
-    {
-        /* The name of the online ML algorithm. */
-        string algorithmName = it->first;
-
-        /* Check if the properties file indicates that this algorithm should be used. */
-        int enable = pPropParser->getProperty<int>(algorithmName);
-        if(enable == 1)
-        {
-            if(algorithmName.compare(HyperParameters::ALGORITHM_NAME_ADAGRAD_RDA) == 0)
-            {
-                /* Get hyperparameter values. */
-                const double eta = pPropParser->getHyperParameterProperty<double>(algorithmName, it->second.at(0));
-                const double lambda = pPropParser->getHyperParameterProperty<double>(algorithmName,it->second.at(1));
-
-                /* Instanciate the online ML algorithm class into an object and put it in the algorithm map. */ 
-                pBomlCreatorMap->insert(pair<string, BinaryOMLCreator*>(algorithmName, new BinaryADAGRADRDACreator(dim, eta, lambda)));
-            }
-            else if(algorithmName.compare(HyperParameters::ALGORITHM_NAME_ADAM) == 0)
-            {
-                /* Instanciate the online ML algorithm class into an object and put it in the algorithm map. */ 
-                pBomlCreatorMap->insert(pair<string, BinaryOMLCreator*>(algorithmName, new BinaryADAMCreator(dim)));
-            }
-            else if(algorithmName.compare(HyperParameters::ALGORITHM_NAME_AROW) == 0)
-            {
-                /* Get hyperparameter values. */
-                const double r = pPropParser->getHyperParameterProperty<double>(algorithmName, it->second.at(0));
-
-                /* Instanciate the online ML algorithm class into an object and put it in the algorithm map. */ 
-                pBomlCreatorMap->insert(pair<string, BinaryOMLCreator*>(algorithmName, new BinaryAROWCreator(dim, r)));
-            }
-            else if(algorithmName.compare(HyperParameters::ALGORITHM_NAME_NHERD) == 0)
-            {
-                /* Get hyperparameter values. */
-                const double c = pPropParser->getHyperParameterProperty<double>(algorithmName, it->second.at(0));
-                const int diagonal = pPropParser->getHyperParameterProperty<int>(algorithmName,it->second.at(1));
-
-                /* Instanciate the online ML algorithm class into an object and put it in the algorithm map. */ 
-                pBomlCreatorMap->insert(pair<string, BinaryOMLCreator*>(algorithmName, new BinaryNHERDCreator(dim, c, diagonal)));
-            }
-            else if(algorithmName.compare(HyperParameters::ALGORITHM_NAME_PA) == 0)
-            {
-                /* Get hyperparameter values. */
-                const double c = pPropParser->getHyperParameterProperty<double>(algorithmName, it->second.at(0));
-                const int select = pPropParser->getHyperParameterProperty<int>(algorithmName,it->second.at(1));
-
-                /* Instanciate the online ML algorithm class into an object and put it in the algorithm map. */ 
-                pBomlCreatorMap->insert(pair<string, BinaryOMLCreator*>(algorithmName, new BinaryPACreator(dim, c, select)));
-            }
-            else if(algorithmName.compare(HyperParameters::ALGORITHM_NAME_SCW) == 0)
-            {
-                /* Get hyperparameter values. */
-                const double c = pPropParser->getHyperParameterProperty<double>(algorithmName, it->second.at(0));
-                const double eta = pPropParser->getHyperParameterProperty<double>(algorithmName,it->second.at(1));
-
-                /* Instanciate the online ML algorithm class into an object and put it in the algorithm map. */ 
-                pBomlCreatorMap->insert(pair<string, BinaryOMLCreator*>(algorithmName, new BinarySCWCreator(dim, c, eta)));
-            }
-        }
-    }
-}
-
-
-
-/**
- * Delete all model and log files.
- */
-void reset()
-{
-    /* Delete all model files. */
-    DIR *dir;
-    struct dirent *ent;
-
-    if((dir = opendir(gDirPathModels.c_str())) != NULL)
-    {   
-        /* Loop through all the files inside the models directory. */
-        while((ent = readdir(dir)) != NULL)
-        {
-            /* Only process regular image files */
-            if(ent->d_type == DT_REG)
-            {
-                string filname(gDirPathModels + "/" + string(ent->d_name));
-                remove(filname.c_str());
-            }
-        }
-    }
-
-    /* Delete all log files. */
-    remove(LOG_FILEPATH_TRAINING);
-    remove(LOG_FILEPATH_INFERENCE);
-    remove(LOG_FILEPATH_ORBITAI);
-}
-
-/**
- * Train and save all the models with the given input.
- */
-void trainAndSaveModels(map<string, BinaryOMLCreator*> *pBomlCreatorMap, string *pTrainingInput, size_t dim)
-{
-    for(map<string, BinaryOMLCreator*>::iterator it=pBomlCreatorMap->begin(); it!=pBomlCreatorMap->end(); ++it)
-    {
-        it->second->trainAndSave(pTrainingInput, dim, gDirPathModels + "/" + it->second->name());
-    }
-}
-
-/**
- * Use the trained models to infer/predict the label for the given input.
- */
-void infer(map<string, BinaryOMLCreator*> *pBomlCreatorMap, string *pTrainingInput, size_t dim, map<string, int> *pPredictions)
-{
-    for(map<string, BinaryOMLCreator*>::iterator it=pBomlCreatorMap->begin(); it!=pBomlCreatorMap->end(); ++it)
-    {
-        // TODO: insert prediction result into map
-        it->second->infer(pTrainingInput, dim);
-    }
-}
-
-
-/**
- * Load all the models for the enabled online ML algorithms.
- */
-void loadModels(map<string, BinaryOMLCreator*> *pBomlCreatorMap)
-{
-    for(map<string, BinaryOMLCreator*>::iterator it=pBomlCreatorMap->begin(); it!=pBomlCreatorMap->end(); ++it)
-    {
-        // TODO: Handle missing file exception (just skip and log).
-        it->second->load(gDirPathModels + "/" + it->second->name());
-    }
-}
-
-/**
- * Save all the models for the enabled online ML algorithms.
- */
-void saveModels(map<string, BinaryOMLCreator*> *pBomlCreatorMap)
-{
-    for(map<string, BinaryOMLCreator*>::iterator it=pBomlCreatorMap->begin(); it!=pBomlCreatorMap->end(); ++it)
-    {
-        it->second->save(gDirPathModels + "/" + it->second->name());
-    }
-}
-
-/**
  * Process the received command.
+ * Returns flag indicating if the program loop should be exited or not.
  */
-int processReceivedCommand(int mode, int dim, string *pReceivedCommand, map<string, BinaryOMLCreator*> *pBomlCreatorMap)
+int processReceivedCommand(int mode, int dim, string *pReceivedCommand, MochiMochiProxy *pMochiMochiProxy)
 {
     if(pReceivedCommand->compare(0, COMMAND_RESET_LENGTH, COMMAND_RESET) == 0)
     {
         /* Delete all model and log files. */
-        reset();
+        pMochiMochiProxy->reset();
     }
     else if(pReceivedCommand->compare(0, COMMAND_SAVE_LENGTH, COMMAND_SAVE) == 0)
     {
         /* Save all models for the enabled algorithms. */
-        saveModels(pBomlCreatorMap);
+        pMochiMochiProxy->save(DIR_PATH_MODELS);
     }
     else if(pReceivedCommand->compare(0, COMMAND_EXIT_LENGTH, COMMAND_EXIT) == 0)
     {
         /* Exit the server loop. */
-        return 1;
+        return EXIT_PROGRAM_LOOP_YES;
     }
     else
     {
@@ -246,7 +80,7 @@ int processReceivedCommand(int mode, int dim, string *pReceivedCommand, map<stri
         {
             case static_cast<int>(Mode::trainNew):
                 /* Train and save models. */
-                trainAndSaveModels(pBomlCreatorMap, &input, dim);
+                pMochiMochiProxy->trainAndSave(&input, dim, DIR_PATH_MODELS);
                 break;
 
             case static_cast<int>(Mode::trainContinue):
@@ -255,38 +89,37 @@ int processReceivedCommand(int mode, int dim, string *pReceivedCommand, map<stri
                 if(gModelsLoadedFlag == 0)
                 {
                     /* Load all the models. */
-                    loadModels(pBomlCreatorMap);
+                    pMochiMochiProxy->load(DIR_PATH_MODELS);
 
                     /* Mark models as having been loaded. */
                     gModelsLoadedFlag = 1;
                 }
 
                 /* Train and save models. */
-                trainAndSaveModels(pBomlCreatorMap, &input, dim);
+                pMochiMochiProxy->trainAndSave(&input, dim, DIR_PATH_MODELS);
 
                 break;
 
             case static_cast<int>(Mode::infer):
+
                 /* Load models if they weren't loaded already. */
                 if(gModelsLoadedFlag == 0)
                 {
                     /* Load all the models. */
-                    loadModels(pBomlCreatorMap);
+                    pMochiMochiProxy->load(DIR_PATH_MODELS);
 
                     /* Mark models as having been loaded. */
                     gModelsLoadedFlag = 1;
                 }
 
-                map<string, int> predictions;
-                infer(pBomlCreatorMap, &input, dim, &predictions);
-
                 // TODO: Log prediction results.
+                pMochiMochiProxy->infer(&input, dim);
 
                 break;
         }
     }
 
-    return 0;
+    return EXIT_PROGRAM_LOOP_NO;
 }
 
 int main(int argc, char *argv[])
@@ -301,6 +134,7 @@ int main(int argc, char *argv[])
         mkdir(DIR_PATH_MODELS, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 
         /* Load the properties file and parse it into a map. */
+        // TODO: Error check if given file path points to existing file.
         PropertiesParser propParser(argv[1]);
 
         /* The socket serve's port number. */
@@ -316,8 +150,10 @@ int main(int argc, char *argv[])
         HyperParameters hyperParams;
         map<string, vector<string>> hpMap = hyperParams.getHyperParamsMap();
 
-        /* Init the online ML algorithms. */
-        initAlgorithms(dim, &propParser, &hpMap, &bomlCreatorMap);
+        /* Instanciate the Proxy to the MochiMochi library Init the online ML algorithms */
+        /* These online ML algorithms have been selectively enabled in the properties file. */
+        MochiMochiProxy mochiMochiProxy(&bomlCreatorMap);
+        mochiMochiProxy.initAlgorithms(dim, &propParser, &hpMap);
 
         /* The buffer for received commands. */
         char buffer[COMMAND_BUFFER_LENGTH];
@@ -351,9 +187,9 @@ int main(int argc, char *argv[])
             //std::cout << "Received: " << receivedCmd << std::endl;
 
             /* Process the received command and break out the server loop if it's an exit command. */
-            if(processReceivedCommand(mode, dim, &receivedCmd, &bomlCreatorMap) == 1)
+            if(processReceivedCommand(mode, dim, &receivedCmd, &mochiMochiProxy) == 1)
             {
-                break;
+                exit(ERROR_PROCESSING_RECEIVED_COMMAND);
             }
         }
 
@@ -363,10 +199,10 @@ int main(int argc, char *argv[])
         /* Exit program. */
         exit(NO_ERROR);
     }
-    catch(const std::exception& e)
+    catch(const exception& e)
     {
         // Log error.
-        std::ostringstream oss;
+        ostringstream oss;
         oss << "Error parsing arguments: " << e.what();
         logError(oss.str());
         

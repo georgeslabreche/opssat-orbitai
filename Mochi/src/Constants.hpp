@@ -19,6 +19,10 @@
 #define COMMAND_EXIT                                         "exit"
 #define COMMAND_EXIT_LENGTH                                       4
 
+/* Exit program loop flag */
+#define EXIT_PROGRAM_LOOP_YES                                     1
+#define EXIT_PROGRAM_LOOP_NO                                      0
+
 /* Error codes. */
 #define NO_ERROR                                                  0
 #define ERROR_UNKNOWN                                             1
@@ -28,5 +32,6 @@
 #define ERROR_BIND_PORT                                           5
 #define ERROR_LISTEN_SOCKET                                       6
 #define ERROR_GRAB_CONNECTION                                     7
+#define ERROR_PROCESSING_RECEIVED_COMMAND                         8
 
 #endif // CONSTANTS_H_
