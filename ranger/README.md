@@ -45,3 +45,5 @@ Load and use a saved forest from file ranger_out.forest:
 ```bash
 ./ranger --verbose --file ../training/mochi-2021-04-16_18-28-31/logs/training_ranger.csv --depvarname Target --treetype 1 --ntree 10 --nthreads 4 --predict ranger_out.forest
 ```
+
+The predicted values are saved in the file ranger_out.prediction. The confusion matrix is saved in the file ranger_out.confusion. 
