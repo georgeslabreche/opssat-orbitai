@@ -1,13 +1,14 @@
 #ifndef MOCHI_MOCHI_PROXY_H_
 #define MOCHI_MOCHI_PROXY_H_
 
-#include <map>
+#include <vector>
 #include <string>
 
 /* The Binary Machine Learning Algorithm Factory. */
 #include <mochimochi/classifier/factory/binary_oml_factory.hpp>
 
 #include "Constants.hpp"
+#include "Utils.hpp"
 #include "PropertiesParser.hpp"
 
 using namespace std;
@@ -19,8 +20,9 @@ using namespace std;
 class MochiMochiProxy : public BinaryOMLCreatorInterface
 {
 private:
-    /* Map pointer for the Binary ML algorithms creator classes. */
-    map<string, BinaryOMLCreator*> *m_pBomlCreatorMap;
+    /* Vector pointer for the Binary ML algorithms creator classes. */
+    vector<pair<string, BinaryOMLCreator*>>* m_pBomlCreatorVector;
+    PropertiesParser* m_pPropParser;
 
     /* Hide constructor. */
     MochiMochiProxy() {};
@@ -28,15 +30,16 @@ private:
 public:
     
     /* Constructor. */
-    MochiMochiProxy(map<string, BinaryOMLCreator*> *pBomlCreatorMap) 
+    MochiMochiProxy(vector<pair<string, BinaryOMLCreator*>>* pBomlCreatorVector, PropertiesParser* pPropParser)
     { 
-        m_pBomlCreatorMap = pBomlCreatorMap;
+        m_pBomlCreatorVector = pBomlCreatorVector;
+        m_pPropParser = pPropParser;
     }
 
     /**
      * Create the enabled algorithms via the Factory Pattern implemented in the MochiMochi library.
      */
-    void initAlgorithms(int dim, PropertiesParser *pPropParser, map<string, vector<string>> *pHpMap);
+    void initAlgorithms(int dim, map<string, vector<string>>* pHpMap);
 
     /**
      * Delete all model and log files.
@@ -54,23 +57,36 @@ public:
     /**
      * Train/update the model with the given training input.
      */
-    void train(string *pInput, int dim)
+    void train(string* pInput, int dim)
     {
-        for(map<string, BinaryOMLCreator*>::iterator it=m_pBomlCreatorMap->begin(); it!=m_pBomlCreatorMap->end(); ++it)
+        for(vector<pair<string, BinaryOMLCreator*>>::iterator it=m_pBomlCreatorVector->begin(); it!=m_pBomlCreatorVector->end(); ++it)
         {
             it->second->train(pInput, dim);
         }
+
+        /* Log the training data. */
+        if(m_pPropParser->isTrainingDataLogEnabled() == 1)
+        {
+            logTrainingData(m_pPropParser->getInputParamNames(), pInput);
+        }
+        
     }
 
     /**
      * Train/update the model with the given training input and save/serialize the model.
      * Note that for this proxy function the path argument is the parent directory path rather than the model file path.
      */
-    void trainAndSave(string *pInput, size_t dim, const string modelDirPath)
+    void trainAndSave(string* pInput, size_t dim, const string modelDirPath)
     {
-        for(map<string, BinaryOMLCreator*>::iterator it=m_pBomlCreatorMap->begin(); it!=m_pBomlCreatorMap->end(); ++it)
+        for(vector<pair<string, BinaryOMLCreator*>>::iterator it=m_pBomlCreatorVector->begin(); it!=m_pBomlCreatorVector->end(); ++it)
         {
             it->second->trainAndSave(pInput, dim, modelDirPath + "/" + it->second->name());
+        }
+
+        /* Log the training data. */
+        if(m_pPropParser->isTrainingDataLogEnabled() == 1)
+        {
+            logTrainingData(m_pPropParser->getInputParamNames(), pInput);
         }
     }
 
@@ -78,17 +94,24 @@ public:
      * Infer/predict the label with the given input.
      * Note that for this proxy function the return value is not the prediction result.
      */
-    int infer(string *pInput, size_t dim)
+    int infer(string* pInput, size_t dim)
     {
-        for(map<string, BinaryOMLCreator*>::iterator it=m_pBomlCreatorMap->begin(); it!=m_pBomlCreatorMap->end(); ++it)
+        /* This vector will contain the predictions made by the trained algorithms. */
+        vector<pair<string, int>> inferences;
+
+        for(vector<pair<string, BinaryOMLCreator*>>::iterator it=m_pBomlCreatorVector->begin(); it!=m_pBomlCreatorVector->end(); ++it)
         {
             // TODO: insert prediction result into map (or write them directly into file?)
-            it->second->infer(pInput, dim);
+            int label = it->second->infer(pInput, dim);
+            inferences.push_back(pair<string, int>(it->second->name(), label));
         }
+
+        /* Log the inference results. */
+        logInferenceResult(m_pPropParser->getInputParamNames(), pInput, &inferences);
         
         /**
          * Multiple model predictions are invoked.
-         * It makes no sense for this Proxy function to return a single predict result. 
+         * It makes no sense for this Proxy function to return a single prediction result. 
          */
         return 0;
     }
@@ -99,7 +122,7 @@ public:
      */
     void load(const string modelDirPath)
     {
-        for(map<string, BinaryOMLCreator*>::iterator it=m_pBomlCreatorMap->begin(); it!=m_pBomlCreatorMap->end(); ++it)
+        for(vector<pair<string, BinaryOMLCreator*>>::iterator it=m_pBomlCreatorVector->begin(); it!=m_pBomlCreatorVector->end(); ++it)
         {
             // TODO: Handle missing file exception (just skip and log the error?).
             it->second->load(modelDirPath + "/" + it->second->name());
@@ -112,7 +135,7 @@ public:
      */
     void save(const string modelDirPath)
     {
-        for(map<string, BinaryOMLCreator*>::iterator it=m_pBomlCreatorMap->begin(); it!=m_pBomlCreatorMap->end(); ++it)
+        for(vector<pair<string, BinaryOMLCreator*>>::iterator it=m_pBomlCreatorVector->begin(); it!=m_pBomlCreatorVector->end(); ++it)
         {
             it->second->save(modelDirPath + "/" + it->second->name());
         }

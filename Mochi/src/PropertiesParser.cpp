@@ -5,6 +5,7 @@
 
 /* Constants for property keys. */
 const string PropertiesParser::PROPS_PREFIX = "esa.mo.nmf.apps.OrbitAI.";
+const string PropertiesParser::PROPS_LOG_TRAINING_DATA = "mochi.log.data.training";
 const string PropertiesParser::PROPS_PORT_NUMBER  = "mochi.port";
 const string PropertiesParser::PROPS_MODE  = "mode";
 const string PropertiesParser::PROPS_INPUTS  = "inputs";

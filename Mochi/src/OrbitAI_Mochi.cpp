@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <string>
 #include <map>
+#include <vector>
 
 #include "Constants.hpp"
 #include "Utils.hpp"
@@ -124,8 +125,9 @@ int processReceivedCommand(int mode, int dim, string *pReceivedCommand, MochiMoc
 
 int main(int argc, char *argv[])
 {
-    /* The map that will contain points to the online ML algorithm class instances. */
-    map<string, BinaryOMLCreator*> bomlCreatorMap;
+    /* The vector that will contain points to the online ML algorithm class instances. */
+    /* We use a vector to preserve insertion order */
+    vector<pair<string, BinaryOMLCreator*>> bomlCreatorVector;
 
     try
     {
@@ -152,8 +154,8 @@ int main(int argc, char *argv[])
 
         /* Instanciate the Proxy to the MochiMochi library Init the online ML algorithms */
         /* These online ML algorithms have been selectively enabled in the properties file. */
-        MochiMochiProxy mochiMochiProxy(&bomlCreatorMap);
-        mochiMochiProxy.initAlgorithms(dim, &propParser, &hpMap);
+        MochiMochiProxy mochiMochiProxy(&bomlCreatorVector, &propParser);
+        mochiMochiProxy.initAlgorithms(dim, &hpMap);
 
         /* The buffer for received commands. */
         char buffer[COMMAND_BUFFER_LENGTH];
@@ -168,7 +170,7 @@ int main(int argc, char *argv[])
 
         if(errorCode != NO_ERROR)
         {
-            logError("Error Code " + to_string(errorCode) + ": Failed to initialized Socket Server.");
+            logError("Error Code " + to_string(errorCode) + ": Failed to initialize Socket Server.");
             exit(errorCode);
         }
 
@@ -212,9 +214,9 @@ int main(int argc, char *argv[])
 
     // TODO: Handle exception here.
     /* Destroy the BinaryOMLCreator pointers in the Creator map. */
-    for(map<string, BinaryOMLCreator*>::iterator it=bomlCreatorMap.begin(); it!=bomlCreatorMap.end(); ++it)
+    for(vector<pair<string, BinaryOMLCreator*>>::iterator it=bomlCreatorVector.begin(); it!=bomlCreatorVector.end(); ++it)
     {
         delete it->second;
-        bomlCreatorMap.erase(it);
+        bomlCreatorVector.erase(it);
     }
 }

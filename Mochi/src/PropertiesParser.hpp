@@ -25,6 +25,7 @@ public:
 
     /* Constants for property keys. */
     static const string PROPS_PREFIX;
+    static const string PROPS_LOG_TRAINING_DATA;
     static const string PROPS_PORT_NUMBER;
     static const string PROPS_MODE;
     static const string PROPS_INPUTS;
@@ -49,6 +50,11 @@ public:
         stringValue >> castValue;
 
         return castValue;
+    }
+
+    int isTrainingDataLogEnabled()
+    {
+        return getProperty<int>(PropertiesParser::PROPS_LOG_TRAINING_DATA);
     }
 
     int getPortNumber()
