@@ -25,13 +25,15 @@
 
 /* Error codes. */
 #define NO_ERROR                                                  0
-#define ERROR_UNKNOWN                                             1
-#define ERROR_PARSE_ARGS                                          2
-#define ERROR_INVALID_PORT_NUM                                    3
-#define ERROR_CREATE_SOCKET                                       4
-#define ERROR_BIND_PORT                                           5
-#define ERROR_LISTEN_SOCKET                                       6
-#define ERROR_GRAB_CONNECTION                                     7
-#define ERROR_PROCESSING_RECEIVED_COMMAND                         8
+#define ERROR_INVALID_ARGS                                        1
+#define ERROR_PROP_FILE_NOT_EXIST                                 2
+#define ERROR_UNKNOWN                                             3
+#define ERROR_PARSE_ARGS                                          4
+#define ERROR_INVALID_PORT_NUM                                    5
+#define ERROR_CREATE_SOCKET                                       6
+#define ERROR_BIND_PORT                                           7
+#define ERROR_LISTEN_SOCKET                                       8
+#define ERROR_GRAB_CONNECTION                                     9
+#define ERROR_PROCESSING_RECEIVED_COMMAND                        10
 
 #endif // CONSTANTS_H_

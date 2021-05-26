@@ -30,6 +30,129 @@ int gModelsLoadedFlag = 0;
  * Process the received command.
  * Returns flag indicating if the program loop should be exited or not.
  */
+int processReceivedCommand(int mode, int dim, string *pReceivedCommand, MochiMochiProxy *pMochiMochiProxy);
+
+
+/**
+ * Main application function.
+ */ 
+int main(int argc, char *argv[])
+{
+    if (argc != 2)
+    {
+        logError(ERROR_INVALID_ARGS, "invalid number or arguments given, expected a path to the properties file.");
+        exit(ERROR_INVALID_ARGS);
+    }
+
+    /* The vector that will contain points to the online ML algorithm class instances. */
+    /* We use a vector to preserve insertion order */
+    vector<pair<string, BinaryOMLCreator*>> bomlCreatorVector;
+
+    try
+    {
+        /* Create models and logs directory if they do not exist. */
+        mkdir(DIR_PATH_LOGS, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+        mkdir(DIR_PATH_MODELS, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+
+        /* Check if given property file exists or not. */
+        string propFilePath(argv[1]);
+        if(!exists(propFilePath))
+        {
+            logError(ERROR_PROP_FILE_NOT_EXIST, "Properties file does not exist " + propFilePath);
+            exit(ERROR_PROP_FILE_NOT_EXIST);
+        }
+
+        /* Load the properties file and parse it into a map. */
+        // TODO: Error check if given file path points to existing file.
+        PropertiesParser propParser(argv[1]);
+
+        /* The socket serve's port number. */
+        const int portNumber = propParser.getPortNumber();
+
+        /* Get mode: 0 - new training, 1 - continue training, or 2 - inference. */
+        const int mode = propParser.getMode();
+
+        /* The input dimension. */
+        const size_t dim = propParser.getInputDimension();
+
+        /* Convenience class that gives us a map containg a list of hyperparameter names for each online ML algorithm. */
+        HyperParameters hyperParams;
+        map<string, vector<string>> hpMap = hyperParams.getHyperParamsMap();
+
+        /* Instanciate the Proxy to the MochiMochi library Init the online ML algorithms */
+        /* These online ML algorithms have been selectively enabled in the properties file. */
+        MochiMochiProxy mochiMochiProxy(&bomlCreatorVector, &propParser);
+        mochiMochiProxy.initAlgorithms(dim, &hpMap);
+
+        /* The buffer for received commands. */
+        char buffer[COMMAND_BUFFER_LENGTH];
+
+        /* Create Socket Server object. */
+        SocketServer socketServer;
+
+        /* Init the Socket Server and start listening for connections. */ 
+        int connection;
+        int sockfd;
+        int errorCode = socketServer.initSocketServer(portNumber, &sockfd, &connection);
+
+        if(errorCode != NO_ERROR)
+        {
+            logError(errorCode, "Failed to initialize Socket Server.");
+            exit(errorCode);
+        }
+
+        /* Wait for a connection. */
+
+        /* Read from the connection. */
+        while(1)
+        {
+            /* Read received command. */
+            auto bytesRead = read(connection, buffer, COMMAND_BUFFER_LENGTH);
+
+            /* Get string representation of the command. */
+            string receivedCmd(buffer, bytesRead);
+
+            /* Print out received command. */
+            //std::cout << "Received: " << receivedCmd << std::endl;
+
+            /* Process the received command and break out the server loop if it's an exit command. */
+            if(processReceivedCommand(mode, dim, &receivedCmd, &mochiMochiProxy) == 1)
+            {
+                exit(ERROR_PROCESSING_RECEIVED_COMMAND);
+            }
+        }
+
+        /* Close connection and socket. */
+        socketServer.shutdownSocketServer(&sockfd, &connection);
+
+        /* Exit program. */
+        exit(NO_ERROR);
+    }
+    catch(const exception& e)
+    {
+        // Log error.
+        ostringstream oss;
+        oss << "Error parsing arguments: " << e.what();
+        logError(oss.str());
+        
+        // Exit program with error code.
+        exit(ERROR_UNKNOWN);
+    }
+
+    // TODO: Handle exception here.
+    /* Destroy the BinaryOMLCreator pointers in the Creator map. */
+    for(vector<pair<string, BinaryOMLCreator*>>::iterator it=bomlCreatorVector.begin(); it!=bomlCreatorVector.end(); ++it)
+    {
+        delete it->second;
+        bomlCreatorVector.erase(it);
+    }
+}
+
+
+/**
+ * Process the received command.
+ * Returns flag indicating if the program loop should be exited or not.
+ */
 int processReceivedCommand(int mode, int dim, string *pReceivedCommand, MochiMochiProxy *pMochiMochiProxy)
 {
     if(pReceivedCommand->compare(0, COMMAND_RESET_LENGTH, COMMAND_RESET) == 0)
@@ -121,102 +244,4 @@ int processReceivedCommand(int mode, int dim, string *pReceivedCommand, MochiMoc
     }
 
     return EXIT_PROGRAM_LOOP_NO;
-}
-
-int main(int argc, char *argv[])
-{
-    /* The vector that will contain points to the online ML algorithm class instances. */
-    /* We use a vector to preserve insertion order */
-    vector<pair<string, BinaryOMLCreator*>> bomlCreatorVector;
-
-    try
-    {
-        /* Create models and logs directory if they do not exist. */
-        mkdir(DIR_PATH_LOGS, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-        mkdir(DIR_PATH_MODELS, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-
-        /* Load the properties file and parse it into a map. */
-        // TODO: Error check if given file path points to existing file.
-        PropertiesParser propParser(argv[1]);
-
-        /* The socket serve's port number. */
-        const int portNumber = propParser.getPortNumber();
-
-        /* Get mode: 0 - new training, 1 - continue training, or 2 - inference. */
-        const int mode = propParser.getMode();
-
-        /* The input dimension. */
-        const size_t dim = propParser.getInputDimension();
-
-        /* Convenience class that gives us a map containg a list of hyperparameter names for each online ML algorithm. */
-        HyperParameters hyperParams;
-        map<string, vector<string>> hpMap = hyperParams.getHyperParamsMap();
-
-        /* Instanciate the Proxy to the MochiMochi library Init the online ML algorithms */
-        /* These online ML algorithms have been selectively enabled in the properties file. */
-        MochiMochiProxy mochiMochiProxy(&bomlCreatorVector, &propParser);
-        mochiMochiProxy.initAlgorithms(dim, &hpMap);
-
-        /* The buffer for received commands. */
-        char buffer[COMMAND_BUFFER_LENGTH];
-
-        /* Create Socket Server object. */
-        SocketServer socketServer;
-
-        /* Init the Socket Server and start listening for connections. */ 
-        int connection;
-        int sockfd;
-        int errorCode = socketServer.initSocketServer(portNumber, &sockfd, &connection);
-
-        if(errorCode != NO_ERROR)
-        {
-            logError("Error Code " + to_string(errorCode) + ": Failed to initialize Socket Server.");
-            exit(errorCode);
-        }
-
-        /* Wait for a connection. */
-
-        /* Read from the connection. */
-        while(1)
-        {
-            /* Read received command. */
-            auto bytesRead = read(connection, buffer, COMMAND_BUFFER_LENGTH);
-
-            /* Get string representation of the command. */
-            string receivedCmd(buffer, bytesRead);
-
-            /* Print out received command. */
-            //std::cout << "Received: " << receivedCmd << std::endl;
-
-            /* Process the received command and break out the server loop if it's an exit command. */
-            if(processReceivedCommand(mode, dim, &receivedCmd, &mochiMochiProxy) == 1)
-            {
-                exit(ERROR_PROCESSING_RECEIVED_COMMAND);
-            }
-        }
-
-        /* Close connection and socket. */
-        socketServer.shutdownSocketServer(&sockfd, &connection);
-
-        /* Exit program. */
-        exit(NO_ERROR);
-    }
-    catch(const exception& e)
-    {
-        // Log error.
-        ostringstream oss;
-        oss << "Error parsing arguments: " << e.what();
-        logError(oss.str());
-        
-        // Exit program with error code.
-        exit(ERROR_UNKNOWN);
-    }
-
-    // TODO: Handle exception here.
-    /* Destroy the BinaryOMLCreator pointers in the Creator map. */
-    for(vector<pair<string, BinaryOMLCreator*>>::iterator it=bomlCreatorVector.begin(); it!=bomlCreatorVector.end(); ++it)
-    {
-        delete it->second;
-        bomlCreatorVector.erase(it);
-    }
 }

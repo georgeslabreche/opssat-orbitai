@@ -107,6 +107,14 @@ static inline void logError(string message)
 }
 
 /**
+ * Logging error message prefixed with error code.
+ */
+static inline void logError(int errorCode, string message)
+{
+    logError("Error Code " + to_string(errorCode) + ": " + message);
+}
+
+/**
  * Logging info into the application log file.
  */
 static inline void logInfo(string message)
