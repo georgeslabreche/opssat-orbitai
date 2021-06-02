@@ -63,7 +63,7 @@ The server can execute the following operations:
 - load: load the previously saved models in order to update them with new training data.
 - exit: stop the server and exit the program (does not save the trained models).
 
-#### Training
+#### Training, Continue Training, and Inferring
 An ML Server implemented by the OrbitAI serves as a generic entry point that accepts training or inference inputs of any size if the following structure:
 - The first four characters is an integer value representing the total length of the message sent to the ML Server.
 - The remaining characters compose the input string sent to the update (train) or predict (infer) functions implemented in the [MochiMochi online ML algorithms](https://github.com/georgeslabreche/MochiMochi).
@@ -74,8 +74,9 @@ E.g. training or inference strings expected by the ML Server:
 0031 -1 1:1.232 2:2.412 3:2.123
 ```
 
-Note that the label values can either be +1 or -1 for binary classification. These label values represent the expected labels (supervised learning).
-
+Note:
+- The label values can either be +1 or -1 for binary classification. These label values represent the expected labels (supervised learning).
+- The ML Server determines which mode its on from the reading the properties file (Mode 0: New Training, Mode 1: Continue Training, Mode 2: Inference).
 ### Test the ML Server
 #### Training
 ##### Single Sample
