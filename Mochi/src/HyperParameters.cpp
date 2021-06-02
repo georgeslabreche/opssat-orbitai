@@ -14,11 +14,11 @@ const string HyperParameters::ALGORITHM_NAME_PA = "PA";
  */
 HyperParameters::HyperParameters()
 {
-    /* List the hyperparameters expected from each online ML algorithm. */
+    /* List the names of the hyperparameters expected by each online ML algorithm. */
     vector<string> adamParams = {};
     vector<string> adagradRdaParams = {HYPER_PARAMETER_ETA, HYPER_PARAMETER_LAMBDA};
     vector<string> arowParams = {HYPER_PARAMETER_R};
-    vector<string> scwParams = {HYPER_PARAMETER_ETA};
+    vector<string> scwParams = {HYPER_PARAMETER_C, HYPER_PARAMETER_ETA};
     vector<string> nherdParams = {HYPER_PARAMETER_C, HYPER_PARAMETER_DIAGONAL};
     vector<string> paParams = {HYPER_PARAMETER_VARIANT, HYPER_PARAMETER_C};
 

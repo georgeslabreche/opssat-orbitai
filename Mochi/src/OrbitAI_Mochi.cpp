@@ -63,7 +63,6 @@ int main(int argc, char *argv[])
         }
 
         /* Load the properties file and parse it into a map. */
-        // TODO: Error check if given file path points to existing file.
         PropertiesParser propParser(argv[1]);
 
         /* The socket serve's port number. */

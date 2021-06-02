@@ -25,7 +25,7 @@ void MochiMochiProxy::initAlgorithms(int dim, map<string, vector<string>>* pHpMa
             {
                 /* Get hyperparameter values. */
                 const double eta = m_pPropParser->getHyperParameterProperty<double>(algorithmName, it->second.at(0));
-                const double lambda = m_pPropParser->getHyperParameterProperty<double>(algorithmName,it->second.at(1));
+                const double lambda = m_pPropParser->getHyperParameterProperty<double>(algorithmName, it->second.at(1));
 
                 /* Instanciate the online ML algorithm class into an object and put it in the algorithm vector. */ 
                 m_pBomlCreatorVector->push_back(pair<string, BinaryOMLCreator*>(algorithmName, new BinaryADAGRADRDACreator(dim, eta, lambda)));
@@ -47,7 +47,7 @@ void MochiMochiProxy::initAlgorithms(int dim, map<string, vector<string>>* pHpMa
             {
                 /* Get hyperparameter values. */
                 const double c = m_pPropParser->getHyperParameterProperty<double>(algorithmName, it->second.at(0));
-                const int diagonal = m_pPropParser->getHyperParameterProperty<int>(algorithmName,it->second.at(1));
+                const int diagonal = m_pPropParser->getHyperParameterProperty<int>(algorithmName, it->second.at(1));
 
                 /* Instanciate the online ML algorithm class into an object and put it in the algorithm vector. */ 
                 m_pBomlCreatorVector->push_back(pair<string, BinaryOMLCreator*>(algorithmName, new BinaryNHERDCreator(dim, c, diagonal)));
@@ -55,8 +55,8 @@ void MochiMochiProxy::initAlgorithms(int dim, map<string, vector<string>>* pHpMa
             else if(algorithmName.compare(HyperParameters::ALGORITHM_NAME_PA) == 0)
             {
                 /* Get hyperparameter values. */
-                const double c = m_pPropParser->getHyperParameterProperty<double>(algorithmName, it->second.at(0));
-                const int select = m_pPropParser->getHyperParameterProperty<int>(algorithmName,it->second.at(1));
+                const int select = m_pPropParser->getHyperParameterProperty<int>(algorithmName, it->second.at(0));
+                const double c = m_pPropParser->getHyperParameterProperty<double>(algorithmName, it->second.at(1));
 
                 /* Instanciate the online ML algorithm class into an object and put it in the algorithm vector. */ 
                 m_pBomlCreatorVector->push_back(pair<string, BinaryOMLCreator*>(algorithmName, new BinaryPACreator(dim, c, select)));
@@ -65,7 +65,7 @@ void MochiMochiProxy::initAlgorithms(int dim, map<string, vector<string>>* pHpMa
             {
                 /* Get hyperparameter values. */
                 const double c = m_pPropParser->getHyperParameterProperty<double>(algorithmName, it->second.at(0));
-                const double eta = m_pPropParser->getHyperParameterProperty<double>(algorithmName,it->second.at(1));
+                const double eta = m_pPropParser->getHyperParameterProperty<double>(algorithmName, it->second.at(1));
 
                 /* Instanciate the online ML algorithm class into an object and put it in the algorithm vector. */ 
                 m_pBomlCreatorVector->push_back(pair<string, BinaryOMLCreator*>(algorithmName, new BinarySCWCreator(dim, c, eta)));
