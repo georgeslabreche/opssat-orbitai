@@ -17,7 +17,7 @@ using namespace std;
  * Instead of operating on a singly ML Algorithm this Proxy makes sure
  * that we operate on every ML Alagorithm enabled in the properties file.
  */ 
-class MochiMochiProxy : public BinaryOMLCreatorInterface
+class MochiMochiProxy : public BinaryOMLInterface
 {
 private:
     /* Vector pointer for the Binary ML algorithms creator classes. */
