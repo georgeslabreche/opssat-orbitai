@@ -101,7 +101,6 @@ public:
 
         for(vector<pair<string, BinaryOMLCreator*>>::iterator it=m_pBomlCreatorVector->begin(); it!=m_pBomlCreatorVector->end(); ++it)
         {
-            // TODO: insert prediction result into map (or write them directly into file?)
             int label = it->second->infer(pInput, dim);
             inferences.push_back(pair<string, int>(it->second->name(), label));
         }
