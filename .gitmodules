@@ -1,7 +1,7 @@
 [submodule "Mochi/MochiMochi"]
 	path = Mochi/MochiMochi
 	url = https://github.com/georgeslabreche/MochiMochi
-	branch = factory_pattern
+	branch = orbitai
 [submodule "Mochi/eigen"]
 	path = Mochi/eigen
 	url = https://gitlab.com/libeigen/eigen.git
