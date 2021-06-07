@@ -30,7 +30,7 @@ int gModelsLoadedFlag = 0;
  * Process the received command.
  * Returns flag indicating if the program loop should be exited or not.
  */
-int processReceivedCommand(int mode, int dim, string *pReceivedCommand, MochiMochiProxy *pMochiMochiProxy);
+int processReceivedCommand(int mode, int dim, string *pReceivedCommand, MochiMochiProxy *pMochiMochiProxy, int *pErrorCode);
 
 
 /**
@@ -98,9 +98,13 @@ int main(int argc, char *argv[])
             exit(errorCode);
         }
 
-        /* Wait for a connection. */
+        /* Processing the command returns a flag on whether we should break out of the server loop or not. */
+        int breakLoop;
 
-        /* Read from the connection. */
+        /* When processing a command and error can occur (e.g. invalid command). */
+        int cmdErrorCode;
+
+        /* Wait for a connection and read from the connection. */
         while(1)
         {
             /* Read received command. */
@@ -113,10 +117,18 @@ int main(int argc, char *argv[])
             //std::cout << "Received: " << receivedCmd << std::endl;
 
             /* Process the received command and break out the server loop if it's an exit command. */
-            if(processReceivedCommand(mode, dim, &receivedCmd, &mochiMochiProxy) == 1)
+            breakLoop = processReceivedCommand(mode, dim, &receivedCmd, &mochiMochiProxy, &cmdErrorCode);
+
+            /* Check for error and log if any. */
+            if(cmdErrorCode != NO_ERROR)
             {
-                // FIXME: break out of the loop instead of exit.
-                exit(ERROR_PROCESSING_RECEIVED_COMMAND);
+                logError(cmdErrorCode, "Failed to process the following command: " + receivedCmd);
+            }
+
+            if(breakLoop == 1)
+            {
+                /* Break out of the loop in case of exit command. */
+                break;
             }
         }
 
@@ -128,12 +140,12 @@ int main(int argc, char *argv[])
     }
     catch(const exception& e)
     {
-        // Log error.
+        /* Log error. */
         ostringstream oss;
-        oss << "Error parsing arguments: " << e.what();
+        oss << "Exception thrown while starting the server. The exception's explanatory string: " << e.what();
         logError(oss.str());
         
-        // Exit program with error code.
+        /* Exit program with error code. */
         exit(ERROR_UNKNOWN);
     }
 }
@@ -143,94 +155,114 @@ int main(int argc, char *argv[])
  * Process the received command.
  * Returns flag indicating if the program loop should be exited or not.
  */
-int processReceivedCommand(int mode, int dim, string *pReceivedCommand, MochiMochiProxy *pMochiMochiProxy)
+int processReceivedCommand(int mode, int dim, string *pReceivedCommand, MochiMochiProxy *pMochiMochiProxy, int *pErrorCode)
 {
-    if(pReceivedCommand->compare(0, COMMAND_RESET_LENGTH, COMMAND_RESET) == 0)
-    {
-        /* Delete all model and log files. */
-        pMochiMochiProxy->reset();
-    }
-    else if(pReceivedCommand->compare(0, COMMAND_SAVE_LENGTH, COMMAND_SAVE) == 0)
-    {
-        /* Save all models for the enabled algorithms. */
-        pMochiMochiProxy->save(DIR_PATH_MODELS);
-    }
-    else if(pReceivedCommand->compare(0, COMMAND_EXIT_LENGTH, COMMAND_EXIT) == 0)
-    {
-        /* Exit the server loop. */
-        return EXIT_PROGRAM_LOOP_YES;
-    }
-    else
-    {
-        /**
-         * Entering this else block means that the receive command is either for training or inference.
-         * There are three possible modes:
-         * 
-         *  Mode 0: New Training.
-         *  Mode 1: Continue Training.
-         *  Mode 2: Inference.
-         * 
-         * Command structure:
-         * - First four characters is the total length of the received message.
-         * - The rest is the input string sent as a parameter to the online ML update or predict/infer functions.
-         * 
-         * E.g. commands:
-         * 
-         * 0041 +1 1:1.232 2:2.412 3:2.123 4:5.23223
-         * 0031 -1 1:1.232 2:2.412 3:2.123
-         * 
-         * Note that the commands do not start with a command name for which operation mode to execute.
-         * This is because we can just determine this from reading the Properties file.
-         * 
-         */ 
+    /* Assume no errors. */
+    *pErrorCode = NO_ERROR;
 
-        /* First four characters is the total length of the received message. */
-        int messageLength = std::stoi(pReceivedCommand->substr(0, 4));
-
-        /* The rest is the actual training or inference input. */
-        string input = pReceivedCommand->substr(5, messageLength-5);
-
-        switch(mode)
+    try
+    {
+        if(pReceivedCommand->compare(0, COMMAND_RESET_LENGTH, COMMAND_RESET) == 0)
         {
-            case static_cast<int>(Mode::trainNew):
-                /* Train and save models. */
-                pMochiMochiProxy->trainAndSave(&input, dim, DIR_PATH_MODELS);
-                break;
-
-            case static_cast<int>(Mode::trainContinue):
-
-                /* Load models if they weren't loaded already. */
-                if(gModelsLoadedFlag == 0)
-                {
-                    /* Load all the models. */
-                    pMochiMochiProxy->load(DIR_PATH_MODELS);
-
-                    /* Mark models as having been loaded. */
-                    gModelsLoadedFlag = 1;
-                }
-
-                /* Train and save models. */
-                pMochiMochiProxy->trainAndSave(&input, dim, DIR_PATH_MODELS);
-
-                break;
-
-            case static_cast<int>(Mode::infer):
-
-                /* Load models if they weren't loaded already. */
-                if(gModelsLoadedFlag == 0)
-                {
-                    /* Load all the models. */
-                    pMochiMochiProxy->load(DIR_PATH_MODELS);
-
-                    /* Mark models as having been loaded. */
-                    gModelsLoadedFlag = 1;
-                }
-
-                // TODO: Log prediction results.
-                pMochiMochiProxy->infer(&input, dim);
-
-                break;
+            /* Delete all model and log files. */
+            pMochiMochiProxy->reset();
         }
+        else if(pReceivedCommand->compare(0, COMMAND_SAVE_LENGTH, COMMAND_SAVE) == 0)
+        {
+            /* Save all models for the enabled algorithms. */
+            pMochiMochiProxy->save(DIR_PATH_MODELS);
+        }
+        else if(pReceivedCommand->compare(0, COMMAND_EXIT_LENGTH, COMMAND_EXIT) == 0)
+        {
+            /* Exit the server loop. */
+            return EXIT_PROGRAM_LOOP_YES;
+        }
+        else
+        {
+            /**
+             * Entering this else block means that the receive command is either for training or inference.
+             * There are three possible modes:
+             * 
+             *  Mode 0: New Training.
+             *  Mode 1: Continue Training.
+             *  Mode 2: Inference.
+             * 
+             * Command structure:
+             * - First four characters is the total length of the received message.
+             * - The rest is the input string sent as a parameter to the online ML update or predict/infer functions.
+             * 
+             * E.g. commands:
+             * 
+             * 0041 +1 1:1.232 2:2.412 3:2.123 4:5.23223
+             * 0031 -1 1:1.232 2:2.412 3:2.123
+             * 
+             * Note that the commands do not start with a command name for which operation mode to execute.
+             * This is because we can just determine this from reading the Properties file.
+             * 
+             */ 
+
+            /* First four characters is the total length of the received message. */
+            int messageLength = std::stoi(pReceivedCommand->substr(0, 4));
+
+            /* The rest is the actual training or inference input. */
+            string input = pReceivedCommand->substr(5, messageLength-5);
+
+            switch(mode)
+            {
+                case static_cast<int>(Mode::trainNew):
+                    /* Train and save models. */
+                    pMochiMochiProxy->trainAndSave(&input, dim, DIR_PATH_MODELS);
+                    break;
+
+                case static_cast<int>(Mode::trainContinue):
+
+                    /* Load models if they weren't loaded already. */
+                    if(gModelsLoadedFlag == 0)
+                    {
+                        /* Load all the models. */
+                        pMochiMochiProxy->load(DIR_PATH_MODELS);
+
+                        /* Mark models as having been loaded. */
+                        gModelsLoadedFlag = 1;
+                    }
+
+                    /* Train and save models. */
+                    pMochiMochiProxy->trainAndSave(&input, dim, DIR_PATH_MODELS);
+
+                    break;
+
+                case static_cast<int>(Mode::infer):
+
+                    /* Load models if they weren't loaded already. */
+                    if(gModelsLoadedFlag == 0)
+                    {
+                        /* Load all the models. */
+                        pMochiMochiProxy->load(DIR_PATH_MODELS);
+
+                        /* Mark models as having been loaded. */
+                        gModelsLoadedFlag = 1;
+                    }
+
+                    // TODO: Log prediction results.
+                    pMochiMochiProxy->infer(&input, dim);
+
+                    break;
+
+                default:
+                    /* Unexpected command */
+                    *pErrorCode = ERROR_PROCESSING_RECEIVED_COMMAND;
+            }
+        }
+    }
+    catch(const exception& e)
+    {
+        /* Log error. */
+        ostringstream oss;
+        oss << "Exception thrown while processing the received command. The exception's explanatory string: " << e.what();
+        logError(oss.str());
+        
+        /* Set error code. */
+        *pErrorCode = ERROR_PROCESSING_RECEIVED_COMMAND;
     }
 
     return EXIT_PROGRAM_LOOP_NO;
