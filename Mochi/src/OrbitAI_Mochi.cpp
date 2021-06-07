@@ -44,10 +44,6 @@ int main(int argc, char *argv[])
         exit(ERROR_INVALID_ARGS);
     }
 
-    /* The vector that will contain points to the online ML algorithm class instances. */
-    /* We use a vector to preserve insertion order */
-    vector<pair<string, BinaryOMLCreator*>> bomlCreatorVector;
-
     try
     {
         /* Create models and logs directory if they do not exist. */
@@ -80,7 +76,9 @@ int main(int argc, char *argv[])
 
         /* Instanciate the Proxy to the MochiMochi library Init the online ML algorithms */
         /* These online ML algorithms have been selectively enabled in the properties file. */
-        MochiMochiProxy mochiMochiProxy(&bomlCreatorVector, &propParser);
+        MochiMochiProxy mochiMochiProxy(&propParser);
+
+        /* Init the enabled algorithms. */
         mochiMochiProxy.initAlgorithms(dim, &hpMap);
 
         /* The buffer for received commands. */
@@ -117,6 +115,7 @@ int main(int argc, char *argv[])
             /* Process the received command and break out the server loop if it's an exit command. */
             if(processReceivedCommand(mode, dim, &receivedCmd, &mochiMochiProxy) == 1)
             {
+                // FIXME: break out of the loop instead of exit.
                 exit(ERROR_PROCESSING_RECEIVED_COMMAND);
             }
         }
@@ -136,14 +135,6 @@ int main(int argc, char *argv[])
         
         // Exit program with error code.
         exit(ERROR_UNKNOWN);
-    }
-
-    // TODO: Handle exception here.
-    /* Destroy the BinaryOMLCreator pointers in the Creator map. */
-    for(vector<pair<string, BinaryOMLCreator*>>::iterator it=bomlCreatorVector.begin(); it!=bomlCreatorVector.end(); ++it)
-    {
-        delete it->second;
-        bomlCreatorVector.erase(it);
     }
 }
 

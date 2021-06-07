@@ -21,7 +21,7 @@ class MochiMochiProxy : public BinaryOMLInterface
 {
 private:
     /* Vector pointer for the Binary ML algorithms creator classes. */
-    vector<pair<string, BinaryOMLCreator*>>* m_pBomlCreatorVector;
+    vector<pair<string, BinaryOMLCreator*>> m_bomlCreatorVector;
     PropertiesParser* m_pPropParser;
 
     /* Hide constructor. */
@@ -30,10 +30,20 @@ private:
 public:
     
     /* Constructor. */
-    MochiMochiProxy(vector<pair<string, BinaryOMLCreator*>>* pBomlCreatorVector, PropertiesParser* pPropParser)
-    { 
-        m_pBomlCreatorVector = pBomlCreatorVector;
+    MochiMochiProxy(PropertiesParser* pPropParser)
+    {
         m_pPropParser = pPropParser;
+    }
+
+    /* Destructor. */
+    ~MochiMochiProxy()
+    {
+        /* Destroy the BinaryOMLCreator pointers in the Creator map. */
+        /* Do not increment "it" in the for loop because calling ->erase(it) on a vector we are iterating through is problematic. */
+        for(vector<pair<string, BinaryOMLCreator*>>::iterator it=m_bomlCreatorVector.begin(); it!=m_bomlCreatorVector.end();)
+        {
+            it = m_bomlCreatorVector.erase(it);
+        }
     }
 
     /**
@@ -59,7 +69,7 @@ public:
      */
     void train(string* pInput, int dim)
     {
-        for(vector<pair<string, BinaryOMLCreator*>>::iterator it=m_pBomlCreatorVector->begin(); it!=m_pBomlCreatorVector->end(); ++it)
+        for(vector<pair<string, BinaryOMLCreator*>>::iterator it=m_bomlCreatorVector.begin(); it!=m_bomlCreatorVector.end(); ++it)
         {
             it->second->train(pInput, dim);
         }
@@ -78,7 +88,7 @@ public:
      */
     void trainAndSave(string* pInput, size_t dim, const string modelDirPath)
     {
-        for(vector<pair<string, BinaryOMLCreator*>>::iterator it=m_pBomlCreatorVector->begin(); it!=m_pBomlCreatorVector->end(); ++it)
+        for(vector<pair<string, BinaryOMLCreator*>>::iterator it=m_bomlCreatorVector.begin(); it!=m_bomlCreatorVector.end(); ++it)
         {
             it->second->trainAndSave(pInput, dim, modelDirPath + "/" + it->second->name());
         }
@@ -99,7 +109,7 @@ public:
         /* This vector will contain the predictions made by the trained algorithms. */
         vector<pair<string, int>> inferences;
 
-        for(vector<pair<string, BinaryOMLCreator*>>::iterator it=m_pBomlCreatorVector->begin(); it!=m_pBomlCreatorVector->end(); ++it)
+        for(vector<pair<string, BinaryOMLCreator*>>::iterator it=m_bomlCreatorVector.begin(); it!=m_bomlCreatorVector.end(); ++it)
         {
             int label = it->second->infer(pInput, dim);
             inferences.push_back(pair<string, int>(it->second->name(), label));
@@ -121,7 +131,7 @@ public:
      */
     void load(const string modelDirPath)
     {
-        for(vector<pair<string, BinaryOMLCreator*>>::iterator it=m_pBomlCreatorVector->begin(); it!=m_pBomlCreatorVector->end(); ++it)
+        for(vector<pair<string, BinaryOMLCreator*>>::iterator it=m_bomlCreatorVector.begin(); it!=m_bomlCreatorVector.end(); ++it)
         {
             // TODO: Handle missing file exception (just skip and log the error?).
             it->second->load(modelDirPath + "/" + it->second->name());
@@ -134,7 +144,7 @@ public:
      */
     void save(const string modelDirPath)
     {
-        for(vector<pair<string, BinaryOMLCreator*>>::iterator it=m_pBomlCreatorVector->begin(); it!=m_pBomlCreatorVector->end(); ++it)
+        for(vector<pair<string, BinaryOMLCreator*>>::iterator it=m_bomlCreatorVector.begin(); it!=m_bomlCreatorVector.end(); ++it)
         {
             it->second->save(modelDirPath + "/" + it->second->name());
         }
