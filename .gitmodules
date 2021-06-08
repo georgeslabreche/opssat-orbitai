@@ -6,11 +6,3 @@
 	path = Mochi/eigen
 	url = https://gitlab.com/libeigen/eigen.git
 	branch = 3.3
-[submodule "Boost/eigen"]
-	path = Boost/eigen
-	url = https://gitlab.com/libeigen/eigen.git
-	branch = 2.0
-[submodule "Boost/online-multiclass-lpboost"]
-	path = Boost/online-multiclass-lpboost
-	url = https://github.com/georgeslabreche/online-multiclass-lpboost.git
-	branch = orbitai
