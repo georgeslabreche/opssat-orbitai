@@ -148,11 +148,10 @@ public:
             }
             else
             {
-                /* Log that serialized model file is missing file exception. */
+                /* Log that serialized model file is missing. */
                 /* When this happens the model will be retrained from scratch. */
                 logError(ERROR_SERIALIZED_MODE_NOT_EXIST, "Serialized model file does not exist, training it from sratch instead of loading: " + modelFilePath);
             }
-            
         }
     }
 
