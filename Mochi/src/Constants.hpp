@@ -35,5 +35,6 @@
 #define ERROR_LISTEN_SOCKET                                       8
 #define ERROR_GRAB_CONNECTION                                     9
 #define ERROR_PROCESSING_RECEIVED_COMMAND                        10
+#define ERROR_SERIALIZED_MODE_NOT_EXIST                          11
 
 #endif // CONSTANTS_H_
