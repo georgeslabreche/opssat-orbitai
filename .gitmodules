@@ -6,3 +6,6 @@
 	path = Mochi/eigen
 	url = https://gitlab.com/libeigen/eigen.git
 	branch = 3.3
+[submodule "RandomForest/ranger"]
+	path = RandomForest/ranger
+	url = https://github.com/georgeslabreche/ranger.git
