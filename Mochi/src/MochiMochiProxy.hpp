@@ -79,7 +79,6 @@ public:
         {
             logTrainingData(m_pPropParser->getInputParamNames(), pInput);
         }
-        
     }
 
     /**
@@ -131,10 +130,28 @@ public:
      */
     void load(const string modelDirPath)
     {
+        string modelFilePath;
+
         for(vector<pair<string, BinaryOMLCreator*>>::iterator it=m_bomlCreatorVector.begin(); it!=m_bomlCreatorVector.end(); ++it)
         {
-            // TODO: Handle missing file exception (just skip and log the error?).
-            it->second->load(modelDirPath + "/" + it->second->name());
+            /* The file path to the serialized model. */
+            modelFilePath = modelDirPath + "/" + it->second->name();
+
+            /* If the serialized model file exists then load it. */
+            if(exists(modelFilePath) == 1)
+            {
+                /* Load the model. */
+                it->second->load(modelFilePath);
+
+                /* Log that the model has been loaded. */
+                logInfo("Loaded model: " + modelFilePath);
+            }
+            else
+            {
+                /* Log that serialized model file is missing. */
+                /* When this happens the model will be retrained from scratch. */
+                logError(ERROR_SERIALIZED_MODE_NOT_EXIST, "Serialized model file does not exist, training it from sratch instead of loading: " + modelFilePath);
+            }
         }
     }
 

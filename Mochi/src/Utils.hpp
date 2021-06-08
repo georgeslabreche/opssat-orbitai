@@ -111,7 +111,7 @@ static inline void logError(string message)
  */
 static inline void logError(int errorCode, string message)
 {
-    logError("Error Code " + to_string(errorCode) + ": " + message);
+    logError("Error Code " + to_string(errorCode) + " - " + message);
 }
 
 /**
