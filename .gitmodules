@@ -9,3 +9,7 @@
 [submodule "RandomForest/ranger"]
 	path = RandomForest/ranger
 	url = https://github.com/georgeslabreche/ranger.git
+	branch = orbitai
+[submodule "RandomForest/csv2"]
+	path = RandomForest/csv2
+	url = https://github.com/georgeslabreche/csv2.git
