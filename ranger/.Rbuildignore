@@ -1,8 +1,0 @@
-^.*\.Rproj$
-^\.Rproj\.user$
-^release$
-^NEWS\.md$
-^README\.md$
-^.*\.tar.gz$
-^cpp\_version$
-^\.github$

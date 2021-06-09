@@ -1,10 +1,10 @@
 # OPS-SAT OrbitAI: Online Machine Learning with MochiMochi
 An executable binary for ESA's OPS-SAT spacecraft to enable Machine Learning using MochiMochi in the OrbitAI experiment. After initializing the Git submodules this folder contains:
-1. A fork of the MochiMochi repository taken from [olanleed/MochiMochi](https://github.com/olanleed/MochiMochi).
+1. A fork of the MochiMochi repository: [georgeslabreche/MochiMochi](https://github.com/georgeslabreche/MochiMochi).
 2. The [v3.3 branch](https://gitlab.com/libeigen/eigen/-/tree/3.3) of the Eigen repository.
 
 ## Environments
-This project was successfully compiled in C++ on Ubuntu 18.04 LTS. The target platform is the Ångström distribution, it's a Linux on the spacecraft's ARM processor.
+This project was successfully compiled in C++ on Ubuntu 18.04 LTS. The target platform is the Ångström Linux distribution on the spacecraft's ARM processor.
 
 ### Local development
 Install the Boost C++ libraries: `sudo apt-get install libboost-all-dev`
@@ -31,7 +31,7 @@ Use `Make` to compile for either local development or the spacecraft.
 ```
 make clean
 make
-./OrbitAI_Mochi
+./OrbitAI_Mochi <path_to_properties_file>
 ```
 
 ### Compile and start for the spacecraft
@@ -42,7 +42,7 @@ make TARGET=arm
 ```
 On the spacecraft (transfer the binary there)
 ```
-./OrbitAI_Mochi
+./OrbitAI_Mochi <path_to_properties_file>
 ```
 
 ### Algorithms
