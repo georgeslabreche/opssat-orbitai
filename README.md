@@ -11,8 +11,8 @@ We appreciate citations if you reference this work in a scientific publication. 
 Labrèche, G., Soto, T., Ntagiou, E., & Evans, D. (2021). In-Flight Training of a FDIR Model with Online Machine Learning on the OPS-SAT Spacecraft. In _The 16th International Conference on Space Operations, SpaceOps_. AIAA.
 
 ## Repository Structure
-- **Boost**: C++ implementation of Online Multi-Class LPBoost, Online Multi-Class Gradient Boost, and Online Random Forest algorithms. These were not included in OrbitAI in the end due to unresolved serialization issues. Kept in the repository as a reference and in case of future use.
-- **Mochi**: C++ implementation of ADAM, Adagarad RDA, AROW, SCW, NHERD, and PA algorithms. These are used by the OrbitAI app for online ML.
+- **Mochi**: C++ implementation of online machine learning algorithms.
+- **RandomForest**: C++ implementation of the Random Forest algorithm.
 - **ipk**: Script and guideline to generate a ZIP file and then an IPK file to install the experiment on the Satellite Experimental Processing Platform (SEPP) on-board OPS-SAT.
 - **nmf/space-app**: The OrbitAI [NMF](https://github.com/esa/nmf-mission-ops-sat) App.
 - **pub**: Publication assest, i.e. R scripts, plots, and diagram files.
