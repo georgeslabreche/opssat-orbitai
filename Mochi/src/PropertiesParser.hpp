@@ -25,6 +25,7 @@ public:
 
     /* Constants for property keys. */
     static const string PROPS_PREFIX;
+    static const string PROPS_PREFIX_MOCHI;
     static const string PROPS_LOG_TRAINING_DATA;
     static const string PROPS_PORT_NUMBER;
     static const string PROPS_MODE;
@@ -33,9 +34,9 @@ public:
     PropertiesParser(char* propertiesFilePath);
 
     template<typename T>
-    T getProperty(string key)
+    T getProperty(string prefix, string key)
     {   
-        istringstream stringValue(m_propsMap[PropertiesParser::PROPS_PREFIX + key]);
+        istringstream stringValue(m_propsMap[prefix + key]);
         T castValue;
         stringValue >> castValue;
 
@@ -43,9 +44,15 @@ public:
     }
 
     template<typename T>
+    T getProperty(string key)
+    {
+        return getProperty<T>(PropertiesParser::PROPS_PREFIX_MOCHI, key);
+    }
+
+    template<typename T>
     T getHyperParameterProperty(string algorithmName, string hyperParamName)
     {
-        istringstream stringValue(m_propsMap[PropertiesParser::PROPS_PREFIX + algorithmName + ".hparam." + hyperParamName]);
+        istringstream stringValue(m_propsMap[PropertiesParser::PROPS_PREFIX_MOCHI + algorithmName + ".hparam." + hyperParamName]);
         T castValue;
         stringValue >> castValue;
 
