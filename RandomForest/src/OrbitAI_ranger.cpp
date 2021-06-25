@@ -36,8 +36,8 @@ void run_ranger(const ArgumentHandler& arg_handler, std::ostream& verbose_out)
       if (arg_handler.probability) 
       {
         forest = make_unique<ForestProbability>();
-      } 
-      else 
+      }
+      else
       {
         forest = make_unique<ForestClassification>();
       }
@@ -72,7 +72,53 @@ void run_ranger(const ArgumentHandler& arg_handler, std::ostream& verbose_out)
   verbose_out << "Finished Ranger." << std::endl;
 }
 
-void create_input_csv(std::string inputFile, std::vector<std::string>* pIncludeVars)
+void create_single_input_csv(std::vector<std::string>* pIncludeVars, std::vector<std::string>* pInputVars)
+{
+  std::ofstream csvInputFile;
+  csvInputFile.open(INPUT_CSV_FILENAME);
+
+  size_t varCounter = 0;
+
+  /* Write header row. */
+  for(std::vector<std::string>::iterator it = pIncludeVars->begin() ; it != pIncludeVars->end(); ++it)
+  {
+    /* Increment var counter. */
+    varCounter++;
+
+    if(varCounter < pIncludeVars->size())
+    {
+      csvInputFile << *it << ",";
+    }
+    else
+    {
+      csvInputFile << *it << std::endl;
+    }
+  }
+
+  /* Reset the var counter. */
+  varCounter = 0;
+
+  /* Write data row. */
+  for(std::vector<std::string>::iterator it = pInputVars->begin() ; it != pInputVars->end(); ++it)
+  {
+    /* Increment var counter. */
+    varCounter++;
+
+    if(varCounter < pInputVars->size())
+    {
+      csvInputFile << *it << ",";
+    }
+    else
+    {
+      csvInputFile << *it << std::endl;
+    }
+  }
+
+  /* Done writing to the ranger input CSV file, close it. */
+  csvInputFile.close();
+}
+
+void create_input_csv(std::vector<std::string>* pIncludeVars, std::string inputFile)
 {
   /* Create CSV reader. */
   csv2::Reader<delimiter<','>,
@@ -184,11 +230,40 @@ int main(int argc, char **argv)
     {
       return 0;
     }
-    arg_handler.checkArguments();
+
+    /* Flag to indicate if we need to check that the file argument was set.*/
+    bool checkFile = true;
+
+    /* Flag indicating that prediction inputs are being given "in-line" as command arguments. */
+    bool inlinePrediction = false;
+
+    /* When giving inputs as arguments we must create the input CSV file from the given arguments. */
+    if (!arg_handler.predict.empty() && arg_handler.file.empty() && arg_handler.inputvars.size() > 0) {
+      if(arg_handler.includevars.size() == arg_handler.inputvars.size())
+      {
+        /* Create single input CSV */
+        create_single_input_csv(&arg_handler.includevars, &arg_handler.inputvars);
+
+        /* No input file is given so don't check for the file argument when invoking checkArguments(). */
+        checkFile = false;
+
+        /* Flag indicating that we need to return the result written in the prediction file. */
+        inlinePrediction = true;
+      }
+      else {
+        throw std::runtime_error("The '--includevars' and '--inputvars' parameters must have the same size.");
+      }
+    }
+
+    /* Check arguments. */
+    arg_handler.checkArguments(checkFile);
 
     /* The given CSV file can contain columns that should not be used for training or predicting (e.g. timestamp). */
     /* Cleanse the data and create a new CSV file to be used as ranger's input CSV file. */
-    create_input_csv(arg_handler.file, &arg_handler.includevars);
+    if(!arg_handler.file.empty())
+    {
+      create_input_csv(&arg_handler.includevars, arg_handler.file);
+    }
 
     if (arg_handler.verbose)
     {
@@ -202,6 +277,30 @@ int main(int argc, char **argv)
         throw std::runtime_error("Could not write to logfile.");
       }
       run_ranger(arg_handler, logfile);
+    }
+
+    if(inlinePrediction)
+    {
+      /* Open the prediction file. */
+      std::string predictionFilename = arg_handler.outprefix.empty() ? "ranger_out.prediction" : arg_handler.outprefix + ".prediction";
+      std::ifstream ifs(predictionFilename);
+
+      /* Read line will be stored in this variable. */
+      std::string predictedLabel;
+
+      /* Predicted label is on the second line. */
+      std::getline(ifs, predictedLabel);
+      std::getline(ifs, predictedLabel);
+      
+      /* Return predicted label. */
+      if (arg_handler.verbose)
+      {
+        std::cout << std::endl << "Prediction: " << predictedLabel << std::endl;
+      }
+      else
+      {
+        std::cout << predictedLabel;
+      }
     }
   } catch (std::exception& e) 
   {

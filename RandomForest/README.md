@@ -43,7 +43,6 @@ The ranger implementation of Random Forest was tested with training data that wa
 Predictions can either be made by feeding a single data sample as an input or by batch processing a CSV file or by directly. Note that even though predictions are being made the data input still includes the target label.
 
 #### Single input
-- **TODO:** Not implemented yet.
 ```
 ./OrbitAI_ranger --verbose --includevars PD1,PD2,PD3,PD4,PD5,PD6,LABEL --input 0.01,0,1.12,0.29,0,0.02,1 --predict ranger_out.forest
 ./OrbitAI_ranger --verbose --includevars PD1,PD2,PD3,PD4,PD5,PD6,LABEL --input 0.01,0,0.28,0.2,0.01,1.16,0 --predict ranger_out.forest
@@ -56,4 +55,4 @@ Predictions can either be made by feeding a single data sample as an input or by
 ```
 
 ### Classification metrics
-**TODO:** Write python scripts to calculate classification metrics from 
+**TODO:** Write python scripts to calculate classification metrics.

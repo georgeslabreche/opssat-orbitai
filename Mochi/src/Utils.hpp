@@ -139,7 +139,7 @@ static inline void logInferenceResult(vector<string>* pParamNames, string* pInpu
     if(writeHeader)
     {
         /* First two columns are the timestamp and the target label. */
-        ofs << "timestamp,target,";
+        ofs << "timestamp,label,";
 
         /* Then the param names. */
         for (vector<string>::iterator it = pParamNames->begin(); it != pParamNames->end(); ++it)
@@ -221,7 +221,7 @@ static inline void logTrainingData(vector<string>* pParamNames, string* pInput)
     if(writeHeader)
     {
         /* First two columns are the timestamp and the target label. */
-        ofs << "timestamp,target,";
+        ofs << "timestamp,label,";
 
         /* Then the param names. */
         for (vector<string>::iterator it = pParamNames->begin(); it != pParamNames->end(); ++it)
