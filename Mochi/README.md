@@ -50,7 +50,7 @@ Instances of the **Concrete Classes** are created via the **Concrete Creators** 
 - The **Concrete Creators** override the factory method in order to change the resulting `BinaryOML`'s type.
 
 ### The `BinaryOMLInterface` interface
-- Exists so that the [proxy design pattern](ttps://refactoring.guru/design-patterns/proxy/cpp/example) can be implemented by a client – i.e, the OrbitAI app.
+- Exists so that the [proxy design pattern](https://refactoring.guru/design-patterns/proxy/cpp/example) can be implemented by a client – i.e, the OrbitAI app.
 - Within OrbitAI, the Proxy class that implements this interface is `MochiMochiProxy`, see [here](https://github.com/georgeslabreche/opssat-orbitai/blob/main/Mochi/src/MochiMochiProxy.hpp).
 - Declares common operations for the `BinaryOMLCreator` class and whatever Proxy class will be implemented.
 
@@ -80,7 +80,7 @@ On the spacecraft (transfer the binary there)
 ```
 
 ### Algorithms
-Running the program will start a server that accepts commands to train models and make predictions/inferences using the online ML methodologies implemented by the MochiMochi library.
+Running the program will start a server that accepts commands to train models and make predictions/inferences using the online ML methodologies implemented by the [MochiMochi library](https://github.com/georgeslabreche/MochiMochi).
 
 #### Operations
 The server can execute the following operations:
@@ -92,7 +92,7 @@ The server can execute the following operations:
 - exit: stop the server and exit the program (does not save the trained models).
 
 #### Training, Continue Training, and Inferring
-An ML Server implemented by the OrbitAI serves as a generic entry point that accepts training or inference inputs of any size if the following structure:
+An ML Server implemented by the OrbitAI serves as a generic entry point that accepts training or inference inputs of any size in the following structure:
 - The first four characters is an integer value representing the total length of the message sent to the ML Server.
 - The remaining characters compose the input string sent to the update (train) or predict (infer) functions implemented in the [MochiMochi online ML algorithms](https://github.com/georgeslabreche/MochiMochi).
 
