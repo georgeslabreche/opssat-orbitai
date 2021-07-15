@@ -24,6 +24,40 @@ On your local machine
 
 Nothing specific is required to do on the spacecraft since the libraries are statically linked when compiling.
 
+## MochiMochi Integration
+The OrbitAI app integrates the [MochiMochi Online Machine Learning Library](https://github.com/georgeslabreche/MochiMochi) for binary classification. The following online machine learning (ML) classes are provided by MochiMochi:
+- [ADAGRAD_RDA](https://github.com/georgeslabreche/MochiMochi/blob/orbitai/mochimochi/classifier/binary/adagrad_rda.hpp): Adaptive Subgradient Methods for Online Learning and Stochastic Optimization (Adagarad = Adaptive Gradian, RDA = Regularized Dual Averaging).
+- [ADAM](https://github.com/georgeslabreche/MochiMochi/blob/orbitai/mochimochi/classifier/binary/adam.hpp): A Method for Stochastic Optimization.
+- [AROW](https://github.com/georgeslabreche/MochiMochi/blob/orbitai/mochimochi/classifier/binary/arow.hpp): Adaptive Regularization of Weight Vectors.
+- [NHERD](https://github.com/georgeslabreche/MochiMochi/blob/orbitai/mochimochi/classifier/binary/nherd.hpp): Normal Herd (Learning via Gaussian Herding) with full diagonal covariance.
+- [PA](https://github.com/georgeslabreche/MochiMochi/blob/orbitai/mochimochi/classifier/binary/pa.hpp): Passive Aggressive. All three variants: PA, PA-I, PA-II.
+- [SCW](https://github.com/georgeslabreche/MochiMochi/blob/orbitai/mochimochi/classifier/binary/scw.hpp): Exact Soft Confidence-Weighted Learning.
+
+These online ML classes are grouped as **Concrete Classes** on the following UML class diagram ([pdf](https://raw.githubusercontent.com/georgeslabreche/opssat-orbitai/main/docs/OrbitAI_Mochi_UML_Class_Diagram.pdf?raw=true)):
+
+![UML Class Diagram for MochiMochi integration into the OrbitAI app](https://raw.githubusercontent.com/georgeslabreche/opssat-orbitai/main/docs/OrbitAI_Mochi_UML_Class_Diagram.png?raw=true)
+
+Instances of the **Concrete Classes** are created via the **Concrete Creators** implemented as part of the [factory design pattern](https://refactoring.guru/design-patterns/factory-method/cpp/example), see [here](https://github.com/georgeslabreche/MochiMochi/blob/orbitai/mochimochi/classifier/factory/binary_oml_factory.hpp). 
+
+### The `BinaryOML` interface
+- Declares the operations that all `BinaryOML` **Concrete Classes** must implement.
+- The **Concrete Classes** are the online ML classes provided by the MochiMochi library.
+
+### The `BinaryOMLCreator` class
+- Contains the core logic that relies on objects that implement the `BinaryOML` interface.
+- Declares the factory method that returns a concrete online ML object which implements the `BinaryOML` interface.
+- Its subclasses are **Concreate Creators** that implement the factory method.
+- The **Concrete Creators** override the factory method in order to change the resulting `BinaryOML`'s type.
+
+### The `BinaryOMLInterface` interface
+- Exists so that the [proxy design pattern](ttps://refactoring.guru/design-patterns/proxy/cpp/example) can be implemented by a client – i.e, the OrbitAI app.
+- Within OrbitAI, the Proxy class that implement this interface is `MochiMochiProxy`, see [here](https://github.com/georgeslabreche/opssat-orbitai/blob/main/Mochi/src/MochiMochiProxy.hpp).
+- Declares common operations for the `BinaryOMLCreator` class and whatever Proxy class will be implemented.
+
+### The `MochiMochiProxy` class
+- Exists so that multiple models can be trained given a single training data input.
+- Multiple models can be trained for a single input when more than one training algorithm is enabled via the OrbitAI app's properties file. For instance, enabling both the ADAM and AROW algorithms will instanciate the `ADAM` and `AROW` **concrete classes** via the `BinaryADAMCreator` and `BinaryAROWCreator` **concrete creators**.
+- Invoking the `MochiMochiProxy` functions defined in `BinaryOMLInterface` will invoke the equivalent functions for all enabled online ML **concrete classes**. Instances of the enabled online ML **concrete classes** are stored in `MochiMochiProxy`'s `m_bomlCreatorVector` vector property.
 ## Getting Started
 Use `Make` to compile for either local development or the spacecraft.
 
@@ -46,13 +80,7 @@ On the spacecraft (transfer the binary there)
 ```
 
 ### Algorithms
-Running the program will start a server that accepts commands to train models and make predictions/inferences using the following methodologies:
-- ADAM: A Method for Stochastic Optimization.
-- ADAGRAD RDA: Adaptive Subgradient Methods for Online Learning and Stochastic Optimization (Adagarad = Adaptive Gradian, RDA = Regularized Dual Averaging).
-- AROW: Adaptive Regularization of Weight Vectors.
-- SCW: Exact Soft Confidence-Weighted Learning.
-- NHERD: Normal Herd (Learning via Gaussian Herding) with full diagonal covariance.
-- PA: Passive Aggressive. All three variants: PA, PA-I, PA-II.
+Running the program will start a server that accepts commands to train models and make predictions/inferences using the online ML methodologies implemented by the MochiMochi library.
 
 #### Operations
 The server can execute the following operations:
