@@ -45,17 +45,19 @@ Instances of the **Concrete Classes** are created via the **Concrete Creators** 
 
 ### The `BinaryOMLCreator` class
 - Contains the core logic that relies on objects that implement the `BinaryOML` interface.
-- Declares the factory method that returns a a concrete online ML object which implements the `BinaryOML` interface.
-- Its subclasses are **Concreate Creators** that provide the implementation of the factory method.
+- Declares the factory method that returns a concrete online ML object which implements the `BinaryOML` interface.
+- Its subclasses are **Concreate Creators** that implement the factory method.
 - The **Concrete Creators** override the factory method in order to change the resulting `BinaryOML`'s type.
 
 ### The `BinaryOMLInterface` interface
 - Exists so that the [proxy design pattern](ttps://refactoring.guru/design-patterns/proxy/cpp/example) can be implemented by a client – i.e, the OrbitAI app.
-- Within OrbitAI, the Proxy class that implemented this interface is `MochiMochiProxy`, see [here](https://github.com/georgeslabreche/opssat-orbitai/blob/main/Mochi/src/MochiMochiProxy.hpp).
+- Within OrbitAI, the Proxy class that implement this interface is `MochiMochiProxy`, see [here](https://github.com/georgeslabreche/opssat-orbitai/blob/main/Mochi/src/MochiMochiProxy.hpp).
 - Declares common operations for the `BinaryOMLCreator` class and whatever Proxy class will be implemented.
 
 ### The `MochiMochiProxy` class
-This proxy class exists so that multiple models can be trained given a single training data input. Multiple models can be trained for a single input when more than one training algorithm is enabled via the application's properties file. For instance, enabling both the ADAM and AROW algorithms will instanciate the `ADAM` and `AROW` **concrete classes** via the `BinaryADAMCreator` and `BinaryAROWCreator` **concrete creators**. Invoking the `MochiMochiProxy` functions defined in `BinaryOMLInterface` will invoke the equivalent functions for all enabled online ML **concrete classes**. Instances of the enabled online ML **concrete classes** are stored in `MochiMochiProxy`'s `m_bomlCreatorVector` vector property.
+- Exists so that multiple models can be trained given a single training data input.
+- Multiple models can be trained for a single input when more than one training algorithm is enabled via the OrbitAI app's properties file. For instance, enabling both the ADAM and AROW algorithms will instanciate the `ADAM` and `AROW` **concrete classes** via the `BinaryADAMCreator` and `BinaryAROWCreator` **concrete creators**.
+- Invoking the `MochiMochiProxy` functions defined in `BinaryOMLInterface` will invoke the equivalent functions for all enabled online ML **concrete classes**. Instances of the enabled online ML **concrete classes** are stored in `MochiMochiProxy`'s `m_bomlCreatorVector` vector property.
 ## Getting Started
 Use `Make` to compile for either local development or the spacecraft.
 
