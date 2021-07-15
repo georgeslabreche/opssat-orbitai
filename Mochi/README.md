@@ -51,13 +51,13 @@ Instances of the **Concrete Classes** are created via the **Concrete Creators** 
 
 ### The `BinaryOMLInterface` interface
 - Exists so that the [proxy design pattern](ttps://refactoring.guru/design-patterns/proxy/cpp/example) can be implemented by a client – i.e, the OrbitAI app.
-- Within OrbitAI, the Proxy class that implement this interface is `MochiMochiProxy`, see [here](https://github.com/georgeslabreche/opssat-orbitai/blob/main/Mochi/src/MochiMochiProxy.hpp).
+- Within OrbitAI, the Proxy class that implements this interface is `MochiMochiProxy`, see [here](https://github.com/georgeslabreche/opssat-orbitai/blob/main/Mochi/src/MochiMochiProxy.hpp).
 - Declares common operations for the `BinaryOMLCreator` class and whatever Proxy class will be implemented.
 
 ### The `MochiMochiProxy` class
-- Exists so that multiple models can be trained given a single training data input.
+- Exists so that multiple models can be trained "simultenously" given a single training data input.
 - Multiple models can be trained for a single input when more than one training algorithm is enabled via the OrbitAI app's properties file. For instance, enabling both the ADAM and AROW algorithms will instanciate the `ADAM` and `AROW` **concrete classes** via the `BinaryADAMCreator` and `BinaryAROWCreator` **concrete creators**.
-- Invoking the `MochiMochiProxy` functions defined in `BinaryOMLInterface` will invoke the equivalent functions for all enabled online ML **concrete classes**. Instances of the enabled online ML **concrete classes** are stored in `MochiMochiProxy`'s `m_bomlCreatorVector` vector property.
+- Invoking the `MochiMochiProxy` functions defined in `BinaryOMLInterface` will invoke the equivalent functions for all enabled online ML **concrete classes**. This is achieved via a simple loop that fetches instances of the enabled online ML **concrete classes** stored in `MochiMochiProxy`'s `m_bomlCreatorVector` vector property.
 ## Getting Started
 Use `Make` to compile for either local development or the spacecraft.
 
