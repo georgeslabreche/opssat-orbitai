@@ -33,10 +33,8 @@ The OrbitAI app integrates the [MochiMochi Online Machine Learning Library](http
 - [PA](https://github.com/georgeslabreche/MochiMochi/blob/orbitai/mochimochi/classifier/binary/pa.hpp): Passive Aggressive. All three variants: PA, PA-I, PA-II.
 - [SCW](https://github.com/georgeslabreche/MochiMochi/blob/orbitai/mochimochi/classifier/binary/scw.hpp): Exact Soft Confidence-Weighted Learning.
 
-These online ML classes are grouped as **Concrete Classes** on the following UML class diagram ([(link to pdf)](https://raw.githubusercontent.com/georgeslabreche/opssat-orbitai/main/docs/OrbitAI_Mochi_UML_Class_Diagram.pdf?raw=true)): 
-
+These online ML classes are grouped as **Concrete Classes** on the following UML class diagram ([pdf](https://raw.githubusercontent.com/georgeslabreche/opssat-orbitai/main/docs/OrbitAI_Mochi_UML_Class_Diagram.pdf?raw=true)): 
 ![UML Class Diagram for MochiMochi integration into the OrbitAI app](https://raw.githubusercontent.com/georgeslabreche/opssat-orbitai/main/docs/OrbitAI_Mochi_UML_Class_Diagram.png?raw=true)
-
 
 Instances of the **Concrete Classes** are created via the **Concrete Creators** implemented as part of the [factory design pattern](https://refactoring.guru/design-patterns/factory-method/cpp/example), see [here](https://github.com/georgeslabreche/MochiMochi/blob/orbitai/mochimochi/classifier/factory/binary_oml_factory.hpp). 
 
