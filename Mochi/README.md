@@ -37,7 +37,7 @@ These online ML classes are grouped as **Concrete Classes** on the following UML
 
 ![UML Class Diagram for MochiMochi integration into the OrbitAI app](https://github.com/georgeslabreche/opssat-orbitai/raw/main/Mochi/docs/OrbitAI_Mochi_UML_Class_Diagram.png)
 
-Instances of the **Concrete Classes** are created via the **Concrete Creators** implemented as part of the [factory design pattern](https://refactoring.guru/design-patterns/factory-method/cpp/example), see [here](https://github.com/georgeslabreche/MochiMochi/blob/orbitai/mochimochi/classifier/factory/binary_oml_factory.hpp). A Client App interact with OrbitAI's online ML algorithms by sending commands to the `SocketServer` instance, henceforth referred to as the *ML Server*. These commands are documented in the [Algorithm](https://github.com/georgeslabreche/opssat-orbitai/tree/main/Mochi#algorithms) section of this README.
+Instances of the **Concrete Classes** are created via the **Concrete Creators** implemented as part of the [factory design pattern](https://refactoring.guru/design-patterns/factory-method/cpp/example), see [here](https://github.com/georgeslabreche/MochiMochi/blob/orbitai/mochimochi/classifier/factory/binary_oml_factory.hpp). A Client App interact with OrbitAI's online ML algorithms by sending commands to the `SocketServer` instance, henceforth referred to as the *ML Server*. These commands are documented in the *[Algorithms](https://github.com/georgeslabreche/opssat-orbitai/tree/main/Mochi#algorithms)* section of this README.
 
 ### The `BinaryOML` interface
 - Declares the operations that all `BinaryOML` **Concrete Classes** must implement.
