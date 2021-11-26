@@ -18,6 +18,7 @@ Labrèche, G., Evans, D., Marszk, D., Mladenov, T., Shiradhonkar, V., Soto, T., 
   journal={2022 IEEE Aerospace Conference},
   year={2022}
 }
+```
 
 ## Repository Structure
 - **Mochi**: C++ implementation of online machine learning algorithms.
