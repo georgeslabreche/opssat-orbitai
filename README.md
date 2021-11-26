@@ -4,11 +4,20 @@
 ## Description
 The use of Artificial Intelligence (AI) is of rising interest for space-segment applications despite limited technology demonstrators on-board flying spacecrafts. Past missions have restricted their experience with AI to inferring models that were trained on the ground prior to being uplinked to a spacecraft. The OrbitAI experiment pushes the envelope by breaking away from this trend and shifting ML training from a ground activity to an autonomous in-flight operation. Running on-board the OPS-SAT spacecraft, the experiment uses online Machine Learning (ML) algorithms to train fault detection, isolation, and recovery (FDIR) models that can be used to protect the on-board camera’s lens against exposure to sunlight. One model achieved 89% balanced accuracy in its predictions with an F1 score of 95%.
 
-## Citation
-We appreciate citations if you reference this work in a scientific publication. Thank you!
+# Citation
+We appreciate citations if you reference this work in our upcoming scientific publication. Thank you!
 
-### APA
-Labrèche, G., Soto, T., Ntagiou, E., & Evans, D. (2021). In-Flight Training of a FDIR Model with Online Machine Learning on the OPS-SAT Spacecraft. In _The 16th International Conference on Space Operations, SpaceOps_. AIAA.
+## APA
+Labrèche, G., Evans, D., Marszk, D., Mladenov, T., Shiradhonkar, V., Soto, T., & Zelenevskiy, V. (2022). OPS-SAT Spacecraft Autonomy with TensorFlow Lite, Unsupervised Learning, and Online Machine Learning. _2022 IEEE Aerospace Conference._
+
+## BibTex
+```
+@article{LabrecheIEEEAeroconf2022,
+  title={OPS-SAT Spacecraft Autonomy with TensorFlow Lite, Unsupervised Learning, and Online Machine Learning},
+  author={Georges Labrèche and David Evans and Dominik Marszk and Tom Mladenov and Vasundhara Shiradhonkar and Tanguy Soto and Vladimir Zelenevskiy},
+  journal={2022 IEEE Aerospace Conference},
+  year={2022}
+}
 
 ## Repository Structure
 - **Mochi**: C++ implementation of online machine learning algorithms.
