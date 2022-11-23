@@ -11,7 +11,7 @@ We appreciate citations if you reference this work in our upcoming scientific pu
 Labrèche, G., Evans, D., Marszk, D., Mladenov, T., Shiradhonkar, V., Soto, T., & Zelenevskiy, V. (2022). OPS-SAT Spacecraft Autonomy with TensorFlow Lite, Unsupervised Learning, and Online Machine Learning. _2022 IEEE Aerospace Conference._
 
 ## BibTex
-```
+```bibtex
 @article{LabrecheIEEEAeroconf2022,
   title={OPS-SAT Spacecraft Autonomy with TensorFlow Lite, Unsupervised Learning, and Online Machine Learning},
   author={Georges Labrèche and David Evans and Dominik Marszk and Tom Mladenov and Vasundhara Shiradhonkar and Tanguy Soto and Vladimir Zelenevskiy},
