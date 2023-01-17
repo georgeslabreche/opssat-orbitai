@@ -8,14 +8,14 @@ The use of Artificial Intelligence (AI) is of rising interest for space-segment 
 We appreciate citations if you reference this work in your upcoming publication. Thank you!
 
 ## Plain Text
-Labrèche, G., Evans, D., Marszk, D., Mladenov, T., Shiradhonkar, V., Soto, T., & Zelenevskiy, V. (2022). OPS-SAT Spacecraft Autonomy with TensorFlow Lite, Unsupervised Learning, and Online Machine Learning]. _2022 IEEE Aerospace Conference (AERO)_, 2022, pp. 1-17, doi: [10.1109/AERO53065.2022.9843402](https://ieeexplore.ieee.org/document/9843402).
+Labrèche, G., Evans, D., Marszk, D., Mladenov, T., Shiradhonkar, V., Soto, T., & Zelenevskiy, V. (2022). OPS-SAT Spacecraft Autonomy with TensorFlow Lite, Unsupervised Learning, and Online Machine Learning. _2022 IEEE Aerospace Conference (AERO)_, 2022, pp. 1-17, doi: [10.1109/AERO53065.2022.9843402](https://ieeexplore.ieee.org/document/9843402).
 
 ## BibTex
 ```bibtex
 @INPROCEEDINGS{9843402,
   author={Labrèche, Georges and Evans, David and Marszk, Dominik and Mladenov, Tom and Shiradhonkar, Vasundhara and Soto, Tanguy and Zelenevskiy, Vladimir},
   booktitle={2022 IEEE Aerospace Conference (AERO)}, 
-  title={OPS-SAT Spacecraft Autonomy with TensorFlow Lite, Unsupervised Learning, and Online Machine Learning}, 
+  title={{OPS-SAT Spacecraft Autonomy with TensorFlow Lite, Unsupervised Learning, and Online Machine Learning}}, 
   year={2022},
   volume={},
   number={},
